@@ -1,36 +1,20 @@
-<script setup>
-//import HelloWorld from './components/HelloWorld.vue'
-//import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <h1>Hello world, this is the start of something great</h1>
-    
-  </header>
-
-  <main>
-    
-  </main>
+  <img alt="Kitty" src="./assets/cat.png">
+  <span>"Big meow"</span>
 </template>
 
+<script>
+
+
+</script>
+
 <style>
-@import './assets/base.css';
-
-header {
-  line-height: 1.5;
-}
-
-@media (min-width: 1024px) {
-
-  header {
-    display: flex;
-    place-items: center;
-    margin-left: 500px;
-    padding: 200 px;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-  
-
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
 }
 </style>
