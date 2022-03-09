@@ -1,17 +1,16 @@
 <template>
-    <div id="login-comp">
-        <h1>Login</h1>
-        <v-row justify="center"></v-row>
+    <div class="login-Comp">
+        <h1 class="title">Login</h1>
+        <p>Ps. code is username then password</p>
         <input type="text" name="username" v-model="input.username" placerholder="Username" />
         <input type="password" name="password" v-model="input.password" palceholder="Password" />
         <button type="button" v-on:click="login()">Login</button>
-
     </div>
 </template>
 
 <script>
     export default {
-        name: 'login-comp',
+        name: 'login-Comp',
         data() {
             return {
                 input: {
@@ -37,12 +36,12 @@
 
 </script>
 <style scoped>
-    .login-comp{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-
+    .login-Comp{
+        text-align: center;
     }
-
+    .login-Comp .title{ 
+        padding: 0px 0px 0px 0;
+        font-size: 60px;
+        
+    }
 </style>
