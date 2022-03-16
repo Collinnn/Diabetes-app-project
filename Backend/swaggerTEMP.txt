@@ -1,0 +1,41 @@
+swagger: "2.0"
+info:
+  description: "Description"
+  version: 0.0.1
+  title: "Title"
+host: "localhost:8080"
+basePath: "/api"
+schemes:
+- "https"
+- "http"
+paths:
+  /patientID:
+    get:
+      summary: "Gets a patientsID"
+      responses:
+        "200": 
+          description: "The list of patientsID"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Patients"
+definitions:
+  Patients:
+    type: "object"
+    properties:
+      id: 
+        type: "integer"
+      name: 
+        type: "string"
+      Measurements:
+        type: "array"
+        items:
+          $ref: "#/definitions/Mesurements"
+  Mesurements:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      name:
+        type: "string"
+        
