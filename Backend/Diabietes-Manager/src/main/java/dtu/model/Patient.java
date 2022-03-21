@@ -20,6 +20,8 @@ public class Patient {
 	private String lastName;
 	@Column
 	private String email;
+	@Column
+	private String doctorId;
 	
 	
 	public int getId() {
@@ -52,7 +54,12 @@ public class Patient {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	public string getdoctorId(){
+		return doctorId;
+	}
+	public void setDoctorId(int dcotorId){
+		this.doctorId = doctorId;
+	}
 	
 		
 }
