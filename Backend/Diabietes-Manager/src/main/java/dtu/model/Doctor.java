@@ -1,17 +1,21 @@
 package dtu.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
-public class Patient {
+public class Doctor {
 	@Id
 	@Column
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private int id;
 	@Column
 	private String password;
 	@Column
@@ -21,13 +25,14 @@ public class Patient {
 	@Column
 	private String email;
 	@Column
-	private int doctorId;
-	
+	private String DoctorID; 
+	@OneToMany @JsonIgnore
+	private List<Patient> patients;
 	
 	public int getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getPassword() {
@@ -54,18 +59,16 @@ public class Patient {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getdoctorId(){
-		return doctorId;
+	public String getDoctorID() {
+		return DoctorID;
 	}
-	public void setDoctorId(int doctorId){
-		this.doctorId = doctorId;
+	public void setDoctorID(String doctorID) {
+		DoctorID = doctorID;
 	}
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Patient) {
-			return ((Patient) obj).id.equals(this.id);
-		}
-		return false;
+	public void addPatient(Patient patient) {
+		this.patients.add(patient);
 	}
-		
+	public void removePatient(Patient patient) {
+		this.patients.remove(patient);
+	}
 }
