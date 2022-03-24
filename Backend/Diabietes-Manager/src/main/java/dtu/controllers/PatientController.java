@@ -17,6 +17,7 @@ import dtu.repositories.PatientRepository;
 
 @Controller @CrossOrigin
 public class PatientController {
+	
 	@Autowired
 	private PatientRepository repository;
 	
@@ -26,7 +27,7 @@ public class PatientController {
 	}
 	
 	@PostMapping("/api/v1/patient")
-	public ResponseEntity<Patient>create(@RequestBody Patient patient){
+	public ResponseEntity<Patient> create(@RequestBody Patient patient){
 		return ResponseEntity.ok(repository.save(patient));
 	}
 	

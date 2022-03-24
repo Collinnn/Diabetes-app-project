@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import dtu.model.Doctor;
 import dtu.repositories.DoctorRepository;
@@ -26,7 +27,7 @@ public class DoctorController {
 	}
 	
 	@PostMapping("/api/v1/doctor")
-	public ResponseEntity<Doctor>create(Doctor doctor){
+	public ResponseEntity<Doctor>create(@RequestBody Doctor doctor){
 		return ResponseEntity.ok(repository.save(doctor));
 	}
 	

@@ -22,7 +22,7 @@ public class Patient {
 	private String email;
 
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
