@@ -20,9 +20,7 @@ public class Patient {
 	private String lastName;
 	@Column
 	private String email;
-	@Column
-	private int doctorId;
-	
+
 	
 	public int getId() {
 		return id;
@@ -54,12 +52,7 @@ public class Patient {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getdoctorId(){
-		return doctorId;
-	}
-	public void setDoctorId(int doctorId){
-		this.doctorId = doctorId;
-	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Patient) {

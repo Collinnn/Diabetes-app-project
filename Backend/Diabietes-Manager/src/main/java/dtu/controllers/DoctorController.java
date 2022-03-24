@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import dtu.model.Doctor;
 import dtu.repositories.DoctorRepository;
-@Controller
+
+@Controller @CrossOrigin
 public class DoctorController {
 	
 	@Autowired
@@ -28,7 +30,7 @@ public class DoctorController {
 		return ResponseEntity.ok(repository.save(doctor));
 	}
 	
-	@DeleteMapping("/api/v1/doctor/{id}")
+	@DeleteMapping("/api/v1/doctor/{doctorid}")
 	public ResponseEntity<?> delete(@PathVariable Integer id){
 		repository.deleteById(id);;
 		return ResponseEntity.noContent().build();
