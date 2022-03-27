@@ -1,29 +1,33 @@
-<template>
+<template >
     <div class="container">
-        <div class="title">
-            <h1 @click="$router.push({ name: 'dashboard'})"> {{title}} </h1>
-        </div>
-        <div class="buttons">
-            <router-link to="/pageOne"></router-link>
-            <ul>
-                <li><button @click="$router.push({ name: 'PageOne'})"> Button 1 </button></li>
-                <li><button> Button 2 </button></li>
-                <li><button> Button 3 </button></li>
-                <li><button> Button 4 </button></li>
-            </ul>
-        </div>
-        <div class="routers">
-        </div>   
+        <button class="sidebarButton" id="overviewButton" @click="goToPage('overview')"> 
+            <span class="icon" id="overviewIcon"></span>
+        </button>
+        <button class="sidebarButton" id="foodButton" @click="goToPage('food')">
+            <span class="icon" id="foodIcon"></span>
+        </button>
+        <button class="sidebarButton" id="doctorButton" @click="goToPage('doctor')">
+            <span class="icon" id="doctorIcon"></span>
+        </button>
+        <button class="sidebarButton" id="emergencyButton" @click="goToPage('emergency')">
+            <span class="icon" id="emergencyIcon"></span>
+        </button>        
     </div>
 </template>
 
 <script>
+    import router from "@/router"
     
     export default {
         name: 'SidebarMenu',
         data() {
             return {
                 title: 'Sidebar'
+            }
+        },
+        methods: {
+            goToPage(pageName) {
+                router.push({ name: pageName})
             }
         }
     }
@@ -32,22 +36,41 @@
 <style scoped>
 .container {
     float: left;
+    position: fixed;
+    top: 50px;
+    bottom: 0;
+    left: 0;
     width: 20%;
     min-width: 120px;
     max-width: 150px;
-    background-color: rgb(52, 11, 235);
-    position: fixed;
-    top: 50px;
-    left: 0;
-    bottom: 0;
-    text-align: center;
-}   
-ul {
-    list-style-type: none;
-    padding: 0 0 0 0;
-    text-align: center;
+    background-color: #0010bb;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
-li {
-    padding-top: 10%;
+
+.sidebarButton {
+    cursor: pointer;
+    background-color: #5b6be4;
+    width: 90px;
+    height: 90px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    
 }
+.sidebarButton:hover {
+    background: rgba(255, 255, 255, 0.60);
+}
+.sidebarButton:active {
+    background: rgba(100, 100, 255, 0.60);
+}
+.icon {
+    padding: 30px;
+}
+#overviewIcon {
+    background: url('../assets/graph.svg') no-repeat center;
+}
+
 </style>

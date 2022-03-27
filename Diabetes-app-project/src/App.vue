@@ -1,5 +1,8 @@
 <template>
-  <Sidebar v-if="$route.name !== 'login'"/>
+  <div id="appLayout" v-if="$route.name !== 'login'">
+    <Sidebar />
+  </div>
+  
   <div id="app">
     <router-link to='/'></router-link>
     <router-view  />
@@ -8,6 +11,7 @@
 
 <script>
 import Sidebar from "./components/Sidebar.vue"
+
 export default {
     name: 'App',
     components: {
