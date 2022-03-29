@@ -35,7 +35,6 @@
 
 <style scoped>
 .container {
-    float: left;
     position: fixed;
     top: 50px;
     bottom: 0;
@@ -70,7 +69,16 @@
     padding: 30px;
 }
 #overviewIcon {
-    background: url('../assets/graph.svg') no-repeat center;
+    background: url('@/assets/Graph.svg') no-repeat center;
+}
+#foodIcon {
+    background: url('@/assets/Food.svg') no-repeat center;
+}
+#doctorIcon {
+    background: url('@/assets/Doctor.svg') no-repeat center;
+}
+#emergencyIcon {
+    background: url('@/assets/Emergency.svg') no-repeat center;
 }
 
 </style>
