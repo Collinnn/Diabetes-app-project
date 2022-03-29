@@ -52,8 +52,8 @@
 .sidebarButton {
     cursor: pointer;
     background-color: #5b6be4;
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
     border-radius: 10px;
     outline: none;
     border: none;
