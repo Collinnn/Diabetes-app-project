@@ -1,16 +1,16 @@
 <template >
     <div class="container">
         <button class="sidebarButton" id="overviewButton" @click="goToPage('overview')"> 
-            <span class="icon" id="overviewIcon"></span>
+            <svg class="icon" id="overviewIcon"></svg>
         </button>
         <button class="sidebarButton" id="foodButton" @click="goToPage('food')">
-            <span class="icon" id="foodIcon"></span>
+            <svg class="icon" id="foodIcon"></svg>
         </button>
         <button class="sidebarButton" id="doctorButton" @click="goToPage('doctor')">
-            <span class="icon" id="doctorIcon"></span>
+            <svg class="icon" id="doctorIcon"></svg>
         </button>
         <button class="sidebarButton" id="emergencyButton" @click="goToPage('emergency')">
-            <span class="icon" id="emergencyIcon"></span>
+            <svg class="icon" id="emergencyIcon"></svg>
         </button>        
     </div>
 </template>
@@ -66,7 +66,8 @@
     background: rgba(100, 100, 255, 0.60);
 }
 .icon {
-    padding: 30px;
+    width: 60px;
+    height: 60px;
 }
 #overviewIcon {
     background: url('@/assets/Graph.svg') no-repeat center;
