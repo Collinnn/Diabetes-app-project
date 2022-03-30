@@ -1,5 +1,8 @@
 <template>
-  <Topbar />
+  <div id="appLayout" v-if="$route.name !== 'login'">
+    <Topbar />
+  </div>
+  
   <div id="app">
     <router-link to='/'></router-link>
     <router-view  />
