@@ -1,19 +1,14 @@
 <template>
     <div class ="topbar">
         <button class = "topbarButton" id = "homeButton" @click="goToPage(dashBoard)">
-            <span class="icon" id="homeIcon"></span>
+            <svg class="icon" id="homeIcon"></svg>
         </button>
         <button class = "topbarButton" id = "userButton" @click="goToPage(profilePage)">
-            <span class="icon" id="userIcon"></span>
+            <svg class="icon" id="userIcon"></svg>
         </button>
         <button class = "topbarButton" id = "settingsButton">
-            <span class="icon" id="settingsIcon"></span>
+            <svg class="icon" id="settingsIcon"></svg>
         </button>
-        <div class="sub-menu">
-                <div v-for= "(setting,i) in settings"  :key="i" class="menu-item">
-                    {{ setting.title}}
-                </div>
-            </div>
     </div>
 </template>
 
@@ -60,6 +55,8 @@
     left: 0;
     height: 15%;
     width: 100%;
+    min-height: 120px;
+    max-height: 150px;
     background: rgb(34, 8, 185);
     display: flex;
     flex-direction: row;
@@ -70,11 +67,13 @@
 
 
 .topbarButton {
+    cursor: pointer;
     background-color: rgb(0, 60, 255);
     width: 100px;
     height: 100px;
     border-radius: 10px;
-
+    outline: none;
+    border: none;
 }
 
 
@@ -87,16 +86,9 @@
 }
 
 
-
 .icon {
-    padding: 30px;
-}
-
-#settings {
-    float: right;
-}
-h2 {
-    text-align: left;
+    width: 75px;
+    height: 75px;
 }
 
 #homeIcon {
