@@ -6,5 +6,10 @@
 
 <script>
 
+export default {
+    name: "dashBoard"
+}
+
+
 </script>
 
