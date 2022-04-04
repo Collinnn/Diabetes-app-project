@@ -1,11 +1,20 @@
 package dtu.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 @Entity
+@Table(name = "Doctor")
 public class Doctor {
 	@Id
 	@Column
@@ -17,9 +26,25 @@ public class Doctor {
 	private String firstName;
 	@Column
 	private String lastName;
-	@Column
-	private String email;
-
+	@ManyToMany(fetch = FetchType.LAZY,
+			cascade= {
+				CascadeType.PERSIST,
+				CascadeType.MERGE
+			})
+	@JoinTable(name = "patient-doctor",
+    joinColumns = { @JoinColumn(name = "Doctor_id") },
+    inverseJoinColumns = { @JoinColumn(name = "patient_id") })
+	private List<Patient> patients;
+	
+	public Doctor() {
+		
+	}
+	public Doctor(String password, String firstName, String lastName) {
+		this.password=password;
+		this.firstName=firstName;
+		this.lastName=lastName;
+	}
+	
 	
 	public int getId() {
 		return id;
@@ -45,10 +70,18 @@ public class Doctor {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getEmail() {
-		return email;
+	public List<Patient> getPatients(){
+		return patients;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setPatients(List<Patient> patients) {
+		this.patients = patients;
 	}
+	public void addPatient(Patient patient) {
+		this.patients.add(patient);
+	}
+	public void removePatient(Patient patient) {
+		this.patients.remove(patient);
+	}
+	
+	
 }

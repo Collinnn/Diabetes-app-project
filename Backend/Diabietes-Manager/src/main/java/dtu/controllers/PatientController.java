@@ -13,27 +13,28 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import dtu.model.Patient;
+import dtu.repositories.DoctorRepository;
 import dtu.repositories.PatientRepository;
 
 @Controller @CrossOrigin
 public class PatientController {
 	
 	@Autowired
-	private PatientRepository repository;
+	private PatientRepository patientRepository;
 	
 	@GetMapping("/api/v1/patient")
 	public ResponseEntity<List<Patient>> getAll(){
-		return ResponseEntity.ok(repository.findAll());
+		return ResponseEntity.ok(patientRepository.findAll());
 	}
 	
 	@PostMapping("/api/v1/patient")
 	public ResponseEntity<Patient> create(@RequestBody Patient patient){
-		return ResponseEntity.ok(repository.save(patient));
+		return ResponseEntity.ok(patientRepository.save(patient));
 	}
 	
 	@DeleteMapping("/api/v1/patient/{id}")
 	public ResponseEntity<?> delete(@PathVariable Integer id){
-		repository.deleteById(id);;
+		patientRepository.deleteById(id);;
 		return ResponseEntity.noContent().build();
 	}
 	

@@ -1,10 +1,17 @@
 package dtu.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Patient {
@@ -19,8 +26,18 @@ public class Patient {
 	@Column
 	private String lastName;
 	@Column
-	private String email;
-
+	private String dateOfBirth;
+	@ManyToMany(fetch = FetchType.LAZY,
+			cascade = {
+					CascadeType.PERSIST,
+					CascadeType.MERGE
+			},
+			mappedBy = "Patient")
+	@JsonIgnore
+	private List<Patient> patients;
+	public Patient() {
+		
+	}
 	
 	public Integer getId() {
 		return id;
@@ -46,11 +63,17 @@ public class Patient {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getEmail() {
-		return email;
+	public String getDateOfBirth() {
+		return dateOfBirth;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+	public List<Patient> getPatients() {
+		return patients;
+	}
+	public void setPatient(List<Patient> patients) {
+		this.patients=patients;
 	}
 
 	@Override
