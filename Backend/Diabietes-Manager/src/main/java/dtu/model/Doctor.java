@@ -5,13 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 @Entity
-public class Patient {
+public class Doctor {
 	@Id
 	@Column
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private int id;
 	@Column
 	private String password;
 	@Column
@@ -22,10 +21,10 @@ public class Patient {
 	private String email;
 
 	
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getPassword() {
@@ -52,13 +51,4 @@ public class Patient {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Patient) {
-			return ((Patient) obj).id.equals(this.id);
-		}
-		return false;
-	}
-		
 }
