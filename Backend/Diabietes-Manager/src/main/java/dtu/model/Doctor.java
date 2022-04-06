@@ -20,11 +20,11 @@ public class Doctor {
 	@Column
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@Column
+	@Column(name = "password")
 	private String password;
-	@Column
+	@Column(name = "firstName")
 	private String firstName;
-	@Column
+	@Column(name = "lastName")
 	private String lastName;
 	@ManyToMany(fetch = FetchType.LAZY,
 			cascade= {
