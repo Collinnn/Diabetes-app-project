@@ -9,5 +9,5 @@ import dtu.model.Patient;
 
 @Repository
 public interface PatientRepository extends JpaRepository<Patient,Integer> {
-	List<Patient> findPatientByDoctorId(int doctotId);
+	List<Patient> findPatientsByDoctorId(int doctotId);
 }

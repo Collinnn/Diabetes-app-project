@@ -10,5 +10,7 @@ import dtu.model.Doctor;
 
 @Repository
 public interface DoctorRepository extends JpaRepository<Doctor,Integer> {
+	
+	List<Doctor> findByFirstNameContaining(String firstName);
 	List<Doctor> findDoctorsByPatientId(int patientId);
 }
