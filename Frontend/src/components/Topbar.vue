@@ -60,7 +60,7 @@
     left: 0;
     height: 50px;
     width: 100%;
-    background: rgb(34, 8, 185);
+    background-color: #0010bb;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -82,7 +82,7 @@
 
 .topbarButton {
     cursor: pointer;
-    background-color: rgb(0, 60, 255);
+    background-color: #5b6be4;
     width: 40px;
     height: 40px;
     border-radius: 10px;
@@ -93,11 +93,11 @@
 
 
 .topbarButton:hover{
-    background: rgb(106, 121, 187);
+    background: rgba(255, 255, 255, 0.60);
 }
 
 .topbarButton:active{
-    background: rgb(1, 1, 150);
+    background: rgba(100, 100, 255, 0.60);
 }
 
 
