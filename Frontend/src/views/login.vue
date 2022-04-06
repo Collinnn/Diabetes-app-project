@@ -23,7 +23,7 @@
             login() {
                 if(this.input.username != "" && this.input.password != "") {
                     if(this.input.username =="username" && this.input.password == "password") {
-                        this.$router.replace({ name: "dashBoard"});
+                        this.$router.replace({ name: "overview"});
                     } else {
                         console.log("The username and / or password is incorrect");
                     }
