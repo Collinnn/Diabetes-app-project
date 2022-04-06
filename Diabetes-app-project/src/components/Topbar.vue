@@ -72,12 +72,12 @@
 
 .topbar .leftElement {
     float: left;
-    padding-left: 50px;
+    padding-left: 20px;
 }
 
 .topbar .right {
     float: right;
-    
+    margin-right: 20px;
 }
 
 
@@ -107,6 +107,12 @@
     width: 75px;
     height: 75px;
 }
+
+
+#userButton {
+    margin-right: 20px;
+}
+
 
 #homeIcon {
     background: url('@/assets/Home.svg') no-repeat center;
