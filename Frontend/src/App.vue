@@ -16,7 +16,7 @@ import Sidebar from "./components/Sidebar.vue"
 export default {
     name: 'App',
     components: {
-    Topbar
+    Topbar,
     Sidebar
     }
 }
