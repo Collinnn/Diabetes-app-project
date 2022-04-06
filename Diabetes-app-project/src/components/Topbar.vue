@@ -1,14 +1,19 @@
 <template>
     <div class ="topbar">
-        <button class = "topbarButton" id = "homeButton" @click="goToPage(dashBoard)">
-            <svg class="icon" id="homeIcon"></svg>
-        </button>
-        <button class = "topbarButton" id = "userButton" @click="goToPage(profilePage)">
-            <svg class="icon" id="userIcon"></svg>
-        </button>
-        <button class = "topbarButton" id = "settingsButton">
-            <svg class="icon" id="settingsIcon"></svg>
-        </button>
+        <div class = "leftElement">
+            <button class = "topbarButton" id = "homeButton" @click="goToPage(dashBoard)">
+                <svg class="icon" id="homeIcon"></svg>
+            </button>
+            DiAPPbetes
+        </div>
+        <div class = "right">
+            <button class = "topbarButton" id = "userButton" @click="goToPage(profilePage)">
+                <svg class="icon" id="userIcon"></svg>
+            </button>
+            <button class = "topbarButton" id = "settingsButton">
+                <svg class="icon" id="settingsIcon"></svg>
+            </button>
+        </div>
     </div>
 </template>
 
@@ -60,8 +65,19 @@
     background: rgb(34, 8, 185);
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     padding-top: 1%;
+}
+
+
+.topbar .leftElement {
+    float: left;
+    padding-left: 50px;
+}
+
+.topbar .right {
+    float: right;
+    
 }
 
 
@@ -74,6 +90,7 @@
     border-radius: 10px;
     outline: none;
     border: none;
+    
 }
 
 
