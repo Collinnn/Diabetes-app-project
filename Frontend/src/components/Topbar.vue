@@ -58,15 +58,13 @@
     top: 0;
     bottom: 0;
     left: 0;
-    height: 15%;
+    height: 50px;
     width: 100%;
-    min-height: 120px;
-    max-height: 150px;
     background: rgb(34, 8, 185);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-top: 1%;
+    align-items: center;
 }
 
 
@@ -85,8 +83,8 @@
 .topbarButton {
     cursor: pointer;
     background-color: rgb(0, 60, 255);
-    width: 100px;
-    height: 100px;
+    width: 40px;
+    height: 40px;
     border-radius: 10px;
     outline: none;
     border: none;
@@ -104,8 +102,8 @@
 
 
 .icon {
-    width: 75px;
-    height: 75px;
+    width: 25px;
+    height: 25px;
 }
 
 
