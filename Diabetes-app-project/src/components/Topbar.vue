@@ -6,7 +6,7 @@
             </button>
             DiAPPbetes
         </div>
-        <div class = "right">
+        <div class = "rightElements">
             <button class = "topbarButton" id = "userButton" @click="goToPage(profilePage)">
                 <svg class="icon" id="userIcon"></svg>
             </button>
@@ -75,7 +75,7 @@
     padding-left: 20px;
 }
 
-.topbar .right {
+.topbar .rightElements {
     float: right;
     margin-right: 20px;
 }
