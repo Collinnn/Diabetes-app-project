@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import dtu.model.Doctor;
 import dtu.model.Patient;
 import dtu.repositories.DoctorRepository;
 import dtu.repositories.PatientRepository;
@@ -28,7 +29,7 @@ public class PatientController {
 	private DoctorRepository doctorRepository;
 	
 	//Gets all Patients
-	@GetMapping("/patient")
+	@GetMapping("/Patient")
 	public ResponseEntity<List<Patient>> getAll(){
 		List<Patient> patient = new ArrayList<Patient>();
 		patientRepository.findAll().forEach(patient::add);
@@ -39,22 +40,31 @@ public class PatientController {
 		}
 	}
 	//Gets all patients of a specific doctor by id
-	@GetMapping("/Doctor/{Doctorid}/patient")
+	@GetMapping("/Doctor/{DoctorId}/Patient")
 	public ResponseEntity<List<Patient>> getAllPatientsByDoctorId(@PathVariable(value = "DoctorId")int doctorId){
 		if(!doctorRepository.existsById(doctorId)) {
-			throw new RuntimeException("Not found Doctor with Id: " + doctorId);
+			throw new RuntimeException("Not found Doctor with id: " + doctorId);
 		}
 		List<Patient> patients = patientRepository.findPatientsByDoctorId(doctorId);
 		return new ResponseEntity<>(patients, HttpStatus.OK);
 	}
 	//Gets patient by id
-	@GetMapping("patient/{id}")
+	@GetMapping("Patient/{PatientId}")
 	public ResponseEntity<Patient> getPatientbyId(@PathVariable(value = "id")int id){
 		Patient patient = patientRepository.findById(id)
 				.orElseThrow(() -> new RuntimeException("Not found patient with Id: " + id));
 		return new ResponseEntity<>(patient,HttpStatus.OK);
 	}
-	
+	//Gets all doctors by patientID
+	@GetMapping("Patient/{PatientId}/Doctor")
+	public ResponseEntity<List<Doctor>> getAllDoctorsByPatientId(@PathVariable(value="PatientId")int patientId){
+		if(!patientRepository.existsById(patientId)) {
+			throw new RuntimeException("Not found a Patient with id: " + patientId);
+		}
+		List<Doctor> doctors = doctorRepository.findDoctorsByPatientId(patientId);
+		return new ResponseEntity<>(doctors,HttpStatus.OK);
+		
+	}
 	
 	
 	@PostMapping("/api/v1/patient")

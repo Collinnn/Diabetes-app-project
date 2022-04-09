@@ -32,8 +32,8 @@ public class Doctor {
 				CascadeType.MERGE
 			})
 	@JoinTable(name = "patient-doctor",
-    joinColumns = { @JoinColumn(name = "Doctor_id") },
-    inverseJoinColumns = { @JoinColumn(name = "patient_id") })
+    joinColumns = { @JoinColumn(name = "DoctorId") },
+    inverseJoinColumns = { @JoinColumn(name = "PatientId") })
 	private List<Patient> patients;
 	
 	public Doctor() {
