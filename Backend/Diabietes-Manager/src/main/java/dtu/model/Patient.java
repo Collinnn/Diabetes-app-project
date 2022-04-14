@@ -1,5 +1,6 @@
 package dtu.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -34,11 +35,15 @@ public class Patient {
 			},
 			mappedBy = "Patient")
 	@JsonIgnore
-	private List<Patient> patients;
+	private List<Doctor> doctors = new ArrayList<Doctor>();
 	public Patient() {
 		
 	}
-	
+	public Patient(String password, String firstName, String lastName) {
+		this.password=password;
+		this.firstName=firstName;
+		this.lastName=lastName;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -69,11 +74,8 @@ public class Patient {
 	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
-	public List<Patient> getPatients() {
-		return patients;
-	}
-	public void setPatient(List<Patient> patients) {
-		this.patients=patients;
+	public List<Doctor> getDoctors(){
+		return doctors;
 	}
 
 	@Override

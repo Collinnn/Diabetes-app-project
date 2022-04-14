@@ -67,12 +67,12 @@ public class PatientController {
 		
 	}
 	
-	//@PostMapping("/patient")
-	//public ResponseEntity<Patient> createPatient(@RequestBody Patient patientRequest){
-	//	Patient patient = patientRepository
-	//			.save(new Patient(patientRequest.getFirstName(),patientRequest.getLastName(),patientRequest.getPassword()));
-	//	return new ResponseEntity<>(patient,HttpStatus.CREATED);
-	//}
+	@PostMapping("/patient")
+	public ResponseEntity<Patient> createPatient(@RequestBody Patient patientRequest){
+		Patient patient = patientRepository
+				.save(new Patient(patientRequest.getFirstName(),patientRequest.getLastName(),patientRequest.getPassword()));
+		return new ResponseEntity<>(patient,HttpStatus.CREATED);
+	}
 	
 	
 	//Update existing doctor
@@ -87,16 +87,24 @@ public class PatientController {
 		
 			
 	}
+	//Deletes a doctors patient with an id of the doctor and the patient
+	  @DeleteMapping("/Doctor/{doctorId}/patient/{id}")
+	  public ResponseEntity<HttpStatus> deletePatientFromDoctor(@PathVariable(value = "doctorId") int doctorId, @PathVariable(value = "patientId") int patientId) {
+	    Doctor doctor = doctorRepository.findById(doctorId)
+	        .orElseThrow(() -> new RuntimeException("Not found Tutorial with id = " + doctorId));
+	   
+	    
+	    doctor.removePatient(patientId);
+	    doctorRepository.save(doctor);
+	    
+	    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	  }
 	
-	@PostMapping("/api/v1/patient")
-	public ResponseEntity<Patient> create(@RequestBody Patient patient){
-		return ResponseEntity.ok(patientRepository.save(patient));
-	}
-	
-	@DeleteMapping("/api/v1/patient/{id}")
-	public ResponseEntity<?> delete(@PathVariable Integer id){
+	  
+	@DeleteMapping("patient/{id}")
+	public ResponseEntity<HttpStatus> deletePatient(@PathVariable int id){
 		patientRepository.deleteById(id);;
-		return ResponseEntity.noContent().build();
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	

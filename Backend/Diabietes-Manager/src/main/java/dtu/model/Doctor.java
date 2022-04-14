@@ -82,6 +82,10 @@ public class Doctor {
 	public void removePatient(Patient patient) {
 		this.patients.remove(patient);
 	}
-	
+	public void removePatient(int patientId) {
+		Patient patient = this.patients.stream().filter(t -> t.getId() == patientId).findFirst().orElse(null);
+		if (patient != null) this.patients.remove(patient);
+		    patient.getDoctors().remove(this);
+	}
 	
 }
