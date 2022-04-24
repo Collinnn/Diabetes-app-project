@@ -172,10 +172,10 @@ definitions:
         type: string
       lastName:
         type: string
-      email:
+      dateOfBirth:
         type: string
-      doctorId:
-        type: integer
+      doctor:
+        type: object
         
   Doctor:
     type: object
@@ -187,8 +187,6 @@ definitions:
       firstName:
         type: string
       lastName:
-        type: string
-      email:
         type: string
       patients:
         type: array
