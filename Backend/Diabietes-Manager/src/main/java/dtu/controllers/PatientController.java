@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,6 +48,26 @@ public class PatientController {
 		doctor.get().addPatient(patient);
 		return ResponseEntity.ok(patientRepository.save(patient));
 	}
+	
+	@PutMapping("/doctors/{doctorId}/patients/{patientId}")
+	public ResponseEntity<Patient> update(@PathVariable int doctorId, @PathVariable int patientId, @RequestBody Patient patient){
+		Optional<Doctor> doctor = doctorRepository.findById(doctorId);
+		if(doctor.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+		Optional<Patient> oPatient = patientRepository.findById(patientId);
+		if(oPatient.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+		oPatient.get().setFirstName(patient.getFirstName());
+		oPatient.get().setLastName(patient.getLastName());
+		oPatient.get().setPassword(patient.getPassword());
+		oPatient.get().setDateOfBirth(patient.getDateOfBirth());
+		return ResponseEntity.ok(patientRepository.save(oPatient.get()));
+	}
+	
+
+	
 	
 	@DeleteMapping("/doctors/{doctorId}/patients/{patientId}")
 	public ResponseEntity<?> delete(@PathVariable int doctorId, @PathVariable int patientId) {
