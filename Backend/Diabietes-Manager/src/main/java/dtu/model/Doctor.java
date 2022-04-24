@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 @Entity
 @Table(name = "Doctor")
 public class Doctor {
@@ -17,11 +18,11 @@ public class Doctor {
 	@Column
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@Column(name = "password")
+	@Column
 	private String password;
-	@Column(name = "firstName")
+	@Column
 	private String firstName;
-	@Column(name = "lastName")
+	@Column
 	private String lastName;
 	@OneToMany(
 			mappedBy = "doctor",
@@ -29,9 +30,6 @@ public class Doctor {
 			orphanRemoval = true
 			)
 	private List<Patient> patients;
-	
-	public Doctor() {
-	}
 		
 	public int getId() {
 		return id;

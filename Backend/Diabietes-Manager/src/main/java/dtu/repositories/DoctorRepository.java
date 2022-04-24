@@ -7,6 +7,5 @@ import dtu.model.Doctor;
 
 
 @Repository
-public interface DoctorRepository extends JpaRepository<Doctor,Integer> {
-	
+public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
 }
