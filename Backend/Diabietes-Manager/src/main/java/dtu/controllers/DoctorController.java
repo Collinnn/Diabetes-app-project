@@ -23,17 +23,17 @@ public class DoctorController {
 	@Autowired
 	private DoctorRepository doctorRepository;
 	
-	@GetMapping("/doctor")
+	@GetMapping("/doctors")
 	public ResponseEntity<List<Doctor>> getAllDoctors() {
 		return ResponseEntity.ok(doctorRepository.findAll());
 	}
 	
-	@PostMapping("/doctor")
+	@PostMapping("/doctors")
 	public ResponseEntity<Doctor> createDoctor(@RequestBody Doctor doctor) {
 		return ResponseEntity.ok(doctorRepository.save(doctor));
 	}
 	
-	@GetMapping("/doctor/{doctorId}")
+	@GetMapping("/doctors/{doctorId}")
 	public ResponseEntity<Doctor> getDoctorById(@PathVariable Integer doctorId) {
 		Optional<Doctor> doctor = doctorRepository.findById(doctorId);
 		if (doctor.isEmpty()) {
@@ -42,7 +42,7 @@ public class DoctorController {
 		return ResponseEntity.ok(doctor.get());
 	}
 	
-	@DeleteMapping("/doctor/{doctorId}")
+	@DeleteMapping("/doctors/{doctorId}")
 	public ResponseEntity<?> deleteDoctorById(@PathVariable Integer doctorId) {
 		doctorRepository.deleteById(doctorId);
 		return ResponseEntity.noContent().build();
