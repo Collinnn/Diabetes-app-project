@@ -9,7 +9,7 @@ schemes:
   - http
   
 paths:
-  /doctor:
+  /doctors:
     get:
       summary: Gets a list of doctors
       responses:
@@ -33,7 +33,7 @@ paths:
           description: Doctor correctly added
           
           
-  /doctor/{doctorId}:
+  /doctors/{doctorId}:
     delete:
       summary: Deletes a doctor
       parameters:
@@ -46,8 +46,20 @@ paths:
         "204":
           description: The doctor has been deleted
           
-          
-  /doctor/{doctorId}/patients:
+    get:
+      summary: Doctor with specified id
+      parameters:
+        - in: path
+          name: doctorId
+          type: integer
+          description: The id of the doctor
+          required: true
+      responses:
+        "200":
+          description: The doctor with the specified id       
+  
+  
+  /doctors/{doctorId}/patients:
     get:
       summary: Gets a list of patients
       parameters:
@@ -82,7 +94,7 @@ paths:
           description: The doctor cannot be found
           
           
-  /doctor/{doctorId}/patients/{patientId}:
+  /doctors/{doctorId}/patients/{patientId}:
     delete:
       summary: Deletes a patient
       parameters:
@@ -103,7 +115,7 @@ paths:
           description: The doctor cannot be found
           
           
-  /doctor/{doctorId}/patients/{patientId}/measurements:
+  /doctors/{doctorId}/patients/{patientId}/measurements:
     get:
       summary: Gets a list of measurements
       parameters:
