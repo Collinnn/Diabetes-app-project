@@ -175,7 +175,7 @@ definitions:
       dateOfBirth:
         type: string
       doctor:
-        type: object
+        $ref: "#/definitions/Doctor"
         
   Doctor:
     type: object
