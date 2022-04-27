@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class Doctor {
 	@Id
 	@Column
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column
 	private String password;
@@ -26,7 +26,7 @@ public class Doctor {
 	private String lastName;
 	@OneToMany(
 			mappedBy = "doctor",
-			cascade = CascadeType.ALL,
+			cascade = CascadeType.MERGE,
 			orphanRemoval = true
 			)
 	private List<Patient> patients;
@@ -63,7 +63,7 @@ public class Doctor {
 		this.lastName = lastName;
 	}
 	
-	public List<Patient> getPatients(){
+	public List<Patient> getPatients() {
 		return patients;
 	}
 	
