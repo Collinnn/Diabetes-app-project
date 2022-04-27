@@ -3,6 +3,8 @@ package dtu.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import javax.annotation.processing.Generated;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,9 +30,38 @@ public class PatientController {
 	@Autowired
 	private DoctorRepository doctorRepository;
 	
+	//get mapping for all patients
+	@GetMapping("/patients")
+	public ResponseEntity<List<Patient>> getAllPatients(){
+		return ResponseEntity.ok(patientRepository.findAll());
+	}
+	
+	//get mapping for single patient
+	public ResponseEntity<Patient> getPatientById(@PathVariable int patientid){
+		Optional<Patient> patient = patientRepository.findById(patientid);
+		if (patient.isEmpty()){
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(patient.get());
+	}
+
+	//Put mapping for updating patient fields
+	@PutMapping("/patients/{patientId}")
+	public ResponseEntity<Patient> updatePatient(@PathVariable int patientId, @RequestBody Patient patient){
+		Optional<Patient> oPatient = patientRepository.findById(patientId);
+		if(oPatient.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+		oPatient.get().setFirstName(patient.getFirstName());
+		oPatient.get().setLastName(patient.getLastName());
+		oPatient.get().setPassword(patient.getPassword());
+		oPatient.get().setDateOfBirth(patient.getDateOfBirth());
+		return ResponseEntity.ok(patientRepository.save(oPatient.get()));
+	}
+
 	// Gets all Patients associated with a doctor
 	@GetMapping("/doctors/{doctorId}/patients")
-	public ResponseEntity<List<Patient>> getAll(@PathVariable int doctorId) {
+	public ResponseEntity<List<Patient>> getAllDoctors(@PathVariable int doctorId) {
 		Optional<Doctor> doctor = doctorRepository.findById(doctorId);
 		if (doctor.isEmpty()) {
 			return ResponseEntity.notFound().build();
