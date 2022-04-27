@@ -28,10 +28,11 @@ public class Patient {
 	public Patient() {	
 	}
 	
-	public Patient(String password, String firstName, String lastName) {
+	public Patient(String password, String firstName, String lastName, String dateOfBirth) {
 		this.password=password;
 		this.firstName=firstName;
 		this.lastName=lastName;
+		this.dateOfBirth=dateOfBirth;
 	}
 	
 	public Integer getId() {
