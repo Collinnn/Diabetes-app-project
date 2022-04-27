@@ -12,8 +12,8 @@ import javax.persistence.ManyToOne;
 public class Patient {
 	@Id
 	@Column
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 	@Column(name = "password")
 	private String password;
 	@Column(name = "firstName")
@@ -35,11 +35,11 @@ public class Patient {
 		this.dateOfBirth=dateOfBirth;
 	}
 	
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 	
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	
@@ -82,7 +82,7 @@ public class Patient {
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Patient) {
-			return ((Patient) obj).id.equals(this.id);
+			return ((Patient) obj).id == this.id;
 		}
 		return false;
 	}
