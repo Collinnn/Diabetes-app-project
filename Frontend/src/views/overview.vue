@@ -45,6 +45,7 @@ export default {
                     this.doctorForm.password = ""
                     console.log("Doctor added")
                 })
+                .catch(this.doctorForm.firstName = "")
         }
     }
 }
