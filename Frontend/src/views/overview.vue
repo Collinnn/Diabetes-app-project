@@ -3,20 +3,20 @@
         <h1>Overview Page</h1>
         <ul>
             <label>
-                First name: <input type="text" />
+                First name: <input type="text" v-model="doctorForm.firstName" />
             </label>
         </ul>
         <ul>
             <label>
-                Last name: <input type="text" />
+                Last name: <input type="text" v-model="doctorForm.lastName" />
             </label>
         </ul>
         <ul>
             <label>
-                Password: <input type="text" />
+                Password: <input type="text" v-model="doctorForm.password" />
             </label>
         </ul>
-            <button v-on:submit.prevent="submitPatientsForm"> Submit </button>
+            <button @click="submitDoctorForm"> Submit </button>
        
 
         
@@ -30,19 +30,19 @@ export default {
     data() {
         return {
             doctorForm: {
-                firstName: "John",
-                lastName: "Doe",
-                password: "Secure123"
+                firstName: "",
+                lastName: "",
+                password: ""
             }
         }
     },
     methods: {
-        submitPatientsForm() {
+        submitDoctorForm() {
             this.axios.post(this.$backend.getUrlPostDoctor(), this.doctorForm)
                 .then(() => {
-                    this.doctorForm.firstName = "John"
-                    this.doctorForm.lastName = "Doe"
-                    this.doctorForm.password = "Secure123"
+                    this.doctorForm.firstName = ""
+                    this.doctorForm.lastName = ""
+                    this.doctorForm.password = ""
                     console.log("Doctor added")
                 })
         }
