@@ -1,0 +1,200 @@
+swagger: "2.0"
+info:
+  description: Description
+  version: 1..100:5050
+  title: DiAPPbetes
+host: localhost:8080
+basePath: /api/v1/
+schemes:
+  - http
+  
+paths:
+  /doctors:
+    get:
+      summary: Gets a list of doctors
+      responses:
+        "200":
+          description: The list of doctor IDs
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Doctor"
+              
+    post:
+      summary: Adds a doctor to the database
+      parameters:
+        - in: body
+          name: doctor
+          required: true
+          schema:
+            $ref: "#/definitions/Doctor"
+      responses:
+        "200":
+          description: Doctor correctly added
+          
+          
+  /doctors/{doctorId}:
+    delete:
+      summary: Deletes a doctor
+      parameters:
+        - in: path
+          name: doctorId
+          type: integer
+          description: The id of the doctor to delete
+          required: true
+      responses:
+        "204":
+          description: The doctor has been deleted
+          
+    get:
+      summary: Doctor with specified id
+      parameters:
+        - in: path
+          name: doctorId
+          type: integer
+          description: The id of the doctor
+          required: true
+      responses:
+        "200":
+          description: The doctor with the specified id       
+  
+  
+  /doctors/{doctorId}/patients:
+    get:
+      summary: Gets a list of patients
+      parameters:
+        - in: path
+          name: doctorId
+          type: integer
+          description: The id of the doctor
+          required: true
+      responses:
+        "200":
+          description: The doctor"s patient list
+        "404":
+          description: The doctor cannot be found
+          
+    post:
+      summary: Adds a patient to the database
+      parameters:
+        - in: path
+          name: doctorId
+          type: integer
+          description: The id of the doctor
+          required: true
+        - in: body
+          name: patient
+          required: true
+          schema:
+            $ref: "#/definitions/Patient"
+      responses:
+        "200":
+          description: Patient correctly added
+        "404":
+          description: The doctor cannot be found
+          
+          
+  /doctors/{doctorId}/patients/{patientId}:
+    delete:
+      summary: Deletes a patient
+      parameters:
+        - in: path
+          name: doctorId
+          type: integer
+          description: The id of the patient"s doctor
+          required: true
+        - in: path
+          name: patientId
+          type: integer
+          description: The id of the patient to delete
+          required: true
+      responses:
+        "204":
+          description: The patient has been deleted
+        "404":
+          description: The doctor cannot be found
+          
+          
+  /doctors/{doctorId}/patients/{patientId}/measurements:
+    get:
+      summary: Gets a list of measurements
+      parameters:
+        - in: path
+          name: doctorId
+          type: integer
+          description: The id of the doctor
+          required: true
+        - in: path
+          name: patientId
+          type: integer
+          description: The id of the patient
+          required: true
+      responses:
+        "200":
+          description: The patient"s measurements list
+        "404":
+          description: The doctor or patient cannot be found
+          
+    post:
+      summary: Adds a measurement to the database
+      parameters:
+        - in: path
+          name: doctorId
+          type: integer
+          description: The id of the doctor
+          required: true
+        - in: path
+          name: patientId
+          type: integer
+          description: The id of the patient
+          required: true
+        - in: body
+          name: measurement
+          required: true
+          schema:
+            $ref: "#/definitions/Measurement"
+      responses:
+        "200":
+          description: Measurement correctly added
+        "404":
+          description: The doctor or patient cannot be found
+          
+          
+definitions:
+  Patient:
+    type: object
+    properties:
+      id:
+        type: integer
+      password:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      dateOfBirth:
+        type: string
+      doctor:
+        $ref: "#/definitions/Doctor"
+        
+  Doctor:
+    type: object
+    properties:
+      id:
+        type: integer
+      password:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      patients:
+        type: array
+        items:
+          $ref: "#/definitions/Patient"
+          
+  Measurement:
+    type: object
+    properties:
+      timeStamp:
+        type: string
