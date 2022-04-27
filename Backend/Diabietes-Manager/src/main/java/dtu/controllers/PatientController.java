@@ -35,8 +35,9 @@ public class PatientController {
 	public ResponseEntity<List<Patient>> getAllPatients(){
 		return ResponseEntity.ok(patientRepository.findAll());
 	}
-	
+
 	//get mapping for single patient
+	@GetMapping("/patients/{patientId}")
 	public ResponseEntity<Patient> getPatientById(@PathVariable int patientid){
 		Optional<Patient> patient = patientRepository.findById(patientid);
 		if (patient.isEmpty()){
