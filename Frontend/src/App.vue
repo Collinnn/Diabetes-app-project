@@ -1,12 +1,14 @@
 <template>
-  <div id="appLayout" v-if="$route.name !== 'login'">
-    <Topbar />
-    <Sidebar />
-  </div>
-
-  <div id="app">
-    <router-link to='/'></router-link>
-    <router-view  />
+  <div>
+    <div id="appLayout" v-if="$route.name !== 'login'">
+      <Topbar />
+      <Sidebar />
+    </div>
+  
+    <div id="app">
+      <router-link to='/'></router-link>
+      <router-view  />
+    </div>
   </div>
 </template>
 
