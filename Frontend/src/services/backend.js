@@ -5,12 +5,13 @@ export default class Backend {
         this.subpathPatients = "/patients"
     }
 
-    ////// Doctor paths //////
+    ////// Doctor controller //////
     getUrlGetDoctors() {
         return this.urlAPI + this.subpathDoctors
     }
 
     getUrlPostDoctor() {
+        console.log("Post doctor")
         return this.urlAPI + this.subpathDoctors
     }
 
@@ -30,7 +31,7 @@ export default class Backend {
         return this.urlAPI + this.subpathDoctors + "/" + id + this.subpathPatients
     }
 
-    ////// Patient paths //////
+    ////// Patient controller //////
     getUrlGetPatients() {
         return this.urlAPI + this.subpathPatients
     }
