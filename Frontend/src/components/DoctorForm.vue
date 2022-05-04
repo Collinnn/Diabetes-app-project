@@ -1,10 +1,10 @@
 <template>
     <div>
         <form id="doctorForm" @submit.prevent="submitDoctorForm" >
-            <ul v-for="input in doctorForm" :key="input.id">
-                <p class="required" v-for="requirement in input.required" :key="requirement"> *{{ requirement }} </p>
+            <ul>
+                <p class="required"> {{ updatedFirstNameRequirements }} </p>
                 <label>
-                    {{ input.label }}: <input :type="input.type" v-model="input.content" />
+                    {{ doctorForm[0].label }}: <input :type="doctorForm[0].type" v-model="doctorForm[0].content" />
                 </label>
             </ul>
             <button type="submit"> Submit </button>
@@ -16,16 +16,15 @@
 <script>
 
 let formId = 0
-let firstNameRequirements = [
-    "First name must not contain any numbers.", 
-    "First name must not contain any special characters (Letter accents excluded).",
-    "First name must not be empty."
-    ]
-let lastNameRequirements = [
-    "Last name must not contain any numbers.", 
-    "Last name must not contain any special characters (Letter accents excluded).",
-    "Last name must not be empty."
-]
+let firstNameRequirements = 
+    "First name must not contain any numbers." +
+    "\nFirst name must not contain any special characters (Letter accents excluded)." +
+    "\nFirst name must not be empty."
+    
+let lastNameRequirements =
+    "Last name must not contain any numbers." +
+    "\nLast name must not contain any special characters (Letter accents excluded)." +
+    "\nLast name must not be empty."
 
 export default {
     name: "DoctorForm",
