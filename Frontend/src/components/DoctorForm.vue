@@ -2,9 +2,19 @@
     <div>
         <form id="doctorForm" @submit.prevent="submitDoctorForm" >
             <ul>
-                <p class="required"> {{ updatedFirstNameRequirements }} </p>
+                <p class="required" v-for="{requirement} in updatedFirstNameRequirements" :key="requirement"> *{{ requirement }} </p>
                 <label>
-                    {{ doctorForm[0].label }}: <input :type="doctorForm[0].type" v-model="doctorForm[0].content" />
+                    First name: <input type="text" v-model="doctorForm.firstName" />
+                </label>
+            </ul>
+            <ul>
+                <label>
+                    Last name: <input type="text" v-model="doctorForm.lastName" />
+                </label>
+            </ul>
+            <ul>
+                <label>
+                    Password: <input type="password" v-model="doctorForm.password" />
                 </label>
             </ul>
             <button type="submit"> Submit </button>
@@ -15,53 +25,53 @@
 
 <script>
 
-let formId = 0
-let firstNameRequirements = 
-    "First name must not contain any numbers." +
-    "\nFirst name must not contain any special characters (Letter accents excluded)." +
-    "\nFirst name must not be empty."
-    
-let lastNameRequirements =
-    "Last name must not contain any numbers." +
-    "\nLast name must not contain any special characters (Letter accents excluded)." +
-    "\nLast name must not be empty."
+let specialChars = /[ `´§½!@#$%¤€£^¨&*()_+\-=[\]{};':"\\|,.<>/?~]/
+let numbers = /\d/
 
 export default {
     name: "DoctorForm",
     data() {
         return {
-            doctorForm: [
-                { id: formId++, label: "First name", type: "text", content: "", required: firstNameRequirements },
-                { id: formId++, label: "Last name", type: "text", content: "", required: lastNameRequirements},
-                { id: formId++, label: "Password", type: "password", content: ""}
+            doctorForm: {
+                firstName: "",
+                lastName: "",
+                password: ""
+            },
+            firstNameRequirements: [
+                { id: "numbers", requirement: "First name must not contain any numbers." },
+                { id: "specialchars", requirement: "First name must not contain any special characters (Letter accents excluded)." }
             ]
         }
     },
     methods: {
-        validateForm() {
-            if (this.doctorForm[0].content === "") {
-                console.log("Form validated. Result false")
-                return false
-            }
-            else {
-                console.log("Form validated. Result true")
-                return true
-            }
-        },
         submitDoctorForm() {
+            console.log("poopy " + this.doctorForm.firstName)
             this.axios.post(this.$backend.getUrlPostDoctor(), this.doctorForm)
                 .then(() => {
                     this.doctorForm.firstName = ""
                     this.doctorForm.lastName = ""
                     this.doctorForm.password = ""
-                    console.log("Doctor added")
+                    console.log("Doctor submitted")
                 })
                 .catch(() => console.log("Invalid request"))
         }
     },
     computed: {
         updatedFirstNameRequirements() {
-            return firstNameRequirements
+            if (this.doctorForm.firstName != "") {
+                let updatedRequirements = this.firstNameRequirements
+
+                if (!specialChars.test(this.doctorForm.firstName)) {
+                    updatedRequirements = updatedRequirements.filter((req) => req.id != "specialchars")
+                }
+
+                if (!numbers.test(this.doctorForm.firstName)) {
+                    updatedRequirements = updatedRequirements.filter((req) => req.id != "numbers")
+                }
+                return updatedRequirements
+            }
+            
+            return []
         }
     }
 }
