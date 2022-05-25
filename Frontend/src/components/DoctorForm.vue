@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="container">
         <form id="doctorForm" @submit.prevent="submitDoctorForm" >
             <ul>
                 <p class="required" v-requirement v-for="{requirement} in unhandledRequirements" :key="requirement"> *{{ requirement }} </p>
@@ -93,5 +93,13 @@ export default {
 
 
 <style>
+    #container {
+        position: absolute;
+        left: calc(50% - 200px);
+        width: 400px;
+        border-radius: 20px;
+        background-color: rgb(192, 192, 192);
+        padding: 10px;
+    }
 
 </style>

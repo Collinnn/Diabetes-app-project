@@ -1,8 +1,8 @@
 
 const requirement = {
     mounted(el) {
-      el.style.color =  'red';
-      el.style.fontFamily = 'verdena';
+      el.style.color = 'crimson';
+      el.style.fontFamily = 'verdana';
       el.style.fontSize = '10px';
     }
   }
