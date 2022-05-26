@@ -1,39 +1,38 @@
 <template>
     <div id="container">
-        <form id="doctorForm" @submit.prevent="submitDoctorForm" >
+        <form @submit.prevent="submitForm">
             <ul>
-                <p class="required" v-requirement v-for="{requirement} in unhandledRequirements" :key="requirement"> *{{ requirement }} </p>
+                <p v-requirement v-for="{requirement} in unhandledRequirements" :key="requirement"> *{{ requirement }} </p>
                 <label>
-                    First name: <input type="text" v-model="doctorForm.firstName" />
+                    First name: <input type="text" v-model="form.firstName" />
                 </label>
             </ul>
             <ul>
                 <label>
-                    Last name: <input type="text" v-model="doctorForm.lastName" />
+                    Last name: <input type="text" v-model="form.lastName" />
                 </label>
             </ul>
             <ul>
                 <label>
-                    Password: <input type="password" v-model="doctorForm.password" />
+                    Password: <input type="password" v-model="form.password" />
                 </label>
             </ul>
             <button type="submit"> Submit </button>
         </form>
-        
     </div>
 </template>
 
 <script>
 
 let uppercase = /[A-Z]/
-let specialChars = /[ `´§½!@#$%¤€£^¨&*()_+\-=[\]{};':"\\|,.<>/?~]/
+let specialChars = /[ `´§½!@#$%¤€£^¨&*()_+-=[\]{};':"\\|,.<>/?~]/
 let numbers = /\d/
 
 export default {
     name: "DoctorForm",
     data() {
         return {
-            doctorForm: {
+            form: {
                 firstName: "",
                 lastName: "",
                 password: ""
@@ -47,13 +46,13 @@ export default {
         }
     },
     methods: {
-        submitDoctorForm() {
+        submitForm() {
             if (this.unhandledRequirements.length == 0) {
-                this.axios.post(this.$backend.getUrlPostDoctor(), this.doctorForm)
+                this.axios.post(this.$backend.getUrlPostDoctor(), this.form)
                 .then(() => {
-                    this.doctorForm.firstName = ""
-                    this.doctorForm.lastName = ""
-                    this.doctorForm.password = ""
+                    this.form.firstName = ""
+                    this.form.lastName = ""
+                    this.form.password = ""
                     console.log("Doctor submitted")
                 })
                 .catch(() => console.log("Invalid request"))
@@ -67,19 +66,19 @@ export default {
         unhandledRequirements() {
             let updatedRequirements = this.requirements
 
-            if ((this.doctorForm.firstName.length * this.doctorForm.lastName.length * this.doctorForm.password.length) !== 0) {
+            if ((this.form.firstName.length * this.form.lastName.length * this.form.password.length) !== 0) {
                 updatedRequirements = updatedRequirements.filter((req) => req.id != "empty")
             }
 
-            if (!specialChars.test(this.doctorForm.firstName + this.doctorForm.lastName)) {
+            if (!specialChars.test(this.form.firstName + this.form.lastName)) {
                 updatedRequirements = updatedRequirements.filter((req) => req.id != "specialchars")
             }
 
-            if (!numbers.test(this.doctorForm.firstName + this.doctorForm.lastName)) {
+            if (!numbers.test(this.form.firstName + this.form.lastName)) {
                 updatedRequirements = updatedRequirements.filter((req) => req.id != "numbers")
             }
 
-            if ((numbers.test(this.doctorForm.password) || specialChars.test(this.doctorForm.password)) && uppercase.test(this.doctorForm.password) && this.doctorForm.password.length >= 6) {
+            if ((numbers.test(this.form.password) || specialChars.test(this.form.password)) && uppercase.test(this.form.password) && this.form.password.length >= 6) {
                 updatedRequirements = updatedRequirements.filter((req) => req.id != "password")
             }
 
