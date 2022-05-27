@@ -2,9 +2,9 @@
     <div id="container">
         <form @submit.prevent="submitForm">
             <ul>
-                <p v-requirement v-for="{requirement} in unhandledRequirements" :key="requirement"> *{{ requirement }} </p>
+                <p id="ptag" v-requirement v-for="{requirement} in unhandledRequirements" :key="requirement"> *{{ requirement }} </p>
                 <label>
-                    First name: <input type="text" v-model="form.firstName" />
+                    First name: <input v-required:ptag.notEmpty="requirements[0].requirement" type="text" v-model="form.firstName" />
                 </label>
             </ul>
             <ul>
@@ -83,7 +83,6 @@ export default {
             }
 
             return updatedRequirements
-            
         }
     }
 }
