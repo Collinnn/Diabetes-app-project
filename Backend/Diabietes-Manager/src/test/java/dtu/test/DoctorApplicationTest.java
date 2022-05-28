@@ -44,10 +44,7 @@ public class DoctorApplicationTest {
 
 	@Test
 	public void getAllDoctors() throws Exception{		
-		Doctor doctor = new Doctor();
-		doctor.setFirstName("John");
-		doctor.setLastName("Doe");
-		doctor.setPassword("password");
+		createTestDoctor("john", "doe", "password");
 		mvc.perform(MockMvcRequestBuilders.get("/api/v1/doctors")
 				.accept(MediaType.APPLICATION_JSON))
 				.andDo(print())
@@ -55,5 +52,12 @@ public class DoctorApplicationTest {
 				.andExpect(MockMvcResultMatchers.jsonPath("$[0].firstName").value("john"));
 	}
 	
-	
+
+
+
+
+	private void createTestDoctor(String firstName,String lastName,String password) {
+		Doctor doctor = new Doctor(firstName,lastName,password);
+        repository.saveAndFlush(doctor);
+    }
 }
