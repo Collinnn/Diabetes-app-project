@@ -4,11 +4,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
+
+import javax.print.attribute.standard.Media;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.After;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,6 +42,7 @@ public class DoctorApplicationTest {
 	@Autowired
 	private DoctorRepository repository;
 	
+
 	@After
 	public void resetDb() {
 		repository.deleteAll();
@@ -43,17 +50,66 @@ public class DoctorApplicationTest {
 	
 
 	@Test
-	public void getAllDoctors() throws Exception{		
+	public void getaDoctor() throws Exception{
+		
 		createTestDoctor("john", "doe", "password");
 		mvc.perform(MockMvcRequestBuilders.get("/api/v1/doctors")
 				.accept(MediaType.APPLICATION_JSON))
 				.andDo(print())
 				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$[0].firstName").value("john"));
+				.andExpect(MockMvcResultMatchers.jsonPath("$[0].firstName").value("john"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$[0].lastName").value("doe"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$[0].password").value("password"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$[0].patients").isEmpty());
 	}
 	
 
 
+	@Test
+	public void getAllWithZeroDoctors() throws Exception{
+		mvc.perform(MockMvcRequestBuilders.get("/api/v1/doctors")
+		.accept(MediaType.APPLICATION_JSON))
+		.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(MockMvcResultMatchers.jsonPath("$[*].firstName").doesNotExist())
+		.andExpect(MockMvcResultMatchers.jsonPath("$[*].lastName").doesNotExist())
+		.andExpect(MockMvcResultMatchers.jsonPath("$[*].password").doesNotExist())
+		.andExpect(MockMvcResultMatchers.jsonPath("$[*].patients").doesNotExist());
+	}
+	
+	@Test
+	public void postDoctor() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.post("/api/v1/doctors")
+		.accept(MediaType.APPLICATION_JSON)
+		.content((toJsonString(new Doctor("john","doe","password"))))
+		.contentType(MediaType.APPLICATION_JSON))
+		.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("john"))
+		.andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("doe"))
+		.andExpect(MockMvcResultMatchers.jsonPath("$.password").value("password"))
+		.andExpect(MockMvcResultMatchers.jsonPath("$.patients").isEmpty());
+	}
+
+	@Test
+	public void deleteDoctor() throws Exception{
+		createTestDoctor("john", "doe", "password");
+		mvc.perform(MockMvcRequestBuilders.delete("/api/v1/doctor/{doctorid}",1))
+		.andExpect(status().isNotFound())
+		.andExpect(MockMvcResultMatchers.jsonPath("$.firstName").doesNotExist())
+		.andExpect(MockMvcResultMatchers.jsonPath("$.lastName").doesNotExist())
+		.andExpect(MockMvcResultMatchers.jsonPath("$.password").doesNotExist())
+		.andExpect(MockMvcResultMatchers.jsonPath("$.patients").doesNotExist());
+	}
+
+
+	public static String toJsonString(final Object obj){
+		try {
+			return new ObjectMapper().writeValueAsString(obj);
+		} catch (Exception e){
+			throw new RuntimeException(e);
+		}
+	}
 
 
 	private void createTestDoctor(String firstName,String lastName,String password) {
