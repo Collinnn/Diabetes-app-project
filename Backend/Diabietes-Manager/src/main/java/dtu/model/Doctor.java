@@ -39,7 +39,14 @@ public class Doctor {
 		this.lastName=lastName;
 		this.password=password;
 	}
-		
+	public Doctor(int id, String firstName, String lastName, String password){
+		this.id=id;
+		this.firstName=firstName;
+		this.lastName=lastName;
+		this.password=password;
+	}
+	
+
 	public int getId() {
 		return id;
 	}

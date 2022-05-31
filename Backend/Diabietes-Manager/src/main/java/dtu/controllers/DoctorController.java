@@ -52,6 +52,7 @@ public class DoctorController {
 	@PutMapping("/doctors/{doctorId}")
 	public ResponseEntity<Doctor> updateDoctorDetails(@PathVariable int doctorId, @RequestBody Doctor updatedDoctorDetails) {
 		Optional<Doctor> doctor = doctorRepository.findById(doctorId);
+
 		if (doctor.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
