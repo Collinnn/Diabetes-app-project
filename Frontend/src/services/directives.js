@@ -38,10 +38,21 @@ function hasPasswordRequirements(vnode) {
 
 let requirements = []
 
+
 export const required = {
   updated(el, binding, vnode) {
-    console.log("elem: ", vnode)
-    console.log("isEmpty: ", isEmptyField(vnode))
+    if (binding.modifiers.mark) {
+
+    }
+
+    if (binding.modifiers.name) {
+
+    }
+
+    if (binding.modifiers.password) {
+      
+    }
+
     if (binding.modifiers.notEmpty && isEmptyField(vnode)) {
       if (!requirements.includes(binding.value.notEmpty)) {
         requirements.push(binding.value.notEmpty)
@@ -88,3 +99,24 @@ export const required = {
     }
   }
 }
+
+
+
+
+/*
+Value:
+  - [ {fun: t => t == "", req: "All fields must be filled out"}, // empty
+      {fun: t => [A-Z].test(t)}, // Capital letter(s)
+      {fun: t => [0-9].test(t)}, // Number(s)
+      {fun: t => [..,-].test(t)} // Special char(s)
+    ]
+
+Arg:
+  - Paragraph id <p id="foo"></p>
+
+Modifiers:
+  - mark:   Marks satisfied reqs
+  - name:   Must be name
+  - password: Must be password
+
+*/
