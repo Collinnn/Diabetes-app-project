@@ -53,13 +53,11 @@ public class DoctorApplicationTest {
 		} catch  (Exception e){
 			throw new RuntimeException(e);
 		}
-		System.out.println("Hello world!");
 	}
 	
 
 	@Test
 	public void getaDoctor() throws Exception{
-		
 		createTestDoctor("john", "doe", "password");
 		mvc.perform(MockMvcRequestBuilders.get("/api/v1/doctors")
 				.accept(MediaType.APPLICATION_JSON))
@@ -87,9 +85,9 @@ public class DoctorApplicationTest {
 
 	@Test 
 	public void postDoctor() throws Exception {
-		mvc.perform(MockMvcRequestBuilders.post("/api/v1/doctors")
+		mvc.perform(MockMvcRequestBuilders.post("/api/v1/doctors",2)
 		.accept(MediaType.APPLICATION_JSON)
-		.content((toJsonString(new Doctor("johnny","deer","password"))))
+		.content((toJsonString(new Doctor(123456789,"johnny","deer","password"))))
 		.contentType(MediaType.APPLICATION_JSON))
 		.andDo(print())
 		.andExpect(status().isOk())
