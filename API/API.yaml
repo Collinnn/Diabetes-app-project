@@ -1,8 +1,8 @@
 swagger: "2.0"
 info:
-  description: Description
+  title: DiAPIbetes
+  description: API for the DiAPPbetes application
   version: 1..100:5050
-  title: DiAPPbetes
 host: localhost:8080
 basePath: /api/v1/
 schemes:
@@ -31,6 +31,8 @@ paths:
       responses:
         "200":
           description: Doctor correctly added
+          schema:
+            $ref: "#/definitions/Doctor"
           
           
   /doctors/{doctorId}:
@@ -56,12 +58,15 @@ paths:
           required: true
       responses:
         "200":
-          description: The doctor with the specified id       
-  
+          description: The doctor with the specified id
+          schema:
+            $ref: "#/definitions/Doctor"
+        "404":
+          description: The doctor cannot be found  
   
   /doctors/{doctorId}/patients:
     get:
-      summary: Gets a list of patients
+      summary: Gets list of patients associated with a doctor
       parameters:
         - in: path
           name: doctorId
@@ -70,18 +75,29 @@ paths:
           required: true
       responses:
         "200":
-          description: The doctor"s patient list
+          description: The list of patients associated with the doctor
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Patient"
         "404":
           description: The doctor cannot be found
+
+  
+  /patients:
+    get:
+      summary: Gets a list of patients
+      responses:
+        "200":
+          description: The list of all patients
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Patient"
           
     post:
       summary: Adds a patient to the database
       parameters:
-        - in: path
-          name: doctorId
-          type: integer
-          description: The id of the doctor
-          required: true
         - in: body
           name: patient
           required: true
@@ -90,19 +106,14 @@ paths:
       responses:
         "200":
           description: Patient correctly added
-        "404":
-          description: The doctor cannot be found
+          schema:
+            $ref: "#/definitions/Patient"
           
           
-  /doctors/{doctorId}/patients/{patientId}:
+  /patients/{patientId}:
     delete:
       summary: Deletes a patient
       parameters:
-        - in: path
-          name: doctorId
-          type: integer
-          description: The id of the patient"s doctor
-          required: true
         - in: path
           name: patientId
           type: integer
@@ -111,19 +122,12 @@ paths:
       responses:
         "204":
           description: The patient has been deleted
-        "404":
-          description: The doctor cannot be found
           
           
-  /doctors/{doctorId}/patients/{patientId}/measurements:
+  /patients/{patientId}/measurements:
     get:
       summary: Gets a list of measurements
       parameters:
-        - in: path
-          name: doctorId
-          type: integer
-          description: The id of the doctor
-          required: true
         - in: path
           name: patientId
           type: integer
@@ -131,18 +135,17 @@ paths:
           required: true
       responses:
         "200":
-          description: The patient"s measurements list
+          description: The patient's measurements list
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Measurement"
         "404":
-          description: The doctor or patient cannot be found
+          description: The patient cannot be found
           
     post:
       summary: Adds a measurement to the database
       parameters:
-        - in: path
-          name: doctorId
-          type: integer
-          description: The id of the doctor
-          required: true
         - in: path
           name: patientId
           type: integer
@@ -156,8 +159,10 @@ paths:
       responses:
         "200":
           description: Measurement correctly added
+          schema:
+            $ref: "#/definitions/Measurement"
         "404":
-          description: The doctor or patient cannot be found
+          description: The patient cannot be found
           
           
 definitions:
