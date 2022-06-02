@@ -8,7 +8,7 @@ export const requirement = {
 }
 
 let uppercase = /[A-Z]/
-let specialChars = /[ `´§½!@#$%¤€£^¨&*()_+-=[\]{};':"\\|,.<>/?~]/
+let specialChars = /[ `´§½!@#$%¤€£^¨&*()_+=[\]{};':"\\|,.<>/?~-]/
 let numbers = /\d/
 
 function isEmptyField(vnode) {
