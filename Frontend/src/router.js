@@ -6,10 +6,12 @@ import overview from './views/overview.vue'
 import food from './views/food.vue'
 import doctor from './views/doctor.vue'
 import emergency from './views/emergency.vue'
+import landing from './views/landing.vue'
+import patientLogin from './views/patientLogin.vue'
 
 const routes = [
     {
-        path: '/',
+        path: '/login',
         component: login,
         name: 'login'
     },
@@ -32,6 +34,16 @@ const routes = [
         path: '/emergency',
         component: emergency,
         name: 'emergency'
+    },
+    {
+        path: '/',
+        component: landing,
+        name: 'landing'
+    },
+    {
+        path:'/patientLogin',
+        component: patientLogin,
+        name: 'patientLogin'
     }
 ]
 
