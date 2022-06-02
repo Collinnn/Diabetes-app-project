@@ -1,5 +1,6 @@
 <template>
     <div id="container">
+        <h3> Doctor Submission Form </h3>
         <form @submit.prevent="submitForm">
             <ul>
                 <p v-requirement v-for="{requirement} in unhandledRequirements" :key="requirement"> *{{ requirement }} </p>
@@ -25,7 +26,7 @@
 <script>
 
 let uppercase = /[A-Z]/
-let specialChars = /[ `´§½!@#$%¤€£^¨&*()_+-=[\]{};':"\\|,.<>/?~]/
+let specialChars = /[ `´§½!@#$%¤€£^¨&*()_+=[\]{};':"\\|,.<>/?~-]/
 let numbers = /\d/
 
 export default {
@@ -93,8 +94,6 @@ export default {
 
 <style>
     #container {
-        position: absolute;
-        left: calc(50% - 200px);
         width: 400px;
         border-radius: 20px;
         background-color: rgb(192, 192, 192);
