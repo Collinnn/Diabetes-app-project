@@ -3,17 +3,18 @@ package dtu.controllers;
 import java.util.List;
 import java.util.Optional;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import dtu.model.Doctor;
 import dtu.model.Patient;
 import dtu.repositories.DoctorRepository;
@@ -42,8 +43,20 @@ public class PatientController {
 		}
 		return ResponseEntity.ok(patient.get());
 	}
+	@PostMapping("/patients")
+	public ResponseEntity<Patient> createPatient(@RequestBody Patient patient) {
+		int doctorId = patient.getDoctor().getId();
+		String doctorFirstName = patient.getDoctor().getFirstName();
+		String doctorLastName = patient.getDoctor().getLastName();
+		if(doctorRepository.existsById(doctorId) || doctorRepository.getById(doctorId).getFirstName() == doctorFirstName 
+				|| doctorRepository.getById(doctorId).getLastName() == doctorLastName) {
+			return ResponseEntity.ok(patientRepository.save(patient));
+		}
+		return ResponseEntity.notFound().build();
+		
+	}
+	
 
-	//Put mapping for updating patient fields
 	@PutMapping("/patients/{patientId}")
 	public ResponseEntity<Patient> updatePatient(@PathVariable int patientId, @RequestBody Patient patient){
 		Optional<Patient> oPatient = patientRepository.findById(patientId);
@@ -54,6 +67,9 @@ public class PatientController {
 		oPatient.get().setLastName(patient.getLastName());
 		oPatient.get().setPassword(patient.getPassword());
 		oPatient.get().setDateOfBirth(patient.getDateOfBirth());
+		oPatient.get().getDoctor().setFirstName(patient.getDoctor().getFirstName());
+		oPatient.get().getDoctor().setLastName(patient.getDoctor().getLastName());
+		oPatient.get().getDoctor().setPassword(patient.getDoctor().getPassword());
 		return ResponseEntity.ok(patientRepository.save(oPatient.get()));
 	}
 
