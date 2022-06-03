@@ -1,24 +1,15 @@
 <template>
     <div class ="topbar">
         <div class = "leftElement">
-            <button class = "topbarButton" id = "homeButton" @click="goToPage(dashBoard)">
+            <button class = "topbarButton" id = "homeButton" @click="goToPage('overview')">
                 <svg class="icon" id="homeIcon"></svg>
             </button>
             DiAPPbetes
         </div>
         <div class = "rightElements">
-            <button class = "topbarButton" id = "userButton" @click="goToPage(profilePage)">
+            <button class = "topbarButton" id = "userButton" @click="this.$emit('showDropdown')">
                 <svg class="icon" id="userIcon"></svg>
             </button>
-            <button class = "topbarButton" id = "settingsButton" @click="settingsMenu.isVisible = !settingsMenu.isVisible">
-                <svg class="icon" id="settingsIcon"></svg>
-            </button>
-        </div>
-        <div id="settingsMenu" v-if="settingsMenu.isVisible">
-            <button class="settingsButton"> Settings 1 </button>
-            <button class="settingsButton"> Settings 2 </button>
-            <button class="settingsButton"> Settings 3 </button>
-            <button class="settingsButton"> Settings 4 </button>
         </div>
     </div>
 </template>
@@ -29,28 +20,7 @@
 
     export default {
         name: "TopbarMenu",
-        data() {
-            return {
-                title: 'Sidebar',
-                settings: [
-                    {
-                        title: 'Interface settings', 
-                        link: '#'
-                    },
-                    {
-                        title: 'Darkmode', 
-                        link: '#'
-                    },
-                    {
-                        title: 'Advanced settings', 
-                        link: '#'
-                    }
-                ],
-                settingsMenu: {
-                    isVisible: false
-                }
-            }
-        },
+        emits: ['showDropdown'],
         methods: {
             goToPage(pageName) {
                 router.push({ name: pageName})

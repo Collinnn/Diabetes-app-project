@@ -1,13 +1,17 @@
 <template>
   <div>
-    <div id="appLayout" v-if="$route.name !== 'login'">
-      <Topbar />
+    <div id="appLayout" v-if="app.loggedIn">
+      <Topbar @showDropdown="showDropdown.isVisible=!showDropdown.isVisible" />
       <Sidebar />
     </div>
   
     <div id="app">
       <router-link to='/'></router-link>
-      <router-view  />
+      <router-view @logIn="app.loggedIn = true" />
+    </div>
+
+    <div id=showDropdown v-if="showDropdown.isVisible">
+        <ProfileDropdown @logOut="app.loggedIn = false"/>
     </div>
   </div>
 </template>
@@ -15,11 +19,23 @@
 <script>
 import Topbar from "./components/Topbar.vue"
 import Sidebar from "./components/Sidebar.vue"
+import ProfileDropdown from "./components/ProfileDropdown.vue"
 export default {
     name: 'App',
+    data(){
+      return{
+        showDropdown:{
+          isVisible: false
+        },
+        app:{
+          loggedIn: false
+        }
+      }
+    },
     components: {
     Topbar,
-    Sidebar
+    Sidebar,
+    ProfileDropdown
     }
 }
     
