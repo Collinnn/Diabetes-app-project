@@ -10,6 +10,7 @@
 
 <script>
 import router from "@/router"
+
 export default {
         name: 'login-patient',
         data() {
@@ -23,7 +24,7 @@ export default {
         methods: {
             login() {
                 if(this.input.id != "" && this.input.password != "") {
-                    this.axios.get(this.$Backend.getUrlGetDoctorById(this.input.id))
+                    this.axios.get(this.$backend.getUrlGetPatientId(this.input.id))
                     .then(function(response){
                         if(response.id==this.input.id && response.password == this.input.password){
                             console.log("Logged in succesfully")
