@@ -35,19 +35,7 @@ paths:
             $ref: "#/definitions/Doctor"
           
           
-  /doctors/{doctorId}:
-    delete:
-      summary: Deletes a doctor
-      parameters:
-        - in: path
-          name: doctorId
-          type: integer
-          description: The id of the doctor to delete
-          required: true
-      responses:
-        "204":
-          description: The doctor has been deleted
-          
+  /doctors/{doctorId}:          
     get:
       summary: Gets doctor with specified id
       parameters:
@@ -82,6 +70,18 @@ paths:
           description: The doctor has been updated successfully
           schema:
             $ref: "#/definitions/Doctor"
+      
+    delete:
+      summary: Deletes a doctor
+      parameters:
+        - in: path
+          name: doctorId
+          type: integer
+          description: The id of the doctor to delete
+          required: true
+      responses:
+        "204":
+          description: The doctor has been deleted
 
   
   /doctors/{doctorId}/patients:
@@ -130,19 +130,7 @@ paths:
             $ref: "#/definitions/Patient"
           
           
-  /patients/{patientId}:
-    delete:
-      summary: Deletes a patient
-      parameters:
-        - in: path
-          name: patientId
-          type: integer
-          description: The id of the patient to delete
-          required: true
-      responses:
-        "204":
-          description: The patient has been deleted
-    
+  /patients/{patientId}:   
     get:
       summary: Gets a patient
       parameters:
@@ -177,6 +165,18 @@ paths:
           description: The patient has been updated successfully
           schema:
             $ref: "#/definitions/Patient"
+    
+    delete:
+      summary: Deletes a patient
+      parameters:
+        - in: path
+          name: patientId
+          type: integer
+          description: The id of the patient to delete
+          required: true
+      responses:
+        "204":
+          description: The patient has been deleted
           
           
   /patients/{patientId}/measurements:
