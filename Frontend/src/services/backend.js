@@ -3,6 +3,7 @@ export default class Backend {
         this.urlAPI = "http://localhost:8080/api/v1"
         this.subpathDoctors = "/doctors"
         this.subpathPatients = "/patients"
+        this.subpathMeasurements = "/measurements"
     }
 
     ////// Doctor controller //////
@@ -15,11 +16,15 @@ export default class Backend {
         return this.urlAPI + this.subpathDoctors
     }
 
-    getUrlDeleteDoctorById(id) {
+    getUrlGetDoctorById(id) {
         return this.urlAPI + this.subpathDoctors + "/" + id
     }
 
-    getUrlGetDoctorById(id) {
+    getUrlPutDoctorById(id) {
+        return this.urlAPI + this.subpathDoctors + "/" + id
+    }
+
+    getUrlDeleteDoctorById(id) {
         return this.urlAPI + this.subpathDoctors + "/" + id
     }
 
@@ -27,10 +32,7 @@ export default class Backend {
         return this.urlAPI + this.subpathDoctors + "/" + id + this.subpathPatients
     }
 
-    getUrlPostPatientToDoctorById(id) {
-        return this.urlAPI + this.subpathDoctors + "/" + id + this.subpathPatients
-    }
-
+    
     ////// Patient controller //////
     getUrlGetPatients() {
         return this.urlAPI + this.subpathPatients
@@ -40,8 +42,25 @@ export default class Backend {
         return this.urlAPI + this.subpathPatients
     }
 
+    getUrlGetPatientById(id) {
+        return this.urlAPI + this.subpathPatients + "/" + id
+    }
+
+    getUrlPutPatientById(id) {
+        return this.urlAPI + this.subpathPatients + "/" + id
+    }
+
     getUrlDeletePatientById(id) {
         return this.urlAPI + this.subpathPatients + "/" + id
     }
 
+
+    ////// Measurement controller //////
+    getUrlGetMeasurementsFromPatientById(id) {
+        return this.urlAPI + this.subpathPatients + "/" + id + this.subpathMeasurements
+    }
+
+    getUrlPostMeasurementToPatientById(id) {
+        return this.urlAPI + this.subpathPatients + "/" + id + this.subpathMeasurements
+    }
 }
