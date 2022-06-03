@@ -15,12 +15,20 @@
             </ul>
             <ul>
                 <label>
-                    Date of birth: <input type="date" min="1900-01-01" :max="this.today" v-model="form.dateOfBirth" />
+                    Password: <input type="password" v-model="form.password" />
                 </label>
             </ul>
             <ul>
                 <label>
-                    Password: <input type="password" v-model="form.password" />
+                    Date of birth: <input type="date" min="1900-01-01" :max="this.today" v-model="form.dateOfBirth" />
+                </label>
+            </ul>
+            <ul> 
+                <label>
+                    Doctor: <select name="doctor">
+                                <option> Doc1 </option>
+                                <option> Doc2 </option>
+                            </select>
                 </label>
             </ul>
             <button type="submit"> Submit </button>
@@ -31,6 +39,7 @@
 <script>
 
 let date = new Date(); 
+let today = date.toISOString().split('T')[0]
 
 let uppercase = /[A-Z]/
 let specialChars = /[ `´§½!@#$%¤€£^¨&*()_+=[\]{};':"\\|,.<>/?~-]/
@@ -40,12 +49,12 @@ export default {
     name: "PatientForm",
     data() {
         return {
-            today: date.toISOString().split('T')[0],
+            today: today,
             form: {
                 firstName: "",
                 lastName: "",
                 password: "",
-                dateOfBirth: date.toISOString().split('T')[0]
+                dateOfBirth: today
             },
             requirements: [
                 { id: "empty", requirement: "All fields must be filled out." },
@@ -58,14 +67,16 @@ export default {
     methods: {
         submitForm() {
             if (this.unhandledRequirements.length == 0) {
-                this.axios.post(this.$backend.getUrlPostPatient(), this.form)
+                this.axios.post(this.$backend.getUrlPostPatientToDoctorById(1), this.form)
                 .then(() => {
+                    console.log(this.form)
                     this.form.firstName = ""
                     this.form.lastName = ""
                     this.form.password = ""
+                    this.form.dateOfBirth = today
                     console.log("Patient submitted")
                 })
-                .catch(() => console.log("Invalid request"))
+                .catch(() => console.log("Invalid request", this.form))
             }
             else {
                 console.log("Submission not accepted due to unhandled requirements")
@@ -91,7 +102,6 @@ export default {
             if ((numbers.test(this.form.password) || specialChars.test(this.form.password)) && uppercase.test(this.form.password) && this.form.password.length >= 6) {
                 updatedRequirements = updatedRequirements.filter((req) => req.id != "password")
             }
-            console.log(this.form.dateOfBirth)
             return updatedRequirements
             
         }
