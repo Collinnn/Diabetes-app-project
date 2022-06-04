@@ -50,6 +50,9 @@ public class PatientController {
 		String doctorLastName = patient.getDoctor().getLastName();
 		if(doctorRepository.existsById(doctorId) || doctorRepository.getById(doctorId).getFirstName() == doctorFirstName 
 				|| doctorRepository.getById(doctorId).getLastName() == doctorLastName) {
+			Doctor doc = doctorRepository.getById(doctorId);
+			doc.addPatient(patient);
+			doctorRepository.save(doc);
 			return ResponseEntity.ok(patientRepository.save(patient));
 		}
 		return ResponseEntity.notFound().build();
