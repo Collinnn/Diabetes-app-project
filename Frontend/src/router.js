@@ -1,14 +1,13 @@
-
-import {createRouter, createWebHistory} from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
 import login from './views/login.vue'
 import overview from './views/overview.vue'
 import food from './views/food.vue'
 import doctor from './views/doctor.vue'
 import emergency from './views/emergency.vue'
+import pageNotFound from './views/pageNotFound.vue'
 
-const routes = [
-    {
+const routes = [{
         path: '/',
         component: login,
         name: 'login'
@@ -32,6 +31,11 @@ const routes = [
         path: '/emergency',
         component: emergency,
         name: 'emergency'
+    },
+    {
+        path: '/:pathMatch(.*)',
+        component: pageNotFound,
+        name: 'pageNotFound'
     }
 ]
 

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dtu.model.Doctor;
+import dtu.model.Patient;
 import dtu.repositories.DoctorRepository;
 
 @RestController @CrossOrigin @RequestMapping("/api/v1")
@@ -43,12 +44,6 @@ public class DoctorController {
 		return ResponseEntity.ok(doctor.get());
 	}
 	
-	@DeleteMapping("/doctors/{doctorId}")
-	public ResponseEntity<?> deleteDoctorById(@PathVariable int doctorId) {
-		doctorRepository.deleteById(doctorId);
-		return ResponseEntity.noContent().build();
-	}
-	
 	@PutMapping("/doctors/{doctorId}")
 	public ResponseEntity<Doctor> updateDoctorDetails(@PathVariable int doctorId, @RequestBody Doctor updatedDoctorDetails) {
 		Optional<Doctor> doctor = doctorRepository.findById(doctorId);
@@ -60,4 +55,20 @@ public class DoctorController {
 		doctor.get().setPassword(updatedDoctorDetails.getPassword());
 		return ResponseEntity.ok(doctor.get());
 	}	
+	
+	@DeleteMapping("/doctors/{doctorId}")
+	public ResponseEntity<?> deleteDoctorById(@PathVariable int doctorId) {
+		doctorRepository.deleteById(doctorId);
+		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping("/doctors/{doctorId}/patients")
+	public ResponseEntity<List<Patient>> getPatientsFromDoctor(@PathVariable int doctorId) {
+		Optional<Doctor> doctor = doctorRepository.findById(doctorId);
+		if (doctor.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(doctor.get().getPatients());
+	}
+	
 }
