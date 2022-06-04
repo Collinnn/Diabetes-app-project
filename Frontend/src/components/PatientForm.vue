@@ -25,9 +25,8 @@
             </ul>
             <ul> 
                 <label>
-                    Doctor: <select name="doctor">
-                                <option> Doc1 </option>
-                                <option> Doc2 </option>
+                    Doctor: <select>
+                                <option v-for="{id, firstName, lastName} in doctors" :key="id"> {{firstName}} {{lastName}} </option>
                             </select>
                 </label>
             </ul>
@@ -51,17 +50,29 @@ export default {
         return {
             today: today,
             form: {
+                id: "",
                 firstName: "",
                 lastName: "",
                 password: "",
-                dateOfBirth: today
+                dateOfBirth: today,
+                doctor: this.doctorForm
+            },
+            doctorForm: {
+                id: "",
+                firstName: "",
+                lastName: "",
+                password: "",
             },
             requirements: [
                 { id: "empty", requirement: "All fields must be filled out." },
                 { id: "numbers", requirement: "First name and last must not contain any numbers." },
                 { id: "specialchars", requirement: "First name and last name must not contain any special characters (Letter accents excluded)." },
                 { id: "password", requirement: "Password must be at least 6 characters long and contain at least 1 uppercase letter and 1 special character or number." }
-            ]
+            ],
+            doctors: this.axios.get(this.$backend.getUrlGetDoctors(), this.doctorForm)
+                        .then(() => {
+                            console.log(this.doctors)
+                        })
         }
     },
     methods: {
@@ -103,7 +114,6 @@ export default {
                 updatedRequirements = updatedRequirements.filter((req) => req.id != "password")
             }
             return updatedRequirements
-            
         }
     }
 }
