@@ -69,7 +69,7 @@ export default {
                 { id: "specialchars", requirement: "First name and last name must not contain any special characters (Letter accents excluded)." },
                 { id: "password", requirement: "Password must be at least 6 characters long and contain at least 1 uppercase letter and 1 special character or number." }
             ],
-            doctors: this.axios.get(this.$backend.getUrlGetDoctors(), this.doctorForm)
+            doctors: this.axios.get(this.$backend.getUrlGetDoctors())
                         .then(() => {
                             console.log(this.doctors)
                         })
@@ -78,9 +78,9 @@ export default {
     methods: {
         submitForm() {
             if (this.unhandledRequirements.length == 0) {
-                this.axios.post(this.$backend.getUrlPostPatientToDoctorById(1), this.form)
-                .then(() => {
-                    console.log(this.form)
+                this.axios.post(this.$backend.getUrlPostPatient(), this.form)
+                .then((response) => {
+                    console.log(response)
                     this.form.firstName = ""
                     this.form.lastName = ""
                     this.form.password = ""
