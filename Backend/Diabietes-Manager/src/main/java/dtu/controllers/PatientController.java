@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -43,17 +44,14 @@ public class PatientController {
 		}
 		return ResponseEntity.ok(patient.get());
 	}
+	
 	@PostMapping("/patients")
 	public ResponseEntity<Patient> createPatient(@RequestBody Patient patient) {
-		int doctorId = patient.getDoctor().getId();
-		String doctorFirstName = patient.getDoctor().getFirstName();
-		String doctorLastName = patient.getDoctor().getLastName();
-		if(doctorRepository.existsById(doctorId) || doctorRepository.getById(doctorId).getFirstName() == doctorFirstName 
-				|| doctorRepository.getById(doctorId).getLastName() == doctorLastName) {
-			return ResponseEntity.ok(patientRepository.save(patient));
+		Doctor doctor = patient.getDoctor();
+		if(doctor != null && doctorRepository.exists(Example.of(doctor))) {
+			doctor.addPatient(patient);
 		}
-		return ResponseEntity.notFound().build();
-		
+		return ResponseEntity.ok(patientRepository.save(patient));		
 	}
 	
 
@@ -79,14 +77,5 @@ public class PatientController {
 		return ResponseEntity.noContent().build();
 	}
 
-	// Gets all Patients associated with a doctor
-	@GetMapping("/doctors/{doctorId}/patients")
-	public ResponseEntity<List<Patient>> getAllDoctors(@PathVariable int doctorId) {
-		Optional<Doctor> doctor = doctorRepository.findById(doctorId);
-		if (doctor.isEmpty()) {
-			return ResponseEntity.notFound().build();
-		}
-		return ResponseEntity.ok(doctor.get().getPatients());
-	}
 	
 }
