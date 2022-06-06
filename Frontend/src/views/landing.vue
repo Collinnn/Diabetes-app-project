@@ -4,7 +4,7 @@
         Patient Login
         </button>
 
-        <button class="landingButton" id="doctorButton" @click="goToPage('doctorLogin')">
+        <button class="landingButton" id="doctorButton" @click="goToPage('overview')">
         Doctor Login
         </button>
     </div> 
@@ -31,32 +31,29 @@ export default {
 .container{
     position: relative;
     top:300px;
-    left:30%;
+    left:20%;
     align-content: center;
-    max-width: 35%;
-    background-color: #ffffff;
+    max-width: 50%;
+    background-color: #0010bb;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     border-radius: 40px;
-    padding: 30px 0px;
 }
 .landingButton{
     background-color: #5b6be4;
     border: 1cm;
+    color: #002851;
+    padding: 20 px 45px; 
     text-align: center;
     text-decoration: none;
     display: inline-flex;
     font-size: 42px;
-    margin: 20px 2px;
+    margin: 40px 2px;
     cursor: pointer;
-    padding: 40px 50px;
-    border-radius: 40px;
-    color: #ffffff;
 }
 .landingButton:hover{
-    background: #E5E5E5;;
+    background: rgba(255, 255, 255, 0.60);
 }
-
 </style>
