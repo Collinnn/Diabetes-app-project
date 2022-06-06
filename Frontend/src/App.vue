@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="appLayout" v-if="$route.name !== 'login'">
-      <Topbar />
+      <Topbar @darkMode="toggleDarkmode()" />
       <Sidebar />
     </div>
   
@@ -20,6 +20,11 @@ export default {
     components: {
     Topbar,
     Sidebar
+    },
+    methods: {
+      toggleDarkmode: function (){
+        if()
+      }
     }
 }
     
@@ -39,4 +44,5 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+
 </style>
