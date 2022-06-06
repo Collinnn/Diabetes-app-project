@@ -10,7 +10,7 @@
             <button class = "topbarButton" id = "userButton" @click="goToPage(profilePage)">
                 <svg class="icon" id="userIcon"></svg>
             </button>
-            <button class = "topbarButton" id = "settingsButton" @click="this.$emit('darkmode')">
+            <button class = "topbarButton" id = "settingsButton" @click="this.$emit('darkMode')">
                 <svg class="icon" id="settingsIcon"></svg>
             </button>
         </div>
@@ -22,7 +22,7 @@
     import router from "@/router"
 
     export default {
-        emits:['darkmode'],
+        emits:['darkMode'],
         name: "TopbarMenu",
         data() {
             return {
@@ -33,7 +33,7 @@
                         link: '#'
                     },
                     {
-                        title: 'Darkmode', 
+                        title: 'DarkMode', 
                         link: '#'
                     },
                     {

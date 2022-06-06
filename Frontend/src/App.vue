@@ -16,18 +16,18 @@
 import Topbar from "./components/Topbar.vue"
 import Sidebar from "./components/Sidebar.vue"
 export default {
-    name: 'App',
+    name: 'App',  
     components: {
     Topbar,
     Sidebar
     },
     methods: {
-      toggleDarkmode: function (){
-        if()
+      toggleDarkmode: function(){
+          console.log("Darkmode set to true");
+          document.app.classList.toggle('darkMode')
       }
     }
 }
-    
 </script>
 
 <style scoped>
@@ -43,6 +43,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+.darkMode{
+  background-color: black;
 }
 
 </style>
