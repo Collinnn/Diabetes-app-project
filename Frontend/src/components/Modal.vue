@@ -1,17 +1,19 @@
 <template>
     <div id="modalMask" @click="$emit('close')">
-        <div id="modal">
+        <div id="modal" @click.stop>
             <div id="modalHead">
                 <slot name="heading">
-                    <h1>❗❗❗WARNING❗❗❗ </h1>
+                    <h1> ❗❗❗WARNING❗❗❗ </h1>
                 </slot>
             </div>
             <div id="modalBody">
                 <slot name="body">
-                    Eat something or you're gonna feel bad, stupid... 
+                    Pls eat something... 😰
                 </slot>
             </div>
-            <button id="acceptButton" @click="$emit('close')"> Ok </button>
+            <div id="modalFooter">
+                <button id="modalButton" @click="$emit('close')"> Ok </button>
+            </div>
         </div>
     </div>
 
@@ -36,23 +38,30 @@
 }
 #modal {
     margin: 60px auto;
-    width: 350px;
+    width: 380px;
     height: auto;
-    background-color: rgb(200, 200, 200);
+    background-color: rgb(200, 200, 220);
     border-radius: 3px;
     padding: 5px 10px;
+    box-shadow: 0 0 10px 4px;
 }
 #modalHead {
-    min-height: 40px;
+    height: 80px;
+    overflow: hidden;
 }
 #modalBody {
-    min-height: 60px;
+    height: 80px;
+    overflow: hidden;
 }
-#acceptButton {
+#modalFooter {
     position: relative;
-    bottom: 20px;
-    float: right;
-
+    height: 30px;
+}
+#modalButton {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    cursor: pointer;
 }
 
 </style>
