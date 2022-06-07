@@ -21,11 +21,55 @@ export default {
     Topbar,
     Sidebar
     },
+    //Remember theme of the user
+    mounted(){
+      this.darktheme= this.getMediaPreference();
+   
+      this.toggleDarkmode();
+     
+    },
+    data(){
+      return{
+        darktheme: null,
+      };
+    },
     methods: {
       toggleDarkmode: function(){
-          console.log("Darkmode set to true");
-          document.app.classList.toggle('darkMode')
-      }
+        console.log(this.darktheme);
+          if(this.darktheme){
+            console.log("dark-theme");
+            this.darktheme=false; 
+            this.primarycolor   = 'grey'; 
+            this.secondarycolor = 'white';
+            this.accentcolor    = 'white';
+            document.getElementById('app').style.setProperty("--primary-color", this.primarycolor);
+            document.getElementById('app').style.setProperty("--secondary-color", this.secondarycolor);
+            document.getElementById('app').style.setProperty("--accent-color",this.accentcolor);
+
+          } else {
+            console.log("light-theme");
+            this.darktheme=true; 
+            this.primarycolor   = 'white'; 
+            this.secondarycolor = 'white';
+            this.accentcolor    = 'white';
+            document.getElementById('app').style.setProperty("--primary-color", this.primarycolor);
+            document.getElementById('app').style.setProperty("--secondary-color", this.secondarycolor);
+            document.getElementById('app').style.setProperty("--accent-color",this.accentcolor);
+
+          }
+      },
+      getMediaPreference() {
+        console.log("Gets user preference");
+        const hasDarkPreference = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (hasDarkPreference) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      getTheme(){
+        return localStorage.getItem("user-theme");
+      },
     }
 }
 </script>
@@ -43,9 +87,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-color: var(--primary-color);
 }
-.darkMode{
-  background-color: black;
-}
+
 
 </style>
