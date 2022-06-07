@@ -1,8 +1,8 @@
 <template>
     <div class ="profile dropdown">
         <div id="settingsMenu">
-            <button class="settingsButton" @click="goToPage(profilePage)"> View profile </button>
-            <button class="settingsButton" @click="goToPage(passwordPage)"> Change password </button>
+            <button class="settingsButton" @click="goToPage('user')"> View profile </button>
+            <button class="settingsButton" @click="goToPage('changePassword')"> Change password </button>
             <button class="settingsButton" @click="logOut('login')"> Log out </button>
         </div>
     </div>
@@ -32,14 +32,19 @@
 #settingsMenu {
     position: absolute;
     border-radius: 10px;
-    right: calc((100% - 300px)/6);
-    top: 85%;
+    right: 0%;
+    top: 6%;
     width: 200px;
     height: 300px;
     background-color: rgba(106, 121, 187, 0.8);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+}
+
+.settingsButton {
+    margin: 0px 10px;
+    padding: 10px 0px;
 }
 </style>
 

@@ -11,7 +11,7 @@
     </div>
 
     <div id=showDropdown v-if="showDropdown.isVisible">
-        <ProfileDropdown @logOut="app.loggedIn = false"/>
+        <ProfileDropdown @logOut="logOut()"/>
     </div>
   </div>
 </template>
@@ -36,6 +36,12 @@ export default {
     Topbar,
     Sidebar,
     ProfileDropdown
+    },
+    methods:{
+      logOut(){
+        this.showDropdown.isVisible = false;
+        this.app.loggedIn = false
+      }
     }
 }
     
