@@ -1,5 +1,5 @@
 <template>
-    <div id="modalMask" @click="$emit('close')">
+    <div id="modalMask" @click="this.$emit('close')">
         <div id="modal" @click.stop>
             <div id="modalHead">
                 <slot name="heading">
@@ -12,7 +12,7 @@
                 </slot>
             </div>
             <div id="modalFooter">
-                <button id="modalButton" @click="$emit('close')"> Ok </button>
+                <button id="modalButton" @click="this.$emit('close')"> Ok </button>
             </div>
         </div>
     </div>
@@ -22,7 +22,8 @@
 
 <script>
     export default {
-        name: "ModalBox"
+        name: "ModalBox",
+        emits: ['close']
     }
 </script>
 
