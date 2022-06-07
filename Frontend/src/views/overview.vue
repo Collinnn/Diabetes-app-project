@@ -12,7 +12,6 @@ import { DoughnutChart } from "vue-chart-3"
 import { Chart, registerables } from 'chart.js'
 
 Chart.register(...registerables)
-
 export default {
     name: "overviewPage",
     components: { DoughnutChart },
@@ -24,7 +23,7 @@ export default {
                     data: [50, 40, 30, 20],
                     backgroundColor: ['#77CEFF', '#0079AF', '#123E6B', '#97B0C4']
                 }]
-            },
+            }
         }
     }
 }
