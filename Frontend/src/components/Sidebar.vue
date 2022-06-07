@@ -1,17 +1,16 @@
 <template >
-    <div class="container">
-        <button class="sidebarButton" id="overviewButton" @click="goToPage('overview')"> 
-            <svg class="icon" id="overviewIcon"></svg>
-        </button>
-        <button class="sidebarButton" id="foodButton" @click="goToPage('food')">
-            <svg class="icon" id="foodIcon"></svg>
-        </button>
-        <button class="sidebarButton" id="doctorButton" @click="goToPage('doctor')">
-            <svg class="icon" id="doctorIcon"></svg>
-        </button>
-        <button class="sidebarButton" id="emergencyButton" @click="goToPage('emergency')">
-            <svg class="icon" id="emergencyIcon"></svg>
-        </button>        
+    <div id="sidebarContainer">
+        <div id="sidebarWrapper"> 
+            <button title="Overview" class="sidebar-button" id="overviewButton" @click="goToPage('overview')"> 
+                <svg class="icon" id="overviewIcon"></svg>
+            </button>
+            <button title="Meals" class="sidebar-button" id="foodButton" @click="goToPage('food')">
+                <svg class="icon" id="foodIcon"></svg>
+            </button>
+            <button title="Doctor" class="sidebar-button" id="doctorButton" @click="goToPage('doctor')">
+                <svg class="icon" id="doctorIcon"></svg>
+            </button> 
+        </div>      
     </div>
 </template>
 
@@ -34,35 +33,41 @@
 </script>
 
 <style scoped>
-.container {
+#sidebarContainer {
     position: fixed;
     top: 50px;
     bottom: 0;
     left: 0;
-    width: 20%;
+    width: 18%;
     min-width: 120px;
     max-width: 150px;
     background-color: #0010bb;
+}
+
+#sidebarWrapper {
+    position: relative;
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: flex-start;
+    gap: 30px;
     align-items: center;
 }
 
-.sidebarButton {
+.sidebar-button {
     cursor: pointer;
     background-color: #5b6be4;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border-radius: 10px;
     outline: none;
     border: none;
     
 }
-.sidebarButton:hover {
+.sidebar-button:hover {
     background: rgba(255, 255, 255, 0.60);
 }
-.sidebarButton:active {
+.sidebar-button:active {
     background: rgba(100, 100, 255, 0.60);
 }
 .icon {
@@ -78,8 +83,6 @@
 #doctorIcon {
     background: url('@/assets/Doctor.svg') no-repeat center;
 }
-#emergencyIcon {
-    background: url('@/assets/Emergency.svg') no-repeat center;
-}
+
 
 </style>
