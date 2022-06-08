@@ -1,4 +1,5 @@
 <template>
+    <title>Login page</title>
     <div class="login-Comp">
         <h1 class="title">Login</h1>
         <p>Ps. code is username then password</p>
