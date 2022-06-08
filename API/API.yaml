@@ -14,7 +14,7 @@ paths:
       summary: Gets a list of doctors
       responses:
         "200":
-          description: The list of doctor IDs
+          description: The list of doctors
           schema:
             type: array
             items:
@@ -35,21 +35,9 @@ paths:
             $ref: "#/definitions/Doctor"
           
           
-  /doctors/{doctorId}:
-    delete:
-      summary: Deletes a doctor
-      parameters:
-        - in: path
-          name: doctorId
-          type: integer
-          description: The id of the doctor to delete
-          required: true
-      responses:
-        "204":
-          description: The doctor has been deleted
-          
+  /doctors/{doctorId}:          
     get:
-      summary: Doctor with specified id
+      summary: Gets doctor with specified id
       parameters:
         - in: path
           name: doctorId
@@ -62,11 +50,43 @@ paths:
           schema:
             $ref: "#/definitions/Doctor"
         "404":
-          description: The doctor cannot be found  
+          description: The doctor cannot be found
+
+    put:
+      summary: Change doctor properties
+      parameters:
+        - in: path
+          name: doctorId
+          type: integer
+          description: The id of the doctor
+          required: true
+        - in: body
+          name: doctor
+          required: true
+          schema:
+            $ref: "#/definitions/Doctor"
+      responses:
+        "200":
+          description: The doctor has been updated successfully
+          schema:
+            $ref: "#/definitions/Doctor"
+      
+    delete:
+      summary: Deletes a doctor
+      parameters:
+        - in: path
+          name: doctorId
+          type: integer
+          description: The id of the doctor to delete
+          required: true
+      responses:
+        "204":
+          description: The doctor has been deleted
+
   
   /doctors/{doctorId}/patients:
     get:
-      summary: Gets list of patients associated with a doctor
+      summary: Gets a list of patients associated with a doctor
       parameters:
         - in: path
           name: doctorId
@@ -86,7 +106,7 @@ paths:
   
   /patients:
     get:
-      summary: Gets a list of patients
+      summary: Gets the list of patients
       responses:
         "200":
           description: The list of all patients
@@ -110,7 +130,42 @@ paths:
             $ref: "#/definitions/Patient"
           
           
-  /patients/{patientId}:
+  /patients/{patientId}:   
+    get:
+      summary: Gets a patient
+      parameters:
+        - in: path
+          name: patientId
+          type: integer
+          description: The id of the patient
+          required: true
+      responses:
+        "200":
+          description: The patient with the specified id
+          schema:
+            $ref: "#/definitions/Patient"
+        "404":
+          description: The patient cannot be found
+    
+    put:
+      summary: Change patient properties
+      parameters:
+        - in: path
+          name: patientId
+          type: integer
+          description: The id of the patient
+          required: true
+        - in: body
+          name: patient
+          required: true
+          schema:
+            $ref: "#/definitions/Patient"
+      responses:
+        "200":
+          description: The patient has been updated successfully
+          schema:
+            $ref: "#/definitions/Patient"
+    
     delete:
       summary: Deletes a patient
       parameters:

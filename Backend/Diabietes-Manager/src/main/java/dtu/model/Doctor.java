@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table
 public class Doctor {
@@ -29,23 +31,8 @@ public class Doctor {
 			cascade = CascadeType.MERGE,
 			orphanRemoval = true
 			)
+	@JsonManagedReference
 	private List<Patient> patients;
-
-	public Doctor() {
-
-	}
-	public Doctor(String firstName, String lastName, String password) {
-		this.firstName=firstName;
-		this.lastName=lastName;
-		this.password=password;
-	}
-	public Doctor(int id, String firstName, String lastName, String password){
-		this.id=id;
-		this.firstName=firstName;
-		this.lastName=lastName;
-		this.password=password;
-	}
-	
 
 	public int getId() {
 		return id;
