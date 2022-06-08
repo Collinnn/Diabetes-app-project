@@ -1,4 +1,5 @@
 <template>
+    <title>Emergency page</title>
     <h1>Emergency Page</h1>
 </template>
 
