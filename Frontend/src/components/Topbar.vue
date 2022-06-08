@@ -76,12 +76,9 @@
         },
     }
 }
-
-
 </script>
 
 <style scoped>
-
 .topbar {
     position: fixed;
     top: 0;
@@ -89,11 +86,12 @@
     left: 0;
     height: 50px;
     width: 100%;
-    background-color: #0010bb;
+    background-color: var(--secondary-color);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    color: var(--text-color);
 }
 .topbar .leftElement {
     float: left;
@@ -108,7 +106,7 @@
 }
 .topbarButton {
     cursor: pointer;
-    background-color: #5b6be4;
+    background-color: var(--accent-color);
     width: 40px;
     height: 40px;
     border-radius: 10px;

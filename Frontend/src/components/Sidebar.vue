@@ -42,7 +42,7 @@
     width: 20%;
     min-width: 120px;
     max-width: 150px;
-    background-color: #0010bb;
+    background-color: var(--secondary-color);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -51,7 +51,7 @@
 
 .sidebarButton {
     cursor: pointer;
-    background-color: #5b6be4;
+    background-color: var(--accent-color);
     width: 100px;
     height: 100px;
     border-radius: 10px;

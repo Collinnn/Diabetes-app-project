@@ -24,7 +24,6 @@ export default {
     //Remember theme of the user
     mounted(){
       this.darktheme= this.getMediaPreference();
-   
       this.toggleDarkmode();
      
     },
@@ -35,26 +34,33 @@ export default {
     },
     methods: {
       toggleDarkmode: function(){
-        console.log(this.darktheme);
           if(this.darktheme){
             console.log("dark-theme");
             this.darktheme=false; 
-            this.primarycolor   = 'grey'; 
-            this.secondarycolor = 'white';
-            this.accentcolor    = 'white';
+            this.primarycolor   = '#101010'; 
+            this.secondarycolor = '#090909';
+            this.accentcolor    = '#747474';
+            this.variantcolor   = '';
+            this.textcolor      = '#2c3e50';
             document.getElementById('app').style.setProperty("--primary-color", this.primarycolor);
             document.getElementById('app').style.setProperty("--secondary-color", this.secondarycolor);
-            document.getElementById('app').style.setProperty("--accent-color",this.accentcolor);
+            document.getElementById('app').style.setProperty("--accent-color", this.accentcolor);
+            document.getElementById('app').style.setProperty("--variant-color", this.variantcolor);
+            document.getElementById('app').style.setProperty("--text-color", this.textcolor);
 
           } else {
             console.log("light-theme");
             this.darktheme=true; 
-            this.primarycolor   = 'white'; 
-            this.secondarycolor = 'white';
-            this.accentcolor    = 'white';
+            this.primarycolor   = '#EBEBF2'; 
+            this.secondarycolor = '#6295D9';
+            this.accentcolor    = '#A0C4F2';
+            this.variantcolor   = '';
+            this.textcolor      = '#2c3e50';
             document.getElementById('app').style.setProperty("--primary-color", this.primarycolor);
             document.getElementById('app').style.setProperty("--secondary-color", this.secondarycolor);
-            document.getElementById('app').style.setProperty("--accent-color",this.accentcolor);
+            document.getElementById('app').style.setProperty("--accent-color", this.accentcolor);
+            document.getElementById('app').style.setProperty("--variant-color", this.variantcolor);
+            document.getElementById('app').style.setProperty("--text-color", this.textcolor);
 
           }
       },
@@ -86,7 +92,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: var(--text-color);
   background-color: var(--primary-color);
 }
 
