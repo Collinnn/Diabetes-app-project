@@ -36,27 +36,23 @@ public class PatientController {
 
 	//get mapping for single patient
 	@GetMapping("/patients/{patientId}")
-	public ResponseEntity<Patient> getPatientById(@PathVariable int patientid){
-		Optional<Patient> patient = patientRepository.findById(patientid);
+	public ResponseEntity<Patient> getPatientById(@PathVariable int patientId){
+		Optional<Patient> patient = patientRepository.findById(patientId);
 		if (patient.isEmpty()){
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(patient.get());
 	}
+	
 	@PostMapping("/patients")
 	public ResponseEntity<Patient> createPatient(@RequestBody Patient patient) {
-		int doctorId = patient.getDoctor().getId();
-		String doctorFirstName = patient.getDoctor().getFirstName();
-		String doctorLastName = patient.getDoctor().getLastName();
-		if(doctorRepository.existsById(doctorId) || doctorRepository.getById(doctorId).getFirstName() == doctorFirstName 
-				|| doctorRepository.getById(doctorId).getLastName() == doctorLastName) {
-			Doctor doc = doctorRepository.getById(doctorId);
-			doc.addPatient(patient);
-			doctorRepository.save(doc);
-			return ResponseEntity.ok(patientRepository.save(patient));
+		Doctor doctor = patient.getDoctor();
+		if (doctor != null && doctorRepository.existsById(doctor.getId())) {
+			doctor = doctorRepository.findById(doctor.getId()).get();
+			patient.setDoctor(doctor);
+			doctor.addPatient(patient);
 		}
-		return ResponseEntity.notFound().build();
-		
+		return ResponseEntity.ok(patientRepository.save(patient));
 	}
 	
 
@@ -70,9 +66,7 @@ public class PatientController {
 		oPatient.get().setLastName(patient.getLastName());
 		oPatient.get().setPassword(patient.getPassword());
 		oPatient.get().setDateOfBirth(patient.getDateOfBirth());
-		oPatient.get().getDoctor().setFirstName(patient.getDoctor().getFirstName());
-		oPatient.get().getDoctor().setLastName(patient.getDoctor().getLastName());
-		oPatient.get().getDoctor().setPassword(patient.getDoctor().getPassword());
+		oPatient.get().setDoctor(patient.getDoctor());
 		return ResponseEntity.ok(patientRepository.save(oPatient.get()));
 	}
 
@@ -80,16 +74,6 @@ public class PatientController {
 	public ResponseEntity<?> deletePatientById(@PathVariable int patientId){
 		patientRepository.deleteById(patientId);
 		return ResponseEntity.noContent().build();
-	}
-
-	// Gets all Patients associated with a doctor
-	@GetMapping("/doctors/{doctorId}/patients")
-	public ResponseEntity<List<Patient>> getAllDoctors(@PathVariable int doctorId) {
-		Optional<Doctor> doctor = doctorRepository.findById(doctorId);
-		if (doctor.isEmpty()) {
-			return ResponseEntity.notFound().build();
-		}
-		return ResponseEntity.ok(doctor.get().getPatients());
 	}
 	
 }
