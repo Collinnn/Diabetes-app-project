@@ -67,11 +67,7 @@ export default {
       getMediaPreference() {
         console.log("Gets user preference");
         const hasDarkPreference = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        if (hasDarkPreference) {
-          return true;
-        } else {
-          return false;
-        }
+        return hasDarkPreference
       },
       getTheme(){
         return localStorage.getItem("user-theme");
