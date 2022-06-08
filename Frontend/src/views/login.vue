@@ -12,6 +12,7 @@
 <script>
     export default {
         name: 'login-Comp',
+        emits:['logIn'],
         data() {
             return {
                 input: {
@@ -25,6 +26,7 @@
                 if(this.input.username != "" && this.input.password != "") {
                     if(this.input.username =="username" && this.input.password == "password") {
                         this.$router.replace({ name: "overview"});
+                        this.$emit('logIn');
                     } else {
                         console.log("The username and / or password is incorrect");
                     }

@@ -8,6 +8,8 @@ import emergency from './views/emergency.vue'
 import landing from './views/landing.vue'
 import patientLogin from './views/patientLogin.vue'
 import pageNotFound from './views/pageNotFound.vue'
+import user from './views/user.vue'
+import changePassword from './views/changePassword.vue'
 const routes = [
     {
         path: '/login',
@@ -43,6 +45,16 @@ const routes = [
         path:'/patientLogin',
         component: patientLogin,
         name: 'patientLogin'
+    },
+    {
+        path: '/user',
+        component: user,
+        name: 'user'
+    },
+    {
+        path: '/changePassword',
+        component: changePassword,
+        name: 'changePassword'
     },
     {
         path: '/:pathMatch(.*)',

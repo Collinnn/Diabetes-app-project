@@ -1,7 +1,7 @@
 <template>
     <div class ="topbar">
         <div class = "leftElement">
-            <button class = "topbarButton" id = "homeButton" @click="goToPage(dashBoard)">
+            <button class = "topbarButton" id = "homeButton" @click="goToPage('overview')">
                 <svg class="icon" id="homeIcon"></svg>
             </button>
             DiAPPbetes
@@ -22,7 +22,7 @@
             </div>
 
             <div id = "rightbutton">
-                <button class = "topbarButton" id = "userButton" @click="goToPage(profilePage)">
+                <button class = "topbarButton" id = "userButton" @click="this.$emit('showDropdown')">
                     <svg class="icon" id="userIcon"></svg>
                 </button>
             </div>
@@ -37,7 +37,7 @@
     import router from "@/router"
 
     export default {
-        emits:['darkMode'],
+        emits:['darkMode','showDropdown'],
         name: "TopbarMenu",
         data() {
             return {
@@ -143,12 +143,12 @@
     min-width: 36px;
     min-height: 20px;
     border-radius: 24px;
-    background-color: black;
+    background-color: #2c3e50;
     display: block;
     z-index: 2;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     -webkit-touch-callout: none;
-    transition: background-color .5s ease;
+
     cursor: pointer;
 }
 .toggle {

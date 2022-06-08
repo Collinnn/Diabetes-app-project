@@ -1,20 +1,17 @@
 <template>
-  <div>
-    <div id="appLayout" v-if="$route.name == 'landing'">
-      <Topbar @darkMode="toggleDarkmode()" />
+  <div id="appcontainer">
+    <div id="appLayout" v-if="app.loggedIn">
+      <Topbar @showDropdown="showDropdown.isVisible=!showDropdown.isVisible" @darkMode="toggleDarkmode()" />
       <Sidebar />
-    </div>
-    <div id="" v-else-if="$route.name == 'patientLogin'">
-    </div>
-
-    <div id="" v-else>
-      <Topbar/>
-      <Sidebar/>
     </div>
 
     <div id="app">
       <router-link to='/'></router-link>
-      <router-view  />
+      <router-view @logIn="app.loggedIn = true" />
+    </div>
+
+    <div id=showDropdown v-if="showDropdown.isVisible">
+        <ProfileDropdown @logOut="logOut()"/>
     </div>
   </div>
 </template>
@@ -22,11 +19,13 @@
 <script>
 import Topbar from "./components/Topbar.vue"
 import Sidebar from "./components/Sidebar.vue"
+import ProfileDropdown from "./components/ProfileDropdown.vue"
 export default {
     name: 'App',  
     components: {
     Topbar,
-    Sidebar
+    Sidebar,
+    ProfileDropdown
     },
     //Remember theme of the user
     mounted(){
@@ -37,6 +36,12 @@ export default {
     data(){
       return{
         darktheme: null,
+        showDropdown:{
+          isVisible: false
+        },
+        app:{
+          loggedIn: false
+        }
       };
     },
     methods: {
@@ -44,8 +49,8 @@ export default {
           if(this.darktheme){
             console.log("dark-theme");
             this.darktheme=false; 
-            this.primarycolor   = '#101010'; 
-            this.secondarycolor = '#090909';
+            this.primarycolor   = '#424242'; 
+            this.secondarycolor = '#212121';
             this.accentcolor    = '#747474';
             this.variantcolor   = '';
             this.textcolor      = '#2c3e50';
@@ -79,6 +84,10 @@ export default {
       getTheme(){
         return localStorage.getItem("user-theme");
       },
+      logOut(){
+        this.showDropdown.isVisible = false;
+        this.app.loggedIn = false
+      }
     }
 }
 </script>
@@ -96,8 +105,17 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: var(--text-color);
+  
+}
+#appcontainer{
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
   background-color: var(--primary-color);
 }
+
 
 
 </style>
