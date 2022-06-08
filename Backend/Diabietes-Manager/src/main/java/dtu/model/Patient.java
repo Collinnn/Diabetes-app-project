@@ -35,6 +35,13 @@ public class Patient {
 		this.dateOfBirth=dateOfBirth;
 	}
 	
+	public Patient(int id,String password, String firstName, String lastName, String dateOfBirth) {
+		this.id=id;
+		this.password=password;
+		this.firstName=firstName;
+		this.lastName=lastName;
+		this.dateOfBirth=dateOfBirth;
+	}
 	public int getId() {
 		return id;
 	}
