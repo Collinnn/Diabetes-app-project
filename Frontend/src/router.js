@@ -9,45 +9,72 @@ import pageNotFound from './views/pageNotFound.vue'
 import user from './views/user.vue'
 import changePassword from './views/changePassword.vue'
 
+
+
+
 const routes = [{
         path: '/',
         component: login,
-        name: 'login'
+        name: 'login',
+        meta: {
+            requiredLoggedIn: false
+        }
     },
     {
         path: '/overview',
         component: overview,
-        name: 'overview'
+        name: 'overview',
+        meta: {
+            requiredLoggedIn: true
+        }
     },
     {
         path: '/food',
         component: food,
-        name: 'food'
+        name: 'food',
+        meta: {
+            requiredLoggedIn: true
+        }
     },
     {
         path: '/doctor',
         component: doctor,
-        name: 'doctor'
+        name: 'doctor',
+        meta: {
+            requiredLoggedIn: true
+        }
     },
     {
         path: '/emergency',
         component: emergency,
-        name: 'emergency'
+        name: 'emergency',
+        meta: {
+            requiredLoggedIn: true
+        }
     },
     {
         path: '/user',
         component: user,
-        name: 'user'
+        name: 'user',
+        meta: {
+            requiredLoggedIn: true
+        }
     },
     {
         path: '/changePassword',
         component: changePassword,
-        name: 'changePassword'
+        name: 'changePassword',
+        meta: {
+            requiredLoggedIn: true
+        }
     },
     {
         path: '/:pathMatch(.*)',
         component: pageNotFound,
-        name: 'pageNotFound'
+        name: 'pageNotFound',
+        meta: {
+            requiredLoggedIn: false
+        }
     }
 ]
 
@@ -55,5 +82,9 @@ const router = createRouter({
     history: createWebHistory(),
     routes
 })
+
+
+
+
 
 export default router
