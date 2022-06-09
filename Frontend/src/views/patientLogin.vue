@@ -32,9 +32,9 @@ export default {
                             this.$emit('logIn');
 
                         }else{
-                            console.log("username and/or password was wrong")
+                            console.log("username and/or password was wrong");
                         }
-                    });
+                    }).catch(() => console.log("Invalid command"));
                 } else {
                     console.log("Username and/or password was empty");
             }
