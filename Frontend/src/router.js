@@ -88,6 +88,10 @@ router.beforeEach((to) => {
         if (!loggedInStatus.getStatus) {
             return { name: 'login' }
         }
+    } else if (to.matched.some(route => !route.meta.requiredLoggedIn)) {
+        if (loggedInStatus.getStatus) {
+            return { name: 'overview' }
+        }
     }
 })
 
