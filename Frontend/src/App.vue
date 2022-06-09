@@ -42,13 +42,11 @@ export default {
       logIn(){
         this.app.loggedIn = true
         loggedInStatus.setLoggedIn = true;
-        console.log(loggedInStatus.getStatus)
       },
       logOut(){
         this.showDropdown.isVisible = false;
         this.app.loggedIn = false
         loggedInStatus.setLoggedIn = false;
-        console.log(loggedInStatus.getStatus)
       }
     }
 }

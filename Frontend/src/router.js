@@ -83,14 +83,12 @@ const router = createRouter({
     routes
 })
 
-router.beforeEach((to, from) => {
+router.beforeEach((to) => {
     if (to.matched.some(route => route.meta.requiredLoggedIn)) {
         if (!loggedInStatus.getStatus) {
-            console.log(loggedInStatus.getStatus)
-            return from
+            return { name: 'login' }
         }
     }
-    console.log(loggedInStatus.getStatus)
 })
 
 
