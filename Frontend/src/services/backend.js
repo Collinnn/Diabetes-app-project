@@ -37,10 +37,6 @@ export default class Backend {
     getUrlGetPatients() {
         return this.urlAPI + this.subpathPatients
     }
-    getUrlGetPatinetById(id) {
-        return this.urlAPI + this.subpathPatients + "/" + id
-    }
-
     getUrlPostPatient() {
         return this.urlAPI + this.subpathPatients
     }
