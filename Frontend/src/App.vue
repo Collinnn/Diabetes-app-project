@@ -63,7 +63,7 @@ export default {
             this.secondarycolor = '#212121';
             this.accentcolor    = '#747474';
             this.variantcolor   = '';
-            this.textcolor      = '#2c3e50';
+            this.textcolor      = '#DDDDDD';
             document.getElementById('app').style.setProperty("--primary-color", this.primarycolor);
             document.getElementById('app').style.setProperty("--secondary-color", this.secondarycolor);
             document.getElementById('app').style.setProperty("--accent-color", this.accentcolor);
