@@ -1,17 +1,15 @@
 <template>
+    <title>Graph page</title>
     <div>
         <h1>Overview Page</h1>
-        <DoctorForm />       
     </div>    
 </template>
 
 
 <script>
-import DoctorForm from "@/components/DoctorForm.vue";
 
 export default {
-    name: "overviewPage",
-    components: { DoctorForm }
+    name: "overviewPage"
 }
 
 </script>

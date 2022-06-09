@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="appLayout" v-if="app.loggedIn">
-      <Topbar @showDropdown="showDropdown.isVisible=!showDropdown.isVisible" />
+      <Topbar @showDropdown="showDropdown.isVisible=!showDropdown.isVisible" @darkMode="toggleDarkmode()" />
       <Sidebar />
     </div>
   
@@ -23,6 +23,16 @@ import ProfileDropdown from "./components/ProfileDropdown.vue"
 import {loggedInStatus} from "./variables.js"
 export default {
     name: 'App',
+    components: {
+    Topbar,
+    Sidebar,
+    ProfileDropdown
+    },
+    mounted(){
+      this.darktheme= this.getMediaPreference();
+      this.toggleDarkmode();
+     
+    },
     data(){
       return{
         showDropdown:{
@@ -30,13 +40,9 @@ export default {
         },
         app:{
           loggedIn: loggedInStatus.getStatus
-        }
+        },
+        darktheme: null,
       }
-    },
-    components: {
-    Topbar,
-    Sidebar,
-    ProfileDropdown
     },
     methods:{
       logIn(){
@@ -47,10 +53,48 @@ export default {
         this.showDropdown.isVisible = false;
         this.app.loggedIn = false
         loggedInStatus.setLoggedIn = false;
+      },
+      toggleDarkmode: function(){
+          if(this.darktheme){
+            console.log("dark-theme");
+            this.darktheme=false; 
+            this.primarycolor   = '#101010'; 
+            this.secondarycolor = '#090909';
+            this.accentcolor    = '#747474';
+            this.variantcolor   = '';
+            this.textcolor      = '#2c3e50';
+            document.getElementById('app').style.setProperty("--primary-color", this.primarycolor);
+            document.getElementById('app').style.setProperty("--secondary-color", this.secondarycolor);
+            document.getElementById('app').style.setProperty("--accent-color", this.accentcolor);
+            document.getElementById('app').style.setProperty("--variant-color", this.variantcolor);
+            document.getElementById('app').style.setProperty("--text-color", this.textcolor);
+
+          } else {
+            console.log("light-theme");
+            this.darktheme=true; 
+            this.primarycolor   = '#EBEBF2'; 
+            this.secondarycolor = '#6295D9';
+            this.accentcolor    = '#A0C4F2';
+            this.variantcolor   = '';
+            this.textcolor      = '#2c3e50';
+            document.getElementById('app').style.setProperty("--primary-color", this.primarycolor);
+            document.getElementById('app').style.setProperty("--secondary-color", this.secondarycolor);
+            document.getElementById('app').style.setProperty("--accent-color", this.accentcolor);
+            document.getElementById('app').style.setProperty("--variant-color", this.variantcolor);
+            document.getElementById('app').style.setProperty("--text-color", this.textcolor);
+
+          }
+      },
+      getMediaPreference() {
+        console.log("Gets user preference");
+        const hasDarkPreference = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        return hasDarkPreference
+      },
+      getTheme(){
+        return localStorage.getItem("user-theme");
       }
     }
 }
-    
 </script>
 
 <style scoped>
@@ -65,6 +109,9 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: var(--text-color);
+  background-color: var(--primary-color);
 }
+
+
 </style>
