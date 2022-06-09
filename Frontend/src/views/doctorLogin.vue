@@ -3,7 +3,8 @@
         <h1 class="title">Login Doctor</h1>
         <input type="number" name="id" v-model="input.id" placerholder="id" />
         <input type="password" name="password" v-model="input.password" palceholder="Password" />
-        <button type="button" id="button" v-on:click="login()">Login</button>
+        <button type="button" id="button" @click="login()">Login</button>
+        <button type="button" id="button" @click="lazy()">Lazy</button>
         <h1></h1>
     </div>
 </template>
@@ -43,6 +44,9 @@ export default {
                 } else {
                     console.log("Username and/or password was empty");
             }
+        },lazy(){
+            this.$emit('logIn');
+            router.push({name: "overview"});
         }
 
     }

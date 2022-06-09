@@ -3,7 +3,7 @@
         <div id="settingsMenu">
             <button class="settingsButton" @click="goToPage('user')"> View profile </button>
             <button class="settingsButton" @click="goToPage('changePassword')"> Change password </button>
-            <button class="settingsButton" @click="logOut('login')"> Log out </button>
+            <button class="settingsButton" @click="logOut('landing')"> Log out </button>
         </div>
     </div>
 </template>

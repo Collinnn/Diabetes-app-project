@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import login from './views/login.vue'
 import overview from './views/overview.vue'
 import food from './views/food.vue'
 import doctor from './views/doctor.vue'
@@ -13,11 +12,6 @@ import user from './views/user.vue'
 import changePassword from './views/changePassword.vue'
 
 const routes = [
-    {
-        path: '/login',
-        component: login,
-        name: 'login'
-    },
     {
         path: '/overview',
         component: overview,
