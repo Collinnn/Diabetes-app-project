@@ -2,7 +2,7 @@
     <title>Graph page</title>
     <div>
         <h1>Overview Page</h1>
-        <DoughnutChart ref="donut" :chart-data="chartData"/>
+        <DoughnutChart ref="donut" :chart-data="chartData" @darkMode="darkmodeactivate"/>
     </div>    
 </template>
 
@@ -22,11 +22,18 @@ export default {
                 labels: ["Jacob", "Simon", "Tobias", "Zwinge"],
                 datasets: [{
                     data: [50, 40, 30, 20],
-                    backgroundColor: ['#77CEFF', '#0079AF', '#123E6B', '#97B0C4']
+                    backgroundColor: ['#77CEFF', '#0079AF', '#123E6B', '#97B0C4'],
+                    borderColor: '#131313'
                 }]
             }
         }
     }
+
 }
 
 </script>
+
+<style scoped>
+
+
+</style>
