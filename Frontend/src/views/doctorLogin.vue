@@ -1,9 +1,9 @@
 <template>
     <div class="login-Comp">
         <h1 class="title">Login Doctor</h1>
-        <input type="text" name="id" v-model="input.id" placerholder="id" />
+        <input type="number" name="id" v-model="input.id" placerholder="id" />
         <input type="password" name="password" v-model="input.password" palceholder="Password" />
-        <button type="button" v-on:click="login()">Login</button>
+        <button type="button" id="button" v-on:click="login()">Login</button>
         <h1></h1>
     </div>
 </template>
@@ -12,50 +12,58 @@
 import router from "@/router"
 export default {
         name: 'login-doctor',
+        emits: ['logIn'],
         data() {
             return {
                 input: {
-                    id: "",
-                    password: ""
+                    id: 1,
+                    password: "password"
                 }
             }
         },
         methods: {
+            logInValidation(password){
+                console.log(password);
+                if(password == this.input.password){
+                    console.log("Logged in succesfully")
+                    router.push({name: "overview"});
+                    this.$emit('logIn');
+                }else{
+                    console.log("username and/or password was wrong");
+                }
+            },
             login() {
-                if(this.input.id != "" && this.input.password != "") {
-                    this.axios.get(this.$Backend.getUrlGetDoctorById(this.input.id))
-                    .then(function(response){
-                        if(response.id==this.input.id && response.password == this.input.password){
-                            console.log("Logged in succesfully")
-                            router.push("overview");
 
-                        }
-                    });
-
-                    if(this.input.id =="username" && this.input.password == "password") {
-                        this.$router.replace({ name: "overview"});
-                    } else {
-                        console.log("The username and / or password is incorrect");
-                    }
+                if(this.input.id != 0 || this.input.password != "") {
+                    this.axios.get(this.$backend.getUrlPutDoctorById(this.input.id))
+                    .then(response =>{
+                        console.log(response.data.password);
+                        this.logInValidation(response.data.password);
+                    }).catch((error) => console.log(error));
                 } else {
                     console.log("Username and/or password was empty");
             }
         }
+
     }
 }
 </script>
 <style scoped>
     .login-Comp{
         position:relative;
-        background-color: rgb(110, 120, 250);
+        background-color: var(--secondary-color);
         border-radius: 40px;
-        max-width: 50%;
+        width: 470px;
         left:20%;
         margin: 40px 2px;
+        padding: 40px;
     }
     .login-Comp .title{ 
         padding: 0px 0px 0px 0;
         font-size: 60px;
+        
+    }
+    #button{
         
     }
 </style>

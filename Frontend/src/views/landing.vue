@@ -4,7 +4,7 @@
         Patient Login
         </button>
 
-        <button class="landingButton" id="doctorButton" @click="goToPage('login')">
+        <button class="landingButton" id="doctorButton" @click="goToPage('doctorLogin')">
         Doctor Login
         </button>
     </div> 

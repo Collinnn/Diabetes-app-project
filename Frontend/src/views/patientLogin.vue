@@ -1,7 +1,7 @@
 <template>
     <div class="login-Comp">
         <h1 class="title">Login Patient</h1>
-        <input type="text" name="id" v-model="input.id" placerholder="id" />
+        <input type="number" name="id" v-model="input.id" placerholder="id" />
         <input type="password" name="password" v-model="input.password" palceholder="Password" />
         <button type="button" id="button" v-on:click="login()">Login</button>
         <h1></h1>
@@ -16,29 +16,35 @@ export default {
         data() {
             return {
                 input: {
-                    id: "",
-                    password: ""
+                    id: 1,
+                    password: "password"
                 }
             }
         },
         methods: {
+            logInValidation(password){
+                console.log(password);
+                if(password == this.input.password){
+                    console.log("Logged in succesfully")
+                    router.push({name: "overview"});
+                    this.$emit('logIn');
+                }else{
+                    console.log("username and/or password was wrong");
+                }
+            },
             login() {
-                if(this.input.id != "" && this.input.password != "") {
-                    this.axios.get(this.$backend.getUrlGetPatinetById(this.input.id))
-                    .then(function(response){
-                        if(response.id==this.input.id && response.password == this.input.password){
-                            console.log("Logged in succesfully")
-                            router.push("overview");
-                            this.$emit('logIn');
 
-                        }else{
-                            console.log("username and/or password was wrong");
-                        }
-                    }).catch(() => console.log("Invalid command"));
+                if(this.input.id != 0 || this.input.password != "") {
+                    this.axios.get(this.$backend.getUrlGetPatientById(this.input.id))
+                    .then(response =>{
+                        console.log(response.data.password);
+                        this.logInValidation(response.data.password);
+                    }).catch((error) => console.log(error));
                 } else {
                     console.log("Username and/or password was empty");
             }
         }
+
     }
 }
 </script>
@@ -47,11 +53,13 @@ export default {
         position:relative;
         background-color: var(--secondary-color);
         border-radius: 40px;
-        max-width: 50%;
+        width: 470px;
         left:20%;
         margin: 40px 2px;
+        padding: 40px;
     }
-    .login-Comp .title{ 
+    .login-Comp .title{
+        text-align: center;
         padding: 0px 0px 0px 0;
         font-size: 60px;
         
