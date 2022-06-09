@@ -2,7 +2,7 @@
   <div>
     <div id="appLayout" v-if="$route.name !== 'login'">
       <Topbar />
-      <Sidebar />
+      <AdminSidebar />
     </div>
   
     <div id="app">
@@ -14,12 +14,12 @@
 
 <script>
 import Topbar from "./components/Topbar.vue"
-import Sidebar from "./components/Sidebar.vue"
+import AdminSidebar from "./components/AdminSidebar.vue"
 export default {
     name: 'App',
     components: {
     Topbar,
-    Sidebar
+    AdminSidebar
     }
 }
     
