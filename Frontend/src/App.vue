@@ -7,7 +7,7 @@
   
     <div id="app">
       <router-link to='/'></router-link>
-      <router-view @logIn="app.loggedIn = true" />
+      <router-view @logIn="logIn()" />
     </div>
 
     <div id=showDropdown v-if="showDropdown.isVisible">
@@ -20,6 +20,7 @@
 import Topbar from "./components/Topbar.vue"
 import Sidebar from "./components/Sidebar.vue"
 import ProfileDropdown from "./components/ProfileDropdown.vue"
+import {loggedInStatus} from "./variables.js"
 export default {
     name: 'App',
     data(){
@@ -28,7 +29,7 @@ export default {
           isVisible: false
         },
         app:{
-          loggedIn: false
+          loggedIn: loggedInStatus.getStatus
         }
       }
     },
@@ -38,9 +39,16 @@ export default {
     ProfileDropdown
     },
     methods:{
+      logIn(){
+        this.app.loggedIn = true
+        loggedInStatus.setLoggedIn = true;
+        console.log(loggedInStatus.getStatus)
+      },
       logOut(){
         this.showDropdown.isVisible = false;
         this.app.loggedIn = false
+        loggedInStatus.setLoggedIn = false;
+        console.log(loggedInStatus.getStatus)
       }
     }
 }

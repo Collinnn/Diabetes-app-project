@@ -8,7 +8,7 @@ import emergency from './views/emergency.vue'
 import pageNotFound from './views/pageNotFound.vue'
 import user from './views/user.vue'
 import changePassword from './views/changePassword.vue'
-
+import { loggedInStatus } from "./variables.js"
 
 
 
@@ -83,6 +83,15 @@ const router = createRouter({
     routes
 })
 
+router.beforeEach((to, from) => {
+    if (to.matched.some(route => route.meta.requiredLoggedIn)) {
+        if (!loggedInStatus.getStatus) {
+            console.log(loggedInStatus.getStatus)
+            return from
+        }
+    }
+    console.log(loggedInStatus.getStatus)
+})
 
 
 
