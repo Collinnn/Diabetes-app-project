@@ -143,12 +143,12 @@
     min-width: 36px;
     min-height: 20px;
     border-radius: 24px;
-    background-color: black;
+    background-color: #2c3e50;
     display: block;
     z-index: 2;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     -webkit-touch-callout: none;
-    transition: background-color .5s ease;
+
     cursor: pointer;
 }
 .toggle {

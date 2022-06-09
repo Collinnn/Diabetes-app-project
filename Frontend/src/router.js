@@ -1,10 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import login from './views/login.vue'
 import overview from './views/overview.vue'
 import food from './views/food.vue'
 import doctor from './views/doctor.vue'
 import emergency from './views/emergency.vue'
+import landing from './views/landing.vue'
+import patientLogin from './views/patientLogin.vue'
+import doctorLogin from './views/doctorLogin.vue'
 import pageNotFound from './views/pageNotFound.vue'
 import user from './views/user.vue'
 import changePassword from './views/changePassword.vue'
@@ -13,14 +15,6 @@ import { loggedInStatus } from "./variables.js"
 
 
 const routes = [{
-        path: '/',
-        component: login,
-        name: 'login',
-        meta: {
-            requiredLoggedIn: false
-        }
-    },
-    {
         path: '/overview',
         component: overview,
         name: 'overview',
@@ -50,6 +44,30 @@ const routes = [{
         name: 'emergency',
         meta: {
             requiredLoggedIn: true
+        }
+    },
+    {
+        path: '/',
+        component: landing,
+        name: 'landing',
+        meta: {
+            requiredLoggedIn: false
+        }
+    },
+    {
+        path: '/patientLogin',
+        component: patientLogin,
+        name: 'patientLogin',
+        meta: {
+            requiredLoggedIn: false
+        }
+    },
+    {
+        path: '/doctorLogin',
+        component: doctorLogin,
+        name: 'doctorLogin',
+        meta: {
+            requiredLoggedIn: false
         }
     },
     {

@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div id="appcontainer">
     <div id="appLayout" v-if="app.loggedIn">
       <Topbar @showDropdown="showDropdown.isVisible=!showDropdown.isVisible" @darkMode="toggleDarkmode()" />
       <Sidebar />
     </div>
-  
+
     <div id="app">
       <router-link to='/'></router-link>
       <router-view @logIn="logIn()" />
@@ -22,12 +22,13 @@ import Sidebar from "./components/Sidebar.vue"
 import ProfileDropdown from "./components/ProfileDropdown.vue"
 import {loggedInStatus} from "./variables.js"
 export default {
-    name: 'App',
+    name: 'App',  
     components: {
     Topbar,
     Sidebar,
     ProfileDropdown
     },
+    //Remember theme of the user
     mounted(){
       this.darktheme= this.getMediaPreference();
       this.toggleDarkmode();
@@ -58,8 +59,8 @@ export default {
           if(this.darktheme){
             console.log("dark-theme");
             this.darktheme=false; 
-            this.primarycolor   = '#101010'; 
-            this.secondarycolor = '#090909';
+            this.primarycolor   = '#424242'; 
+            this.secondarycolor = '#212121';
             this.accentcolor    = '#747474';
             this.variantcolor   = '';
             this.textcolor      = '#2c3e50';
@@ -110,8 +111,17 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: var(--text-color);
+  
+}
+#appcontainer{
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
   background-color: var(--primary-color);
 }
+
 
 
 </style>
