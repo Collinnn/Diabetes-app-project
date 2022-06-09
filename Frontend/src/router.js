@@ -104,7 +104,7 @@ const router = createRouter({
 router.beforeEach((to) => {
     if (to.matched.some(route => route.meta.requiredLoggedIn)) {
         if (!loggedInStatus.getStatus) {
-            return { name: 'login' }
+            return { name: 'landing' }
         }
     } else if (to.matched.some(route => !route.meta.requiredLoggedIn)) {
         if (loggedInStatus.getStatus) {
