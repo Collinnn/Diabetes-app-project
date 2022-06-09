@@ -1,19 +1,25 @@
 package dtu.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
+
 public class Patient {
 	@Id
-	@Column
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(name = "password")
@@ -27,6 +33,8 @@ public class Patient {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonBackReference
 	private Doctor doctor;
+	@OneToMany(mappedBy = "patient", cascade = CascadeType.REMOVE)
+	private List<Measurement> measurements;
 
 	public int getId() {
 		return id;
@@ -74,6 +82,15 @@ public class Patient {
 	
 	public void setDoctor(Doctor doctor) {
 		this.doctor = doctor;
+	}
+	
+
+	public List<Measurement> getMeasurements() {
+		return measurements;
+	}
+
+	public void addMeasurement(Measurement measurement) {
+		measurements.add(measurement);
 	}
 
 	@Override

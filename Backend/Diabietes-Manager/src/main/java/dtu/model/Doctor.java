@@ -77,4 +77,5 @@ public class Doctor {
 	public void removePatient(Patient patient) {
 		this.patients.remove(patient);
 	}
+	
 }
