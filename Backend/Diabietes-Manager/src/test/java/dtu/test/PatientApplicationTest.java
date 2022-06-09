@@ -87,9 +87,15 @@ public class PatientApplicationTest {
     //This test is not allowed.
 	@Test 
 	public void postPatients() throws Exception {
+		Patient patient = new Patient();
+		patient.setId(1);
+		patient.setFirstName("johnny");
+		patient.setLastName("deer");
+		patient.setPassword("passwords");
+		patient.setDateOfBirth("22.12.2019");
 		mvc.perform(MockMvcRequestBuilders.post("/api/v1/patients",2)
 		.accept(MediaType.APPLICATION_JSON)
-		.content((toJsonString(new Patient(1,"passwords","johnny","deer","22.12.2019"))))
+		.content((toJsonString(patient)))
 		.contentType(MediaType.APPLICATION_JSON))
 		.andDo(print())
 		.andExpect(status().isOk())
@@ -105,7 +111,11 @@ public class PatientApplicationTest {
 
 
     private void createTestPatient(String firstName,String lastName,String password,String dateOfBirth) {
-		Patient patient = new Patient(password,firstName,lastName,dateOfBirth);
+		Patient patient = new Patient();
+		patient.setFirstName(firstName);
+		patient.setLastName(lastName);
+		patient.setPassword(password);
+		patient.setDateOfBirth(dateOfBirth);
         repository.saveAndFlush(patient);
     }
     public static String toJsonString(final Object obj){

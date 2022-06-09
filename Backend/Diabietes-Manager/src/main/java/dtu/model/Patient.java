@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Patient {
 	@Id
@@ -23,25 +25,9 @@ public class Patient {
 	@Column(name = "dateOfBirth")
 	private String dateOfBirth;
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonBackReference
 	private Doctor doctor;
-	
-	public Patient() {	
-	}
-	
-	public Patient(String password, String firstName, String lastName, String dateOfBirth) {
-		this.password=password;
-		this.firstName=firstName;
-		this.lastName=lastName;
-		this.dateOfBirth=dateOfBirth;
-	}
-	
-	public Patient(int id,String password, String firstName, String lastName, String dateOfBirth) {
-		this.id=id;
-		this.password=password;
-		this.firstName=firstName;
-		this.lastName=lastName;
-		this.dateOfBirth=dateOfBirth;
-	}
+
 	public int getId() {
 		return id;
 	}
@@ -84,6 +70,10 @@ public class Patient {
 	
 	public Doctor getDoctor() {
 		return doctor;
+	}
+	
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
 	}
 
 	@Override

@@ -85,9 +85,14 @@ public class DoctorApplicationTest {
 
 	@Test 
 	public void postDoctor() throws Exception {
+		Doctor doctor = new Doctor();
+		doctor.setId(123456789);
+		doctor.setFirstName("johnny");
+		doctor.setLastName("deer");
+		doctor.setPassword("password");
 		mvc.perform(MockMvcRequestBuilders.post("/api/v1/doctors",2)
 		.accept(MediaType.APPLICATION_JSON)
-		.content((toJsonString(new Doctor(123456789,"johnny","deer","password"))))
+		.content((toJsonString(doctor)))
 		.contentType(MediaType.APPLICATION_JSON))
 		.andDo(print())
 		.andExpect(status().isOk())
@@ -141,7 +146,10 @@ public class DoctorApplicationTest {
 
 
 	private void createTestDoctor(String firstName,String lastName,String password) {
-		Doctor doctor = new Doctor(firstName,lastName,password);
+		Doctor doctor = new Doctor();
+		doctor.setFirstName(firstName);
+		doctor.setLastName(lastName);
+		doctor.setPassword(password);
         repository.saveAndFlush(doctor);
     }
 }
