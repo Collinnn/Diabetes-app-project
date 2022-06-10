@@ -5,7 +5,8 @@
 
 <script>
 export default {
-    name: "changePasswordPage"
+    name: "changePasswordPage",
+    emits: ['logIn']
 }
 
 </script>

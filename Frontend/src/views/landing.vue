@@ -16,6 +16,7 @@ import router from "@/router"
 
 export default {
     name: "landingPage",
+    emits: ['logIn'],
     data() {
         return{
             title:'landingPage'

@@ -5,7 +5,8 @@
 
 <script>
 export default {
-    name: "foodPage"
+    name: "foodPage",
+    emits: ['logIn']
 }
 
 </script>

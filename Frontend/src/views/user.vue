@@ -5,7 +5,8 @@
 
 <script>
 export default {
-    name: "userPage"
+    name: "userPage",
+    emits: ['logIn']
 }
 
 </script>

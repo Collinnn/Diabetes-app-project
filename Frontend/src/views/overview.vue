@@ -9,7 +9,8 @@
 <script>
 
 export default {
-    name: "overviewPage"
+    name: "overviewPage",
+    emits: ['logIn']
 }
 
 </script>

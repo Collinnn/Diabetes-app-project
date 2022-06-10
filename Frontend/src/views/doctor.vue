@@ -6,7 +6,8 @@
 
 <script>
 export default {
-    name: "doctorPage"
+    name: "doctorPage",
+    emits: ['logIn']
 }
 
 </script>
