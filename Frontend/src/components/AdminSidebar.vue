@@ -1,23 +1,34 @@
 <template>
-    <sidebar style="max-width: 200px; min-width: 150px;">
+    <Sidebar style="max-width: 200px; min-width: 150px;">
         <div class="sidebar-wrapper">
-            <div class="button-container" @click="$router.push('admin-patients')">
-                <label class="sidebar-label"> Patients </label>
-            </div>
-            <div class="button-container" @click="$router.push('admin-doctors')">
-                <label class="sidebar-label"> Doctors </label>
-            </div>
+            <DropdownMenu id="patientsMenu" title="Patients" :items="[
+                {id: 'viewPatients', title: 'View patients', onClick: dop()},
+                {id: 'addPatient', title: 'Add patient', onClick: $router.push('overview')}
+                ]" 
+            />
+            <DropdownMenu id="doctorsMenu" title="Doctors" :items="[
+                {id: 'viewDoctors', title: 'View doctors', onClick: $router.push('overview')},
+                {id: 'addDoctor', title: 'Add doctor', onClick: $router.push('food')}
+                ]" 
+            />
         </div>
-    </sidebar>
+    </Sidebar>
 </template>
 
 <script>
 import Sidebar from "./Sidebar.vue"
+import DropdownMenu from "./DropdownMenu"
 
 export default {
     name: "adminSidebar",
     components: { 
-        Sidebar
+        Sidebar,
+        DropdownMenu
+    },
+    methods: {
+        dop() {
+            console.log("bop")
+        }
     }
 
 
@@ -32,27 +43,22 @@ export default {
     margin-top: 30px;
 }
 
-.button-container {
-    height: 40px;
-    width: 100%;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    background-color: transparent;
-    cursor: pointer;
-}
-.button-container:hover {
-    background-color: blue;
+.button-mask {
+    position: relative;
+    z-index: 3;
+    
 }
 
-.sidebar-label {
+.button {
+    height: 40px;
+    width: 100%;
     cursor: pointer;
-    width: 70%;
-    margin-left: 60px;
+    background-color: transparent;
+    border: none;
     color: rgb(233, 233, 233);
-    font-family: Arial, Helvetica, sans-serif;
+    font: 20px Arial bold, sans-serif;
 }
-.sidebar-label:hover .button-container {
+.button:hover {
     background-color: blue;
 }
 
