@@ -256,5 +256,22 @@ definitions:
   Measurement:
     type: object
     properties:
-      timeStamp:
+      measurementId:
+        $ref: "#/definitions/MeasurementId"
+      glucoseLevel:
+        type: number
+      bolus:
+        type: number
+      basal:
+        type: number
+      carbohydrates:
+        type: number
+        
+  MeasurementId:
+    type: object
+    properties:
+      timestamp:
         type: string
+        format: date-time
+      patientId:
+        type: integer

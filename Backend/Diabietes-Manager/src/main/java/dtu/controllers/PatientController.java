@@ -3,6 +3,8 @@ package dtu.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import javax.swing.text.html.Option;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dtu.model.Doctor;
+import dtu.model.Measurement;
 import dtu.model.Patient;
 import dtu.repositories.DoctorRepository;
 import dtu.repositories.PatientRepository;
@@ -74,6 +77,15 @@ public class PatientController {
 	public ResponseEntity<?> deletePatientById(@PathVariable int patientId){
 		patientRepository.deleteById(patientId);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping("/patients/{patientId}/measurements")
+	public ResponseEntity<List<Measurement>> getMeasurementsFromPatient(@PathVariable int patientId) {
+		Optional<Patient> p = patientRepository.findById(patientId);
+		if(p.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(p.get().getMeasurements());
 	}
 	
 }
