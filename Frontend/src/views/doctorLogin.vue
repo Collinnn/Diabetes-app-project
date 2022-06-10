@@ -1,4 +1,5 @@
 <template>
+    <title>Login Doctor</title>
     <div class="login-Comp">
         <h1 class="title">Login Doctor</h1>
         <input type="number" name="id" v-model="input.id" placerholder="id" />

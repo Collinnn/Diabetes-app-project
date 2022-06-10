@@ -1,4 +1,5 @@
 <template>
+    <title>Landing page</title>
     <div class="container">
         <button class="landingButton" id="patientButton" @click="goToPage('patientLogin')">
         Patient Login
