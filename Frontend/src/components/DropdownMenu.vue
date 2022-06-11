@@ -1,7 +1,7 @@
 <template>
     <button :id="id" class="menu-head" @click="isMenuVisible = !isMenuVisible"> {{title}} </button>
     <div class="menu-wrapper" v-if="isMenuVisible">
-        <button :id="id" class="menu-item" v-for="{id, title, onClick} in items" :key="id" @click="onClick()"> 
+        <button :id="itemId" class="menu-item" v-for="{itemId, title, onClick} in items" :key="itemId" @click="onClick(); $emit('selected', itemId)"> 
             {{title}} 
         </button>
      </div>
@@ -10,20 +10,17 @@
 <script>
 export default {
     name: "dropdownMenu",
+    emits: ['selected'],
     props: {
         id: String, 
         title: String,
-        // Default: Array of {id: 'foo', title: 'bar', onClick: baz()} 
-        items: [Array, Object],
-        default: []
+        // Array of objects {id: String, title: String, onClick: func}
+        items: Array
     },
     data() {
         return {
             isMenuVisible: false
         }
-    },
-    mounted() {
-        //this.items.forEach((id, title) => )
     },
     watch: {
         isMenuVisible() {
@@ -32,12 +29,6 @@ export default {
             } else {
                 document.getElementById(this.id).style.backgroundColor = ""
             }
-        },
-        items: {
-            handler(val) {
-                console.log(val)    
-            },
-            deep: true
         }
     }
 }

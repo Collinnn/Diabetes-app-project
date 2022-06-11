@@ -2,14 +2,16 @@
     <Sidebar style="max-width: 200px; min-width: 150px;">
         <div class="sidebar-wrapper">
             <DropdownMenu id="patientsMenu" title="Patients" :items="[
-                {id: 'viewPatients', title: 'View patients', onClick: dop()},
-                {id: 'addPatient', title: 'Add patient', onClick: $router.push('overview')}
-                ]" 
+                {itemId: 'viewPatients', title: 'View patients', onClick: () => $router.push('food')},
+                {itemId: 'addPatient', title: 'Add patient', onClick: () => $router.push('overview')}
+                ]"
+                @selected="(itemId) => this.selectedMenuItemId=itemId"
             />
             <DropdownMenu id="doctorsMenu" title="Doctors" :items="[
-                {id: 'viewDoctors', title: 'View doctors', onClick: $router.push('overview')},
-                {id: 'addDoctor', title: 'Add doctor', onClick: $router.push('food')}
-                ]" 
+                {itemId: 'viewDoctors', title: 'View doctors', onClick: () => $router.push('overview')},
+                {itemId: 'addDoctor', title: 'Add doctor', onClick: () => $router.push('food')}
+                ]"
+                @selected="(itemId) => this.selectedMenuItemId=itemId"
             />
         </div>
     </Sidebar>
@@ -21,17 +23,23 @@ import DropdownMenu from "./DropdownMenu"
 
 export default {
     name: "adminSidebar",
+    data() {
+        return {
+            selectedMenuItemId: null
+        }
+    },
     components: { 
         Sidebar,
         DropdownMenu
     },
-    methods: {
-        dop() {
-            console.log("bop")
+    watch: {
+        selectedMenuItemId(value, oldValue) {
+            if (oldValue != null) {
+                document.getElementById(oldValue).style.backgroundColor = null
+            }
+            document.getElementById(value).style.backgroundColor = "blue"
         }
     }
-
-
 }
 </script>
 
