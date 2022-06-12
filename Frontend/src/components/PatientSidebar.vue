@@ -7,12 +7,10 @@
             <button title="Meals" class="sidebar-button" id="foodButton" @click="$router.push('food')">
                 <svg class="icon" id="foodIcon"></svg>
             </button>
-            <button title="Doctor" class="sidebar-button" id="doctorButton" @click="$router.push('doctor')">
-                <svg class="icon" id="doctorIcon"></svg>
-            </button> 
         </div>      
     </Sidebar>
 </template>
+
 
 <script>
 import Sidebar from "./Sidebar.vue"
