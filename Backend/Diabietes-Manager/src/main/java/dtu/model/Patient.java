@@ -9,14 +9,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-
 public class Patient {
 	@Id
 	@Column(name = "id")
@@ -34,6 +34,7 @@ public class Patient {
 	@JsonBackReference
 	private Doctor doctor;
 	@OneToMany(mappedBy = "patient", cascade = CascadeType.REMOVE)
+	@JsonIgnore
 	private List<Measurement> measurements;
 
 	public int getId() {

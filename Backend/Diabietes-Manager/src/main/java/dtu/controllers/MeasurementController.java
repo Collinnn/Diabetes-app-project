@@ -36,6 +36,7 @@ public class MeasurementController {
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
 		MeasurementId measurementId = new MeasurementId(ts,p.get().getId());
 		measurement.setMeasurementId(measurementId);
+		p.get().addMeasurement(measurement);
 		return ResponseEntity.ok(measurementRepo.save(measurement));
 	}
 	
@@ -45,7 +46,7 @@ public class MeasurementController {
 		Optional<Patient> p = patientRepo.findById(patientId);
 		if(p.isEmpty()) {
 			return ResponseEntity.notFound().build();
-		}
+		} 
 		MeasurementId measurementId = new MeasurementId(timestamp, patientId);
 		Optional<Measurement> m = measurementRepo.findById(measurementId);
 		if(m.isEmpty()) {
@@ -54,6 +55,7 @@ public class MeasurementController {
 		m.get().setBasal(measurement.getBasal());
 		m.get().setBolus(measurement.getBolus());
 		m.get().setCarbohydrates(measurement.getCarbohydrates());
+		p.get().addMeasurement(m.get());
 		return ResponseEntity.ok(measurementRepo.save(m.get()));
 	}
 	
