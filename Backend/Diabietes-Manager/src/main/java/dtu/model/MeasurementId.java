@@ -2,6 +2,7 @@ package dtu.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 import javax.persistence.Embeddable;
 
@@ -12,12 +13,12 @@ public class MeasurementId implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 6042687706100524982L;
-	private Timestamp timestamp;
+	private String timestamp;
 	private int patientId;
 	
 	public MeasurementId(Timestamp timestamp, int patientId) {
 		super();
-		this.timestamp = timestamp;
+		this.timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:00").format(timestamp);
 		this.patientId = patientId;
 	}
 	
@@ -25,12 +26,12 @@ public class MeasurementId implements Serializable {
 		
 	}
 
-	public Timestamp getTimestamp() {
+	public String getTimestamp() {
 		return timestamp;
 	}
 
 	public void setTimestamp(Timestamp timestamp) {
-		this.timestamp = timestamp;
+		this.timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:00").format(timestamp);
 	}
 
 	public int getPatientId() {

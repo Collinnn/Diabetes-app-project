@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +28,7 @@ public class MeasurementController {
 	PatientRepository patientRepo;
 	
 	@PostMapping("/patients/{patientId}/measurements")
-	public ResponseEntity<Measurement> getMeasurementsFromPatient(@PathVariable int patientId, @RequestBody Measurement measurement) {
+	public ResponseEntity<Measurement> addMeasurementToPatient(@PathVariable int patientId, @RequestBody Measurement measurement) {
 		Optional<Patient> p = patientRepo.findById(patientId);
 		if(p.isEmpty()) {
 			return ResponseEntity.notFound().build();
@@ -38,6 +39,23 @@ public class MeasurementController {
 		return ResponseEntity.ok(measurementRepo.save(measurement));
 	}
 	
+	@PutMapping("/patients/{patientId}/measurements/{timestamp}")
+	public ResponseEntity<Measurement> updateMeasurement(@PathVariable int patientId, 
+			@RequestBody Measurement measurement, @PathVariable Timestamp timestamp) {
+		Optional<Patient> p = patientRepo.findById(patientId);
+		if(p.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+		MeasurementId measurementId = new MeasurementId(timestamp, patientId);
+		Optional<Measurement> m = measurementRepo.findById(measurementId);
+		if(m.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+		m.get().setBasal(measurement.getBasal());
+		m.get().setBolus(measurement.getBolus());
+		m.get().setCarbohydrates(measurement.getCarbohydrates());
+		return ResponseEntity.ok(measurementRepo.save(m.get()));
+	}
 	
 	
 }
