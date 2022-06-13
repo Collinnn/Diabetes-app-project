@@ -1,19 +1,19 @@
 <template>
-    <title> Add patient </title>
+    <title> Add doctor </title>
     <div class="container">
-        <PatientForm />
+        <DoctorForm />
     </div>
 </template>
 
 <script>
 
-import PatientForm from '@/components/PatientForm.vue'
+import DoctorForm from '@/components/DoctorForm.vue'
 
 export default {
     name: "adminPage",
     emits: ['logIn'],
     components: {
-        PatientForm
+        DoctorForm
     }
 }
 

@@ -10,6 +10,8 @@ import pageNotFound from './views/pageNotFound.vue'
 import user from './views/user.vue'
 import changePassword from './views/changePassword.vue'
 import { loggedInStatus } from "./variables.js"
+import addPatient from './views/addPatient'
+import addDoctor from './views/addDoctor'
 
 
 const routes = [{
@@ -74,6 +76,22 @@ const routes = [{
         name: 'pageNotFound',
         meta: {
             requiredLoggedIn: false
+        }
+    },
+    {
+        path: '/addPatient',
+        component: addPatient,
+        name: 'addPatient',
+        meta: {
+            requiredLoggedIn: true
+        }
+    },
+    {
+        path: '/addDoctor',
+        component: addDoctor,
+        name: 'addDoctor',
+        meta: {
+            requiredLoggedIn: true
         }
     }
 ]

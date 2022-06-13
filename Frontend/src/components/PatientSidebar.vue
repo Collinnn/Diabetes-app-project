@@ -18,6 +18,7 @@ import Sidebar from "./Sidebar.vue"
 export default {
         name: 'patientSidebar',
         components: { Sidebar },
+        emits: ['logIn'],
         data() {
             return {
                 title: 'PatientSidebar'
