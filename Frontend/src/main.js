@@ -1,4 +1,4 @@
-import {createApp} from 'vue'
+import { createApp } from 'vue'
 import axios from 'axios'
 import App from './App.vue'
 import Backend from './services/backend'
