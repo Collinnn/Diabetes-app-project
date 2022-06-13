@@ -1,2 +1,4 @@
 
 Backend/Diabietes-Manager/src/main/resources/application.properties
+*.csv
+*.properties
