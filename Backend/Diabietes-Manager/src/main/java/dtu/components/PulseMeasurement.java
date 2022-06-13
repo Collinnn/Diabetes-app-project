@@ -68,50 +68,5 @@ public class PulseMeasurement {
 		return Double.parseDouble(measurements[index]);
 	}
 	
-	
-//	public void readDataLine(String fileName, int id) {
-//		try {
-//			File file = new File(fileName);
-//			List<String> listOfLines = Files.readAllLines(file.toPath());
-//			String patientData = listOfLines.get(id-1);
-//			//Spilts a single line from a patient into datapoints
-//			String[] measurments = patientData.split(",");
-//			System.out.println(measurments[this.i]);
-//			this.i++;
-//			
-//			
-//			
-//		}catch(Exception error) {
-//			error.printStackTrace();
-//		}
-//	}
-	
-	
-	
-	
-	/*
-	List<Patient> patientList = patientList();
-	for(int i=0;i<patientList.size();i++) {
-		HttpEntity<Measurement> request = new HttpEntity<>(new Measurement());
-		int id = patientList.get(i).getId();
-		String url = "http://localhost:8080/api/v1/patients/" + id + "/measurements";
-		
-		
-					request.getBody().setMeasurementId(measurementId);
-			double value = 0.0;
-			request.getBody().setGlucoseLevel(value);
-
-		
-	}
-	//NEEDED TO MAKE A TIMESTAMP
-	Timestamp ts = new Timestamp(System.currentTimeMillis());
-	System.out.println(ts);
-	MeasurementId measurementId = new MeasurementId(ts,patientId);
-	
-	request.getBody().setMeasurementId(measurementId);
-	System.out.println(request.getBody().getMeasurementId().getTimestamp());
-	
-	restTemplate.postForObject(url, request, Measurement.class);
-	*/
 
 }
