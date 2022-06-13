@@ -27,7 +27,7 @@ export default {
     width: 18%;
     min-width: 120px;
     max-width: 150px;
-    background-color: #0010bb;
+    background-color: var(--secondary-color);
 }
 
 </style>
