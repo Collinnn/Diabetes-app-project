@@ -37,7 +37,7 @@ export default {
             if (oldValue != null) {
                 document.getElementById(oldValue).style.backgroundColor = ""
             }
-            document.getElementById(value).style.backgroundColor = "blue"
+            document.getElementById(value).style.backgroundColor = "var(--primary-color)"
         }
     }
 }
