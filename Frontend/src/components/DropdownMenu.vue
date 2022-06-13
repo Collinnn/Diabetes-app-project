@@ -25,7 +25,7 @@ export default {
     watch: {
         isMenuVisible() {
             if (this.isMenuVisible) {
-                document.getElementById(this.id).style.backgroundColor = "rgb(0, 0, 230)"
+                document.getElementById(this.id).style.backgroundColor = "var(--primary-color)"
             } else {
                 document.getElementById(this.id).style.backgroundColor = ""
             }
@@ -36,7 +36,7 @@ export default {
 
 <style scoped>
 button:hover {
-    background-color: blue;
+    background-color: var(--accent-color);
 }
 .menu-head, .menu-item {
     height: 40px;
@@ -44,7 +44,7 @@ button:hover {
     cursor: pointer;
     background-color: transparent;
     border: none;
-    color: rgb(233, 233, 233);
+    color: var(--text-color);
     text-align: left;
 }
 .menu-head {

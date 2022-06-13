@@ -39,7 +39,7 @@ export default {
 
 .sidebar-button {
     cursor: pointer;
-    background-color: #5b6be4;
+    background-color: --accent-color;
     width: 80px;
     height: 80px;
     border-radius: 10px;
