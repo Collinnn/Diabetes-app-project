@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+
 import overview from './views/overview.vue'
 import food from './views/food.vue'
 import doctor from './views/doctor.vue'
@@ -11,7 +12,6 @@ import pageNotFound from './views/pageNotFound.vue'
 import user from './views/user.vue'
 import changePassword from './views/changePassword.vue'
 import { loggedInStatus } from "./variables.js"
-
 
 
 const routes = [{
@@ -26,22 +26,6 @@ const routes = [{
         path: '/food',
         component: food,
         name: 'food',
-        meta: {
-            requiredLoggedIn: true
-        }
-    },
-    {
-        path: '/doctor',
-        component: doctor,
-        name: 'doctor',
-        meta: {
-            requiredLoggedIn: true
-        }
-    },
-    {
-        path: '/emergency',
-        component: emergency,
-        name: 'emergency',
         meta: {
             requiredLoggedIn: true
         }
@@ -112,8 +96,6 @@ router.beforeEach((to) => {
         }
     }
 })
-
-
 
 
 export default router

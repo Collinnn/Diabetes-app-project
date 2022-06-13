@@ -5,12 +5,14 @@
     </div>    
 </template>
 
-
 <script>
 
 export default {
     name: "overviewPage",
     emits: ['logIn']
-}
 
+}
 </script>
+
+<style>
+</style>
