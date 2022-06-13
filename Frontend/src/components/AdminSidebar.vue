@@ -5,13 +5,13 @@
                 {itemId: 'viewPatients', title: 'View patients', onClick: () => $router.push('patients')},
                 {itemId: 'addPatient', title: 'Add patient', onClick: () => $router.push('add-patient')}
                 ]"
-                @selected="(itemId) => this.selectedMenuItemId=itemId"
+                @selected="(itemId) => selectedMenuItemId=itemId"
             />
             <DropdownMenu id="doctorsMenu" title="Doctors" :items="[
                 {itemId: 'viewDoctors', title: 'View doctors', onClick: () => $router.push('doctors')},
                 {itemId: 'addDoctor', title: 'Add doctor', onClick: () => $router.push('add-doctor')}
                 ]"
-                @selected="(itemId) => this.selectedMenuItemId=itemId"
+                @selected="(itemId) => selectedMenuItemId=itemId"
             />
         </div>
     </Sidebar>
@@ -35,7 +35,7 @@ export default {
     watch: {
         selectedMenuItemId(value, oldValue) {
             if (oldValue != null) {
-                document.getElementById(oldValue).style.backgroundColor = null
+                document.getElementById(oldValue).style.backgroundColor = ""
             }
             document.getElementById(value).style.backgroundColor = "blue"
         }

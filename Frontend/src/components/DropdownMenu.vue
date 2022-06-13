@@ -1,7 +1,7 @@
 <template>
     <button :id="id" class="menu-head" @click="isMenuVisible = !isMenuVisible"> {{title}} </button>
     <div class="menu-wrapper" v-if="isMenuVisible">
-        <button :id="itemId" class="menu-item" v-for="{itemId, title, onClick} in items" :key="itemId" @click="onClick(); $emit('selected', itemId)"> 
+        <button :id="itemId" class="menu-item" v-for="{itemId, title, onClick} in items" :key="itemId" @click="onClick(); this.$emit('selected', itemId)"> 
             {{title}} 
         </button>
      </div>
