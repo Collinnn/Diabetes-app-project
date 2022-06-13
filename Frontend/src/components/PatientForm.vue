@@ -24,11 +24,11 @@
                 </label>
             </ul>
             <ul> 
-                <label>
-                    Doctor: <select>
-                                <option v-for="{id, firstName, lastName} in doctors" :key="id"> {{firstName}} {{lastName}} </option>
-                            </select>
-                </label>
+                <label for="doctors"> Doctor: </label>
+                <select name="doctors" v-model="selectedDoctor">
+                    <option value="" selected disabled hidden> --Select a doctor-- </option>
+                    <option v-for="{id, firstName, lastName} in doctors" :key="id" :value="lastName"> {{firstName}} {{lastName}} </option>
+                </select>
             </ul>
             <button type="submit"> Submit </button>
         </form>
@@ -69,11 +69,12 @@ export default {
                 { id: "specialchars", requirement: "First name and last name must not contain any special characters (Letter accents excluded)." },
                 { id: "password", requirement: "Password must be at least 6 characters long and contain at least 1 uppercase letter and 1 special character or number." }
             ],
-            doctors: this.axios.get(this.$backend.getUrlGetDoctors())
-                        .then(() => {
-                            console.log(this.doctors)
-                        })
+            doctors: [],
+            selectedDoctor: ""
         }
+    },
+    mounted() {
+        this.axios.get(this.$backend.getUrlGetDoctors()).then((response) => this.doctors = response.data)
     },
     methods: {
         submitForm() {
@@ -86,6 +87,7 @@ export default {
                     this.form.password = ""
                     this.form.dateOfBirth = today
                     console.log("Patient submitted")
+                    console.log("Selected doctor: ", this.selectedDoctor)
                 })
                 .catch(() => console.log("Invalid request", this.form))
             }
