@@ -25,22 +25,21 @@ public class PulseMeasurement {
 		
 		RestTemplate restTemplate = new RestTemplate();
 		HttpEntity<Measurement> request = new HttpEntity<>(new Measurement());
-		System.out.println(request.getBody());
+
 		
 		//NEEDED TO MAKE A TIMESTAMP
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
-		MeasurementId measurementId = new MeasurementId();
-		measurementId.setPatientId(patientId);
-		measurementId.setTimestamp(ts);
-		/*END OF TIMESTAMP CREATION */
+		System.out.println(ts);
+		MeasurementId measurementId = new MeasurementId(ts,patientId);
 		
 		request.getBody().setMeasurementId(measurementId);
-
+		System.out.println(request.getBody().getMeasurementId().getTimestamp());
 		
 		restTemplate.postForObject(url, request, Measurement.class);
 		
 		
 		System.out.println("Hello world");
+		
 	}
 	
 
