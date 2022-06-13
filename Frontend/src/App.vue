@@ -2,7 +2,7 @@
   <div id="appcontainer">
     <div id="appLayout" v-if="app.loggedIn">
       <Topbar @showDropdown="showDropdown.isVisible=!showDropdown.isVisible" @darkMode="toggleDarkmode()" />
-      <Sidebar />
+      <AdminSidebar />
     </div>
 
     <div id="app">
@@ -18,14 +18,14 @@
 
 <script>
 import Topbar from "./components/Topbar.vue"
-import Sidebar from "./components/Sidebar.vue"
+import AdminSidebar from "./components/AdminSidebar.vue"
 import ProfileDropdown from "./components/ProfileDropdown.vue"
 import {loggedInStatus} from "./variables.js"
 export default {
     name: 'App',  
     components: {
     Topbar,
-    Sidebar,
+    AdminSidebar,
     ProfileDropdown
     },
     //Remember theme of the user

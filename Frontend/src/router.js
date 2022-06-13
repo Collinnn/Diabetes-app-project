@@ -3,8 +3,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import overview from './views/overview.vue'
 import food from './views/food.vue'
-import doctor from './views/doctor.vue'
-import emergency from './views/emergency.vue'
 import landing from './views/landing.vue'
 import patientLogin from './views/patientLogin.vue'
 import doctorLogin from './views/doctorLogin.vue'
