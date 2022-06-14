@@ -8,7 +8,7 @@
         <button class="landingButton" id="doctorButton" @click="goToPage('doctorLogin')">
         Doctor Login
         </button>
-        <span id="adminLoginLink" @click="goToPage('adminLogin')"> Login as administrator </span>
+        <router-link id="adminLoginLink" to="/adminLogin"> Login as administrator </router-link>
     </div>
 </template>
 
@@ -63,6 +63,7 @@ export default {
 }
 #adminLoginLink {
     cursor: pointer;
+    color: var(--text-color);
     text-decoration: underline;
     margin-bottom: 10px;
 }
