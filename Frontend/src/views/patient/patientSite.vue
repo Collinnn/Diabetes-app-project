@@ -12,7 +12,7 @@ import Topbar from '@/components/Topbar'
 import PatientSidebar from '@/components/PatientSidebar'
 
 export default {
-    name: patientSite,
+    name: "patientSite",
     components: { Topbar, PatientSidebar },
 }
 </script>

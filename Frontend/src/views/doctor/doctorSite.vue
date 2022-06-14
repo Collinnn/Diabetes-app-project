@@ -10,7 +10,7 @@
 import Topbar from '@/components/Topbar'
 
 export default {
-    name: doctorSite,
+    name: "doctorSite",
     components: { Topbar },
 }
 </script>

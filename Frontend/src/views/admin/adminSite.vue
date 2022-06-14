@@ -12,7 +12,7 @@ import Topbar from '@/components/Topbar'
 import AdminSidebar from '@/components/AdminSidebar'
 
 export default {
-    name: adminSite,
+    name: "adminSite",
     components: { Topbar, AdminSidebar },
 }
 </script>
