@@ -1,13 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import landing from './views/landing.vue'
-import patientLogin from './views/patientLogin.vue'
-import doctorLogin from './views/doctorLogin.vue'
-import overview from './views/overview.vue'
-import food from './views/food.vue'
-import user from './views/user.vue'
-import changePassword from './views/changePassword.vue'
-import pageNotFound from './views/pageNotFound.vue'
+import landing from '@/views/landing.vue'
+import patientLogin from '@/views/patient/patientLogin.vue'
+import doctorLogin from '@/views/doctor/doctorLogin.vue'
+import adminLogin from '@/views/admin/adminLogin.vue'
+import overview from '@/views/patient/overview.vue'
+import food from '@/views/patient/food.vue'
+import user from '@/views/user.vue'
+import changePassword from '@/views/patient/changePassword.vue'
+import addPatient from '@/views/admin/addPatient.vue'
+import addDoctor from '@/views/admin/addDoctor.vue'
+import pageNotFound from '@/views/pageNotFound.vue'
 
 import { loggedInStatus } from "@/globals.js"
 

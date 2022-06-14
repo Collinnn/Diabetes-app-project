@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import router from "@/router"
 export default {
         name: 'login-doctor',
         emits: ['logIn'],
@@ -28,7 +27,7 @@ export default {
                 console.log(password);
                 if(password == this.input.password){
                     console.log("Logged in succesfully")
-                    router.push({name: "overview"});
+                    this.$router.push({name: "overview"});
                     this.$emit('logIn');
                 }else{
                     console.log("username and/or password was wrong");
@@ -47,7 +46,7 @@ export default {
             }
         },lazy(){
             this.$emit('logIn');
-            router.push({name: "overview"});
+            this.$router.push({name: "overview"});
         }
 
     }

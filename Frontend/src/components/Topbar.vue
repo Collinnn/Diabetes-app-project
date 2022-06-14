@@ -33,9 +33,6 @@
 </template>
 
 <script>
-
-    import router from "@/router"
-
     export default {
         emits:['darkMode','showDropdown'],
         name: "TopbarMenu",
@@ -64,7 +61,7 @@
         },
         methods: {
             goToPage(pageName) {
-                router.push({ name: pageName})
+                this.$router.push({ name: pageName})
             },
             modeToggle() {
             this.$emit('darkMode');

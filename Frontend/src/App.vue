@@ -1,10 +1,9 @@
 <template>
   <div id="appLayout" v-if="app.loggedIn">
-    <Topbar @showDropdown="showDropdown.isVisible=!showDropdown.isVisible" @darkMode="toggleDarkmode()" />
-    <Sidebar />
-    <div id="appViews">
-      <router-view @logIn="logIn()" />
-    </div>
+    <PatientSite v-if="user.type == 'patient'"/>
+    <DoctorSite v-else-if="user.type == 'doctor'"/>
+    <AdminSite v-else-if="user.type == 'admin'" />
+
   </div>
 
     <!-- Move this to the topbar @Zwinge -->
@@ -15,19 +14,22 @@
 </template>
 
 <script>
-import Topbar from "./components/Topbar.vue"
-import AdminSidebar from "./components/AdminSidebar.vue"
 import ProfileDropdown from "./components/ProfileDropdown.vue"
 import {loggedInStatus} from "./globals.js"
+import PatientSite from "@/views/patient/patientSite.vue"
+import DoctorSite from "@/views/doctor/doctorSite.vue"
+import AdminSite from "@/views/admin/adminSite.vue"
+
 export default {
     name: 'App',  
     components: {
-    Topbar,
-    AdminSidebar,
-    ProfileDropdown
+      ProfileDropdown,
+      PatientSite,
+      DoctorSite,
+      AdminSite
     },
     //Remember theme of the user
-    mounted(){
+    mounted() {
       this.darktheme= this.getMediaPreference();
       this.toggleDarkmode();
      
@@ -41,6 +43,9 @@ export default {
           loggedIn: loggedInStatus.getStatus
         },
         darktheme: null,
+        user: {
+          type: 'patient'
+        }
       }
     },
     methods:{

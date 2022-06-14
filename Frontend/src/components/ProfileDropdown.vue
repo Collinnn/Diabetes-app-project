@@ -10,18 +10,16 @@
 
 
 <script>
-    import router from "@/router"
-
     export default {
         name: "ProfileDropdown",
         emits:['logOut'],
         methods: {
             goToPage(pageName) {
-                router.push({ name: pageName})
+                this.$router.push({ name: pageName})
             },
 
             logOut(pageName){
-                router.push({name: pageName});
+                this.$router.push({name: pageName});
                 this.$emit('logOut');
             }
         }

@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import router from "@/router"
 
 export default {
     name: "landingPage",
@@ -25,7 +24,7 @@ export default {
     },
     methods: {
         goToPage(pageName) {
-            router.push({name:pageName})
+            this.$router.push({name:pageName})
         }
     }
 }
