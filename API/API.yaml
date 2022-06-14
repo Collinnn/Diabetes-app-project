@@ -218,7 +218,34 @@ paths:
             $ref: "#/definitions/Measurement"
         "404":
           description: The patient cannot be found
-          
+  
+  /patients/{patientId}/measurements/{timestamp}:
+    put:
+      summary: Updates an existing measurement
+      parameters:
+        - in: path
+          name: patientId
+          type: integer
+          description: The id of the patient
+          required: true
+        - in: body
+          name: measurement
+          required: true
+          schema:
+            $ref: "#/definitions/Measurement"
+        - in: path
+          name: timestamp
+          type: string
+          format: date-time
+          description: The timestamp
+          required: true
+      responses:
+        "200":
+          description: Measurement correctly updated
+          schema:
+            $ref: "#/definitions/Measurement"
+        "404":
+          description: Measurement cannot be found
           
 definitions:
   Patient:
@@ -248,13 +275,26 @@ definitions:
         type: string
       lastName:
         type: string
-      patients:
-        type: array
-        items:
-          $ref: "#/definitions/Patient"
           
   Measurement:
     type: object
     properties:
-      timeStamp:
+      measurementId:
+        $ref: "#/definitions/MeasurementId"
+      glucoseLevel:
+        type: number
+      bolus:
+        type: number
+      basal:
+        type: number
+      carbohydrates:
+        type: number
+        
+  MeasurementId:
+    type: object
+    properties:
+      timestamp:
         type: string
+        format: date-time
+      patientId:
+        type: integer

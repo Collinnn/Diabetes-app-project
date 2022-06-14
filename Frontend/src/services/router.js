@@ -39,6 +39,14 @@ const routes = [
         }
     },
     {
+        path: '/adminLogin',
+        component: adminLogin,
+        name: 'adminLogin',
+        meta: {
+            requiredLoggedIn: false
+        }
+    },
+    {
         path: '/overview',
         component: overview,
         name: 'overview',
@@ -77,6 +85,22 @@ const routes = [
         meta: {
             requiredLoggedIn: false
         }
+    },
+    {
+        path: '/addPatient',
+        component: addPatient,
+        name: 'addPatient',
+        meta: {
+            requiredLoggedIn: true
+        }
+    },
+    {
+        path: '/addDoctor',
+        component: addDoctor,
+        name: 'addDoctor',
+        meta: {
+            requiredLoggedIn: true
+        }
     }
 ]
 
@@ -96,8 +120,6 @@ router.beforeEach((to) => {
         }
     }
 })
-
-
 
 
 export default router

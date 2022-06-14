@@ -27,9 +27,7 @@ public class Doctor {
 	@Column
 	private String lastName;
 	@OneToMany(
-			mappedBy = "doctor",
-			cascade = CascadeType.MERGE,
-			orphanRemoval = true
+			mappedBy = "doctor"
 			)
 	@JsonManagedReference
 	private List<Patient> patients;
@@ -77,4 +75,5 @@ public class Doctor {
 	public void removePatient(Patient patient) {
 		this.patients.remove(patient);
 	}
+	
 }
