@@ -1,51 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import overview from './views/overview.vue'
-import food from './views/food.vue'
-import doctor from './views/doctor.vue'
-import emergency from './views/emergency.vue'
 import landing from './views/landing.vue'
 import patientLogin from './views/patientLogin.vue'
 import doctorLogin from './views/doctorLogin.vue'
-import pageNotFound from './views/pageNotFound.vue'
+import overview from './views/overview.vue'
+import food from './views/food.vue'
 import user from './views/user.vue'
 import changePassword from './views/changePassword.vue'
-import { loggedInStatus } from "./variables.js"
+import pageNotFound from './views/pageNotFound.vue'
+
+import { loggedInStatus } from "@/globals.js"
 
 
 
-const routes = [{
-        path: '/overview',
-        component: overview,
-        name: 'overview',
-        meta: {
-            requiredLoggedIn: true
-        }
-    },
-    {
-        path: '/food',
-        component: food,
-        name: 'food',
-        meta: {
-            requiredLoggedIn: true
-        }
-    },
-    {
-        path: '/doctor',
-        component: doctor,
-        name: 'doctor',
-        meta: {
-            requiredLoggedIn: true
-        }
-    },
-    {
-        path: '/emergency',
-        component: emergency,
-        name: 'emergency',
-        meta: {
-            requiredLoggedIn: true
-        }
-    },
+const routes = [
     {
         path: '/',
         component: landing,
@@ -68,6 +36,22 @@ const routes = [{
         name: 'doctorLogin',
         meta: {
             requiredLoggedIn: false
+        }
+    },
+    {
+        path: '/overview',
+        component: overview,
+        name: 'overview',
+        meta: {
+            requiredLoggedIn: true
+        }
+    },
+    {
+        path: '/food',
+        component: food,
+        name: 'food',
+        meta: {
+            requiredLoggedIn: true
         }
     },
     {

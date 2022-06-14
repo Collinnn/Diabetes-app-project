@@ -1,26 +1,24 @@
 <template>
-  <div id="appcontainer">
-    <div id="appLayout" v-if="app.loggedIn">
-      <Topbar @showDropdown="showDropdown.isVisible=!showDropdown.isVisible" @darkMode="toggleDarkmode()" />
-      <Sidebar />
-    </div>
-
-    <div id="app">
-      <router-link to='/'></router-link>
+  <div id="appLayout" v-if="app.loggedIn">
+    <Topbar @showDropdown="showDropdown.isVisible=!showDropdown.isVisible" @darkMode="toggleDarkmode()" />
+    <Sidebar />
+    <div id="appViews">
       <router-view @logIn="logIn()" />
     </div>
+  </div>
 
+    <!-- Move this to the topbar @Zwinge -->
     <div id=showDropdown v-if="showDropdown.isVisible">
         <ProfileDropdown @logOut="logOut()"/>
     </div>
-  </div>
+
 </template>
 
 <script>
 import Topbar from "./components/Topbar.vue"
 import Sidebar from "./components/Sidebar.vue"
 import ProfileDropdown from "./components/ProfileDropdown.vue"
-import {loggedInStatus} from "./variables.js"
+import {loggedInStatus} from "./globals.js"
 export default {
     name: 'App',  
     components: {
@@ -99,28 +97,26 @@ export default {
 </script>
 
 <style scoped>
- /* For the entire app*/
-#app {
-  position: fixed;
+#appLayout {
+  width: 100%;
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: var(--text-color);
+  background-color: var(--primary-color);
+}
+#appViews {
+  position: relative;
   top: 50px;
   left: 150px;
   right: 0;
   bottom: 0;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: var(--text-color);
+  
   
 }
-#appcontainer{
-  position: fixed;
-  top:0;
-  left:0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--primary-color);
-}
+
 
 
 
