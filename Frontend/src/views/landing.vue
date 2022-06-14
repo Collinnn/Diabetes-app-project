@@ -8,7 +8,8 @@
         <button class="landingButton" id="doctorButton" @click="goToPage('doctorLogin')">
         Doctor Login
         </button>
-    </div> 
+        <span id="adminLoginLink" @click="goToPage('adminLogin')"> Login as administrator </span>
+    </div>
 </template>
 
 <script>
@@ -59,5 +60,10 @@ export default {
 }
 .landingButton:hover{
     background: rgba(255, 255, 255, 0.60);
+}
+#adminLoginLink {
+    cursor: pointer;
+    text-decoration: underline;
+    margin-bottom: 10px;
 }
 </style>
