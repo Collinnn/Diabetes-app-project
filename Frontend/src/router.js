@@ -6,7 +6,6 @@ import food from './views/food.vue'
 import landing from './views/landing.vue'
 import patientLogin from './views/patientLogin.vue'
 import doctorLogin from './views/doctorLogin.vue'
-import adminLogin from './views/adminLogin'
 import pageNotFound from './views/pageNotFound.vue'
 import user from './views/user.vue'
 import changePassword from './views/changePassword.vue'
@@ -51,14 +50,6 @@ const routes = [{
         path: '/doctorLogin',
         component: doctorLogin,
         name: 'doctorLogin',
-        meta: {
-            requiredLoggedIn: false
-        }
-    },
-    {
-        path: '/adminLogin',
-        component: adminLogin,
-        name: 'adminLogin',
         meta: {
             requiredLoggedIn: false
         }

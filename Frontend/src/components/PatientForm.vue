@@ -20,14 +20,14 @@
             </ul>
             <ul>
                 <label>
-                    Date of birth: <input type="date" min="1900-01-01" :max="today" v-model="form.dateOfBirth" />
+                    Date of birth: <input type="date" min="1900-01-01" :max="this.today" v-model="form.dateOfBirth" />
                 </label>
             </ul>
             <ul> 
                 <label for="doctors"> Doctor: </label>
-                <select name="doctors" v-model="selectedDoctorId">
-                    <option :value="null" selected disabled hidden> --Select a doctor-- </option>
-                    <option v-for="{id, firstName, lastName} in doctors" :key="id" :value="id"> {{firstName}} {{lastName}} </option>
+                <select name="doctors" v-model="selectedDoctor">
+                    <option value="" selected disabled hidden> --Select a doctor-- </option>
+                    <option v-for="{id, firstName, lastName} in doctors" :key="id" :value="lastName"> {{firstName}} {{lastName}} </option>
                 </select>
             </ul>
             <button type="submit"> Submit </button>
@@ -55,16 +55,22 @@ export default {
                 lastName: "",
                 password: "",
                 dateOfBirth: today,
-                doctor: null
+                doctor: this.doctorForm
             },
-            selectedDoctorId: null,
+            doctorForm: {
+                id: "",
+                firstName: "",
+                lastName: "",
+                password: "",
+            },
             requirements: [
                 { id: "empty", requirement: "All fields must be filled out." },
                 { id: "numbers", requirement: "First name and last must not contain any numbers." },
                 { id: "specialchars", requirement: "First name and last name must not contain any special characters (Letter accents excluded)." },
                 { id: "password", requirement: "Password must be at least 6 characters long and contain at least 1 uppercase letter and 1 special character or number." }
             ],
-            doctors: []
+            doctors: [],
+            selectedDoctor: ""
         }
     },
     mounted() {
@@ -80,7 +86,8 @@ export default {
                     this.form.lastName = ""
                     this.form.password = ""
                     this.form.dateOfBirth = today
-                    console.log("Patient submitted succesfully", this.form)
+                    console.log("Patient submitted")
+                    console.log("Selected doctor: ", this.selectedDoctor)
                 })
                 .catch(() => console.log("Invalid request", this.form))
             }
@@ -109,11 +116,6 @@ export default {
                 updatedRequirements = updatedRequirements.filter((req) => req.id != "password")
             }
             return updatedRequirements
-        }
-    },
-    watch: {
-        selectedDoctorId(value) {
-            this.form.doctor = {id: value}
         }
     }
 }
