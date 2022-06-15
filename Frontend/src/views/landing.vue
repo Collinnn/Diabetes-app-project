@@ -24,7 +24,7 @@ export default {
     },
     methods: {
         goToPage(pageName) {
-            this.$router.push(pageName)
+            this.$router.push({name: pageName})
         }
     }
 }

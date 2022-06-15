@@ -2,7 +2,7 @@
     <title> Doctor site </title>
     <Topbar />
     <div class="viewContainer">
-        <router-view name="doctorSite"> </router-view>
+        <router-view />
     </div>
 </template>
 
@@ -11,7 +11,8 @@ import Topbar from '@/components/Topbar'
 
 export default {
     name: "doctorSite",
-    components: { Topbar },
+    emits: ['logIn'],
+    components: { Topbar }
 }
 </script>
 

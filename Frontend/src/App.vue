@@ -1,9 +1,6 @@
 <template>
     <div id="app">
         <router-view @logIn="logIn()" />
-        <router-view name="patientSite" v-if="app.loggedIn" />
-        <router-view name="doctorSite" v-else-if="app.loggedInAsDoctor" />
-        <router-view name="adminSite" v-else-if="app.loggedInAsAdmin" />
         <!-- Move this to the topbar @Zwinge -->
         <div id=showDropdown v-if="showDropdown.isVisible">
             <ProfileDropdown @logOut="logOut()"/>
@@ -109,8 +106,6 @@ export default {
 
 .viewContainer { /* Applies to all viewContainers (in all views) */
   position: relative;
-  top: 50px;
-  left: 130px;
 }
 
 </style>

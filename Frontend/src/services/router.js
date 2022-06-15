@@ -7,7 +7,7 @@ import adminLogin from '@/views/admin/adminLogin.vue'
 import patientSite from '@/views/patient/patientSite.vue'
 import overview from '@/views/patient/overview.vue'
 import food from '@/views/patient/food.vue'
-import user from '@/views/user.vue'
+import userView from '@/views/userView.vue'
 import changePassword from '@/views/patient/changePassword.vue'
 import doctorSite from '@/views/doctor/doctorSite.vue'
 import adminSite from '@/views/admin/adminSite.vue'
@@ -16,7 +16,7 @@ import addDoctor from '@/views/admin/addDoctor.vue'
 import pageNotFound from '@/views/pageNotFound.vue'
 
 import { loggedInStatus } from "@/globals.js"
-
+import {user} from "@/globals.js"
 
 
 const routes = [
@@ -54,7 +54,8 @@ const routes = [
     },
     {
         path: '/patient',
-        components: { patientSite },
+        redirect: { name: 'overview' },
+        component: patientSite,
         name: 'patientSite',
         meta: {
             requiredLoggedIn: true
@@ -78,7 +79,7 @@ const routes = [
             },
             {
                 path: 'user',
-                component: user,
+                component: userView,
                 name: 'user',
                 meta: {
                     requiredLoggedIn: true
@@ -96,7 +97,7 @@ const routes = [
     },
     {
         path: '/doctor',
-        components: { doctorSite },
+        component: doctorSite,
         name: 'doctorSite',
         meta: {
             requiredLoggedIn: true
@@ -107,7 +108,8 @@ const routes = [
     },
     {
         path: '/admin',
-        components: { adminSite },
+        redirect: { name: 'addPatient' },
+        component: adminSite,
         name: 'adminSite',
         meta: {
             requiredLoggedIn: true
@@ -152,8 +154,15 @@ router.beforeEach((to) => {
             return { name: 'landing' }
         }
     } else if (to.matched.some(route => !route.meta.requiredLoggedIn)) {
-        if (loggedInStatus.getStatus) {
+        console.log(user.getUserType())
+        if (user.getUserType() == "patient") {
+            return { name: 'patientSite' }
+        }
+        else if (user.getUserType() == "doctor") {
             return { name: 'doctorSite' }
+        }
+        else if (user.getUserType() == "admin") {
+            return { name: 'adminSite' }
         }
     }
 })

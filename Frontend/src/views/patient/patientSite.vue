@@ -3,7 +3,7 @@
     <Topbar />
     <PatientSidebar />
     <div class="viewContainer">
-        <router-view name="patientSite"> </router-view>
+        <router-view />
     </div>
 </template>
 
@@ -13,10 +13,18 @@ import PatientSidebar from '@/components/PatientSidebar'
 
 export default {
     name: "patientSite",
-    components: { Topbar, PatientSidebar },
+    emits: ['logIn'],
+    components: { Topbar, PatientSidebar }
+    
 }
 </script>
 
 <style>
+
+.viewContainer {
+    top: 50px;
+    left: 150px;
+}
+
 </style>
 

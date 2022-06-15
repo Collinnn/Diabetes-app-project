@@ -10,7 +10,6 @@
 export default {
     name: "overviewPage",
     emits: ['logIn']
-
 }
 </script>
 

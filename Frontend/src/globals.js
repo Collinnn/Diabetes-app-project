@@ -1,4 +1,6 @@
+import User from "./services/user"
 
+const user = new User()
 
 const loggedInStatus = {
     isLoggedIn: false,
@@ -7,9 +9,10 @@ const loggedInStatus = {
         return this.isLoggedIn
     },
 
+    
     set setLoggedIn(val) {
         this.isLoggedIn = val
     }
 }
 
-export { loggedInStatus }
+export { loggedInStatus, user }

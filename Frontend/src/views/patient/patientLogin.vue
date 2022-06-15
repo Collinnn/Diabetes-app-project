@@ -29,6 +29,8 @@ export default {
                     console.log("Logged in succesfully")
                     this.$router.push("patientSite");
                     this.$emit('logIn');
+                    this.$user.setUserType("patient")
+
                 }else{
                     console.log("username and/or password was wrong");
                 }
@@ -48,6 +50,7 @@ export default {
         lazy(){
             this.$emit('logIn');
             this.$router.push("patientSite");
+            this.$user.setUserType("patient")
         }
 
     }

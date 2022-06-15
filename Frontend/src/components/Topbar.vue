@@ -61,7 +61,7 @@
         },
         methods: {
             goToPage(pageName) {
-                this.$router.push({ name: pageName})
+                this.$router.push({name: pageName})
             },
             modeToggle() {
             this.$emit('darkMode');

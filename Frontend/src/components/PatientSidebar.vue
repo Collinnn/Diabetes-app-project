@@ -1,10 +1,10 @@
 <template >
     <SidebarContainer>
         <div id="sidebarWrapper"> 
-            <button title="Overview" class="sidebar-button" id="overviewButton" @click="$router.push('overview')"> 
+            <button title="Overview" class="sidebar-button" id="overviewButton" @click="$router.push({name: 'overview'})"> 
                 <svg class="icon" id="overviewIcon"></svg>
             </button>
-            <button title="Meals" class="sidebar-button" id="foodButton" @click="$router.push('food')">
+            <button title="Meals" class="sidebar-button" id="foodButton" @click="$router.push({name: 'food'})">
                 <svg class="icon" id="foodIcon"></svg>
             </button>
         </div>      

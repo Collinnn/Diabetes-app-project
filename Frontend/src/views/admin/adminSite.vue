@@ -2,8 +2,8 @@
     <title> Admin site </title>
     <Topbar />
     <AdminSidebar />
-    <div class="viewContainer">
-      <router-view />
+    <div class="viewContainer" id="adminViews">
+        <router-view />
     </div>
 </template>
 
@@ -13,10 +13,14 @@ import AdminSidebar from '@/components/AdminSidebar'
 
 export default {
     name: "adminSite",
-    components: { Topbar, AdminSidebar },
+    emits: ['logIn'],
+    components: { Topbar, AdminSidebar }
 }
 </script>
 
 <style>
+
+
+
 </style>
 
