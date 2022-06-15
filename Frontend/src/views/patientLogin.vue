@@ -14,7 +14,7 @@
 import router from "@/router"
 export default {
         name: 'login-patient',
-        emits: ['logIn','logInasDoctor','logInasAdmin'],
+        emits: ['logIn'],
         props:{
             User:{
                 id:Number,

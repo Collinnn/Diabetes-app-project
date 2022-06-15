@@ -112,11 +112,11 @@ const router = createRouter({
 
 router.beforeEach((to) => {
     if (to.matched.some(route => route.meta.requiredLoggedIn)) {
-        if (!loggedInStatus.getUserStatus || !loggedInStatus.getDocterStatus || !loggedInStatus.getAdminStatus) {
+        if (!loggedInStatus.getStatus) {
             return { name: 'landing' }
         }
     } else if (to.matched.some(route => !route.meta.requiredLoggedIn)) {
-        if (loggedInStatus.getUserStatus || loggedInStatus.getDocterStatus || loggedInStatus.getAdminStatus) {
+        if (loggedInStatus.getStatus) {
             return { name: 'overview' }
         }
     }

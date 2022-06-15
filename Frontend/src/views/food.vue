@@ -6,7 +6,7 @@
 <script>
 export default {
     name: "foodPage",
-    emits: ['logIn','logInasDoctor','logInasAdmin'],
+    emits: ['logIn'],
     props:{
         User:{
             id:Number,

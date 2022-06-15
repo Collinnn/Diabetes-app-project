@@ -7,7 +7,7 @@
 
     <div id="app">
       <router-link to='/'></router-link>
-      <router-view :User="User" @logIn="logIn()" @logInasDoctor="logInDoctor()" @logInasAdmin="logInAdmin()" />
+      <router-view :User="User" @logIn="logIn()" />
     </div>
 
     <div id=showDropdown v-if="showDropdown.isVisible">
@@ -40,9 +40,7 @@ export default {
           isVisible: false
         },
         app:{
-          loggedIn: loggedInStatus.getUserStatus,
-          loggedInasDoctor: loggedInStatus.getDoctorStatus,
-          loggedInasAdmin: loggedInStatus.getAdminStatus
+          loggedIn: loggedInStatus.getStatus
         },
         User:{
             id: 0,
@@ -55,15 +53,7 @@ export default {
     methods:{
       logIn(){
         this.app.loggedIn = true
-        loggedInStatus.setUserLoggedIn = true;
-      },
-      logInDoctor(){
-        this.app.loggedInasDoctor = true
-        loggedInStatus.setDoctorLoggedIn = true;
-      },
-      logInAdmin(){
-        this.app.loggedInasAdmin = true
-        loggedInStatus.setAdminLoggedIn = true;
+        loggedInStatus.setLoggedIn = true;
       },
       logOut(){
         this.showDropdown.isVisible = false;

@@ -9,7 +9,7 @@
 
 export default {
     name: "overviewPage",
-    emits: ['logIn','logInasDoctor','logInasAdmin'],
+    emits: ['logIn'],
     props:{
         User:{
             id:Number,
