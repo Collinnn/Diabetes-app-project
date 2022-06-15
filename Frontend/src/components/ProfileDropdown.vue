@@ -1,6 +1,6 @@
 <template>
     <div class ="profile dropdown">
-        <div id="settingsMenu">
+        <div id="settingsMenu" v-if="loggedIn">
             <button class="settingsButton" @click="goToPage('user')"> View profile </button>
             <button class="settingsButton" @click="goToPage('changePassword')"> Change password </button>
             <button class="settingsButton" @click="logOut('landing')"> Log out </button>
@@ -15,6 +15,13 @@
     export default {
         name: "ProfileDropdown",
         emits:['logOut'],
+        props:{
+            app:{
+                loggedIn:Boolean,
+                loggedInasDoctor:Boolean,
+                loggedInasAdmin:Boolean
+            }
+        },
         methods: {
             goToPage(pageName) {
                 router.push({ name: pageName})

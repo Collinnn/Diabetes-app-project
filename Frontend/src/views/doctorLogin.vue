@@ -14,7 +14,7 @@
 import router from "@/router"
 export default {
         name: 'login-doctor',
-        emits: ['logIn'],
+        emits: ['logIn','logInasDoctor','logInasAdmin'],
         props:{
             User:{
                 id:Number,
@@ -36,7 +36,7 @@ export default {
                 if(password == this.input.password){
                     console.log("Logged in succesfully")
                     router.push({name: "overview"});
-                    this.$emit('logIn');
+                    this.$emit('logInasDoctor');
                 }else{
                     console.log("username and/or password was wrong");
                 }
