@@ -59,17 +59,14 @@ export default {
       logIn(){
         this.app.loggedIn = true
         loggedInStatus.setUserLoggedIn = true;
-        console.log(this.app.loggedIn)
       },
       logInDoctor(){
         this.app.loggedInasDoctor = true
         loggedInStatus.setDoctorLoggedIn = true;
-        console.log(this.app.loggedInasDoctor)
       },
       logInAdmin(){
         this.app.loggedInasAdmin = true
         loggedInStatus.setAdminLoggedIn = true;
-        console.log(this.app.loggedInasAdmin)
       },
       logOut(){
         this.showDropdown.isVisible = false;
