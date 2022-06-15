@@ -1,72 +1,72 @@
 <template>
 <div>
     <h1>HELLO WORLD</h1>
+    <canvas id="glucoseChart" width="400" height="400"></canvas>
 </div>
 </template>
 
 
 <script>
-   // import {Line} from 'vue-chartjs'
-    //import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
-
-
-
-    //ChartJS.register(Title,Tooltip,Legend,BarElement,CategoryScale,LinearScale)
-    export default{
+    import {Line} from 'vue-chartjs'
+    import { Chart,registerables } from 'chart.js'
+    Chart.register(...registerables)
+    export default {
         name: 'GlucoseGraph',
-        componets: {/*Line*/},
+        componets: {Line},
+
         async created(){
-        const {data} = this.axios.get(this.$backend.getUrlGetMeasurementsFromPatientById(1))
-        .then(response =>{
-            console.log(response.data.length);
-            console.log(response.data[0])
-            for (let i = 0; i < response.data.length; i++) {
-                this.glucoseArray[i] = response.data[i].glucoseLevel;
-                this.timestampArray[i] = response.data[i].measurementId.timestamp
-                console.log(this.glucoseArray[i]);
-                console.log(this.timestampArray[i]);
-                
-            }
-        }).catch((error) => console.log(error));
-        console.log(data);
+            this.axios.get(this.$backend.getUrlGetMeasurementsFromPatientById(1))
+            .then(response =>{
+
+
+
+                for (let i = 0; i < response.data.length; i++) {
+                    this.glucoseArray[i] = response.data[i].glucoseLevel;
+                    this.timestampArray[i] = response.data[i].measurementId.timestamp;
+                }
+
+
+
+
+            }).catch((error) => console.log(error));
         },
         data(){
             return{
                 glucoseArray: [],
-                timestampArray:[]
+                timestampArray:[],
+                average: 0.0,
+                variance: 0.0
             }
+        },
+        mounted(){
+            console.log('We got it mounted boys')
+            const ctx = document.getElementById('glucoseChart');
+            const glucoseChart = new Chart(ctx,{
+                type: 'line',
+                data: {
+                    labels: this.timestampArray,
+                    datasets: [{
+                        label: 'datasetTesting',
+                        data: this.glucoseArray,
+                        borderColor: ['rgb(75, 192, 192)'],
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            glucoseChart;
+
         }
-    }
+    };
 </script>
 
-data(){
-            return {
-                labels: [],
-                datasets: [
-                    {
-                        datapoint: null
-                    }
-                ]
-            }
-        },
-        computed:{
-            labeldata: function(){
-                return this.labels;
-            },
-            chartData: function(){
-                return this.datasets;
-            }
-        },
-        methods: {
-            renderLineChart:function(){
-                this.renderChart(
-                    {
-                        labels: this.labeldata,
 
-                    }
-                )
-            }
-        }
 
 
 
