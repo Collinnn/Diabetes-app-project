@@ -1,7 +1,7 @@
 <template>
   <div id="appcontainer">
     <div id="appLayout" v-if="app.loggedIn||app.loggedInasDoctor||app.loggedInasAdmin">
-      <Topbar @showDropdown="showDropdown.isVisible=!showDropdown.isVisible" @darkMode="toggleDarkmode()" />
+      <Topbar :app="app" @showDropdown="showDropdown.isVisible=!showDropdown.isVisible" @darkMode="toggleDarkmode()" @logOut="logOut()" />
       <Sidebar v-if="app.loggedIn" />
       <AdminSidebar v-if="app.loggedInasAdmin"/>
     </div>

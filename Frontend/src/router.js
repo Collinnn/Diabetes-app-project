@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 
 import overview from './views/overview.vue'
+import doctor from './views/doctor.vue'
 import food from './views/food.vue'
 import landing from './views/landing.vue'
 import patientLogin from './views/patientLogin.vue'
@@ -67,6 +68,14 @@ const routes = [{
         path: '/user',
         component: user,
         name: 'user',
+        meta: {
+            requiredLoggedIn: true
+        }
+    },
+    {
+        path: '/doctor',
+        component: doctor,
+        name: 'doctor',
         meta: {
             requiredLoggedIn: true
         }
