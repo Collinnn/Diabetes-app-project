@@ -9,7 +9,14 @@
 
 export default {
     name: "overviewPage",
-    emits: ['logIn']
+    emits: ['logIn'],
+    props:{
+        User:{
+            id:Number,
+            Name:String,
+            Doctor:String,
+        }
+    }
 
 }
 </script>

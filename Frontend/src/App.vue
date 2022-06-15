@@ -7,7 +7,7 @@
 
     <div id="app">
       <router-link to='/'></router-link>
-      <router-view @logIn="logIn()" />
+      <router-view :User="User" @logIn="logIn()" />
     </div>
 
     <div id=showDropdown v-if="showDropdown.isVisible">
@@ -41,6 +41,11 @@ export default {
         },
         app:{
           loggedIn: loggedInStatus.getStatus
+        },
+        User:{
+            id: 0,
+            Name: "Full name",
+            Doctor:"Doctor name",
         },
         darktheme: null,
       }

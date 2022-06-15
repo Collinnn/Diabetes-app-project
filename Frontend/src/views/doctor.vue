@@ -7,7 +7,14 @@
 <script>
 export default {
     name: "doctorPage",
-    emits: ['logIn']
+    emits: ['logIn'],
+    props:{
+        User:{
+            id:Number,
+            Name:String,
+            Doctor:String,
+        }
+    }
 }
 
 </script>

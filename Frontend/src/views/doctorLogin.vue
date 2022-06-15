@@ -15,6 +15,13 @@ import router from "@/router"
 export default {
         name: 'login-doctor',
         emits: ['logIn'],
+        props:{
+            User:{
+                id:Number,
+                Name:String,
+                Doctor:String,
+            }
+        },
         data() {
             return {
                 input: {

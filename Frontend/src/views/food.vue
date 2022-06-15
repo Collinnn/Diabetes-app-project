@@ -6,7 +6,14 @@
 <script>
 export default {
     name: "foodPage",
-    emits: ['logIn']
+    emits: ['logIn'],
+    props:{
+        User:{
+            id:Number,
+            Name:String,
+            Doctor:String,
+        }
+    }
 }
 
 </script>

@@ -15,6 +15,13 @@
 export default {
     name: 'adminLogin',
     emits: ['logIn'],
+    props:{
+        User:{
+            id:Number,
+            Name:String,
+            Doctor:String,
+        }
+    },
     data() {
         return {
             username: "",
