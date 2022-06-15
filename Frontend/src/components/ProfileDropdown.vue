@@ -1,6 +1,16 @@
 <template>
     <div class ="profile dropdown">
-        <div id="settingsMenu" v-if="loggedIn">
+        <div id="settingsMenu" v-if="this.app.loggedIn">
+            <button class="settingsButton" @click="goToPage('user')"> View profile </button>
+            <button class="settingsButton" @click="goToPage('changePassword')"> Change password </button>
+            <button class="settingsButton" @click="logOut('landing')"> Log out </button>
+        </div>
+        <div id="settingsMenu" v-if="this.app.loggedInasDoctor">
+            <button class="settingsButton" @click="goToPage('user')"> View profile </button>
+            <button class="settingsButton" @click="goToPage('changePassword')"> Change password </button>
+            <button class="settingsButton" @click="logOut('landing')"> Log out </button>
+        </div>
+        <div id="settingsMenu" v-if="this.app.loggedInasAdmin">
             <button class="settingsButton" @click="goToPage('user')"> View profile </button>
             <button class="settingsButton" @click="goToPage('changePassword')"> Change password </button>
             <button class="settingsButton" @click="logOut('landing')"> Log out </button>

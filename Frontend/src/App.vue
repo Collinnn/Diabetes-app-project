@@ -1,8 +1,9 @@
 <template>
   <div id="appcontainer">
-    <div id="appLayout" v-if="app.loggedIn">
+    <div id="appLayout" v-if="app.loggedIn||app.loggedInasDoctor||app.loggedInasAdmin">
       <Topbar @showDropdown="showDropdown.isVisible=!showDropdown.isVisible" @darkMode="toggleDarkmode()" />
-      <AdminSidebar />
+      <Sidebar v-if="app.loggedIn" />
+      <AdminSidebar v-if="app.loggedInasAdmin"/>
     </div>
 
     <div id="app">
@@ -11,13 +12,14 @@
     </div>
 
     <div id=showDropdown v-if="showDropdown.isVisible">
-        <ProfileDropdown @logOut="logOut()"/>
+        <ProfileDropdown app:app @logOut="logOut()"/>
     </div>
   </div>
 </template>
 
 <script>
 import Topbar from "./components/Topbar.vue"
+import Sidebar from "./components/Sidebar.vue"
 import AdminSidebar from "./components/AdminSidebar.vue"
 import ProfileDropdown from "./components/ProfileDropdown.vue"
 import {loggedInStatus} from "./variables.js"
@@ -25,6 +27,7 @@ export default {
     name: 'App',  
     components: {
     Topbar,
+    Sidebar,
     AdminSidebar,
     ProfileDropdown
     },
@@ -56,14 +59,17 @@ export default {
       logIn(){
         this.app.loggedIn = true
         loggedInStatus.setUserLoggedIn = true;
+        console.log(this.app.loggedIn)
       },
       logInDoctor(){
         this.app.loggedInasDoctor = true
         loggedInStatus.setDoctorLoggedIn = true;
+        console.log(this.app.loggedInasDoctor)
       },
       logInAdmin(){
         this.app.loggedInasAdmin = true
         loggedInStatus.setAdminLoggedIn = true;
+        console.log(this.app.loggedInasAdmin)
       },
       logOut(){
         this.showDropdown.isVisible = false;

@@ -53,7 +53,7 @@ export default {
                     console.log("Username and/or password was empty");
             }
         },lazy(){
-            this.$emit('logIn');
+            this.$emit('logInasDoctor');
             router.push({name: "overview"});
         }
 
