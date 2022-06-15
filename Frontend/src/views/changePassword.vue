@@ -29,7 +29,7 @@ let numbers = /\d/
 
 export default {
     name: "changePasswordPage",
-    emits: ['logIn'],
+    emits: ['logIn','logInasDoctor','logInasAdmin'],
     props:{
         User:{
             id:Number,

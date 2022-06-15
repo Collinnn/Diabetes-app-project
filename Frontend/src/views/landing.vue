@@ -17,7 +17,7 @@ import router from "@/router"
 
 export default {
     name: "landingPage",
-    emits: ['logIn'],
+    emits: ['logIn','logInasDoctor','logInasAdmin'],
     props:{
         User:{
             id:Number,

@@ -116,7 +116,7 @@ router.beforeEach((to) => {
             return { name: 'landing' }
         }
     } else if (to.matched.some(route => !route.meta.requiredLoggedIn)) {
-        if (loggedInStatus.getStatus) {
+        if (loggedInStatus.getUserStatus || loggedInStatus.getDocterStatus || loggedInStatus.getAdminStatus) {
             return { name: 'overview' }
         }
     }

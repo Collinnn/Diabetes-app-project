@@ -1,12 +1,30 @@
 const loggedInStatus = {
     isLoggedIn: false,
+    isLoggedInasDoctor: false,
+    isLoggedInasAdmin: false,
 
-    get getStatus() {
+    get getUserStatus() {
         return this.isLoggedIn
     },
 
-    set setLoggedIn(val) {
+    get getDoctorStatus() {
+        return this.isLoggedInasDoctor
+    },
+
+    get getAdminStatus() {
+        return this.isLoggedInasAdmin
+    },
+
+    set setUserLoggedIn(val) {
         this.isLoggedIn = val
+    },
+
+    set setDoctorLoggedIn(val) {
+        this.isLoggedInasDoctor = val
+    },
+
+    set setAdminLoggedIn(val) {
+        this.isLoggedInasAdmin = val
     }
 }
 

@@ -7,7 +7,7 @@
 <script>
 export default {
     name: "doctorPage",
-    emits: ['logIn'],
+    emits: ['logIn','logInasDoctor','logInasAdmin'],
     props:{
         User:{
             id:Number,

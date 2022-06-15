@@ -14,7 +14,7 @@
 
 export default {
     name: 'adminLogin',
-    emits: ['logIn'],
+    emits: ['logIn','logInasDoctor','logInasAdmin'],
     props:{
         User:{
             id:Number,
@@ -33,7 +33,7 @@ export default {
             if (this.username == "admin" && this.password == "admin") {
                 console.log("Logged in succesfully")
                 this.$router.push("addPatient");
-                this.$emit('logIn');
+                this.$emit('logInasAdmin');
             }
         }
     }
