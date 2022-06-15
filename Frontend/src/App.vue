@@ -12,7 +12,7 @@
     </div>
 
     <div id=showDropdown v-if="showDropdown.isVisible">
-        <ProfileDropdown app:app @logOut="logOut()"/>
+        <ProfileDropdown :app="app" @logOut="logOut()"/>
     </div>
   </div>
 </template>
@@ -73,8 +73,12 @@ export default {
       },
       logOut(){
         this.showDropdown.isVisible = false;
-        this.app.loggedIn = false
-        loggedInStatus.setLoggedIn = false;
+        this.app.loggedIn = false;
+        loggedInStatus.setUserLoggedIn = false;
+        this.app.loggedInasDoctor = false
+        loggedInStatus.setDoctorLoggedIn = false;
+        this.app.loggedInasAdmin = false
+        loggedInStatus.setAdminLoggedIn = false;
       },
       toggleDarkmode: function(){
           if(this.darktheme){

@@ -22,7 +22,7 @@
             </div>
 
             <div id = "rightbutton">
-                <button class = "topbarButton" id = "userButton" @click="this.$emit('showDropdown')">
+                <button class = "topbarButton" id = "userButton" @click="showDropdown()">
                     <svg class="icon" id="userIcon"></svg>
                 </button>
             </div>
@@ -73,9 +73,13 @@
             } else {
                 this.darkMode = true;
             }
-        },
+            },
+            showDropdown(){
+                this.$emit('showDropdown')
+                console.log("Trying to display dropdown")
+            },
+        }
     }
-}
 </script>
 
 <style scoped>
