@@ -2,7 +2,7 @@
     <title> Doctor site </title>
     <Topbar />
     <div class="viewContainer">
-        <router-view @logIn="logIn()"/>
+        <router-view name="doctorSite"> </router-view>
     </div>
 </template>
 

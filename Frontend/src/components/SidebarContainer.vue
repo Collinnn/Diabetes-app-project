@@ -12,7 +12,7 @@ export default {
     name: 'SidebarMenu',
     data() {
         return {
-            title: 'Sidebar'
+            title: 'SidebarContainer'
         }
     }
 }

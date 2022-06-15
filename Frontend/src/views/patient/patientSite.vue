@@ -3,7 +3,7 @@
     <Topbar />
     <PatientSidebar />
     <div class="viewContainer">
-        <router-view @logIn="logIn()"/>
+        <router-view name="patientSite"> </router-view>
     </div>
 </template>
 

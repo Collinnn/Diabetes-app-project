@@ -1,32 +1,27 @@
 <template>
-  <div id="appLayout" v-if="app.loggedIn">
-    <PatientSite v-if="user.type == 'patient'"/>
-    <DoctorSite v-else-if="user.type == 'doctor'"/>
-    <AdminSite v-else-if="user.type == 'admin'" />
-
-  </div>
-
-    <!-- Move this to the topbar @Zwinge -->
-    <div id=showDropdown v-if="showDropdown.isVisible">
-        <ProfileDropdown @logOut="logOut()"/>
+    <div id="app">
+        <router-view @logIn="logIn()" />
+        <router-view name="patientSite" v-if="app.loggedIn" />
+        <router-view name="doctorSite" v-else-if="app.loggedInAsDoctor" />
+        <router-view name="adminSite" v-else-if="app.loggedInAsAdmin" />
+        <!-- Move this to the topbar @Zwinge -->
+        <div id=showDropdown v-if="showDropdown.isVisible">
+            <ProfileDropdown @logOut="logOut()"/>
+        </div>
     </div>
+    
 
 </template>
 
 <script>
 import ProfileDropdown from "./components/ProfileDropdown.vue"
 import {loggedInStatus} from "./globals.js"
-import PatientSite from "@/views/patient/patientSite.vue"
-import DoctorSite from "@/views/doctor/doctorSite.vue"
-import AdminSite from "@/views/admin/adminSite.vue"
+
 
 export default {
     name: 'App',  
     components: {
-      ProfileDropdown,
-      PatientSite,
-      DoctorSite,
-      AdminSite
+      ProfileDropdown
     },
     //Remember theme of the user
     mounted() {
@@ -42,10 +37,7 @@ export default {
         app:{
           loggedIn: loggedInStatus.getStatus
         },
-        darktheme: null,
-        user: {
-          type: 'patient'
-        }
+        darktheme: null
       }
     },
     methods:{
@@ -101,8 +93,11 @@ export default {
 }
 </script>
 
-<style scoped>
-#appLayout {
+<style>
+#app {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   -webkit-font-smoothing: antialiased;
@@ -111,18 +106,11 @@ export default {
   color: var(--text-color);
   background-color: var(--primary-color);
 }
-#appViews {
+
+.viewContainer { /* Applies to all viewContainers (in all views) */
   position: relative;
   top: 50px;
-  left: 150px;
-  right: 0;
-  bottom: 0;
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  
-  
+  left: 130px;
 }
-
-
-
 
 </style>

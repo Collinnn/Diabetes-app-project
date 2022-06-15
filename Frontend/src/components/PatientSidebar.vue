@@ -1,5 +1,5 @@
 <template >
-    <Sidebar>
+    <SidebarContainer>
         <div id="sidebarWrapper"> 
             <button title="Overview" class="sidebar-button" id="overviewButton" @click="$router.push('overview')"> 
                 <svg class="icon" id="overviewIcon"></svg>
@@ -8,16 +8,16 @@
                 <svg class="icon" id="foodIcon"></svg>
             </button>
         </div>      
-    </Sidebar>
+    </SidebarContainer>
 </template>
 
 
 <script>
-import Sidebar from "./Sidebar.vue"
+import SidebarContainer from "./SidebarContainer.vue"
 
 export default {
         name: 'patientSidebar',
-        components: { Sidebar },
+        components: { SidebarContainer },
         emits: ['logIn'],
         data() {
             return {

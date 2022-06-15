@@ -1,5 +1,5 @@
 <template>
-    <Sidebar style="max-width: 200px; min-width: 150px;">
+    <SidebarContainer style="max-width: 200px; min-width: 150px;">
         <div class="sidebar-wrapper">
             <DropdownMenu id="patientsMenu" title="Patients" :items="[
                 {itemId: 'viewPatients', title: 'View patients', onClick: () => $router.push('patients')},
@@ -14,11 +14,11 @@
                 @selected="(itemId) => selectedMenuItemId=itemId"
             />
         </div>
-    </Sidebar>
+    </SidebarContainer>
 </template>
 
 <script>
-import Sidebar from "./Sidebar.vue"
+import SidebarContainer from "./SidebarContainer.vue"
 import DropdownMenu from "./DropdownMenu"
 
 export default {
@@ -29,7 +29,7 @@ export default {
         }
     },
     components: { 
-        Sidebar,
+        SidebarContainer,
         DropdownMenu
     },
     watch: {

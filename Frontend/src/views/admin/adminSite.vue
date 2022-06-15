@@ -3,7 +3,7 @@
     <Topbar />
     <AdminSidebar />
     <div class="viewContainer">
-      <router-view @logIn="logIn()"/>
+      <router-view />
     </div>
 </template>
 

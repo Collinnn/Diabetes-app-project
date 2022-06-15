@@ -27,7 +27,7 @@ export default {
                 console.log(password);
                 if(password == this.input.password){
                     console.log("Logged in succesfully")
-                    this.$router.push({name: "overview"});
+                    this.$router.push("patientSite");
                     this.$emit('logIn');
                 }else{
                     console.log("username and/or password was wrong");
@@ -47,7 +47,7 @@ export default {
         },
         lazy(){
             this.$emit('logIn');
-            this.$router.push({name: "overview"});
+            this.$router.push("patientSite");
         }
 
     }

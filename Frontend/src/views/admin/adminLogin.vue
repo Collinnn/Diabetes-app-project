@@ -25,8 +25,11 @@ export default {
         login() {
             if (this.username == "admin" && this.password == "admin") {
                 console.log("Logged in succesfully")
-                this.$router.push("addPatient");
+                this.$router.push("adminSite");
                 this.$emit('logIn');
+            }
+            else {
+                console.log("Invalid username and/or password")
             }
         }
     }
