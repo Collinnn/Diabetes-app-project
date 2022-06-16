@@ -17,14 +17,6 @@
 <script>
     export default {
         name: "ProfileDropdown",
-        emits:['logOut'],
-        props:{
-            app:{
-                loggedIn:Boolean,
-                loggedInasDoctor:Boolean,
-                loggedInasAdmin:Boolean
-            }
-        },
         methods: {
             goToPage(pageName) {
                 this.$router.push({ name: pageName})

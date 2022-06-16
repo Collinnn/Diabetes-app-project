@@ -1,14 +1,14 @@
 <template>
     <title>Graph page</title>
     <div>
-        <h1>Overview Page</h1>
+        <h1>Graph Page</h1>
     </div>    
 </template>
 
 <script>
 
 export default {
-    name: "overviewPage"
+    name: "graphPage"
 }
 </script>
 

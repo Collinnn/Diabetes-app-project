@@ -16,14 +16,6 @@
 
 export default {
     name: "landingPage",
-    emits: ['logIn','logInasDoctor','logInasAdmin'],
-    props:{
-        User:{
-            id:Number,
-            Name:String,
-            Doctor:String,
-        }
-    },
     data() {
         return{
             title:'landingPage'

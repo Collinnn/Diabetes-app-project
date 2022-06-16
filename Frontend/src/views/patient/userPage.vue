@@ -1,10 +1,11 @@
 <template>
-    <title>Doctor Page</title>
+    <title>User Page</title>
     <div class="content">
         <div id="container">
-            <h3>Doctor Page</h3>
-            <div id="id">Doctor id: {{this.User.id}}</div>
-            <div id="id">Doctor name: {{this.User.Name}}</div>
+            <h3>User Page</h3>
+            <div id="id">User id: </div>
+            <div id="id">User name: </div>
+            <div id="id">Doctor's name:</div>
             <button class="settingsButton" @click="goToPage('changePassword')"> Change password </button>
         </div>
     </div>
@@ -12,21 +13,12 @@
 
 
 <script>
-import router from "@/router"
 
 export default {
-    name: "doctorPage",
-    emits: ['logIn','logInasDoctor','logInasAdmin'],
-    props:{
-        User:{
-            id:Number,
-            Name:String,
-            Doctor:String,
-        }
-    },
+    name: "userPage",
     methods:{
         goToPage(pageName) {
-            router.push({ name: pageName})
+            this.$router.push({ name: pageName})
         }
     }
 }

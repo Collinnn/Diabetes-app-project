@@ -29,14 +29,6 @@ let numbers = /\d/
 
 export default {
     name: "changePasswordPage",
-    emits: ['logIn','logInasDoctor','logInasAdmin'],
-    props:{
-        User:{
-            id:Number,
-            Name:String,
-            Doctor:String,
-        }
-    },
     data(){
         return{
             form:{

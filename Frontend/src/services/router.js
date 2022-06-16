@@ -4,18 +4,22 @@ import landing from '@/views/landing.vue'
 import patientLogin from '@/views/patient/patientLogin.vue'
 import doctorLogin from '@/views/doctor/doctorLogin.vue'
 import adminLogin from '@/views/admin/adminLogin.vue'
+
 import patientSite from '@/views/patient/patientSite.vue'
-import overview from '@/views/patient/overview.vue'
-import food from '@/views/patient/food.vue'
-import userView from '@/views/userView.vue'
-import changePassword from '@/views/patient/changePassword.vue'
+import graphPage from '@/views/patient/graphPage.vue'
+import mealPage from '@/views/patient/mealPage.vue'
+import userPage from '@/views/patient/userPage.vue'
+import changePasswordPage from '@/views/patient/changePasswordPage.vue'
+
 import doctorSite from '@/views/doctor/doctorSite.vue'
+import doctorPage from '@/views/doctor/doctorPage.vue'
+
 import adminSite from '@/views/admin/adminSite.vue'
-import addPatient from '@/views/admin/addPatient.vue'
-import addDoctor from '@/views/admin/addDoctor.vue'
+import addPatientPage from '@/views/admin/addPatientPage.vue'
+import addDoctorPage from '@/views/admin/addDoctorPage.vue'
+
 import pageNotFound from '@/views/pageNotFound.vue'
 
-import { loggedInStatus } from "@/globals.js"
 import UserController from "@/globals.js"
 
 
@@ -54,7 +58,7 @@ const routes = [
     },
     {
         path: '/patient',
-        redirect: { name: 'overview' },
+        redirect: { name: 'graph' },
         component: patientSite,
         name: 'patientSite',
         meta: {
@@ -62,36 +66,24 @@ const routes = [
         },
         children: [
             {
-                path: 'overview',
-                component: overview,
-                name: 'overview',
-                meta: {
-                    requiredLoggedIn: true
-                }
+                path: 'graph',
+                component: graphPage,
+                name: 'graph'
             },
             {
-                path: 'food',
-                component: food,
-                name: 'food',
-                meta: {
-                    requiredLoggedIn: true
-                }
+                path: 'meal',
+                component: mealPage,
+                name: 'meal'
             },
             {
                 path: 'user',
-                component: userView,
-                name: 'user',
-                meta: {
-                    requiredLoggedIn: true
-                }
+                component: userPage,
+                name: 'user'
             },
             {
                 path: 'changePassword',
-                component: changePassword,
-                name: 'changePassword',
-                meta: {
-                    requiredLoggedIn: true
-                }
+                component: changePasswordPage,
+                name: 'changePassword'
             },
         ]
     },
@@ -103,7 +95,11 @@ const routes = [
             requiredLoggedIn: true
         },
         children: [
-
+            {
+                path: 'user',
+                component: doctorPage,
+                name: "doctor",
+            }
         ]
     },
     {
@@ -117,19 +113,13 @@ const routes = [
         children: [
             {
                 path: 'addPatient',
-                component: addPatient,
-                name: 'addPatient',
-                meta: {
-                    requiredLoggedIn: true
-                }
+                component: addPatientPage,
+                name: 'addPatient'
             },
             {
                 path: 'addDoctor',
-                component: addDoctor,
-                name: 'addDoctor',
-                meta: {
-                    requiredLoggedIn: true
-                }
+                component: addDoctorPage,
+                name: 'addDoctor'
             }
         ]
     },
@@ -150,11 +140,10 @@ const router = createRouter({
 
 router.beforeEach((to) => {
     if (to.matched.some(route => route.meta.requiredLoggedIn)) {
-        if (!loggedInStatus.getStatus) {
+        if (!UserController.isUserLoggedIn()) {
             return { name: 'landing' }
         }
     } else if (to.matched.some(route => !route.meta.requiredLoggedIn)) {
-        console.log(UserController.getUserType())
         if (UserController.getUserType() == "patient") {
             return { name: 'patientSite' }
         }

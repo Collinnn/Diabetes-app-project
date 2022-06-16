@@ -7,24 +7,24 @@ export default class UserController {
         return user.isLoggedIn
     }
 
-    static setUserLoggedIn(loggedIn) {
-        user.isLoggedIn = loggedIn
+    static logIn(userType, userData) {
+        user.isLoggedIn = true
+        user.setType(userType)
+        user.setData(userData)
+    }
+
+    static logOut() {
+        user.isLoggedIn = false
+        user.setType("")
+        user.setData(null)
     }
 
     static getUserType() {
         return user.getType()
     }
 
-    static setUserType(userType) {
-        user.setType(userType)
-    }
-
     static getUserData() {
         return user.getData()
-    }
-
-    static setUserData(userData) {
-        user.setData(userData)
     }
 
 }

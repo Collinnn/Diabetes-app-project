@@ -1,7 +1,7 @@
 <template>
     <div class ="topbar">
         <div class = "leftElement">
-            <button class = "topbarButton" id = "homeButton" @click="goToPage('overview')">
+            <button class = "topbarButton" id = "homeButton" @click="this.$router.push('/')">
                 <svg class="icon" id="homeIcon"></svg>
             </button>
             DiAPPbetes
@@ -22,7 +22,7 @@
             </div>
 
             <div id = "rightbutton">
-                <button class = "topbarButton" id = "userButton" v-if="!this.app.loggedInasAdmin" @click="showDropdown()">
+                <button class = "topbarButton" id = "userButton" v-if="!(this.$userController.getUserType() == 'admin')" @click="showDropdown()">
                     <svg class="icon" id="userIcon"></svg>
                 </button>
                 <div id = "admin" v-else>
@@ -39,14 +39,7 @@
 <script>
     export default {
         name: "TopbarMenu",
-        emits:['darkMode','showDropdown','logOut'],
-        props:{
-            app:{
-                loggedIn:Boolean,
-                loggedInasDoctor:Boolean,
-                loggedInasAdmin:Boolean
-            }
-        },
+        emits:['darkMode','showDropdown'],
         data() {
             return {
                 title: 'Sidebar',
@@ -87,8 +80,8 @@
                 console.log("Trying to display dropdown")
             },
             logOut(pageName){
-                router.push({name: pageName});
-                this.$emit('logOut');
+                this.$router.push({name: pageName});
+                this.$userController.logOut()
             },
         }
     }

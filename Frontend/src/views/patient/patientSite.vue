@@ -13,7 +13,6 @@ import PatientSidebar from '@/components/PatientSidebar'
 
 export default {
     name: "patientSite",
-    emits: ['logIn'],
     components: { Topbar, PatientSidebar }
     
 }

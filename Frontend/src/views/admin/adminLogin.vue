@@ -14,14 +14,6 @@
 
 export default {
     name: 'adminLogin',
-    emits: ['logIn','logInasDoctor','logInasAdmin'],
-    props:{
-        User:{
-            id:Number,
-            Name:String,
-            Doctor:String,
-        }
-    },
     data() {
         return {
             username: "",
@@ -33,7 +25,7 @@ export default {
             if (this.username == "admin" && this.password == "admin") {
                 console.log("Logged in succesfully")
                 this.$router.push("adminSite");
-                this.$user.setUserType("admin")
+                this.$userController.logIn("admin", null)
             }
             else {
                 console.log("Invalid username and/or password")

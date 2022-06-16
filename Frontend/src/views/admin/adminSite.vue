@@ -13,7 +13,6 @@ import AdminSidebar from '@/components/AdminSidebar'
 
 export default {
     name: "adminSite",
-    emits: ['logIn'],
     components: { Topbar, AdminSidebar }
 }
 </script>

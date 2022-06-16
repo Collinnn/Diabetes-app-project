@@ -1,11 +1,11 @@
 <template >
     <SidebarContainer>
         <div id="sidebarWrapper"> 
-            <button title="Overview" class="sidebar-button" id="overviewButton" @click="$router.push({name: 'overview'})"> 
-                <svg class="icon" id="overviewIcon"></svg>
+            <button title="Graph" class="sidebar-button" id="graphButton" @click="$router.push({name: 'graph'})"> 
+                <svg class="icon" id="graphIcon"></svg>
             </button>
-            <button title="Meals" class="sidebar-button" id="foodButton" @click="$router.push({name: 'food'})">
-                <svg class="icon" id="foodIcon"></svg>
+            <button title="Meals" class="sidebar-button" id="mealButton" @click="$router.push({name: 'meal'})">
+                <svg class="icon" id="mealIcon"></svg>
             </button>
         </div>      
     </SidebarContainer>
@@ -17,13 +17,7 @@ import SidebarContainer from "./SidebarContainer.vue"
 
 export default {
         name: 'patientSidebar',
-        components: { SidebarContainer },
-        emits: ['logIn'],
-        data() {
-            return {
-                title: 'PatientSidebar'
-            }
-        }
+        components: { SidebarContainer }
     }
 </script>
 
@@ -58,15 +52,11 @@ export default {
     width: 60px;
     height: 60px;
 }
-#overviewIcon {
+#graphIcon {
     background: url('@/assets/Graph.svg') no-repeat center;
 }
-#foodIcon {
+#mealIcon {
     background: url('@/assets/Food.svg') no-repeat center;
 }
-#doctorIcon {
-    background: url('@/assets/Doctor.svg') no-repeat center;
-}
-
 
 </style>

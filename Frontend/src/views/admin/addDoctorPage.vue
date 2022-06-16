@@ -11,14 +11,6 @@ import DoctorForm from '@/components/DoctorForm.vue'
 
 export default {
     name: "adminPage",
-    emits: ['logIn','logInasDoctor','logInasAdmin'],
-    props:{
-        User:{
-            id:Number,
-            Name:String,
-            Doctor:String,
-        }
-    },
     components: {
         DoctorForm
     }
