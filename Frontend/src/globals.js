@@ -1,6 +1,6 @@
-import User from "./services/user"
+import UserController from "./services/userController.js"
 
-const user = new User()
+export default UserController
 
 const loggedInStatus = {
     isLoggedIn: false,
@@ -15,4 +15,4 @@ const loggedInStatus = {
     }
 }
 
-export { loggedInStatus, user }
+export { loggedInStatus }

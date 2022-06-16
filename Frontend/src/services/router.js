@@ -16,7 +16,7 @@ import addDoctor from '@/views/admin/addDoctor.vue'
 import pageNotFound from '@/views/pageNotFound.vue'
 
 import { loggedInStatus } from "@/globals.js"
-import {user} from "@/globals.js"
+import UserController from "@/globals.js"
 
 
 const routes = [
@@ -154,14 +154,14 @@ router.beforeEach((to) => {
             return { name: 'landing' }
         }
     } else if (to.matched.some(route => !route.meta.requiredLoggedIn)) {
-        console.log(user.getUserType())
-        if (user.getUserType() == "patient") {
+        console.log(UserController.getUserType())
+        if (UserController.getUserType() == "patient") {
             return { name: 'patientSite' }
         }
-        else if (user.getUserType() == "doctor") {
+        else if (UserController.getUserType() == "doctor") {
             return { name: 'doctorSite' }
         }
-        else if (user.getUserType() == "admin") {
+        else if (UserController.getUserType() == "admin") {
             return { name: 'adminSite' }
         }
     }

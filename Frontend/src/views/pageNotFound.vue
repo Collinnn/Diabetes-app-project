@@ -6,7 +6,7 @@
 <script>
 export default {
     name: "pageNotFound",
-    emits: ['logIn']
+    emits: ["logIn"]
 }
 
 </script>
