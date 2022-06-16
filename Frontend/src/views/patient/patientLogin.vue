@@ -13,7 +13,14 @@
 <script>
 export default {
         name: 'login-patient',
-        emits: ['logIn'],
+        emits: ['logIn','logInasDoctor','logInasAdmin'],
+        props:{
+            User:{
+                id:Number,
+                Name:String,
+                Doctor:String,
+            }
+        },
         data() {
             return {
                 input: {

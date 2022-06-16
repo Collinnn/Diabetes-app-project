@@ -13,7 +13,14 @@
 <script>
 export default {
         name: 'login-doctor',
-        emits: ['logIn'],
+        emits: ['logIn','logInasDoctor','logInasAdmin'],
+        props:{
+            User:{
+                id:Number,
+                Name:String,
+                Doctor:String,
+            }
+        },
         data() {
             return {
                 input: {
@@ -28,7 +35,6 @@ export default {
                 if(password == this.input.password){
                     console.log("Logged in succesfully")
                     this.$router.push({name: "doctorSite"});
-                    this.$emit('logIn');
                     this.$user.setUserType("doctor")
                 }else{
                     console.log("username and/or password was wrong");
@@ -46,7 +52,6 @@ export default {
                     console.log("Username and/or password was empty");
             }
         },lazy(){
-            this.$emit('logIn');
             this.$router.push({name: "doctorSite"});
             this.$user.setUserType("doctor")
         }

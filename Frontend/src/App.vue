@@ -1,18 +1,15 @@
 <template>
     <div id="app">
-        <router-view @logIn="logIn()" />
+        <router-view />
         <!-- Move this to the topbar @Zwinge -->
         <div id=showDropdown v-if="showDropdown.isVisible">
-            <ProfileDropdown @logOut="logOut()"/>
+            <ProfileDropdown />
         </div>
     </div>
-    
-
 </template>
 
 <script>
 import ProfileDropdown from "./components/ProfileDropdown.vue"
-import {loggedInStatus} from "./globals.js"
 
 
 export default {
@@ -31,23 +28,11 @@ export default {
         showDropdown:{
           isVisible: false
         },
-        app:{
-          loggedIn: loggedInStatus.getStatus
-        },
         darktheme: null
       }
     },
-    methods:{
-      logIn(){
-        this.app.loggedIn = true
-        loggedInStatus.setLoggedIn = true;
-      },
-      logOut(){
-        this.showDropdown.isVisible = false;
-        this.app.loggedIn = false
-        loggedInStatus.setLoggedIn = false;
-      },
-      toggleDarkmode: function(){
+    methods: {
+      toggleDarkmode() {
           if(this.darktheme){
             console.log("dark-theme");
             this.darktheme=false; 

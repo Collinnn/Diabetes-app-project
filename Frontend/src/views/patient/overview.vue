@@ -8,8 +8,7 @@
 <script>
 
 export default {
-    name: "overviewPage",
-    emits: ['logIn']
+    name: "overviewPage"
 }
 </script>
 

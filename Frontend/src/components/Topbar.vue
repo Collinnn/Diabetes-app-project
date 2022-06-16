@@ -22,9 +22,13 @@
             </div>
 
             <div id = "rightbutton">
-                <button class = "topbarButton" id = "userButton" @click="this.$emit('showDropdown')">
+                <button class = "topbarButton" id = "userButton" v-if="!this.app.loggedInasAdmin" @click="showDropdown()">
                     <svg class="icon" id="userIcon"></svg>
                 </button>
+                <div id = "admin" v-else>
+                    <h3>Logged in as admin</h3>
+                    <button class="logoutButton" @click="logOut('landing')"> Log out </button>
+                </div>
             </div>
 
         </div>
@@ -34,8 +38,15 @@
 
 <script>
     export default {
-        emits:['darkMode','showDropdown'],
         name: "TopbarMenu",
+        emits:['darkMode','showDropdown','logOut'],
+        props:{
+            app:{
+                loggedIn:Boolean,
+                loggedInasDoctor:Boolean,
+                loggedInasAdmin:Boolean
+            }
+        },
         data() {
             return {
                 title: 'Sidebar',
@@ -70,9 +81,17 @@
             } else {
                 this.darkMode = true;
             }
-        },
+            },
+            showDropdown(){
+                this.$emit('showDropdown')
+                console.log("Trying to display dropdown")
+            },
+            logOut(pageName){
+                router.push({name: pageName});
+                this.$emit('logOut');
+            },
+        }
     }
-}
 </script>
 
 <style scoped>
