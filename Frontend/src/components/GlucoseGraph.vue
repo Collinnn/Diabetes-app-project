@@ -17,13 +17,16 @@
         data(){
             return{
                 glucoseArray: [],
-                timestampArray:[]
+                timestampArray:[],
+                timer:null
             }
         },
         async mounted(){
             console.log('We got it mounted boys')
-            console.log(document.getElementById('app').style.getPropertyValue("--primary-color"))
-            console.log(document.getElementById('app').style.getPropertyValue("--text-color"))
+            this.timer=setInterval(()=>{
+                console.log('We made it in boys')
+                this.updateChart()
+            }, 30)
             await this.axios.get(this.$backend.getUrlGetMeasurementsFromPatientById(1))
             .then(response =>{
                 let tmpDate;
@@ -38,6 +41,7 @@
                 }
                 this.glucoseArray.reverse();
                 this.timestampArray.reverse();
+                console.log("end of graph update");
 
 
 
@@ -99,6 +103,10 @@
                 tmp = date.toISOString().split('T');
                 tmp = tmp[1].split('.');
                 return tmp[0]
+            },
+            updateChart:function (){
+                console.log('Should have updated')
+                this.glucoseChart.update();
             }
         }
     };
