@@ -34,7 +34,8 @@ public class PulseMeasurement {
 				String urlmesurementlength = "http://localhost:8080/api/v1/patients/" + id;
 				
 				Patient result = restTemplate.getForObject(urlmesurementlength, Patient.class);
-				if(!result.getMeasurements().isEmpty()) {
+
+				if(result.getMeasurements() !=null) {
 					length = result.getMeasurements().size();
 				}
 				MeasurementId measurementId = new MeasurementId(ts,id);
