@@ -42,7 +42,6 @@ public class PulseMeasurement {
 				request.getBody().setPatient(patientList.get(j));
 
 				restTemplate.postForObject(url, request, Measurement.class);
-				 
 			}
 			this.i++;
 			
