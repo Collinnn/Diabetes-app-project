@@ -23,10 +23,7 @@
         },
         async mounted(){
             console.log('We got it mounted boys')
-            this.timer=setInterval(()=>{
-                console.log('We made it in boys')
-                this.updateChart()
-            }, 30)
+           
             await this.axios.get(this.$backend.getUrlGetMeasurementsFromPatientById(1))
             .then(response =>{
                 let tmpDate;
@@ -39,12 +36,8 @@
                     this.timestampArray[i] = this.dateToString(this.dateTimeHandling(tmpDate));
                     this.glucoseArray[i] = response.data[i].glucoseLevel;
                 }
-                this.glucoseArray.reverse();
-                this.timestampArray.reverse();
-                console.log("end of graph update");
-
-
-
+                    this.reverseArrays();
+                console.log("end of initial graph");
             }).catch((error) => console.log(error));
             
 
@@ -54,7 +47,7 @@
                 data: {
                     labels: this.timestampArray,
                     datasets: [{
-                        label: 'datasetTesting',
+                        label: 'Last 24 hours',
                         data: this.glucoseArray,
                         borderColor: ['#6295D9'],
                         tension: 0.1
@@ -82,14 +75,34 @@
                     }
                 }
             });
-            glucoseChart;   
+            glucoseChart; 
+            this.timer = setInterval(async()=>{
+                this.reverseArrays();
+                await this.axios.get(this.$backend.getUrlGetMeasurementsFromPatientById(1))
+                .then(response =>{
+
+                    
+
+                   
+                    const tmpDate = response.data[response.data.length-1].measurementId.timestamp;
+                    const tmpdata = response.data[response.data.length-1].glucoseLevel;
+
+                   
+                }).catch((error) => console.log(error));
+                
+                this.glucoseArray[this.glucoseArray.length] =tmpdata;
+                this.timestampArray.push(this.dateToString(this.dateTimeHandling(tmpDate)));
+                this.reverseArrays();
+                
+            },10000) //Every 10 sec     
+
         },
         methods:{
             dateTimeHandling: function(tmpDate){
                 let dateTime = new Date();
                 const [date, time] = tmpDate.split(' ');
                 const [year, month, day] = date.split('-');
-                const[hour, minute, second] = time.split(':')
+                const [hour, minute, second] = time.split(':')
                 dateTime.setUTCFullYear(year);
                 dateTime.setUTCMonth((month-1));
                 dateTime.setUTCDate(day);
@@ -103,10 +116,9 @@
                 tmp = date.toISOString().split('T');
                 tmp = tmp[1].split('.');
                 return tmp[0]
-            },
-            updateChart:function (){
-                console.log('Should have updated')
-                this.glucoseChart.update();
+            },reverseArrays: function(){
+                this.glucoseArray.reverse();
+                this.timestampArray.reverse();
             }
         }
     };
