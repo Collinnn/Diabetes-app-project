@@ -3,19 +3,26 @@
     <div>
         <h1>Overview Page</h1>
         <div class="graph">
-            <GlucoseGraph/>
+            <GraphChart />
         </div>
     </div>    
 </template>
 
 
 <script>
-import GlucoseGraph from '@/components/GlucoseGraph.vue';
+import GraphChart from '@/components/Graph.vue';
 
 export default {
     name: "overviewPage",
     emits: ["logIn"],
-    components: { GlucoseGraph }
+    components: { GraphChart }
 }
 
 </script>
+
+<style>
+.graph {
+    display: flex;
+    justify-content: center;
+}
+</style>

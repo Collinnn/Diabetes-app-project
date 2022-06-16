@@ -46,6 +46,7 @@ export default {
       }
     },
     methods:{
+      
       logIn(){
         this.app.loggedIn = true
         loggedInStatus.setLoggedIn = true;
