@@ -1,10 +1,10 @@
 <template>
     <title> Admin site </title>
-    <Topbar />
-    <AdminSidebar />
     <div class="viewContainer" id="adminViews">
         <router-view />
     </div>
+    <Topbar />
+    <AdminSidebar />
 </template>
 
 <script>

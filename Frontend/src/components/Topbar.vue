@@ -30,20 +30,25 @@
                     <button class="logoutButton" @click="logOut('landing')"> Log out </button>
                 </div>
             </div>
-
         </div>
     </div>
-
+    <div id="showDropdown" v-if="settingsMenu.isVisible" >
+            <ProfileDropdown />
+    </div>
 </template>
 
 <script>
+import ProfileDropdown from "./ProfileDropdown.vue"
+
     export default {
         name: "TopbarMenu",
-        emits:['darkMode','showDropdown'],
+        components: {
+           ProfileDropdown
+        },
         data() {
             return {
-                title: 'Sidebar',
-                darkMode: false, 
+                title: 'Sidebar', 
+                darkMode: this.$userController.getDarkTheme(),
                 settings: [
                     {
                         title: 'Interface settings', 
@@ -68,16 +73,28 @@
                 this.$router.push({name: pageName})
             },
             modeToggle() {
-            this.$emit('darkMode');
+            this.$userController.setDarkTheme(!(this.$userController.getDarkTheme()));
+            this.darkMode = this.$userController.getDarkTheme();
             if(this.darkMode) {
-                this.darkMode = false;
+                console.log("dark-theme");
+                console.log(this.$userController.getDarkTheme())
+                document.getElementById('app').style.setProperty("--primary-color",'#424242');
+                document.getElementById('app').style.setProperty("--secondary-color", '#212121');
+                document.getElementById('app').style.setProperty("--accent-color", '#747474');
+                document.getElementById('app').style.setProperty("--variant-color", '');
+                document.getElementById('app').style.setProperty("--text-color", '#DDDDDD');
             } else {
-                this.darkMode = true;
+                console.log("light-theme");
+                console.log(this.$userController.getDarkTheme())
+                document.getElementById('app').style.setProperty("--primary-color", '#EBEBF2');
+                document.getElementById('app').style.setProperty("--secondary-color",'#6295D9');
+                document.getElementById('app').style.setProperty("--accent-color", '#A0C4F2');
+                document.getElementById('app').style.setProperty("--variant-color", '');
+                document.getElementById('app').style.setProperty("--text-color", '#2c3e50');
             }
             },
             showDropdown(){
-                this.$emit('showDropdown')
-                console.log("Trying to display dropdown")
+                this.settingsMenu.isVisible = !this.settingsMenu.isVisible
             },
             logOut(pageName){
                 this.$router.push({name: pageName});

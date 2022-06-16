@@ -2,6 +2,7 @@ export default class User {
     constructor() {
         this.isLoggedIn = false
         this.type = ""
+        this.darkTheme = null
         this.data = null
     }
 

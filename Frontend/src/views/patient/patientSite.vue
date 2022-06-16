@@ -1,10 +1,10 @@
 <template>
     <title> Patient site </title>
-    <Topbar />
-    <PatientSidebar />
     <div class="viewContainer">
         <router-view />
     </div>
+    <Topbar />
+    <PatientSidebar />
 </template>
 
 <script>

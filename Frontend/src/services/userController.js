@@ -7,6 +7,14 @@ export default class UserController {
         return user.isLoggedIn
     }
 
+    static getDarkTheme() {
+        return user.darkTheme
+    }
+
+    static setDarkTheme(val) {
+        user.darkTheme = val
+    }
+
     static logIn(userType, userData) {
         user.isLoggedIn = true
         user.setType(userType)

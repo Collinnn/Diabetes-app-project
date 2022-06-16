@@ -1,13 +1,13 @@
 <template>
     <div class ="profile dropdown">
-        <div id="settingsMenu" v-if="this.app.loggedIn">
-            <button class="settingsButton" @click="goToPage('user')"> View profile </button>
-            <button class="settingsButton" @click="goToPage('changePassword')"> Change password </button>
+        <div id="settingsMenu" v-if="(this.$userController.getUserType() == 'patient')">
+            <button class="settingsButton" @click="this.$router.push('user')"> View profile </button>
+            <button class="settingsButton" @click="this.$router.push('changePassword')"> Change password </button>
             <button class="settingsButton" @click="logOut('landing')"> Log out </button>
         </div>
-        <div id="settingsMenu" v-if="this.app.loggedInasDoctor">
-            <button class="settingsButton" @click="goToPage('doctor')"> View Doctor profile </button>
-            <button class="settingsButton" @click="goToPage('changePassword')"> Change password </button>
+        <div id="settingsMenu" v-if="(this.$userController.getUserType() == 'doctor')">
+            <button class="settingsButton" @click="this.$router.push('doctor')"> View Doctor profile </button>
+            <button class="settingsButton" @click="this.$router.push('changePassword')"> Change password </button>
             <button class="settingsButton" @click="logOut('landing')"> Log out </button>
         </div>
     </div>
@@ -18,13 +18,9 @@
     export default {
         name: "ProfileDropdown",
         methods: {
-            goToPage(pageName) {
-                this.$router.push({ name: pageName})
-            },
-
             logOut(pageName){
                 this.$router.push({name: pageName});
-                this.$emit('logOut');
+                this.$userController.logOut();
             }
         }
 }
