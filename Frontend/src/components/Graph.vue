@@ -62,13 +62,13 @@ export default {
           this.timestamps[i] = this.dateToString(this.dateTimeHandling(tmpDate))
           this.glucoseLevels[i] = data[i].glucoseLevel
       }
-      this.glucoseLevels.reverse()
       this.timestamps.reverse()
     },
     async getData() {
       let data;
       await this.axios.get(this.$backend.getUrlGetMeasurementsFromPatientById(3))
        .then( response => {
+          console.log(response.data)
           data = response.data
        })
       return data
@@ -89,7 +89,6 @@ export default {
     dateToString(date) {
       let tmp;
       tmp = date.toISOString().split('T');
-      console.log(tmp)
       tmp = tmp[1].split('.');
       return tmp[0].substring(0, 5)
     }

@@ -30,8 +30,8 @@ public class PulseMeasurement {
 		HttpEntity<Measurement> request = new HttpEntity<>(new Measurement());
 		
 		List<Patient> patientList = patientList();
-			for(int j =0;j<patientList.size();j++) {
-				int id = patientList.get(j).getId();
+			for(Patient patient : patientList){
+				int id = patient.getId();
 				String url = "http://localhost:8080/api/v1/patients/" + id + "/measurements";
 				MeasurementId measurementId = new MeasurementId(ts,id);
 				String[] listOfGlucoseLevels = readLine(System.getProperty("user.dir") + "/example_diabetes_data/measurements.csv",id);
@@ -39,7 +39,7 @@ public class PulseMeasurement {
 				
 				request.getBody().setMeasurementId(measurementId);
 				request.getBody().setGlucoseLevel(glucoseLevel);
-				request.getBody().setPatient(patientList.get(j));
+				request.getBody().setPatient(patient);
 
 				restTemplate.postForObject(url, request, Measurement.class);
 			}
