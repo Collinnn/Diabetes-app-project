@@ -9,7 +9,7 @@
 
 <script>
 export default {
-    name: "dropdownMenu",
+    name: "dropdownArray",
     emits: ['selected'],
     props: {
         id: String, 
@@ -39,10 +39,10 @@ button:hover {
     background-color: var(--accent-color);
 }
 .menu-head, .menu-item {
-    height: 40px;
+    height: 20px;
     width: 100%;
     cursor: pointer;
-    background-color: var(--accent-color);
+    background-color: transparent;
     border: none;
     color: var(--text-color);
     text-align: left;

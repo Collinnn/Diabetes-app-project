@@ -19,7 +19,7 @@
 
 <script>
 import SidebarContainer from "./SidebarContainer.vue"
-import DropdownMenu from "./DropdownMenu"
+import DropdownMenu from "./DropdownMenu.vue"
 
 export default {
     name: "adminSidebar",
