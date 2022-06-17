@@ -4,8 +4,8 @@
         <h1 class="title">Login Patient</h1>
         <input type="number" name="id" v-model="input.id" placeholder="Username..." />
         <input type="password" name="password" v-model="input.password" placeholder="Password..." />
-        <button type="button" id="button" v-on:click="login()">Login</button>
-        <button type="button" id="button" @click="lazy()">Lazy</button>
+        <button type="button" v-on:click="login()">Login</button>
+        <button type="button" @click="lazy()">Lazy</button>
     </div>
 </template>
 
@@ -25,11 +25,11 @@ export default {
                 if(this.input.id != null || this.input.password != "") {
                     let data = await this.getPatientData()
                     if(this.isLoginValid(data.password)){
-                        let doctor = await this.getDoctor()
-                        data.doctor = doctor
+                        //let doctor = await this.getDoctor()  
+                        //data.doctor = doctor
                         console.log("Logged in succesfully")
                         this.$router.push("patientSite");
-                        this.$userController.logIn("patient", data) /* HUSK AT SÆTTE USER DATA */
+                        this.$userController.logIn("patient", data)
                     }else{
                         console.log("username and/or password was wrong");
                     }

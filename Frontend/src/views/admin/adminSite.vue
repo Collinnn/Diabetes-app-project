@@ -1,6 +1,6 @@
 <template>
     <title> Admin site </title>
-    <div class="viewContainer" id="adminViews">
+    <div class="viewContainer">
         <router-view />
     </div>
     <Topbar />

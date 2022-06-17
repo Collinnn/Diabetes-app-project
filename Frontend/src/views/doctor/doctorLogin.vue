@@ -4,8 +4,8 @@
         <h1 class="title">Login Doctor</h1>
         <input type="number" name="id" v-model="input.id" placeholder="Username..." />
         <input type="password" name="password" v-model="input.password" placeholder="Password..." />
-        <button type="button" id="button" @click="login()">Login</button>
-        <button type="button" id="button" @click="lazy()">Lazy</button>
+        <button type="button" @click="login()">Login</button>
+        <button type="button" @click="lazy()">Lazy</button>
     </div>
 </template>
 
@@ -21,28 +21,33 @@ export default {
             }
         },
         methods: {
-            logInValidation(password){
-                console.log(password);
-                if(password == this.input.password){
-                    console.log("Logged in succesfully")
-                    this.$router.push({name: "doctorSite"});
-                    this.$userController.logIn("doctor", null) /* HUSK AT SÆTTE USER DATA */
-                }else{
-                    console.log("username and/or password was wrong");
-                }
-            },
-            login() {
-
+            async login() {
                 if(this.input.id != null || this.input.password != "") {
-                    this.axios.get(this.$backend.getUrlGetDoctorById(this.input.id))
-                    .then(response =>{
-                        console.log(response.data.password);
-                        this.logInValidation(response.data.password);
-                    }).catch((error) => console.log(error));
+                    let data = await this.getDoctorData()
+                    if(this.isLoginValid(data.password)){
+                        console.log("Logged in succesfully")
+                        this.$router.push("doctorSite");
+                        this.$userController.logIn("doctor", data) /* HUSK AT SÆTTE USER DATA */
+                    }else{
+                        console.log("Username and/or password was wrong");
+                    }
                 } else {
                     console.log("Username and/or password was empty");
             }
-        },lazy(){
+        },
+        async getDoctorData() {
+            let data;
+            await this.axios.get(this.$backend.getUrlGetDoctorById(this.input.id))
+                    .then(response =>{
+                        data = response.data
+                    }).catch((error) => console.log(error));
+            return data
+        },
+        isLoginValid(password){
+                console.log(password);
+                return password == this.input.password
+        },
+        lazy(){
             this.$router.push({name: "doctorSite"});
             this.$userController.logIn("doctor", null) /* HUSK AT SÆTTE USER DATA */
         }
