@@ -2,11 +2,10 @@
     <title>Login Doctor</title>
     <div class="login-Comp">
         <h1 class="title">Login Doctor</h1>
-        <input type="number" name="id" v-model="input.id" placerholder="id" />
-        <input type="password" name="password" v-model="input.password" palceholder="Password" />
+        <input type="number" name="id" v-model="input.id" placeholder="Username..." />
+        <input type="password" name="password" v-model="input.password" placeholder="Password..." />
         <button type="button" id="button" @click="login()">Login</button>
         <button type="button" id="button" @click="lazy()">Lazy</button>
-        <h1></h1>
     </div>
 </template>
 
@@ -16,8 +15,8 @@ export default {
         data() {
             return {
                 input: {
-                    id: 1,
-                    password: "password"
+                    id: null,
+                    password: ""
                 }
             }
         },
@@ -34,7 +33,7 @@ export default {
             },
             login() {
 
-                if(this.input.id != 0 || this.input.password != "") {
+                if(this.input.id != null || this.input.password != "") {
                     this.axios.get(this.$backend.getUrlGetDoctorById(this.input.id))
                     .then(response =>{
                         console.log(response.data.password);
@@ -66,7 +65,5 @@ export default {
         font-size: 60px;
         
     }
-    #button{
-        
-    }
+
 </style>
