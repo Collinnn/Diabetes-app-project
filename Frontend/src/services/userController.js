@@ -27,6 +27,10 @@ export default class UserController {
         user.setData(null)
     }
 
+    static changePassword(password) {
+        user.data.password = password
+    }
+
     static getUserType() {
         return user.getType()
     }

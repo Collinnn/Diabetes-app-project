@@ -1,11 +1,11 @@
 <template>
     <title>Landing page</title>
     <div class="container">
-        <button class="landingButton" id="patientButton" @click="goToPage('patientLogin')">
+        <button class="landingButton" @click="goToPage('patientLogin')">
         Patient Login
         </button>
 
-        <button class="landingButton" id="doctorButton" @click="goToPage('doctorLogin')">
+        <button class="landingButton" @click="goToPage('doctorLogin')">
         Doctor Login
         </button>
         <router-link id="adminLoginLink" to="/adminLogin"> Login as administrator </router-link>
