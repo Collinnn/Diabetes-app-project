@@ -22,28 +22,32 @@ export default {
             }
         },
         methods: {
-            logInValidation(password){
-                console.log(password);
-                if(password == this.input.password){
-                    console.log("Logged in succesfully")
-                    this.$router.push("patientSite");
-                    this.$userController.logIn("patient", null) /* HUSK AT SÆTTE USER DATA */
-
-                }else{
-                    console.log("username and/or password was wrong");
-                }
-            },
             login() {
-
                 if(this.input.id != 0 || this.input.password != "") {
+                    let data;
                     this.axios.get(this.$backend.getUrlGetPatientById(this.input.id))
                     .then(response =>{
                         console.log(response.data.password);
-                        this.logInValidation(response.data.password);
+                        data = response.data
                     }).catch((error) => console.log(error));
+                    if(this.isLoginValid(data.password)){
+                        console.log("Logged in succesfully")
+                        this.$router.push("patientSite");
+                        this.$userController.logIn("patient", data) /* HUSK AT SÆTTE USER DATA */
+                    }else{
+                        console.log("username and/or password was wrong");
+                    }
                 } else {
                     console.log("Username and/or password was empty");
             }
+        },
+        isLoginValid(password){
+                console.log(password);
+                if(password == this.input.password){
+                    return true;
+                }else{
+                    return false;
+                }
         },
         lazy(){
             this.$router.push("patientSite");

@@ -35,7 +35,7 @@ export default {
             login() {
 
                 if(this.input.id != 0 || this.input.password != "") {
-                    this.axios.get(this.$backend.getUrlPutDoctorById(this.input.id))
+                    this.axios.get(this.$backend.getUrlGetDoctorById(this.input.id))
                     .then(response =>{
                         console.log(response.data.password);
                         this.logInValidation(response.data.password);
