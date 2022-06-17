@@ -24,8 +24,11 @@ export default {
   components: { Line },
   data() {
     return {
+      totalDataPoints: 0,
       glucoseLevels: [],
-      upperConfidenceLevels
+      glucoseLevelsPerTimestamp: [], // Array of arrays with glucose levels for each minute in measurements data
+      lowerConfidenceLevels: [],
+      upperConfidenceLevels: [],
       timestamps: [],
       timer: null,
 
@@ -47,23 +50,38 @@ export default {
     }
   },
   async mounted() {
-    this.loadData()
+    this.initializeData()
     this.timer = setInterval(async () => {
-      this.loadData()
-    }, 60000) // Every 60 sec
+      this.initializeData()
+      //this.updateData()
+    }, 30000) // Every 30 sec
   },
   beforeUnmount() {
     clearInterval(this.timer)
   },
   methods: {
-    async loadData() {
-      let data = await this.getData()
-      loadConfidenceIntervals(data)
+    async initializeData() {
+      let data = await this.fetchData()
+      this.totalDataPoints = data.length
+      await this.initializeGraphData(data)
+      await this.initializeGlucoseLevelsPerTimestamp(data)
+      await this.initializeConfidenceIntervals()
+      
+    },
+    async fetchData() {
+      let data;
+      await this.axios.get(this.$backend.getUrlGetMeasurementsFromPatientById(1))
+       .then( response => {
+          data = response.data
+       })
+      return data
+    },
+    async initializeGraphData(data) {
       let tmpDate;
       let today = new Date()
       for (let i = 0; i < data.length; i++) {
           tmpDate = data[data.length-1-i].measurementId.timestamp;
-          if(today.getTime() - 2*24*60*60*1000 > this.dateTimeHandling(tmpDate).getTime()){
+          if (today.getTime() - 2*24*60*60*1000 > this.dateTimeHandling(tmpDate).getTime()) {
               break
           }
           this.timestamps[i] = this.dateToString(this.dateTimeHandling(tmpDate))
@@ -71,17 +89,39 @@ export default {
       }
       this.timestamps.reverse()
     },
-    async getData() {
-      let data;
-      await this.axios.get(this.$backend.getUrlGetMeasurementsFromPatientById(3))
-       .then( response => {
-          data = response.data
-       })
-      return data
+    async initializeGlucoseLevelsPerTimestamp(data) {
+      let timeStamp;
+      this.glucoseLevelsPerTimestamp = data.reduce( (res, curr) => {
+        timeStamp = this.dateTimeHandling(curr.measurementId.timeStamp) 
+        if (res[timeStamp] === undefined) {
+          res[timeStamp] = [curr.glucoseLevel]
+        } else {
+          res[timeStamp].push(curr.glucoseLevel)
+        }
+        return res
+      }, [])
     },
-    loadConfidenceIntervals(data) {
+    async initializeConfidenceIntervals() {
+      let sampleSize, sampleMean, sampleVariance, sampleStandardDeviation;
+      let meanDeviation;
+      this.glucoseLevelsPerTimestamp.forEach( (sample) => {
+        sampleSize = sample.length 
+        sampleMean = sample.reduce((res, curr) => res + curr.glucoseLevel, 0) / sampleSize
+        sampleVariance = sample.reduce((res, curr) => res + (curr.glucoseLevel - sampleMean)**2, 0) / (sampleSize - 1)
+        sampleStandardDeviation = Math.sqrt(sampleVariance)
+        meanDeviation = 1.96 * sampleStandardDeviation / Math.sqrt(sampleSize)
+        this.lowerConfidenceLevels.push(sampleMean - meanDeviation)
+        this.upperConfidenceLevels.push(sampleMean + meanDeviation)
+      })
+    },
+    updateData() {
+      let data = this.fetchData()
+      if (data.length > this.totalDataPoints) {
+        // fetch new datapoint and update all arrays
+        return
+      }
+    },
 
-    },
     dateTimeHandling(tmpDate) {
       let dateTime = new Date();
       const [date, time] = tmpDate.split(' ');
@@ -143,6 +183,9 @@ export default {
 
 <style>
 .graphContainer {
+  position: relative;
+  width: 75%;
+  height: 75%;
   background-color: var(--secondary-color);
 }
 
