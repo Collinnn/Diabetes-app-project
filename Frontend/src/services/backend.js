@@ -53,9 +53,6 @@ export default class Backend {
         return this.urlAPI + this.subpathPatients + "/" + id
     }
 
-    getUrlGetDoctorFromPatientById(id) {
-        return this.urlAPI + this.subpathPatients + "/" + id + "/doctor"
-    }
 
     ////// Measurement controller //////
     getUrlGetMeasurementsFromPatientById(id) {
@@ -64,5 +61,8 @@ export default class Backend {
 
     getUrlPostMeasurementToPatientById(id) {
         return this.urlAPI + this.subpathPatients + "/" + id + this.subpathMeasurements
+    }
+    getUrlPutMeasurementByIdAndTimestamp(id,measurement,timeStamp) {
+        return this.urlAPI + this.subpathPatients + "/" + id + this.subpathMeasurements + "/" + timeStamp
     }
 }

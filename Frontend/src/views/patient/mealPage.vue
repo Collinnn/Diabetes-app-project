@@ -77,9 +77,9 @@ export default {
             hourItems: hours.reduce((acc,elem) => {acc.push({id:elem,title:elem}); return acc},[]),
             minuteItems: minutes.reduce((acc,elem) => {acc.push({id:elem,title:elem}); return acc},[]),
             meal:{
-            selectedHourMeal: null,
-            selectedMinuteMeal:null,
-            carbohydrate:null
+                selectedHourMeal: null,
+                selectedMinuteMeal:null,
+                carbohydrate:null
             },
             bolus:{
                 selectedHourBolus: null,
@@ -90,10 +90,27 @@ export default {
                 selectedHourBasal: null,
                 selectedMinuteBasal:null,
                 basalValue:null
-            } 
+            },
+            measurement:{
+                measurementId:{
+                    timestamp: null,
+                    patientId: null
+                },
+                glucoseLevel:null,
+                bolus: null,
+                basal: null,
+                carbohydrate: null
+            },
         }
     },
     methods:{
+        dateToString(date) {
+            console.log(date)
+            let tmp;
+            tmp = date.toISOString().split('T');
+            tmp = tmp[1].split('.');
+            return tmp[0].substring(0, 5)
+        },
         selectHourMeal(event){
             this.meal.selectedHourMeal = event.target.value
         },
@@ -112,9 +129,21 @@ export default {
         selectMinuteBasal(event){
             this.basal.selectedMinuteBasal = event.target.value
         },async sendMealUpdate(){
-            const userData = this.$userController.getUserData()
-            console.log("Hello",userData);
+            const id = this.$userController.getUserData().id
+            
+            let today = new Date();
+            console.log(today)
+            today.setUTCHours(this.meal.selectedHourMeal,this.meal.selectedMinuteMeal,0,0)
+           // const json= today.getFullYear() + "-"+ today.getMonth()+ "-" + today.getDate() + "T" + (today.getHours()-2) + ":"+ today.getMinutes() + ":" + today.getSeconds() + "Z"
+            this.measurement.measurementId.patientId= id 
+            this.measurement.measurementId.timestamp = JSON.stringify(today)
+            this.measurement.carbohydrate = this.meal.carbohydrate
+            
 
+            await this.axios.put(this.$backend.getUrlPutMeasurementByIdAndTimestamp(id,this.measurement, JSON.stringify(today)))
+            .then(response =>{
+                console.log(response)
+            }).catch((error) => console.log(error));
         }
     },
     components:{
