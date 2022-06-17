@@ -23,7 +23,7 @@ public class PulseMeasurement {
 	
 	private int i = 0;
 
-	@Scheduled(cron = "0 */5 * * * *")
+	@Scheduled(cron = "0 */1 * * * *")
 	public void postMeasurements() throws IOException {
 		RestTemplate restTemplate = new RestTemplate();
 		Timestamp ts = new Timestamp(System.currentTimeMillis());

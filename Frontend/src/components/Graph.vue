@@ -18,24 +18,30 @@ import { Chart as ChartJS, registerables} from 'chart.js'
 
 ChartJS.register(...registerables)
 
+
 export default {
   name: 'GraphChart',
   components: { Line },
   data() {
     return {
       glucoseLevels: [],
+      upperConfidenceLevels
       timestamps: [],
       timer: null,
 
       chartOptions: {
         responsive: true,
-        plugins: {}
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
       },
       chartId: 'glucose-chart',
       datasetIdKey: 'label',
       width: 1200,
       height: 800,
-      cssClasses: '',
+      cssClasses: 'graphContainer',
       styles: {},
       plugins: []
     }
@@ -44,7 +50,7 @@ export default {
     this.loadData()
     this.timer = setInterval(async () => {
       this.loadData()
-    }, 10000) // Every 10 sec
+    }, 60000) // Every 60 sec
   },
   beforeUnmount() {
     clearInterval(this.timer)
@@ -52,6 +58,7 @@ export default {
   methods: {
     async loadData() {
       let data = await this.getData()
+      loadConfidenceIntervals(data)
       let tmpDate;
       let today = new Date()
       for (let i = 0; i < data.length; i++) {
@@ -68,10 +75,12 @@ export default {
       let data;
       await this.axios.get(this.$backend.getUrlGetMeasurementsFromPatientById(3))
        .then( response => {
-          console.log(response.data)
           data = response.data
        })
       return data
+    },
+    loadConfidenceIntervals(data) {
+
     },
     dateTimeHandling(tmpDate) {
       let dateTime = new Date();
@@ -81,9 +90,7 @@ export default {
       dateTime.setUTCFullYear(year);
       dateTime.setUTCMonth((month-1));
       dateTime.setUTCDate(day);
-      dateTime.setUTCHours(hour);
-      dateTime.setUTCMinutes(minute);
-      dateTime.setUTCSeconds(second);
+      dateTime.setUTCHours(hour, minute, second);
       return dateTime;
     },
     dateToString(date) {
@@ -95,13 +102,48 @@ export default {
   },
   computed: {
     chartData() {
-      console.log("Updated")
       return {
         labels: this.timestamps,
-        datasets: [ { data: this.glucoseLevels }]
+        datasets: [
+          { 
+            label: "",
+            fill: 2,
+            data: this.glucoseLevels.reduce((res, curr) => { res.push(curr - 0.2); return res} , []), 
+            backgroundColor: 'rgba(255, 0, 0, 0.2)',
+            pointRadius: 0,
+            pointHitRadius: 0
+          },
+          { 
+            label: 'Glucose levels',
+            fill: 0,
+            data: this.glucoseLevels, 
+            backgroundColor: 'blue',
+            borderColor: 'rgb(75, 192, 192)',
+          },
+          {
+            data: this.glucoseLevels.reduce((res) => { res.push(3); return res} , []),
+            pointRadius: 0,
+            pointHitRadius: 0
+          },
+          {
+            data: this.glucoseLevels.reduce((res) => { res.push(7); return res} , []),
+            fill: 1,
+            backgroundColor: 'rgba(0, 255, 0, 0.2)',
+            pointRadius: 0,
+            pointHitRadius: 0
+
+          }
+        ]
       }
     }
   }
   
 }
 </script>
+
+<style>
+.graphContainer {
+  background-color: var(--secondary-color);
+}
+
+</style>
