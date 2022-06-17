@@ -45,7 +45,7 @@ export default {
         async submitForm() {
             if (this.unhandledRequirements.length == 0) {
                 this.$userController.changePassword(this.form.password1)
-                await this.axios.get(this.$backend.updatePatien(this.$userController.getUserData().id,this.$userController.getUserData()))
+                await this.axios.put(this.$backend.getUrlPutPatientById(this.$userController.getUserData().id), this.$userController.getUserData())
                 console.log("Submit new password")
             } else {
                 console.log("Submission not accepted due to unhandled requirements")   
