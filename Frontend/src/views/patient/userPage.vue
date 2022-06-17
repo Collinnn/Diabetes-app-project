@@ -3,10 +3,11 @@
     <div class="content">
         <div id="container">
             <h3>User Page</h3>
-            <div id="id">User id: </div>
-            <div id="id">User name: </div>
-            <div id="id">Doctor's name:</div>
-            <button class="settingsButton" @click="goToPage('changePassword')"> Change password </button>
+            <div>User id: {{this.$userController.getUserData().id}}</div>
+            <div>User name: {{this.$userController.getUserData().firstName}} {{this.$userController.getUserData().lastName}}</div>
+            <div v-if="this.$userController.getUserData().doctor != null">Doctor's name: {{this.$userController.getUserData().doctor.firstName}} {{this.$userController.getUserData().doctor.lastName}}</div>
+            <div v-else>No doctor assigned</div>
+            <button @click="goToPage('changePassword')"> Change password </button>
         </div>
     </div>
 </template>

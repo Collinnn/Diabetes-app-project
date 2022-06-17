@@ -42,11 +42,13 @@ export default {
         }
     },
     methods: {
-        submitForm() {
+        async submitForm() {
             if (this.unhandledRequirements.length == 0) {
-            console.log("Submit new password")
+                this.$userController.changePassword(this.form.password1)
+                await this.axios.put(this.$backend.getUrlPutPatientById(this.$userController.getUserData().id), this.$userController.getUserData())
+                console.log("Submit new password")
             } else {
-            console.log("Submission not accepted due to unhandled requirements")   
+                console.log("Submission not accepted due to unhandled requirements")   
             }
         }
     },

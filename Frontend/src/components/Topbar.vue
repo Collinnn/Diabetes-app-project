@@ -1,7 +1,7 @@
 <template>
     <div class ="topbar">
         <div class = "leftElement">
-            <button class = "topbarButton" id = "homeButton" @click="this.$router.push('/')">
+            <button class = "topbarButton" @click="this.$router.push('/')">
                 <svg class="icon" id="homeIcon"></svg>
             </button>
             DiAPPbetes
@@ -21,13 +21,13 @@
                 </div>
             </div>
 
-            <div id = "rightbutton">
+            <div>
                 <button class = "topbarButton" id = "userButton" v-if="!(this.$userController.getUserType() == 'admin')" @click="showDropdown()">
                     <svg class="icon" id="userIcon"></svg>
                 </button>
-                <div id = "admin" v-else>
+                <div v-else>
                     <h3>Logged in as admin</h3>
-                    <button class="logoutButton" @click="logOut('landing')"> Log out </button>
+                    <button @click="logOut('landing')"> Log out </button>
                 </div>
             </div>
         </div>

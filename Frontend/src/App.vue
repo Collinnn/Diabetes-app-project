@@ -1,8 +1,5 @@
 <template>
-    <div id="app">
-        <router-view />
-        <!-- Move this to the topbar @Zwinge -->
-    </div>
+    <router-view />
 </template>
 
 <script>

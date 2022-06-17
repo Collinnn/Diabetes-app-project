@@ -1,11 +1,11 @@
 <template>
-    <div class ="profile dropdown">
-        <div id="settingsMenu" v-if="(this.$userController.getUserType() == 'patient')">
+    <div>
+        <div class="settingsMenu" v-if="(this.$userController.getUserType() == 'patient')">
             <button class="settingsButton" @click="this.$router.push('user')"> View profile </button>
             <button class="settingsButton" @click="this.$router.push('changePassword')"> Change password </button>
             <button class="settingsButton" @click="logOut('landing')"> Log out </button>
         </div>
-        <div id="settingsMenu" v-if="(this.$userController.getUserType() == 'doctor')">
+        <div class="settingsMenu" v-if="(this.$userController.getUserType() == 'doctor')">
             <button class="settingsButton" @click="this.$router.push('doctor')"> View Doctor profile </button>
             <button class="settingsButton" @click="this.$router.push('changePassword')"> Change password </button>
             <button class="settingsButton" @click="logOut('landing')"> Log out </button>
@@ -27,7 +27,7 @@
 </script>
 
 <style scoped>
-#settingsMenu {
+.settingsMenu {
     position: absolute;
     border-radius: 10px;
     right: 0%;
