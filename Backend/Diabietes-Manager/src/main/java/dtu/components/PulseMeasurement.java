@@ -20,27 +20,22 @@ import dtu.model.Patient;
 
 @Component
 public class PulseMeasurement {
+	
+	private int i = 0;
 
 	@Scheduled(cron = "0 */1 * * * *")
 	public void postMeasurements() throws IOException {
 		RestTemplate restTemplate = new RestTemplate();
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
 		HttpEntity<Measurement> request = new HttpEntity<>(new Measurement());
-		int length = 1; 
+		
 		List<Patient> patientList = patientList();
 			for(Patient patient : patientList){
 				int id = patient.getId();
 				String url = "http://localhost:8080/api/v1/patients/" + id + "/measurements";
-				String urlmesurementlength = "http://localhost:8080/api/v1/patients/" + id;
-				
-				Patient result = restTemplate.getForObject(urlmesurementlength, Patient.class);
-
-				if(result.getMeasurements() !=null) {
-					length = result.getMeasurements().size();
-				}
 				MeasurementId measurementId = new MeasurementId(ts,id);
 				String[] listOfGlucoseLevels = readLine(System.getProperty("user.dir") + "/example_diabetes_data/measurements.csv",id);
-				double glucoseLevel = token(listOfGlucoseLevels,length);
+				double glucoseLevel = token(listOfGlucoseLevels,i);
 				
 				request.getBody().setMeasurementId(measurementId);
 				request.getBody().setGlucoseLevel(glucoseLevel);
@@ -48,7 +43,7 @@ public class PulseMeasurement {
 
 				restTemplate.postForObject(url, request, Measurement.class);
 			}
-
+			this.i++;
 			
 	}
 	
