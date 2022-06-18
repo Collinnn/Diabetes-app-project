@@ -31,7 +31,7 @@ export default {
       lowerConfidenceLevels: [],
       upperConfidenceLevels: [],
       
-      dataTimeSpan: 2*24*60*60*1000,  // *2 days* in milliseconds
+      dataTimeSpan: 1*1*60*60*1000,  // *60 minutes* in milliseconds
       timer: null,
 
       chartOptions: {
@@ -55,8 +55,7 @@ export default {
     await this.loadData()
     this.timer = setInterval(async () => {
       this.updateData()
-      //this.updateData()
-    }, 30000) // Every 30 sec
+    }, 60000) // Every 60 sec
   },
   beforeUnmount() {
     clearInterval(this.timer)
@@ -66,31 +65,31 @@ export default {
       let data = await this.fetchData()
       this.totalDataPoints = data.length
       await this.loadGraphData(data)
+      console.log(this.sampleGlucoseLevels)
       await this.loadGlucoseLevelsPerDailyTimestamp(data)
       await this.loadConfidenceIntervals()
-      
     },
-    async fetchData() {
+    async fetchData() { // REMEMBER TO FETCH FOR RIGHT PATIENT
       let data;
-      await this.axios.get(this.$backend.getUrlGetMeasurementsFromPatientById(1))
+      await this.axios.get(this.$backend.getUrlGetMeasurementsFromPatientById(3))
        .then( response => {
           data = response.data
        })
       return data
     },
-    async loadGraphData(data) {
-      let tmpDate;
+    async loadGraphData(data) { // RENAME
+      let tmpDate, sampleTimestamp;
       let today = new Date()
       for (let i = 0; i < data.length; i++) {
           tmpDate = data[data.length-1-i].measurementId.timestamp;
-          if (today.getTime() - this.dataTimeSpan > this.dateTimeHandling(tmpDate).getTime()) {
+          if ((today.getTime() - this.dataTimeSpan) > this.dateTimeHandling(tmpDate).getTime()) {
               break
           }
-          this.sampleTimestamps[i] = this.dateToString(this.dateTimeHandling(tmpDate))
-          this.sampleGlucoseLevels[i] = data[data.length-1-i].glucoseLevel
+          sampleTimestamp = this.dateToString(this.dateTimeHandling(tmpDate))
+          this.sampleTimestamps[i] = sampleTimestamp
+          this.sampleGlucoseLevels[sampleTimestamp] = data[data.length-1-i].glucoseLevel
       }
       this.sampleTimestamps.reverse()
-      this.sampleGlucoseLevels.reverse()
     },
     async loadGlucoseLevelsPerDailyTimestamp(data) {
       let timestamp;
@@ -116,11 +115,11 @@ export default {
       let sampleSize, sampleMean, sampleVariance, sampleStandardDeviation, meanDeviation;
       let confidenceInterval = { lowerBound: 0, upperBound: 0 }
       sampleSize = sample.length
-      sampleMean = sample.reduce((res, curr) => res + curr.glucoseLevel, 0) / sampleSize
+      sampleMean = sample.reduce((res, curr) => res + curr, 0) / sampleSize
       if (sampleSize == 1) {
         confidenceInterval = { lowerBound: sampleMean, upperBound: sampleMean}
       } else {
-        sampleVariance = sample.reduce((res, curr) => res + (curr.glucoseLevel - sampleMean)**2, 0) / (sampleSize - 1)
+        sampleVariance = sample.reduce((res, curr) => res + (curr - sampleMean)**2, 0) / (sampleSize - 1)
         sampleStandardDeviation = Math.sqrt(sampleVariance)
         meanDeviation = 1.96 * sampleStandardDeviation / Math.sqrt(sampleSize)
         confidenceInterval.lowerBound = sampleMean - meanDeviation
@@ -131,7 +130,7 @@ export default {
 
     async updateData() { 
       let data = await this.fetchData()
-      this.loadGraphData(data)
+      await this.loadGraphData(data)
       if (data.length > this.totalDataPoints) {
         let newDataPoints = data.slice(this.totalDataPoints)
         await this.updateGlucoseLevelsPerDailyTimestamp(newDataPoints)
@@ -167,17 +166,17 @@ export default {
       const [date, time] = tmpDate.split(' ');
       const [year, month, day] = date.split('-');
       const [hour, minute, second] = time.split(':')
-      dateTime.setUTCFullYear(year);
-      dateTime.setUTCMonth((month-1));
-      dateTime.setUTCDate(day);
-      dateTime.setUTCHours(hour, minute, second);
+      dateTime.setFullYear(year);
+      dateTime.setMonth((month-1));
+      dateTime.setDate(day);
+      dateTime.setHours(hour, minute, second);
       return dateTime;
     },
     dateToString(date) {
       let tmp;
       tmp = date.toISOString().split('T');
       tmp = tmp[1].split('.');
-      return tmp[0].substring(0, 5)
+      return tmp[0].substring(3, 5)
     }
   },
   computed: {
@@ -185,50 +184,67 @@ export default {
       return {
         labels: this.sampleTimestamps,
         datasets: [
-          { 
-            label: "Lower confidence levels",
-            fill: false,
-            data: this.lowerConfidenceLevels, 
-            backgroundColor: 'rgba(255, 0, 0, 0.2)',
-            borderColor: 'rgba(255, 0, 0, 0.2)',
-            pointRadius: 0,
-            pointHitRadius: 0
-          },
-          { 
-            label: 'Glucose levels',
-            fill: 0,
-            data: this.sampleGlucoseLevels, 
-            backgroundColor: 'blue',
-            borderColor: 'rgb(75, 192, 192)',
-          },
-          { 
-            label: "Upper confidence levels",
-            fill: false,
-            data: this.upperConfidenceLevels, 
-            backgroundColor: 'rgba(0, 255, 0, 0.2)',
-            borderColor: 'rgba(0, 255, 0, 0.2)',
-            pointRadius: 0,
-            pointHitRadius: 0
-          },
           {
             label: "Lower bound for healthy level",
-            data: this.sampleGlucoseLevels.reduce((res) => { res.push(3); return res} , []),
-            fill: false,
-            backgroundColor: 'rgba(0, 255, 0, 0.2)',
+            data: this.sampleTimestamps.map(() => 4),
+            fill: {
+              target: false,
+              below: 'transparent',
+              above: 'rgba(255, 0, 0, 1)'
+            },
+            backgroundColor: 'rgba(255, 0, 0, 0.2)',
             showLine: false,
             pointRadius: 0,
             pointHitRadius: 0
           },
           {
             label: "Upper bound for healthy level",
-            data: this.sampleGlucoseLevels.reduce((res) => { res.push(7); return res} , []),
-            fill: false,
-            backgroundColor: 'rgba(0, 255, 0, 0.2)',
-            showLine: false,
+            data: this.sampleTimestamps.map(() => 7),
+            fill: {
+              target: false,
+              below: 'rgba(255, 255, 0, 0.1)',
+              above: 'transparent'
+            },
+            backgroundColor: 'rgba(255, 255, 0, 0.2)',
+            showLine: true,
             pointRadius: 0,
             pointHitRadius: 0
 
-          }
+          },
+          { 
+            label: "Lower confidence levels",
+            fill: false,
+            data: this.sampleTimestamps.map((ts) => this.lowerConfidenceLevels[ts]), 
+            backgroundColor: 'rgba(255, 0, 0, 0.2)',
+            borderColor: 'rgba(0, 255, 0, 0.2)',
+            pointRadius: 0,
+            pointHitRadius: 0
+          },
+          { 
+            label: 'Glucose levels',
+            fill: {
+              target: 2,
+              below: 'transparent',
+              above: 'rgba(0, 255, 0, 0.2)'
+            },
+            data: this.sampleTimestamps.map((ts) => this.sampleGlucoseLevels[ts]), 
+            backgroundColor: 'rgb(0, 0, 255)',
+            borderColor: 'rgb(75, 192, 192)',
+          },
+          { 
+            label: "Upper confidence levels",
+            fill: {
+              target: 3,
+              below: 'transparent',
+              above: 'rgba(255, 0, 0, 0.2)'
+            },
+            data: this.sampleTimestamps.map((ts) => this.upperConfidenceLevels[ts]), 
+            backgroundColor: 'rgba(255, 0, 0, 0.2)',
+            borderColor: 'rgba(0, 255, 0, 0.2)',
+            pointRadius: 0,
+            pointHitRadius: 0
+          },
+          
         ]
       }
     }
