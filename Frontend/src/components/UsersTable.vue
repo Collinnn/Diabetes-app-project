@@ -1,15 +1,10 @@
 <template>
-    <div class="table-page">
-        <h1 class="table-page-header">My Patients</h1>
-        <div class="search-bar">
-            <form class>
-                <input type="text"/>
-            </form>
-        </div>
+<div>
+    <div class="table-wrapper">
         <table class="table">
             <thead>
                <tr>
-                <th v-for="(name,key) in columnNames" :key="key">{{name}}</th>
+                <th v-for="(names,key) in columnNames" :key="key">{{names}}</th>
                </tr>
             </thead>
             <tbody>
@@ -19,20 +14,18 @@
             </tbody>
         </table>
     </div>
+</div>
 </template>
 
 <script>
     export default {
         data() {
             return {
-                sortBy: "id",
-                sortOrder: 1,
                 rowElements: [
                     {id: 1, firstName: "Gauss", lastName: "Jordan", dateOfBirth: "1998-12-07"},
                     {id: 2, firstName: "Jørgen", lastName: "Villadsen", dateOfBirth: "1979-10-10"},
                     {id: 3, firstName: "Michael", lastName: "Pedersen", dateOfBirth: "1969-06-09"}
                 ],
-
                 columnNames: ['Id','First Name', 'Last Name', 'Date of Birth']
             }
         }
@@ -40,40 +33,38 @@
 </script>
 
 <style>
-    .table-page {
-        position:absolute;
-        margin:40px;
-        font-family:sans-serif;
+    .container {
+        display:flex;
+        justify-content: center;
     }
-    .search-bar {
-        text-align: left;
-        margin-bottom: 15px;
+    .table-wrapper {
+        width:810px;
+        max-height: 380px;
+        overflow-y: scroll;
     }
-    .search-bar form,
-    .search-bar input {    
-        /* box-shadow: 0 0 20px rgba(0,0,0,0.15); */
-        width:200px;
-        
+    .table-wrapper thead,
+    .table-wrapper th {
+        position: sticky;
+        top:0;
     }
     /* table styling inspired by https://dev.to/dcodeyt/creating-beautiful-html-tables-with-css-428l */
     .table {
-        position:absolute;
         border-collapse: collapse;
         table-layout: fixed;
         width:800px;
         box-shadow: 0 0 20px rgba(0,0,0,0.15);
         font-size:0.9em;
-
+        font-family: sans-serif;
+        height: 200px;
+        overflow-y: scroll;
     }
     .table thead tr {
-        background-color:lightgray;
+        background-color:var(--accent-color);
         text-align: left;
     }
     .table th,
     .table td {
         padding: 10px 12px;
-    }
-    .table th {
         cursor:pointer;
     }
     .table tbody tr {

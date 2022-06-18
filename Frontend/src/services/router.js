@@ -13,6 +13,7 @@ import changePasswordPage from '@/views/patient/changePasswordPage.vue'
 
 import doctorSite from '@/views/doctor/doctorSite.vue'
 import doctorPage from '@/views/doctor/doctorPage.vue'
+import patientsListPage from '@/views/doctor/patientsListPage.vue'
 
 import adminSite from '@/views/admin/adminSite.vue'
 import addPatientPage from '@/views/admin/addPatientPage.vue'
@@ -89,6 +90,7 @@ const routes = [
     },
     {
         path: '/doctor',
+        redirect: { name: 'patients' },
         component: doctorSite,
         name: 'doctorSite',
         meta: {
@@ -99,6 +101,11 @@ const routes = [
                 path: 'user',
                 component: doctorPage,
                 name: "doctor",
+            },
+            {
+                path: 'patients',
+                component: patientsListPage,
+                name: "patients"
             }
         ]
     },
