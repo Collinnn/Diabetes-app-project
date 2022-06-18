@@ -13,42 +13,15 @@ export default {
       this.$userController.setDarkTheme(this.getMediaPreference());
       this.toggleDarkmode();
     },
-    data(){
-      return{
-        showDropdown:{
-          isVisible: false
-        },
-        app:{
-          loggedIn: loggedInStatus.getStatus
-        },
-        darktheme: null,
-      }
-    },
-    methods:{
-      
-      logIn(){
-        this.app.loggedIn = true
-        loggedInStatus.setLoggedIn = true;
-      },
-      logOut(){
-        this.showDropdown.isVisible = false;
-        this.app.loggedIn = false
-        loggedInStatus.setLoggedIn = false;
-      },
-      toggleDarkmode: function(){
-          if(this.darktheme){
-            console.log("dark-theme");
-            this.darktheme=false; 
-            this.primarycolor   = '#424242'; 
-            this.secondarycolor = '#212121';
-            this.accentcolor    = '#747474';
-            this.variantcolor   = '';
-            this.textcolor      = '#DDDDDD';
-            document.getElementById('app').style.setProperty("--primary-color", this.primarycolor);
-            document.getElementById('app').style.setProperty("--secondary-color", this.secondarycolor);
-            document.getElementById('app').style.setProperty("--accent-color", this.accentcolor);
-            document.getElementById('app').style.setProperty("--variant-color", this.variantcolor);
-            document.getElementById('app').style.setProperty("--text-color", this.textcolor);
+    methods: {
+      toggleDarkmode() {
+          if(this.$userController.getDarkTheme()){
+            console.log("dark-theme"); 
+            document.getElementById('app').style.setProperty("--primary-color",'#424242');
+            document.getElementById('app').style.setProperty("--secondary-color", '#212121');
+            document.getElementById('app').style.setProperty("--accent-color", '#747474');
+            document.getElementById('app').style.setProperty("--variant-color", '');
+            document.getElementById('app').style.setProperty("--text-color", '#DDDDDD');
 
           } else {
             console.log("light-theme"); 

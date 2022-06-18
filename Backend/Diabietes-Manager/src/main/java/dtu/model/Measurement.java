@@ -3,7 +3,6 @@ package dtu.model;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -24,15 +23,9 @@ public class Measurement {
 	private double carbohydrates;
 	@MapsId("id")
 	@JoinColumn(name = "patientId", referencedColumnName = "id")
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	private Patient patient;
 	
-	public Patient getPatient() {
-		return patient;
-	}
-	public void setPatient(Patient patient) {
-		this.patient = patient;
-	}
 	public MeasurementId getMeasurementId() {
 		return measurementId;
 	}
