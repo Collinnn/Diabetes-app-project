@@ -106,10 +106,13 @@ export default {
     methods:{
         dateToString(date) {
             console.log(date)
-            let tmp;
-            tmp = date.toISOString().split('T');
-            tmp = tmp[1].split('.');
-            return tmp[0].substring(0, 5)
+            let tmp ="";
+            tmp = date.toISOString();
+            tmp = tmp.replaceAll(":","%3A")
+            tmp = tmp.replace("T","%20")
+            tmp = tmp.split(".")[0]
+           // return tmp = tmp[0]+" "+tmp[1].split('.')[0];
+           return tmp
         },
         selectHourMeal(event){
             this.meal.selectedHourMeal = event.target.value
@@ -134,13 +137,12 @@ export default {
             let today = new Date();
             console.log(today)
             today.setUTCHours(this.meal.selectedHourMeal,this.meal.selectedMinuteMeal,0,0)
-           // const json= today.getFullYear() + "-"+ today.getMonth()+ "-" + today.getDate() + "T" + (today.getHours()-2) + ":"+ today.getMinutes() + ":" + today.getSeconds() + "Z"
             this.measurement.measurementId.patientId= id 
-            this.measurement.measurementId.timestamp = JSON.stringify(today)
+            this.measurement.measurementId.timestamp = today.toISOString()
             this.measurement.carbohydrate = this.meal.carbohydrate
-            
-
-            await this.axios.put(this.$backend.getUrlPutMeasurementByIdAndTimestamp(id,this.measurement, JSON.stringify(today)))
+            console.log(today);
+            console.log(this.dateToString(today))
+            await this.axios.put(this.$backend.getUrlPutMeasurementByIdAndTimestamp(id,this.dateToString(today),this.measurement))
             .then(response =>{
                 console.log(response)
             }).catch((error) => console.log(error));

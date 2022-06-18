@@ -62,7 +62,11 @@ export default class Backend {
     getUrlPostMeasurementToPatientById(id) {
         return this.urlAPI + this.subpathPatients + "/" + id + this.subpathMeasurements
     }
-    getUrlPutMeasurementByIdAndTimestamp(id,measurement,timeStamp) {
-        return this.urlAPI + this.subpathPatients + "/" + id + this.subpathMeasurements + "/" + timeStamp
+    getUrlPutMeasurementByIdAndTimestamp(id,timeStamp) {
+        console.log('http://localhost:8080/api/v1/patients/1/measurements/2022-06-13%2017%3A51%3A00')
+        console.log(this.urlAPI + this.subpathPatients + "/" + id +  this.subpathMeasurements + "/" + timeStamp)
+
+        return this.urlAPI + this.subpathPatients + "/" + id +  this.subpathMeasurements + "/" + timeStamp
+        
     }
 }
