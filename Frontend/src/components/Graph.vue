@@ -42,7 +42,7 @@ export default {
         scales: {
           y: {
             ticks:{
-                  color: document.getElementById('app').style.getPropertyValue("--text-color")
+                  color: document.getElementById('app').style.getPropertyValue("--text-color") // watch changes
               },
               title: {
                 display: true,
@@ -250,7 +250,8 @@ export default {
             backgroundColor: 'rgba(255, 0, 0, 0.2)',
             borderColor: 'rgba(0, 255, 0, 0.2)',
             pointRadius: 0,
-            pointHitRadius: 0
+            pointHitRadius: 0,
+            lineTension: 0.2
           },
           { 
             label: 'Glucose levels',
@@ -274,9 +275,9 @@ export default {
             backgroundColor: 'rgba(255, 0, 0, 0.2)',
             borderColor: 'rgba(0, 255, 0, 0.2)',
             pointRadius: 0,
-            pointHitRadius: 0
-          },
-          
+            pointHitRadius: 0,
+            lineTension: 0.2
+          }, 
         ]
       }
     }
