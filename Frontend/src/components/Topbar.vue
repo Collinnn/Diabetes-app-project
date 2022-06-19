@@ -80,7 +80,7 @@ import ProfileDropdown from "./ProfileDropdown.vue"
                 document.getElementById('app').style.setProperty("--secondary-color", '#212121');
                 document.getElementById('app').style.setProperty("--accent-color", '#747474');
                 document.getElementById('app').style.setProperty("--variant-color", '');
-                document.getElementById('app').style.setProperty("--highlight-color", '');
+                document.getElementById('app').style.setProperty("--highlight-color", '#B4B4B4');
                 document.getElementById('app').style.setProperty("--text-color", '#DDDDDD');
             } else {
                 console.log("light-theme");
@@ -240,9 +240,20 @@ import ProfileDropdown from "./ProfileDropdown.vue"
 
 #adminButton{
     margin-left: 5px;
-    width: 58px;
+    width: fit-content;
     height: 30px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--accent-color);
+    cursor: pointer;
 }
+#adminButton:hover {
+    background-color: var(--highlight-color);
+}
+#adminButton:active {
+    background-color: rgba(110, 110, 150, 0.8);
+}
+
 
 </style>
 
