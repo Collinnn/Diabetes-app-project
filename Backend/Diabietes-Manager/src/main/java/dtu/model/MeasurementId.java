@@ -6,8 +6,6 @@ import java.text.SimpleDateFormat;
 
 import javax.persistence.Embeddable;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 @Embeddable
 public class MeasurementId implements Serializable {
 	
@@ -15,7 +13,6 @@ public class MeasurementId implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 6042687706100524982L;
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private String timestamp;
 	private int patientId;
 	

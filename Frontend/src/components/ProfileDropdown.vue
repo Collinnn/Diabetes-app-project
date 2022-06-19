@@ -1,8 +1,13 @@
 <template>
-    <div class ="profile dropdown">
-        <div id="settingsMenu">
-            <button class="settingsButton" @click="goToPage('user')"> View profile </button>
-            <button class="settingsButton" @click="goToPage('changePassword')"> Change password </button>
+    <div>
+        <div class="settingsMenu" v-if="(this.$userController.getUserType() == 'patient')">
+            <button class="settingsButton" @click="this.$router.push('user')"> View profile </button>
+            <button class="settingsButton" @click="this.$router.push('changePassword')"> Change password </button>
+            <button class="settingsButton" @click="logOut('landing')"> Log out </button>
+        </div>
+        <div class="settingsMenu" v-if="(this.$userController.getUserType() == 'doctor')">
+            <button class="settingsButton" @click="this.$router.push('doctor')"> View Doctor profile </button>
+            <button class="settingsButton" @click="this.$router.push('changePassword')"> Change password </button>
             <button class="settingsButton" @click="logOut('landing')"> Log out </button>
         </div>
     </div>
@@ -10,26 +15,19 @@
 
 
 <script>
-    import router from "@/router"
-
     export default {
         name: "ProfileDropdown",
-        emits:['logOut'],
         methods: {
-            goToPage(pageName) {
-                router.push({ name: pageName})
-            },
-
             logOut(pageName){
-                router.push({name: pageName});
-                this.$emit('logOut');
+                this.$router.push({name: pageName});
+                this.$userController.logOut();
             }
         }
 }
 </script>
 
 <style scoped>
-#settingsMenu {
+.settingsMenu {
     position: absolute;
     border-radius: 10px;
     right: 0%;

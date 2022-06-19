@@ -275,10 +275,6 @@ definitions:
         type: string
       lastName:
         type: string
-      patients:
-        type: array
-        items:
-          $ref: "#/definitions/Patient"
           
   Measurement:
     type: object

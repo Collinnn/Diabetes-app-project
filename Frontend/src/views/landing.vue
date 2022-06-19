@@ -1,22 +1,21 @@
 <template>
     <title>Landing page</title>
     <div class="container">
-        <button class="landingButton" id="patientButton" @click="goToPage('patientLogin')">
+        <button class="landingButton" @click="goToPage('patientLogin')">
         Patient Login
         </button>
 
-        <button class="landingButton" id="doctorButton" @click="goToPage('doctorLogin')">
+        <button class="landingButton" @click="goToPage('doctorLogin')">
         Doctor Login
         </button>
-    </div> 
+        <router-link id="adminLoginLink" to="/adminLogin"> Login as administrator </router-link>
+    </div>
 </template>
 
 <script>
-import router from "@/router"
 
 export default {
     name: "landingPage",
-    emits: ['logIn'],
     data() {
         return{
             title:'landingPage'
@@ -24,7 +23,7 @@ export default {
     },
     methods: {
         goToPage(pageName) {
-            router.push({name:pageName})
+            this.$router.push({name: pageName})
         }
     }
 }
@@ -59,5 +58,11 @@ export default {
 }
 .landingButton:hover{
     background: rgba(255, 255, 255, 0.60);
+}
+#adminLoginLink {
+    cursor: pointer;
+    color: var(--text-color);
+    text-decoration: underline;
+    margin-bottom: 10px;
 }
 </style>
