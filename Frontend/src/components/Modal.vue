@@ -8,7 +8,7 @@
             </div>
             <div id="modalBody">
                 <slot name="body">
-                    Pls eat something... 😰
+                    Your blood sugar is running low... 😰
                 </slot>
             </div>
             <div id="modalFooter">
@@ -32,26 +32,31 @@
 #modalMask {
     background-color: rgba(0, 0, 0, 0.6);
     position: fixed;
+    z-index: 100;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
 }
 #modal {
-    margin: 60px auto;
-    width: 380px;
-    height: auto;
+    margin: 60px auto 0;
+    width: 30%;
+    max-height: 50%;
     background-color: rgb(200, 200, 220);
     border-radius: 3px;
     padding: 5px 10px;
     box-shadow: 0 0 10px 4px;
 }
 #modalHead {
-    height: 80px;
+    height: fit-content;
+    width: fit-content;
     overflow: hidden;
 }
 #modalBody {
-    height: 80px;
+    display: flex;
+    justify-content: center;
+    max-height: 300px;
+    width: 100%;
     overflow: hidden;
 }
 #modalFooter {

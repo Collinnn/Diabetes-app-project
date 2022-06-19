@@ -22,6 +22,7 @@ ChartJS.register(...registerables)
 export default {
   name: 'GraphChart',
   components: { Line },
+  emits: ["lowBloodSugar", "highBloodSugar"],
   data() {
     return {
       totalDataPoints: 0,
@@ -31,15 +32,50 @@ export default {
       lowerConfidenceLevels: [],
       upperConfidenceLevels: [],
       
+      lowGlucoseLevel: 4,
+      highGlucoseLevel: 7,
       dataTimeSpan: 1*1*60*60*1000,  // *60 minutes* in milliseconds
       timer: null,
 
       chartOptions: {
         responsive: true,
+        scales: {
+          y: {
+            ticks:{
+                  color: document.getElementById('app').style.getPropertyValue("--text-color")
+              },
+              title: {
+                display: true,
+                text: "Glucose level [mmol/L]",
+                color: document.getElementById('app').style.getPropertyValue("--text-color")
+              }
+          },
+          x:{
+              ticks:{
+                  color: document.getElementById('app').style.getPropertyValue("--text-color")
+              },
+              title: {
+                display: true,
+                text: "Time of the hour [min]",
+                color: document.getElementById('app').style.getPropertyValue("--text-color")
+              }
+              
+          }
+        },
         plugins: {
+          title: {
+            display: true,
+            text: "Glucose levels",
+            color: document.getElementById('app').style.getPropertyValue("--text-color"),
+            font: {
+              family: "'arial'",
+              size: 30,
+              weight: "bold"
+            }
+          },
           legend: {
             display: false
-          }
+          },
         }
       },
       chartId: 'glucose-chart',
@@ -133,6 +169,14 @@ export default {
       await this.loadGraphData(data)
       if (data.length > this.totalDataPoints) {
         let newDataPoints = data.slice(this.totalDataPoints)
+        newDataPoints.forEach((dataPoint) => {
+          if (dataPoint.glucoseLevel < this.lowGlucoseLevel) {
+            this.$emit("lowBloodSugar", dataPoint.glucoseLevel.toFixed(2))
+          } 
+          else if (dataPoint.glucoseLevel > this.highGlucoseLevel) {
+            this.$emit("highBloodSugar", dataPoint.glucoseLevel.toFixed(2))
+          }
+        })
         await this.updateGlucoseLevelsPerDailyTimestamp(newDataPoints)
         await this.updateConfidenceIntervals(newDataPoints)
         this.totalDataPoints = data.length
@@ -186,27 +230,15 @@ export default {
         datasets: [
           {
             label: "Lower bound for healthy level",
-            data: this.sampleTimestamps.map(() => 4),
-            fill: {
-              target: false,
-              below: 'transparent',
-              above: 'rgba(255, 0, 0, 1)'
-            },
-            backgroundColor: 'rgba(255, 0, 0, 0.2)',
-            showLine: false,
+            data: this.sampleTimestamps.map(() => this.lowGlucoseLevel),
+            borderColor: 'rgba(0, 255, 0, 0.5)',
             pointRadius: 0,
             pointHitRadius: 0
           },
           {
             label: "Upper bound for healthy level",
-            data: this.sampleTimestamps.map(() => 7),
-            fill: {
-              target: false,
-              below: 'rgba(255, 255, 0, 0.1)',
-              above: 'transparent'
-            },
-            backgroundColor: 'rgba(255, 255, 0, 0.2)',
-            showLine: true,
+            data: this.sampleTimestamps.map(() => this.highGlucoseLevel),
+            borderColor: 'rgba(0, 255, 0, 0.5)',
             pointRadius: 0,
             pointHitRadius: 0
 
@@ -256,8 +288,8 @@ export default {
 <style>
 .graphContainer {
   position: relative;
-  width: 75%;
-  height: 75%;
+  width: 60%;
+  height: 50%;
   background-color: var(--secondary-color);
 }
 
