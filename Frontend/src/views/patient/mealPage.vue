@@ -1,53 +1,29 @@
 <template>
     <title>Meal submission page</title>
-    <h1>Meal Submission Page</h1>
+    <h1>Meal & Insulin Submission Page</h1>
     <div class="page_container">
         <div class="submission_container">
             <h3>Add a meals carbohydrate amount</h3>
             <!--Meals-->
-            <div class="input" id="meals">
+            <div class="input" id="timer">
                 Hours:
-                <select @change="selectHourMeal($event)" class="form-control">
+                <select @change="selectHour($event)" class="form-control">
                     <option disabled value="">Please select an hour</option>
                     <option v-for="(id,title) in hourItems" :key="id" :value="title">{{title}}</option>
                 </select>
                 Minutes:
-                <select @change="selectMinuteMeal($event)" class="form-control">
+                <select @change="selectMinute($event)" class="form-control">
                     <option disabled value="">Please select an min interval</option>
                     <option v-for="{id,title} in minuteItems" :key="id" :value="title">{{title}}</option>
                 </select>
-                <input type =number step="0.000001" min="0" v-model="meal.carbohydrate" placeholder="Carbohydrate in grams"/>
-                <button type="button" id="button" @click="sendMealUpdate()">Upload</button>
             </div>
-            <h3>Add bolus amount for a specific timefram</h3>
-            <!--Bolus insulin-->
-            <div class="input" id="Bolus">
-                Hours:
-                    <select @change="selectHourBolus($event)" class="form-control">
-                    <option disabled value="">Please select an hour</option>
-                    <option v-for="(id,title) in hourItems" :key="id" :value="title">{{title}}</option>
-                </select>
-                Minutes:
-                <select @change="selectMinuteBolus($event)" class="form-control">
-                    <option disabled value="">Please select an min interval</option>
-                    <option v-for="{id,title} in minuteItems" :key="id" :value="title">{{title}}</option>
-                </select>
-                <input type =number step="0.000001" min="0" v-model="bolus.bolusValue" placeholder="Insulin bolus in U"/>    
+            <div class ="input" id="inputs">
+                <input type =number step="0.000001" min="0" v-model="this.inputvalues.carbohydrates" placeholder="Carbohydrate in grams"/>
+                <input type =number step="0.000001" min="0" v-model="this.inputvalues.bolus" placeholder="Insulin bolus in U"/>  
+                <input type =number step="0.000001" min="0" v-model="this.inputvalues.basal" placeholder="Basal flowrate mU/min"/>  
             </div>
-            <h3>Add basal amount for a specfic time frame</h3>
-            <!--Basal insulin-->
-            <div class="input" id="Basal">
-                Hours:
-                    <select @change="selectHourBasal($event)" class="form-control">
-                    <option disabled value="">Please select an hour</option>
-                    <option v-for="(id,title) in hourItems" :key="id" :value="title">{{title}}</option>
-                </select>
-                Minutes:
-                <select @change="selectMinuteBasal($event)" class="form-control">
-                    <option disabled value="">Please select an min interval</option>
-                    <option v-for="{id,title} in minuteItems" :key="id" :value="title">{{title}}</option>
-                </select>
-                <input type =number step="0.000001" min="0" v-model="basal.basalValue" placeholder="Basal flowrate mU/min"/>  
+            <div class="submit">
+                <button type="button" id="button" @click="sendUpdate()">Upload</button>
             </div>
         </div>
     </div>
@@ -76,31 +52,29 @@ export default {
         return{
             hourItems: hours.reduce((acc,elem) => {acc.push({id:elem,title:elem}); return acc},[]),
             minuteItems: minutes.reduce((acc,elem) => {acc.push({id:elem,title:elem}); return acc},[]),
-            meal:{
-                selectedHourMeal: null,
-                selectedMinuteMeal:null,
-                carbohydrate:null
-            },
-            bolus:{
-                selectedHourBolus: null,
-                selectedMinuteBolus:null,
-                bolusValue:null
-            },
-            basal:{
-                selectedHourBasal: null,
-                selectedMinuteBasal:null,
-                basalValue:null
+            inputvalues:{
+                selectedHour: null,
+                selectedMinute:null,
+                carbohydrates:null,
+                bolus: null,
+                basal: null
             },
             measurement:{
                 measurementId:{
                     timestamp: null,
                     patientId: null
                 },
-                glucoseLevel:null,
+                glucoseLevel: null,
                 bolus: null,
                 basal: null,
-                carbohydrate: null
+                carbohydrates: null
             },
+            getValues:{
+                carbohydrates:null,
+                bolus:null,
+                basal:null,
+                glucoseLevel:null
+            }
         }
     },
     methods:{
@@ -111,38 +85,56 @@ export default {
             tmp = tmp.replaceAll(":","%3A")
             tmp = tmp.replace("T","%20")
             tmp = tmp.split(".")[0]
-           // return tmp = tmp[0]+" "+tmp[1].split('.')[0];
+        
            return tmp
         },
-        selectHourMeal(event){
-            this.meal.selectedHourMeal = event.target.value
+        dateToGetString(date){
+            let tmp =  date.toISOString();
+            tmp = tmp.replace("T"," ");
+            tmp = tmp.split(".")[0]
+            return tmp;
         },
-        selectMinuteMeal(event){
-            this.meal.selectedMinuteMeal = event.target.value
+        selectHour(event){
+            this.inputvalues.selectedHour = event.target.value
         },
-        selectHourBolus(event){
-            this.bolus.selectedHourBolus = event.target.value
+        selectMinute(event){
+            this.inputvalues.selectedMinute = event.target.value
         },
-        selectMinuteBolus(event){
-            this.bolus.selectedMinuteBolus = event.target.value
-        },
-        selectHourBasal(event){
-            this.basal.selectedHourBasal = event.target.value
-        },
-        selectMinuteBasal(event){
-            this.basal.selectedMinuteBasal = event.target.value
-        },async sendMealUpdate(){
+        async sendUpdate(){
             const id = this.$userController.getUserData().id
-            
             let today = new Date();
-            console.log(today)
-            today.setUTCHours(this.meal.selectedHourMeal,this.meal.selectedMinuteMeal,0,0)
-            this.measurement.measurementId.patientId= id 
-            this.measurement.measurementId.timestamp = today.toISOString()
-            this.measurement.carbohydrate = this.meal.carbohydrate
-            console.log(today);
-            console.log(this.dateToString(today))
-            await this.axios.put(this.$backend.getUrlPutMeasurementByIdAndTimestamp(id,this.dateToString(today),this.measurement))
+            today.setUTCHours(this.inputvalues.selectedHour,this.inputvalues.selectedMinute,0,0)
+
+            await this.axios.get(this.$backend.getUrlGetMeasurementsFromPatientById(id))
+            .then(response =>{
+                response.data.forEach(data => {
+                    //console.log(data.measurementId.timestamp,"=",this.dateToGetString(today))
+                    if(data.measurementId.timestamp ==this.dateToGetString(today)){
+                        console.log(data.carbohydrates)
+                        this.measurement.basal= data.basal;
+                        this.measurement.bolus= data.bolus;
+                        this.measurement.carbohydrates=data.carbohydrates;
+                    }
+ 
+                });
+            }).catch((error) => console.log(error))
+            console.log(this.inputvalues.basal)
+            
+            //Handling if no input has been made
+            if(this.inputvalues.carbohydrates!=null){
+                this.measurement.carbohydrates = this.inputvalues.carbohydrates;
+            }
+            if(this.inputvalues.basal!=null){
+                this.measurement.basal = this.inputvalues.basal;
+            }
+            if(this.inputvalues.bolus!=null){
+                this.measurement.bolus = this.inputvalues.bolus;
+            }
+            
+            this.measurement.measurementId.timestamp = this.today;
+            this.measurement.measurementId.patientId= id;
+            
+            await this.axios.put(this.$backend.getUrlPutMeasurementByIdAndTimestamp(id,this.dateToString(today)),this.measurement)
             .then(response =>{
                 console.log(response)
             }).catch((error) => console.log(error));
