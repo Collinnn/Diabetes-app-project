@@ -4,7 +4,7 @@
             <button class = "topbarButton" @click="this.$router.push('/')">
                 <svg class="icon" id="homeIcon"></svg>
             </button>
-            DiAPPbetes
+            <h3>DiAPPbetes</h3>
         </div>
        <div class = "rightElements">
             
@@ -21,14 +21,12 @@
                 </div>
             </div>
 
-            <div>
-                <button class = "topbarButton" id = "userButton" v-if="!(this.$userController.getUserType() == 'admin')" @click="showDropdown()">
-                    <svg class="icon" id="userIcon"></svg>
-                </button>
-                <div v-else>
-                    <h3>Logged in as admin</h3>
-                    <button @click="logOut('landing')"> Log out </button>
-                </div>
+            <button class = "topbarButton" id = "userButton" v-if="!(this.$userController.getUserType() == 'admin')" @click="showDropdown()">
+                <svg class="icon" id="userIcon"></svg>
+            </button>
+            <div id = "adminLogout" v-else>
+                <h3>Logged in as admin</h3>
+                <button id = "adminButton" @click="logOut('landing')"> Log out </button>
             </div>
         </div>
     </div>
@@ -120,8 +118,10 @@ import ProfileDropdown from "./ProfileDropdown.vue"
     color: var(--text-color);
 }
 .topbar .leftElement {
+    display: flex;
     float: left;
     padding-left: 20px;
+    align-items: center;
 }
 .topbar .rightElements {
     display: flex;
@@ -138,6 +138,7 @@ import ProfileDropdown from "./ProfileDropdown.vue"
     border-radius: 10px;
     outline: none;
     border: none;
+    margin-right: 5px;
     
 }
 .topbarButton:hover{
@@ -228,8 +229,18 @@ import ProfileDropdown from "./ProfileDropdown.vue"
     height: 85%;
     left: 40%;
     transform: translate(-10%, -40%), rotate(-35deg);
+}
+
+#adminLogout{
+    display:flex;
+    align-items: center;
 }        
 
+#adminButton{
+    margin-left: 5px;
+    width: 58px;
+    height: 30px;
+}
 
 </style>
 
