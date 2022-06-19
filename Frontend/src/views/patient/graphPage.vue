@@ -1,6 +1,6 @@
 <template>
     <title>Graph page</title>
-    <div>
+    <div class="page-container">
         <h1>Graph Page</h1>
         <ModalBox v-if="isModalVisible" @close="isModalVisible = false" >
             <template #heading>
@@ -10,9 +10,7 @@
                 <p> {{modalBody}} </p>
             </template>
         </ModalBox>
-        <div class="graph">
-            <GlucoseGraph @low-blood-sugar="showLowBloodSugarMessage" @high-blood-sugar="showHighBloodSugarMessage"/>
-        </div>
+        <GlucoseGraph @low-blood-sugar="showLowBloodSugarMessage" @high-blood-sugar="showHighBloodSugarMessage"/>
     </div>    
 </template>
 
@@ -49,8 +47,13 @@ export default {
 </script>
 
 <style>
-.graph {
+.page-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
+
 </style>
