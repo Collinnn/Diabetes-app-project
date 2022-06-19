@@ -34,7 +34,7 @@ export default {
 
 .sidebar-button {
     cursor: pointer;
-    background-color: --accent-color;
+    background-color: var(--accent-color);
     width: 80px;
     height: 80px;
     border-radius: 10px;
@@ -43,10 +43,10 @@ export default {
     
 }
 .sidebar-button:hover {
-    background: rgba(255, 255, 255, 0.60);
+    background: var(--highlight-color);
 }
 .sidebar-button:active {
-    background: rgba(100, 100, 255, 0.60);
+    background: rgba(110, 110, 150, 0.8);
 }
 .icon {
     width: 60px;

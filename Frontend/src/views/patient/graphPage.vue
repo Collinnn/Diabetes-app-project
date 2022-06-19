@@ -1,7 +1,6 @@
 <template>
     <title>Graph page</title>
     <div class="page-container">
-        <h1>Graph Page</h1>
         <ModalBox v-if="isModalVisible" @close="isModalVisible = false" >
             <template #heading>
                 <h1> {{modalHeading}} </h1>
@@ -49,6 +48,7 @@ export default {
 <style>
 .page-container {
     position: absolute;
+    padding: 20px;
     width: 100%;
     height: 100%;
     display: flex;

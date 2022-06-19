@@ -290,8 +290,11 @@ export default {
 <style>
 .graphContainer {
   position: relative;
-  width: 50%;
+  width: 60%;
   background-color: var(--secondary-color);
+  border-width: 2px;
+  border-color: black;
+  border-radius: 5px;
 }
 
 </style>
