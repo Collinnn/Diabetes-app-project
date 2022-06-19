@@ -41,6 +41,7 @@ export default {
         responsive: true,
         scales: {
           y: {
+            min: 0,
             ticks:{
                   color: document.getElementById('app').style.getPropertyValue("--text-color") // watch changes
               },
