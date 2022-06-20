@@ -6,18 +6,27 @@
         </div>
 
         <div class="login-Comp">
-            <h1 class="title">Patient Login</h1>
-            <input type="number" name="id" v-model="input.id" placeholder="Username..." />
-            <input type="password" name="password" v-model="input.password" placeholder="Password..." />
-            <button type="button" v-on:click="login()">Login</button>
-            <button type="button" @click="lazy()">Lazy</button>
+            <div class="inputs">
+                <h1 class="title">Patient Login</h1>
+                <input type="number" name="id" v-model="input.id" placeholder="Username..." />
+                <input type="password" name="password" v-model="input.password" placeholder="Password..." />
+            </div>
+            <div class="buttons">
+                <standard-button name="Back" @click="back()"></standard-button>
+                <standard-button name="Login" @click="login()"></standard-button>
+            </div>
+            
         </div>
     </div>
 </template>
 
 <script>
+import StandardButton from '@/components/StandardButton.vue'
 export default {
         name: 'login-patient',
+        components:{
+            StandardButton
+        },
         data() {
             return {
                 input: {
@@ -63,9 +72,8 @@ export default {
                     }).catch((error) => console.log(error));
             return doctor
         },
-        lazy() {
-            this.$router.push("patientSite");
-            this.$userController.logIn("patient", null) /* HUSK AT SÆTTE USER DATA */
+        back(){
+            this.$router.push({name: "landing"});
         }
 
     }
@@ -88,7 +96,9 @@ export default {
 .title{
     font-size: 60px;
 }
-
+.inputs{
+    gap:10px
+}
 .pictureContainer{
     display: flex;
     align-items: center;
@@ -100,5 +110,13 @@ export default {
     height: 400px;
     background: url('@/assets/Home.svg') no-repeat center;
     background-size: 300px 300px;
+}
+.buttons{
+    display: flex;
+    margin-top:5%;
+    gap:10px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
 }
 </style>

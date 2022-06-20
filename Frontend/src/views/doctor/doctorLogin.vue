@@ -5,24 +5,35 @@
              <svg class="picture"></svg>
         </div>
         <div class="login-Comp">
-            <h1 class="title">Doctor Login</h1>
-            <input type="number" name="id" v-model="input.id" placeholder="Username..." />
-            <input type="password" name="password" v-model="input.password" placeholder="Password..." />
-            <button type="button" @click="login()">Login</button>
-            <button type="button" @click="lazy()">Lazy</button>
+            <div class="inputs">
+                <h1 class="title">Doctor Login</h1>
+                <input type="number" name="id" v-model="input.id" placeholder="Username..." />
+                <input type="password" name="password" v-model="input.password" placeholder="Password..." />
+                <p class="wrongInput" v-if="this.input.wrongInput">Invalid username and/or password</p>
+            </div>
+        <div class="buttons">
+            <StandardButton name="Back" @click="back()"></StandardButton>
+            <StandardButton name="Login" @click="login()"></StandardButton>
         </div>
+        </div>
+
     </div>
 
 </template>
 
 <script>
+import StandardButton from '@/components/StandardButton.vue'
 export default {
         name: 'login-doctor',
+        components:{
+            StandardButton
+        },
         data() {
             return {
                 input: {
                     id: null,
-                    password: ""
+                    password: "",
+                    wrongInput: false
                 }
             }
         },
@@ -35,9 +46,11 @@ export default {
                         this.$router.push("doctorSite");
                         this.$userController.logIn("doctor", data) /* HUSK AT SÆTTE USER DATA */
                     }else{
+                        this.input.wrongInput=true;
                         console.log("Username and/or password was wrong");
                     }
                 } else {
+                    this.input.wrongInput =true;
                     console.log("Username and/or password was empty");
             }
         },
@@ -46,22 +59,22 @@ export default {
             await this.axios.get(this.$backend.getUrlGetDoctorById(this.input.id))
                     .then(response =>{
                         data = response.data
-                    }).catch((error) => console.log(error));
+                    }).catch((error) => error);
             return data
         },
         isLoginValid(password){
                 console.log(password);
                 return password == this.input.password
         },
-        lazy(){
-            this.$router.push({name: "doctorSite"});
-            this.$userController.logIn("doctor", null) /* HUSK AT SÆTTE USER DATA */
+        back(){
+            this.$router.push({name: "landing"});
         }
 
     }
 }
 </script>
 <style scoped>
+
 .page-wrapper{
     display: flex;
     flex-direction: column;
@@ -87,11 +100,27 @@ export default {
     height:300px;
 
 }
+.inputs{
+    gap:10px
+}
 .picture{
     display: flex;
     height: 400px;
     background: url('@/assets/Home.svg') no-repeat center;
     background-size: 300px 300px;
+}
+.buttons{
+    display: flex;
+    margin-top:5%;
+    gap:10px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.wrongInput{
+    color:red;
+    font-size: 20px; 
 }
 
 </style>
