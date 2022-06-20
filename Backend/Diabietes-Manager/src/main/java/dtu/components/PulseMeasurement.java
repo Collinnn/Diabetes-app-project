@@ -39,7 +39,7 @@ public class PulseMeasurement {
 				
 				request.getBody().setMeasurementId(measurementId);
 				request.getBody().setGlucoseLevel(glucoseLevel);
-				request.getBody().setPatient(patient);
+				patient.addMeasurement(request.getBody());
 
 				restTemplate.postForObject(url, request, Measurement.class);
 			}
