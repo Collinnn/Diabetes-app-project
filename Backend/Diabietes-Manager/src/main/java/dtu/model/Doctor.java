@@ -1,6 +1,8 @@
 package dtu.model;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,7 +31,7 @@ public class Doctor {
 			mappedBy = "doctor"
 			)
 	@JsonManagedReference
-	private List<Patient> patients;
+	private List<Patient> patients = new ArrayList<Patient>();
 
 	public int getId() {
 		return id;
@@ -73,6 +75,19 @@ public class Doctor {
 	
 	public void removePatient(Patient patient) {
 		this.patients.remove(patient);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Doctor) {
+			return ((Doctor) obj).id == this.id;
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(this.id);
 	}
 	
 }

@@ -1,6 +1,8 @@
 package dtu.model;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -34,7 +36,7 @@ public class Patient {
 	private Doctor doctor;
 	@OneToMany(mappedBy = "patient", cascade = CascadeType.REMOVE)
 	@JsonIgnore
-	private List<Measurement> measurements;
+	private List<Measurement> measurements = new ArrayList<Measurement>();
 
 	public int getId() {
 		return id;
@@ -92,7 +94,7 @@ public class Patient {
 	public void addMeasurement(Measurement measurement) {
 		measurements.add(measurement);
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Patient) {
@@ -101,6 +103,9 @@ public class Patient {
 		return false;
 	}
 
-	// Change hash
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(this.id);
+	}
 		
 }
