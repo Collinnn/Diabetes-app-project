@@ -4,7 +4,7 @@
             <button class = "topbarButton" @click="this.$router.push('/')">
                 <svg class="icon" id="homeIcon"></svg>
             </button>
-            DiAPPbetes
+            <h3>DiAPPbetes</h3>
         </div>
        <div class = "rightElements">
             
@@ -21,14 +21,12 @@
                 </div>
             </div>
 
-            <div>
-                <button class = "topbarButton" id = "userButton" v-if="!(this.$userController.getUserType() == 'admin')" @click="showDropdown()">
-                    <svg class="icon" id="userIcon"></svg>
-                </button>
-                <div v-else>
-                    <h3>Logged in as admin</h3>
-                    <button @click="logOut('landing')"> Log out </button>
-                </div>
+            <button class = "topbarButton" id = "userButton" v-if="!(this.$userController.getUserType() == 'admin')" @click="showDropdown()">
+                <svg class="icon" id="userIcon"></svg>
+            </button>
+            <div id = "adminLogout" v-else>
+                <h3>Logged in as admin</h3>
+                <button id = "adminButton" @click="logOut('landing')"> Log out </button>
             </div>
         </div>
     </div>
@@ -82,14 +80,16 @@ import ProfileDropdown from "./ProfileDropdown.vue"
                 document.getElementById('app').style.setProperty("--secondary-color", '#212121');
                 document.getElementById('app').style.setProperty("--accent-color", '#747474');
                 document.getElementById('app').style.setProperty("--variant-color", '');
+                document.getElementById('app').style.setProperty("--highlight-color", '#B4B4B4');
                 document.getElementById('app').style.setProperty("--text-color", '#DDDDDD');
             } else {
                 console.log("light-theme");
                 console.log(this.$userController.getDarkTheme())
                 document.getElementById('app').style.setProperty("--primary-color", '#EBEBF2');
                 document.getElementById('app').style.setProperty("--secondary-color",'#6295D9');
-                document.getElementById('app').style.setProperty("--accent-color", '#A0C4F2');
+                document.getElementById('app').style.setProperty("--accent-color", '#b1b8e3');
                 document.getElementById('app').style.setProperty("--variant-color", '');
+                document.getElementById('app').style.setProperty("--highlight-color", '#EEF');
                 document.getElementById('app').style.setProperty("--text-color", '#2c3e50');
             }
             },
@@ -120,8 +120,10 @@ import ProfileDropdown from "./ProfileDropdown.vue"
     color: var(--text-color);
 }
 .topbar .leftElement {
+    display: flex;
     float: left;
     padding-left: 20px;
+    align-items: center;
 }
 .topbar .rightElements {
     display: flex;
@@ -138,13 +140,14 @@ import ProfileDropdown from "./ProfileDropdown.vue"
     border-radius: 10px;
     outline: none;
     border: none;
+    margin-right: 5px;
     
 }
 .topbarButton:hover{
-    background: rgba(255, 255, 255, 0.60);
+    background: var(--highlight-color);
 }
 .topbarButton:active{
-    background: rgba(100, 100, 255, 0.60);
+    background: rgba(110, 110, 150, 0.8);
 }
 .icon {
     width: 25px;
@@ -228,7 +231,28 @@ import ProfileDropdown from "./ProfileDropdown.vue"
     height: 85%;
     left: 40%;
     transform: translate(-10%, -40%), rotate(-35deg);
+}
+
+#adminLogout{
+    display:flex;
+    align-items: center;
 }        
+
+#adminButton{
+    margin-left: 5px;
+    width: fit-content;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--accent-color);
+    cursor: pointer;
+}
+#adminButton:hover {
+    background-color: var(--highlight-color);
+}
+#adminButton:active {
+    background-color: rgba(110, 110, 150, 0.8);
+}
 
 
 </style>

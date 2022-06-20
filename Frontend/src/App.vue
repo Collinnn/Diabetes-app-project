@@ -21,14 +21,16 @@ export default {
             document.getElementById('app').style.setProperty("--secondary-color", '#212121');
             document.getElementById('app').style.setProperty("--accent-color", '#747474');
             document.getElementById('app').style.setProperty("--variant-color", '');
+            document.getElementById('app').style.setProperty("--highlight-color", '#B4B4B4');
             document.getElementById('app').style.setProperty("--text-color", '#DDDDDD');
 
           } else {
             console.log("light-theme"); 
             document.getElementById('app').style.setProperty("--primary-color", '#EBEBF2');
             document.getElementById('app').style.setProperty("--secondary-color",'#6295D9');
-            document.getElementById('app').style.setProperty("--accent-color", '#A0C4F2');
+            document.getElementById('app').style.setProperty("--accent-color", '#b1b8e3');
             document.getElementById('app').style.setProperty("--variant-color", '');
+            document.getElementById('app').style.setProperty("--highlight-color", '#EEF');
             document.getElementById('app').style.setProperty("--text-color", '#2c3e50');
           }
       },
