@@ -1,5 +1,6 @@
 package dtu.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +33,9 @@ public class DoctorController {
 	
 	@PostMapping("/doctors")
 	public ResponseEntity<Doctor> createDoctor(@RequestBody Doctor doctor) {
+		if(doctor.getPatients()==null) {
+			doctor.setPatients(new ArrayList<Patient>());
+		}
 		return ResponseEntity.ok(doctorRepository.save(doctor));
 	}
 	

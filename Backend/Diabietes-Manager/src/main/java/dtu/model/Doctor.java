@@ -31,7 +31,7 @@ public class Doctor {
 			mappedBy = "doctor"
 			)
 	@JsonManagedReference
-	private List<Patient> patients = new ArrayList<Patient>();
+	private List<Patient> patients;
 
 	public int getId() {
 		return id;
@@ -68,6 +68,9 @@ public class Doctor {
 	public List<Patient> getPatients() {
 		return patients;
 	}
+	public void setPatients(ArrayList<Patient> patients) {
+		this.patients = patients;
+	}
 	
 	public void addPatient(Patient patient) {
 		this.patients.add(patient);
@@ -76,6 +79,7 @@ public class Doctor {
 	public void removePatient(Patient patient) {
 		this.patients.remove(patient);
 	}
+	
 	
 	@Override
 	public boolean equals(Object obj) {

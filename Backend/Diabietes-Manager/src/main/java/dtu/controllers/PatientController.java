@@ -1,5 +1,6 @@
 package dtu.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,6 +54,10 @@ public class PatientController {
 			patient.setDoctor(doctor);
 			doctor.addPatient(patient);
 		}
+		if(patient.getMeasurements()==null){
+			patient.setMeasurements( new ArrayList<Measurement>());
+		}
+		
 		return ResponseEntity.ok(patientRepository.save(patient));
 	}
 	

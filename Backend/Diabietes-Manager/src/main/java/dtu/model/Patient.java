@@ -36,7 +36,7 @@ public class Patient {
 	private Doctor doctor;
 	@OneToMany(mappedBy = "patient", cascade = CascadeType.REMOVE)
 	@JsonIgnore
-	private List<Measurement> measurements = new ArrayList<Measurement>();
+	private List<Measurement> measurements;
 
 	public int getId() {
 		return id;
@@ -90,6 +90,10 @@ public class Patient {
 	public List<Measurement> getMeasurements() {
 		return measurements;
 	}
+	
+	public void setMeasurements(ArrayList<Measurement> measurements) {
+		this.measurements = measurements;	
+	}
 
 	public void addMeasurement(Measurement measurement) {
 		measurements.add(measurement);
@@ -107,5 +111,7 @@ public class Patient {
 	public int hashCode() {
 		return Objects.hashCode(this.id);
 	}
+
+
 		
 }
