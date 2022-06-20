@@ -7,7 +7,7 @@
         <table class="table">
             <thead>
                <tr>
-                <th v-for="(names,index) in columnNames" :key="index" @click="sortColumn(index)">{{names}}</th>
+                <th v-for="(names,index) in columnNames" :key="index" @click="sortColumn(index)">{{names}}<span style="float:right;">{{arrow}}</span></th>
                </tr>
             </thead>
             <tbody>
@@ -34,6 +34,7 @@
             return {
                 visibleRows: [],
                 order: 'asc',
+                arrow: '▴',
                 index: null
             }
         },
@@ -54,6 +55,7 @@
                 }
                 this.index = index
                 if(this.order=='asc') {
+                    this.arrow = '▴'
                     switch(index) {
                         case 0: this.visibleRows.sort((a,b) => (a.id < b.id) ? -1: (a.id > b.id) ? 1: 0)
                         this.order='desc'
@@ -69,6 +71,7 @@
                         break
                     }
                 } else {
+                    this.arrow = '▾'
                     switch(index) {
                         case 0: this.visibleRows.sort((a,b) => (a.id > b.id) ? -1: (a.id < b.id) ? 1: 0)
                         this.order='asc'
@@ -83,7 +86,7 @@
                         this.order='asc'
                         break
                     }
-                }                
+                }
             }
         },
         mounted() {
