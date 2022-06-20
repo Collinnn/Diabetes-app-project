@@ -31,16 +31,11 @@ public class PulseMeasurement {
 		String url;
 		HttpEntity<Measurement> request = new HttpEntity<>(new Measurement());
 
-		
 		List<Patient> patientList = patientList();
 		for(Patient patient : patientList){
 			int id = patient.getId();
 			url = "http://localhost:8080/api/v1/patients/" + id + "/measurements";
-			
 
-
-
-			
 			String[] listOfGlucoseLevels = readLine(System.getProperty("user.dir") + "/example_diabetes_data/measurements.csv",id);
 			double glucoseLevel = token(listOfGlucoseLevels,i);
 			
