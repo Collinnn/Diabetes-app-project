@@ -18,20 +18,20 @@ public class MeasurementId implements Serializable {
 	
 	public MeasurementId(Timestamp timestamp, int patientId) {
 		super();
-		this.timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:00").format(timestamp);
+		this.timestamp = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:00'Z'").format(timestamp);
 		this.patientId = patientId;
 	}
 	
 	public MeasurementId() {
 		
 	}
-
+	
 	public String getTimestamp() {
 		return timestamp;
 	}
 
 	public void setTimestamp(Timestamp timestamp) {
-		this.timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:00").format(timestamp);
+		this.timestamp = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:00'Z'").format(timestamp);
 	}
 
 	public int getPatientId() {

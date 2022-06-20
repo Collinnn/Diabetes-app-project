@@ -108,7 +108,7 @@ export default {
     },
     async fetchData() { // REMEMBER TO FETCH FOR RIGHT PATIENT
       let data;
-      await this.axios.get(this.$backend.getUrlGetMeasurementsFromPatientById(3))
+      await this.axios.get(this.$backend.getUrlGetMeasurementsFromPatientById(1))
        .then( response => {
           data = response.data
        })
