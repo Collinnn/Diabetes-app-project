@@ -25,7 +25,6 @@ public class PulseMeasurement {
 
 	@Scheduled(cron = "0 */1 * * * *")
 	public void postMeasurements() throws IOException {
-		System.out.print("Hello");
 		RestTemplate restTemplate = new RestTemplate();
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
 		String url;
