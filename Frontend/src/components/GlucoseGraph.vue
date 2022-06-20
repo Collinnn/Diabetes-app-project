@@ -46,22 +46,22 @@ export default {
           y: {
             min: 0,
             ticks:{
-                  color: document.getElementById('app').style.getPropertyValue("--text-color") // watch changes
+                  color: "black"
               },
               title: {
                 display: true,
                 text: "Glucose level [mmol/L]",
-                color: document.getElementById('app').style.getPropertyValue("--text-color")
+                color: "black"
               }
           },
           x:{
               ticks:{
-                  color: document.getElementById('app').style.getPropertyValue("--text-color")
+                  color: "black"
               },
               title: {
                 display: true,
                 text: "Time of the hour [min]",
-                color: document.getElementById('app').style.getPropertyValue("--text-color")
+                color: "black"
               }
               
           }
@@ -70,7 +70,7 @@ export default {
           title: {
             display: true,
             text: "Glucose levels",
-            color: document.getElementById('app').style.getPropertyValue("--text-color"),
+            color: "black",
             font: {
               family: "'arial'",
               size: 30,
@@ -107,7 +107,7 @@ export default {
       await this.loadConfidenceIntervals()
       console.log("Patient data loaded successfully")
     },
-    async fetchData() { // REMEMBER TO FETCH FOR RIGHT PATIENT
+    async fetchData() {
       let data;
       await this.axios.get(this.$backend.getUrlGetMeasurementsFromPatientById(this.patientId))
        .then( response => {
@@ -115,7 +115,7 @@ export default {
        })
       return data
     },
-    async loadGraphData(data) { // RENAME
+    async loadGraphData(data) {
       let tmpDate, sampleTimestamp;
       let today = new Date()
       for (let i = 0; i < data.length; i++) {
@@ -127,7 +127,7 @@ export default {
           this.sampleTimestamps[i] = sampleTimestamp
           this.sampleGlucoseLevels[sampleTimestamp] = data[data.length-1-i].glucoseLevel
       }
-      this.sampleTimestamps.sort()
+      this.sampleTimestamps.reverse()
     },
     async loadGlucoseLevelsPerDailyTimestamp(data) {
       let timestamp;
@@ -234,14 +234,14 @@ export default {
           {
             label: "Lower bound for healthy level",
             data: this.sampleTimestamps.map(() => this.lowGlucoseLevel),
-            borderColor: 'rgba(0, 255, 0, 0.5)',
+            borderColor: 'rgba(0, 200, 0, 0.8)',
             pointRadius: 0,
             pointHitRadius: 0
           },
           {
             label: "Upper bound for healthy level",
             data: this.sampleTimestamps.map(() => this.highGlucoseLevel),
-            borderColor: 'rgba(0, 255, 0, 0.5)',
+            borderColor: 'rgba(0, 200, 0, 0.8)',
             pointRadius: 0,
             pointHitRadius: 0
 
@@ -261,7 +261,7 @@ export default {
             fill: {
               target: 2,
               below: 'transparent',
-              above: 'rgba(0, 255, 0, 0.2)'
+              above: 'rgba(0, 255, 0, 0.3)'
             },
             data: this.sampleTimestamps.map((ts) => this.sampleGlucoseLevels[ts]), 
             backgroundColor: 'rgb(0, 0, 255)',
@@ -272,7 +272,7 @@ export default {
             fill: {
               target: 3,
               below: 'transparent',
-              above: 'rgba(255, 0, 0, 0.2)'
+              above: 'rgba(255, 0, 0, 0.3)'
             },
             data: this.sampleTimestamps.map((ts) => this.upperConfidenceLevels[ts]), 
             backgroundColor: 'rgba(255, 0, 0, 0.2)',
@@ -292,9 +292,10 @@ export default {
 <style>
 .graph-background {
   position: relative;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   width: 100%;
   height: 100%;
+  border-radius: 5px;
 }
 
 </style>
