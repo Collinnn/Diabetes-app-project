@@ -1,10 +1,10 @@
 <template>
     <title> Patient site </title>
-    <div class="viewContainer">
+    <div class="page-container">
         <router-view />
     </div>
-    <Topbar />
     <PatientSidebar />
+    <Topbar />
 </template>
 
 <script>
@@ -19,11 +19,6 @@ export default {
 </script>
 
 <style>
-
-.viewContainer {
-    top: 50px;
-    left: 150px;
-}
 
 </style>
 

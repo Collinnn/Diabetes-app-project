@@ -1,15 +1,14 @@
 <template>
-  <Line
-    :chart-options="chartOptions"
-    :chart-data="chartData"
-    :chart-id="chartId"
-    :dataset-id-key="datasetIdKey"
-    :plugins="plugins"
-    :css-classes="cssClasses"
-    :styles="styles"
-    :width="width"
-    :height="height"
-  />
+    <Line
+        :chart-options="chartOptions"
+        :chart-data="chartData"
+        :chart-id="chartId"
+        :dataset-id-key="datasetIdKey"
+        :plugins="plugins"
+        :css-classes="cssClasses"
+        :styles="styles"
+    />
+  
 </template>
 
 <script>
@@ -23,6 +22,9 @@ export default {
   name: 'GraphChart',
   components: { Line },
   emits: ["lowBloodSugar", "highBloodSugar"],
+  props: {
+    patientId: Number
+  },
   data() {
     return {
       totalDataPoints: 0,
@@ -39,6 +41,7 @@ export default {
 
       chartOptions: {
         responsive: true,
+        maintainAspectRatio: false,
         scales: {
           y: {
             min: 0,
@@ -81,9 +84,7 @@ export default {
       },
       chartId: 'glucose-chart',
       datasetIdKey: 'label',
-      width: 1200,
-      height: 800,
-      cssClasses: 'graphContainer',
+      cssClasses: 'graph-background',
       styles: {},
       plugins: []
     }
@@ -102,13 +103,13 @@ export default {
       let data = await this.fetchData()
       this.totalDataPoints = data.length
       await this.loadGraphData(data)
-      console.log(this.sampleGlucoseLevels)
       await this.loadGlucoseLevelsPerDailyTimestamp(data)
       await this.loadConfidenceIntervals()
+      console.log("Patient data loaded successfully")
     },
     async fetchData() { // REMEMBER TO FETCH FOR RIGHT PATIENT
       let data;
-      await this.axios.get(this.$backend.getUrlGetMeasurementsFromPatientById(1))
+      await this.axios.get(this.$backend.getUrlGetMeasurementsFromPatientById(this.patientId))
        .then( response => {
           data = response.data
        })
@@ -126,7 +127,7 @@ export default {
           this.sampleTimestamps[i] = sampleTimestamp
           this.sampleGlucoseLevels[sampleTimestamp] = data[data.length-1-i].glucoseLevel
       }
-      this.sampleTimestamps.reverse()
+      this.sampleTimestamps.sort()
     },
     async loadGlucoseLevelsPerDailyTimestamp(data) {
       let timestamp;
@@ -181,6 +182,7 @@ export default {
         await this.updateGlucoseLevelsPerDailyTimestamp(newDataPoints)
         await this.updateConfidenceIntervals(newDataPoints)
         this.totalDataPoints = data.length
+        console.log("Patient data updated successfully")
       }
     },
     async updateGlucoseLevelsPerDailyTimestamp(data) {
@@ -208,7 +210,7 @@ export default {
 
     dateTimeHandling(tmpDate) {
       let dateTime = new Date();
-      const [date, time] = tmpDate.split(' ');
+      const [date, time] = tmpDate.slice(0, tmpDate.length-1).split('T');
       const [year, month, day] = date.split('-');
       const [hour, minute, second] = time.split(':')
       dateTime.setFullYear(year);
@@ -288,13 +290,11 @@ export default {
 </script>
 
 <style>
-.graphContainer {
+.graph-background {
   position: relative;
-  width: 60%;
   background-color: var(--secondary-color);
-  border-width: 2px;
-  border-color: black;
-  border-radius: 5px;
+  width: 100%;
+  height: 100%;
 }
 
 </style>

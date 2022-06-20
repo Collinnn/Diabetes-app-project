@@ -61,8 +61,13 @@ export default {
   background-color: var(--primary-color);
 }
 
-.viewContainer { /* Applies to all viewContainers (in all views) */
-  position: relative;
+.page-container {  /* Applies to all viewContainers (in all views) */
+    position: absolute;
+    top: var(--topbar-height);
+    left: var(--sidebar-max-width);
+    padding: 10px;
+    width: 100%;
+    height: 100%;
 }
 
 </style>

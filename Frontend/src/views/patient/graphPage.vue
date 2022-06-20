@@ -1,16 +1,16 @@
 <template>
     <title>Graph page</title>
-    <div class="page-container">
-        <ModalBox v-if="isModalVisible" @close="isModalVisible = false" >
-            <template #heading>
-                <h1> {{modalHeading}} </h1>
-            </template>
-            <template #body>
-                <p> {{modalBody}} </p>
-            </template>
-        </ModalBox>
-        <GlucoseGraph @low-blood-sugar="showLowBloodSugarMessage" @high-blood-sugar="showHighBloodSugarMessage"/>
-    </div>    
+    <ModalBox v-if="isModalVisible" @close="isModalVisible = false" >
+        <template #heading>
+            <h1> {{modalHeading}} </h1>
+        </template>
+        <template #body>
+            <p> {{modalBody}} </p>
+        </template>
+    </ModalBox>
+    <div class="graph-container">
+        <GlucoseGraph :patientId="userId" @low-blood-sugar="showLowBloodSugarMessage" @high-blood-sugar="showHighBloodSugarMessage"/>
+    </div>
 </template>
 
 
@@ -25,7 +25,8 @@ export default {
         return {
             isModalVisible: false,
             modalHeading: "",
-            modalBody: ""
+            modalBody: "",
+            userId: this.$userController.getUserData().id
         }
     },
     methods: {
@@ -38,7 +39,6 @@ export default {
             this.isModalVisible = true
             this.modalHeading = "❗Alert: High blood sugar❗"
             this.modalBody = "Your blood sugar has reached a high level of " + glucoseLevel + " mmol/L"
-
         }
     }
 }
@@ -46,14 +46,17 @@ export default {
 </script>
 
 <style>
-.page-container {
-    position: absolute;
-    padding: 20px;
-    width: 100%;
-    height: 100%;
+.graph-container {
+    padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 80%;
+    width: 80%;
+    border: solid;
+    border-width: 2px;
+    border-color: black;
+    border-radius: 10px;
 }
 
 </style>

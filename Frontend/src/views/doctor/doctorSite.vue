@@ -1,6 +1,6 @@
 <template>
     <title> Doctor site </title>
-    <div class="viewContainer">
+    <div class="page-container">
         <router-view />
     </div>
     <Topbar />
