@@ -1,7 +1,9 @@
 <template>
     <title> Patient site </title>
     <div class="page-container">
-        <router-view />
+        <div class="page-wrapper">
+            <router-view />
+        </div>
     </div>
     <PatientSidebar />
     <Topbar />

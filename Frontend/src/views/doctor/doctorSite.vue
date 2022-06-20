@@ -1,7 +1,9 @@
 <template>
     <title> Doctor site </title>
     <div class="page-container">
-        <router-view />
+        <div class="page-wrapper">
+            <router-view />
+        </div>
     </div>
     <Topbar />
 </template>
