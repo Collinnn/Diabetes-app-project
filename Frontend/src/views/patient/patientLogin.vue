@@ -1,11 +1,17 @@
 <template>
-    <title>Login Patient</title>
-    <div class="login-Comp">
-        <h1 class="title">Login Patient</h1>
-        <input type="number" name="id" v-model="input.id" placeholder="Username..." />
-        <input type="password" name="password" v-model="input.password" placeholder="Password..." />
-        <button type="button" v-on:click="login()">Login</button>
-        <button type="button" @click="lazy()">Lazy</button>
+    <title>Patient Login</title>
+    <div class="page-wrapper">
+        <div class="pictureContainer">
+             <svg class="picture"></svg>
+        </div>
+
+        <div class="login-Comp">
+            <h1 class="title">Patient Login</h1>
+            <input type="number" name="id" v-model="input.id" placeholder="Username..." />
+            <input type="password" name="password" v-model="input.password" placeholder="Password..." />
+            <button type="button" v-on:click="login()">Login</button>
+            <button type="button" @click="lazy()">Lazy</button>
+        </div>
     </div>
 </template>
 
@@ -66,19 +72,33 @@ export default {
 }
 </script>
 <style scoped>
-    .login-Comp{
-        position:relative;
+.page-wrapper{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-top:10%;
+    flex-direction: column;
+}
+.login-Comp{
         background-color: var(--secondary-color);
         border-radius: 40px;
         width: 470px;
-        left:20%;
-        margin: 40px 2px;
         padding: 40px;
-    }
-    .login-Comp .title{
-        text-align: center;
-        padding: 0px 0px 0px 0;
-        font-size: 60px;
-        
-    }
+}
+.title{
+    font-size: 60px;
+}
+
+.pictureContainer{
+    display: flex;
+    align-items: center;
+    height:300px;
+
+}
+.picture{
+    display: flex;
+    height: 400px;
+    background: url('@/assets/Home.svg') no-repeat center;
+    background-size: 300px 300px;
+}
 </style>

@@ -1,6 +1,9 @@
 <template>
     <title> Admin login page </title>
     <div class="page-wrapper"> 
+        <div class="pictureContainer">
+             <svg class="picture"></svg>
+        </div>
         <div class="container">
             <h1 class="title">Login Admin </h1>
             <input type="text" v-model="username" placeholder="Username..." autofocus />
@@ -36,11 +39,12 @@ export default {
 </script>
 <style scoped>
 .page-wrapper {
-    width: 100%;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 40px;
+    margin-top:10%;
+    flex-direction: column;
 }
 .container {
     background-color: var(--secondary-color);
@@ -50,5 +54,17 @@ export default {
 }
 .title { 
     font-size: 60px; 
+}
+.pictureContainer{
+    display: flex;
+    align-items: center;
+    height:300px;
+
+}
+.picture{
+    display: flex;
+    height: 400px;
+    background: url('@/assets/Home.svg') no-repeat center;
+    background-size: 300px 300px;
 }
 </style>

@@ -2,7 +2,7 @@
     <div class ="topbar">
         <div class = "leftElement">
             <button class = "topbarButton" @click="this.$router.push('/')">
-                <svg class="icon" id="homeIcon"></svg>
+                 <svg class="iconLeft" id="homeIcon"></svg>
             </button>
             <h3>DiAPPbetes</h3>
         </div>
@@ -153,6 +153,11 @@ import ProfileDropdown from "./ProfileDropdown.vue"
     width: 25px;
     height: 25px;
 }
+.iconLeft {
+    width: 30px;
+    height: 30px;
+}
+
 #userButton {
     margin-right: 20px;
 }
@@ -160,8 +165,12 @@ import ProfileDropdown from "./ProfileDropdown.vue"
     margin: 0px 10px;
     padding: 10px 0px;
 }
+
 #homeIcon {
+    display: block;
     background: url('@/assets/Home.svg') no-repeat center;
+    background-size: 30px 30px;
+
 }
 #userIcon {
     background: url('@/assets/User.svg') no-repeat center;

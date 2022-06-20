@@ -1,15 +1,22 @@
 <template>
     <title>Landing page</title>
+    <div class="pagecontainer">
+    <div class="pictureContainer" >
+        <svg class="picture"></svg>
+    </div>
     <div class="container">
         <button class="landingButton" @click="goToPage('patientLogin')">
         Patient Login
         </button>
-
         <button class="landingButton" @click="goToPage('doctorLogin')">
         Doctor Login
         </button>
         <router-link id="adminLoginLink" to="/adminLogin"> Login as administrator </router-link>
     </div>
+
+    </div>
+
+   
 </template>
 
 <script>
@@ -29,18 +36,27 @@ export default {
 }
 </script>
 <style scoped>
+
+.pagecontainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    margin-top:10%;
+    
+    
+
+}
+
 .container{
-    position: relative;
-    top:300px;
-    left:20%;
-    align-content: center;
-    max-width: 50%;
     background-color: var(--secondary-color);
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     align-items: center;
     border-radius: 40px;
+    width: 400px;
+    height: 300px;
+    flex-grow: 1;
 }
 .landingButton{
     background-color: var(--accent-color);
@@ -49,12 +65,12 @@ export default {
     padding: 20 px 45px; 
     text-align: center;
     text-decoration: none;
-    display: inline-flex;
+    display: flex;
     font-size: 42px;
     margin: 40px 6px;
     cursor: pointer;
     border-radius: 20px;
-    float:inherit;
+
 }
 .landingButton:hover{
     background: rgba(255, 255, 255, 0.60);
@@ -65,4 +81,18 @@ export default {
     text-decoration: underline;
     margin-bottom: 10px;
 }
+.pictureContainer{
+    display: flex;
+    align-items: center;
+    height:300px;
+
+}
+.picture{
+    display: flex;
+    height: 400px;
+    background: url('@/assets/Home.svg') no-repeat center;
+    background-size: 300px 300px;
+}
+
+
 </style>

@@ -1,12 +1,18 @@
 <template>
-    <title>Login Doctor</title>
-    <div class="login-Comp">
-        <h1 class="title">Login Doctor</h1>
-        <input type="number" name="id" v-model="input.id" placeholder="Username..." />
-        <input type="password" name="password" v-model="input.password" placeholder="Password..." />
-        <button type="button" @click="login()">Login</button>
-        <button type="button" @click="lazy()">Lazy</button>
+    <title>Doctor Login</title>
+    <div class="page-wrapper">
+        <div class="pictureContainer">
+             <svg class="picture"></svg>
+        </div>
+        <div class="login-Comp">
+            <h1 class="title">Doctor Login</h1>
+            <input type="number" name="id" v-model="input.id" placeholder="Username..." />
+            <input type="password" name="password" v-model="input.password" placeholder="Password..." />
+            <button type="button" @click="login()">Login</button>
+            <button type="button" @click="lazy()">Lazy</button>
+        </div>
     </div>
+
 </template>
 
 <script>
@@ -56,19 +62,36 @@ export default {
 }
 </script>
 <style scoped>
-    .login-Comp{
-        position:relative;
-        background-color: var(--secondary-color);
-        border-radius: 40px;
-        width: 470px;
-        left:20%;
-        margin: 40px 2px;
-        padding: 40px;
-    }
-    .login-Comp .title{ 
-        padding: 0px 0px 0px 0;
-        font-size: 60px;
-        
-    }
+.page-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    margin-top:10%;
+}
+.login-Comp{
+    position:relative;
+    background-color: var(--secondary-color);
+    border-radius: 40px;
+    width: 470px;
+    padding: 40px;
+}
+.login-Comp .title{ 
+    padding: 0px 0px 0px 0;
+    font-size: 60px;
+    
+}
+.pictureContainer{
+    display: flex;
+    align-items: center;
+    height:300px;
+
+}
+.picture{
+    display: flex;
+    height: 400px;
+    background: url('@/assets/Home.svg') no-repeat center;
+    background-size: 300px 300px;
+}
 
 </style>
