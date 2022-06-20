@@ -57,7 +57,6 @@ export default {
     justify-content: center;
     align-items: center;
     gap: 40px;
-    margin-top:10%;
     flex-direction: column;
 }
 .container {
