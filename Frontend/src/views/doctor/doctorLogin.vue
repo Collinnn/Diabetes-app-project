@@ -9,7 +9,7 @@
                 <h1 class="title">Doctor Login</h1>
                 <input type="number" name="id" v-model="input.id" placeholder="Username..." />
                 <input type="password" name="password" v-model="input.password" placeholder="Password..." />
-                <p class="wrongInput" v-if="this.input.wrongInput">Invalid username and/or password</p>
+                <p class="wrongInput">{{this.input.wrongInputString}}</p>
             </div>
         <div class="buttons">
             <StandardButton name="Back" @click="back()"></StandardButton>
@@ -33,7 +33,8 @@ export default {
                 input: {
                     id: null,
                     password: "",
-                    wrongInput: false
+                    wrongInput: false,
+                    wrongInputString: ""
                 }
             }
         },
@@ -46,11 +47,13 @@ export default {
                         this.$router.push("doctorSite");
                         this.$userController.logIn("doctor", data) /* HUSK AT SÆTTE USER DATA */
                     }else{
-                        this.input.wrongInput=true;
+                        this.input.wrongInput = true,
+                        this.input.wrongInputString = "Username and/or password was wrong";
                         console.log("Username and/or password was wrong");
                     }
                 } else {
-                    this.input.wrongInput =true;
+                    this.input.wrongInput = true,
+                    this.input.wrongInputString = "Username and/or password was empty";
                     console.log("Username and/or password was empty");
             }
         },
@@ -64,7 +67,6 @@ export default {
                         console.log("hello")
                     );
             return data
-           
         },
         isLoginValid(password){
                 console.log(password);
