@@ -1,7 +1,7 @@
 <template>
     <title>Patients list page</title> 
     <div class="container">
-        <UsersTable :columnNames="this.columnNames" :rows="this.patients" @rowClick="patientsPage"/>
+        <UsersTable :columnNames="this.columnNames" :rows="this.patients" @rowClick="editPage"/>
     </div>
 </template>
 
@@ -23,15 +23,13 @@ export default {
             res.push({id: curr.id, firstName: curr.firstName, lastName: curr.lastName, dateOfBirth: curr.dateOfBirth})
             return res
         },[])
-        console.log(this.patients)
     },
     components: {
         UsersTable
     },
     methods: {
-        patientsPage(patient) {
-            console.log(patient)
-            this.$router.push({name: 'patientsUpdatePage'})
+        editPage() {
+            this.$router.push({name: 'adminEditUserPage'})
         }
     }
 }

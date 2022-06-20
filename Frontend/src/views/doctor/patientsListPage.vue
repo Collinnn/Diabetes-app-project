@@ -13,8 +13,7 @@ export default {
     data() {
         return {
             patients: [],
-            columnNames: ["Id","First Name", "Last Name", "Date of Birth"],
-            randomVal: "0"
+            columnNames: ["Id","First Name", "Last Name", "Date of Birth"]
         }
     },
     async mounted() {
@@ -25,7 +24,6 @@ export default {
             res.push({id: curr.id, firstName: curr.firstName, lastName: curr.lastName, dateOfBirth: curr.dateOfBirth})
             return res
         },[])
-        console.log(this.patients)
     },
     components: {
         UsersTable

@@ -21,6 +21,7 @@ import addPatientPage from '@/views/admin/addPatientPage.vue'
 import addDoctorPage from '@/views/admin/addDoctorPage.vue'
 import adminPatientsListPage from '@/views/admin/adminPatientsListPage.vue'
 import adminDoctorsListPage from '@/views/admin/adminDoctorsListPage.vue'
+import adminEditUserPage from '@/views/admin/adminEditUserPage'
 
 import pageNotFound from '@/views/pageNotFound.vue'
 
@@ -145,6 +146,11 @@ const routes = [
                 path: 'adminDoctorsList',
                 component: adminDoctorsListPage,
                 name: 'adminDoctorsListPage'
+            },
+            {
+                path: 'adminEditUser',
+                component: adminEditUserPage,
+                name: 'adminEditUserPage'
             }
         ]
     },
