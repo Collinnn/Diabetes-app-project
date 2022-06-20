@@ -16,13 +16,17 @@
 </template>
 
 <script>
-
+import StandardButton from '@/components/StandardButton.vue'
 export default {
     name: 'adminLogin',
+    components:{
+        StandardButton
+    },
     data() {
         return {
             username: "",
-            password: ""
+            password: "",
+            inputWrong:false
         }
     },
     methods: {
@@ -33,8 +37,12 @@ export default {
                 this.$userController.logIn("admin", null)
             }
             else {
+                this.inputWrong = true
                 console.log("Invalid username and/or password")
             }
+        },
+        back(){
+            this.$router.push({name: "landing"});
         }
     }
 }

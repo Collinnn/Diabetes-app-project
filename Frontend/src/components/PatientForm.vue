@@ -25,8 +25,8 @@
             </ul>
             <ul> 
                 <label for="doctors"> Doctor: </label>
-                <select name="doctors" v-model="selectedDoctorId">
-                    <option :value="null" selected disabled hidden> --Select a doctor-- </option>
+                <select name="doctors" v-model="selectedDoctorId" :disabled="doctors.length == 0">
+                    <option :value="null" selected disabled hidden> {{ doctorSelectDefault }} </option>
                     <option v-for="{id, firstName, lastName} in doctors" :key="id" :value="id"> {{firstName}} {{lastName}} </option>
                 </select>
             </ul>
@@ -49,6 +49,7 @@ export default {
     data() {
         return {
             today: today,
+            doctorSelectDefault: "--Select a doctor--",
             form: {
                 id: "",
                 firstName: "",
@@ -67,8 +68,9 @@ export default {
             doctors: []
         }
     },
-    mounted() {
-        this.axios.get(this.$backend.getUrlGetDoctors()).then((response) => this.doctors = response.data)
+    async mounted() {
+        await this.axios.get(this.$backend.getUrlGetDoctors()).then((response) => this.doctors = response.data)
+        this.doctorSelectDefault = this.doctors.length == 0 ? "--No available doctors--" : "--Select a doctor--"
     },
     methods: {
         submitForm() {

@@ -1,5 +1,5 @@
 <template>
-    <button :id="id" class="menu-head" @click="isMenuVisible = !isMenuVisible"> {{dropdownArrow + title}} </button>
+    <button :id="id" class="menu-head" @click="isMenuVisible = !isMenuVisible"> {{title}} <span style="float: right; padding-right: 10px;">{{dropdownArrow}}</span> </button>
     <div class="menu-wrapper" v-if="isMenuVisible">
         <button :id="itemId" class="menu-item" v-for="{itemId, title, onClick} in items" :key="itemId" @click="onClick(); this.$emit('selected', itemId)"> 
             {{title}} 
@@ -20,17 +20,17 @@ export default {
     data() {
         return {
             isMenuVisible: false,
-            dropdownArrow: "  ▾"
+            dropdownArrow: "▾"
         }
     },
     watch: {
         isMenuVisible() {
             if (this.isMenuVisible) {
                 document.getElementById(this.id).style.backgroundColor = "var(--accent-color)"
-                this.dropdownArrow = "  ▴"
+                this.dropdownArrow = "▴"
             } else {
                 document.getElementById(this.id).style.backgroundColor = ""
-                this.dropdownArrow = "  ▾"
+                this.dropdownArrow = "▾"
             }
         }
     }
@@ -45,7 +45,7 @@ button:hover {
     height: 40px;
     width: 100%;
     cursor: pointer;
-    background-color: var(--accent-color);
+    background-color: inherit;
     border: none;
     color: var(--text-color);
     text-align: left;

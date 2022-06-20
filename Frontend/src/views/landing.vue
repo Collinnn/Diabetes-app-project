@@ -10,6 +10,10 @@
         </button>
         <router-link id="adminLoginLink" to="/adminLogin"> Login as administrator </router-link>
     </div>
+
+    </div>
+
+   
 </template>
 
 <script>
@@ -46,12 +50,12 @@ export default {
     padding: 20 px 45px; 
     text-align: center;
     text-decoration: none;
-    display: inline-flex;
+    display: flex;
     font-size: 42px;
     margin: 40px 6px;
     cursor: pointer;
     border-radius: 20px;
-    float:inherit;
+
 }
 .login-button:hover{
     background: rgba(255, 255, 255, 0.60);

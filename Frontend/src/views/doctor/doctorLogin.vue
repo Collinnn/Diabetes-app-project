@@ -13,16 +13,23 @@
             <StandardButton name="Login" @click="login()"></StandardButton>
         </div>
     </div>
+
 </template>
 
 <script>
+import StandardButton from '@/components/StandardButton.vue'
 export default {
         name: 'login-doctor',
+        components:{
+            StandardButton
+        },
         data() {
             return {
                 input: {
                     id: null,
-                    password: ""
+                    password: "",
+                    wrongInput: false,
+                    wrongInputString: ""
                 }
             }
         },
@@ -30,14 +37,18 @@ export default {
             async login() {
                 if(this.input.id != null || this.input.password != "") {
                     let data = await this.getDoctorData()
-                    if(this.isLoginValid(data.password)){
+                    if(data != null && this.isLoginValid(data.password)){
                         console.log("Logged in succesfully")
                         this.$router.push("doctorSite");
                         this.$userController.logIn("doctor", data) /* HUSK AT SÆTTE USER DATA */
                     }else{
+                        this.input.wrongInput = true,
+                        this.input.wrongInputString = "Username and/or password was wrong";
                         console.log("Username and/or password was wrong");
                     }
                 } else {
+                    this.input.wrongInput = true,
+                    this.input.wrongInputString = "Username and/or password was empty";
                     console.log("Username and/or password was empty");
             }
         },
@@ -46,16 +57,18 @@ export default {
             await this.axios.get(this.$backend.getUrlGetDoctorById(this.input.id))
                     .then(response =>{
                         data = response.data
-                    }).catch((error) => console.log(error));
+                    }).catch(() =>
+                        this.input.wrongInput = true,
+                        console.log("hello")
+                    );
             return data
         },
         isLoginValid(password){
                 console.log(password);
                 return password == this.input.password
         },
-        lazy(){
-            this.$router.push({name: "doctorSite"});
-            this.$userController.logIn("doctor", null) /* HUSK AT SÆTTE USER DATA */
+        back(){
+            this.$router.push({name: "landing"});
         }
 
     }
