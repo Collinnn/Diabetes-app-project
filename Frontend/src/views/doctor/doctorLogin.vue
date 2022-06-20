@@ -41,7 +41,7 @@ export default {
             async login() {
                 if(this.input.id != null || this.input.password != "") {
                     let data = await this.getDoctorData()
-                    if(this.isLoginValid(data.password)){
+                    if(data != null && this.isLoginValid(data.password)){
                         console.log("Logged in succesfully")
                         this.$router.push("doctorSite");
                         this.$userController.logIn("doctor", data) /* HUSK AT SÆTTE USER DATA */
@@ -59,8 +59,12 @@ export default {
             await this.axios.get(this.$backend.getUrlGetDoctorById(this.input.id))
                     .then(response =>{
                         data = response.data
-                    }).catch((error) => error);
+                    }).catch(() =>
+                        this.input.wrongInput = true,
+                        console.log("hello")
+                    );
             return data
+           
         },
         isLoginValid(password){
                 console.log(password);
