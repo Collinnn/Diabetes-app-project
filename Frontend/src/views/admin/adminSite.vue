@@ -1,10 +1,12 @@
 <template>
     <title> Admin site </title>
-    <div class="viewContainer">
-        <router-view />
+    <div class="page-container">
+        <div class="page-wrapper">
+            <router-view />
+        </div>
     </div>
-    <Topbar />
     <AdminSidebar />
+    <Topbar />
 </template>
 
 <script>
@@ -18,8 +20,6 @@ export default {
 </script>
 
 <style>
-
-
 
 </style>
 

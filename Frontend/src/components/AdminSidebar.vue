@@ -1,5 +1,5 @@
 <template>
-    <SidebarContainer style="max-width: 200px; min-width: 150px;">
+    <SidebarContainer>
         <div class="sidebar-wrapper">
             <DropdownMenu id="patientsMenu" title="Patients" :items="[
                 {itemId: 'viewPatients', title: 'View patients', onClick: () => $router.push('patients')},
@@ -31,6 +31,10 @@ export default {
     components: { 
         SidebarContainer,
         DropdownMenu
+    },
+    mounted() {
+        document.getElementById('app').style.setProperty("--sidebar-max-width", '200px')
+        document.getElementById('app').style.setProperty("--sidebar-min-width", '150px')
     },
     watch: {
         selectedMenuItemId(value, oldValue) {

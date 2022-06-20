@@ -21,12 +21,13 @@ export default {
 <style scoped>
 #sidebarContainer {
     position: fixed;
-    top: 50px;
     bottom: 0;
     left: 0;
-    width: 18%;
-    min-width: 120px;
-    max-width: 150px;
+    top: var(--topbar-height);
+    height: 100%;
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-min-width);
+    max-width: var(--sidebar-max-width);
     background-color: var(--secondary-color);
 }
 

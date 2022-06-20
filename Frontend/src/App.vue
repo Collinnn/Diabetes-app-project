@@ -1,10 +1,8 @@
 <template>
-    <router-view />
+  <router-view />
 </template>
 
 <script>
-
-
 
 export default {
     name: 'App',  
@@ -60,9 +58,21 @@ export default {
   color: var(--text-color);
   background-color: var(--primary-color);
 }
-
-.viewContainer { /* Applies to all viewContainers (in all views) */
-  position: relative;
+.page-container {  /* Applies to all page containers (in all views) */
+    position: absolute;
+    top: var(--topbar-height);
+    left: var(--sidebar-max-width);
+    width: 100%;
+    height: 100%;
+}
+.page-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: calc(100vw - var(--sidebar-max-width));
+    height: calc(100vh - var(--topbar-height));
 }
 
 </style>

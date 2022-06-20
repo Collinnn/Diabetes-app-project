@@ -25,9 +25,9 @@ public class PulseMeasurement {
 
 	@Scheduled(cron = "0 */1 * * * *")
 	public void postMeasurements() throws IOException {
-		System.out.print("Hello");
 		RestTemplate restTemplate = new RestTemplate();
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
+		MeasurementId measurementId;
 		String url;
 		HttpEntity<Measurement> request = new HttpEntity<>(new Measurement());
 
@@ -35,15 +35,15 @@ public class PulseMeasurement {
 		for(Patient patient : patientList){
 			int id = patient.getId();
 			url = "http://localhost:8080/api/v1/patients/" + id + "/measurements";
-
+			measurementId = new MeasurementId(ts, id);
 			String[] listOfGlucoseLevels = readLine(System.getProperty("user.dir") + "/example_diabetes_data/measurements.csv",id);
 			double glucoseLevel = token(listOfGlucoseLevels,i);
 			
+			request.getBody().setMeasurementId(measurementId);
 			request.getBody().setGlucoseLevel(glucoseLevel);
 			request.getBody().setBasal(0.0);
 			request.getBody().setBolus(0.0);
 			request.getBody().setCarbohydrates(0.0);
-			System.out.println(request.getBody());
 			restTemplate.postForObject(url, request, Measurement.class);
 		}
 		this.i++;

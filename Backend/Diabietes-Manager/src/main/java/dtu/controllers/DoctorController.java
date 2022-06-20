@@ -62,6 +62,13 @@ public class DoctorController {
 	
 	@DeleteMapping("/doctors/{doctorId}")
 	public ResponseEntity<?> deleteDoctorById(@PathVariable int doctorId) {
+		Optional<Doctor> doctor = doctorRepository.findById(doctorId);
+		if (doctor.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+		for (Patient patient : doctor.get().getPatients()) {
+			patient.setDoctor(null);
+		}
 		doctorRepository.deleteById(doctorId);
 		return ResponseEntity.noContent().build();
 	}

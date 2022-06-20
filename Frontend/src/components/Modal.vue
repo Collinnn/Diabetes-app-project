@@ -42,14 +42,17 @@
     margin: 60px auto 0;
     width: 30%;
     max-height: 50%;
-    background-color: rgb(200, 200, 220);
-    border-radius: 3px;
+    background-color: var(--primary-color);
+    border-radius: 4px;
     padding: 5px 10px;
-    box-shadow: 0 0 10px 4px;
+    box-shadow: 0 0 10px 2px;
 }
 #modalHead {
+    display: flex;
+    justify-content: center;
     height: fit-content;
-    width: fit-content;
+    width: 100%;
+    color: var(--text-color);
     overflow: hidden;
 }
 #modalBody {
@@ -57,6 +60,7 @@
     justify-content: center;
     max-height: 300px;
     width: 100%;
+    color: var(--text-color);
     overflow: hidden;
 }
 #modalFooter {

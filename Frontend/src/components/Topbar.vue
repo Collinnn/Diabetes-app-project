@@ -110,7 +110,7 @@ import ProfileDropdown from "./ProfileDropdown.vue"
     top: 0;
     right: 0;
     left: 0;
-    height: 50px;
+    height: var(--topbar-height);
     width: 100%;
     background-color: var(--secondary-color);
     display: flex;

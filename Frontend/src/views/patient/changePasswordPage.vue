@@ -2,7 +2,7 @@
     <title>Change user password page</title>
     <div class="content">
         <div id="container">
-        <h3>Change password</h3>
+            <h3>Change password</h3>
             <form @submit.prevent="submitForm">
                 <ul>
                     <p v-requirement v-for="{requirement} in unhandledRequirements" :key="requirement"> *{{ requirement }} </p>

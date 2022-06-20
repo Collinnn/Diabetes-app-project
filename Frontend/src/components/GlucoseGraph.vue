@@ -1,15 +1,14 @@
 <template>
-  <Line
-    :chart-options="chartOptions"
-    :chart-data="chartData"
-    :chart-id="chartId"
-    :dataset-id-key="datasetIdKey"
-    :plugins="plugins"
-    :css-classes="cssClasses"
-    :styles="styles"
-    :width="width"
-    :height="height"
-  />
+    <Line
+        :chart-options="chartOptions"
+        :chart-data="chartData"
+        :chart-id="chartId"
+        :dataset-id-key="datasetIdKey"
+        :plugins="plugins"
+        :css-classes="cssClasses"
+        :styles="styles"
+    />
+  
 </template>
 
 <script>
@@ -23,6 +22,9 @@ export default {
   name: 'GraphChart',
   components: { Line },
   emits: ["lowBloodSugar", "highBloodSugar"],
+  props: {
+    patientId: Number
+  },
   data() {
     return {
       totalDataPoints: 0,
@@ -39,26 +41,27 @@ export default {
 
       chartOptions: {
         responsive: true,
+        maintainAspectRatio: false,
         scales: {
           y: {
             min: 0,
             ticks:{
-                  color: document.getElementById('app').style.getPropertyValue("--text-color") // watch changes
+                  color: "black"
               },
               title: {
                 display: true,
                 text: "Glucose level [mmol/L]",
-                color: document.getElementById('app').style.getPropertyValue("--text-color")
+                color: "black"
               }
           },
           x:{
               ticks:{
-                  color: document.getElementById('app').style.getPropertyValue("--text-color")
+                  color: "black"
               },
               title: {
                 display: true,
                 text: "Time of the hour [min]",
-                color: document.getElementById('app').style.getPropertyValue("--text-color")
+                color: "black"
               }
               
           }
@@ -67,7 +70,7 @@ export default {
           title: {
             display: true,
             text: "Glucose levels",
-            color: document.getElementById('app').style.getPropertyValue("--text-color"),
+            color: "black",
             font: {
               family: "'arial'",
               size: 30,
@@ -81,9 +84,7 @@ export default {
       },
       chartId: 'glucose-chart',
       datasetIdKey: 'label',
-      width: 1200,
-      height: 800,
-      cssClasses: 'graphContainer',
+      cssClasses: 'graph-background',
       styles: {},
       plugins: []
     }
@@ -102,19 +103,19 @@ export default {
       let data = await this.fetchData()
       this.totalDataPoints = data.length
       await this.loadGraphData(data)
-      console.log(this.sampleGlucoseLevels)
       await this.loadGlucoseLevelsPerDailyTimestamp(data)
       await this.loadConfidenceIntervals()
+      console.log("Patient data loaded successfully")
     },
-    async fetchData() { // REMEMBER TO FETCH FOR RIGHT PATIENT
+    async fetchData() {
       let data;
-      await this.axios.get(this.$backend.getUrlGetMeasurementsFromPatientById(3))
+      await this.axios.get(this.$backend.getUrlGetMeasurementsFromPatientById(this.patientId))
        .then( response => {
           data = response.data
        })
       return data
     },
-    async loadGraphData(data) { // RENAME
+    async loadGraphData(data) {
       let tmpDate, sampleTimestamp;
       let today = new Date()
       for (let i = 0; i < data.length; i++) {
@@ -181,6 +182,7 @@ export default {
         await this.updateGlucoseLevelsPerDailyTimestamp(newDataPoints)
         await this.updateConfidenceIntervals(newDataPoints)
         this.totalDataPoints = data.length
+        console.log("Patient data updated successfully")
       }
     },
     async updateGlucoseLevelsPerDailyTimestamp(data) {
@@ -208,7 +210,7 @@ export default {
 
     dateTimeHandling(tmpDate) {
       let dateTime = new Date();
-      const [date, time] = tmpDate.split(' ');
+      const [date, time] = tmpDate.slice(0, tmpDate.length-1).split('T');
       const [year, month, day] = date.split('-');
       const [hour, minute, second] = time.split(':')
       dateTime.setFullYear(year);
@@ -232,14 +234,14 @@ export default {
           {
             label: "Lower bound for healthy level",
             data: this.sampleTimestamps.map(() => this.lowGlucoseLevel),
-            borderColor: 'rgba(0, 255, 0, 0.5)',
+            borderColor: 'rgba(0, 200, 0, 0.8)',
             pointRadius: 0,
             pointHitRadius: 0
           },
           {
             label: "Upper bound for healthy level",
             data: this.sampleTimestamps.map(() => this.highGlucoseLevel),
-            borderColor: 'rgba(0, 255, 0, 0.5)',
+            borderColor: 'rgba(0, 200, 0, 0.8)',
             pointRadius: 0,
             pointHitRadius: 0
 
@@ -259,7 +261,7 @@ export default {
             fill: {
               target: 2,
               below: 'transparent',
-              above: 'rgba(0, 255, 0, 0.2)'
+              above: 'rgba(0, 255, 0, 0.3)'
             },
             data: this.sampleTimestamps.map((ts) => this.sampleGlucoseLevels[ts]), 
             backgroundColor: 'rgb(0, 0, 255)',
@@ -270,7 +272,7 @@ export default {
             fill: {
               target: 3,
               below: 'transparent',
-              above: 'rgba(255, 0, 0, 0.2)'
+              above: 'rgba(255, 0, 0, 0.3)'
             },
             data: this.sampleTimestamps.map((ts) => this.upperConfidenceLevels[ts]), 
             backgroundColor: 'rgba(255, 0, 0, 0.2)',
@@ -288,12 +290,11 @@ export default {
 </script>
 
 <style>
-.graphContainer {
+.graph-background {
   position: relative;
-  width: 60%;
-  background-color: var(--secondary-color);
-  border-width: 2px;
-  border-color: black;
+  background-color: var(--primary-color);
+  width: 100%;
+  height: 100%;
   border-radius: 5px;
 }
 

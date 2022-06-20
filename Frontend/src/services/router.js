@@ -20,7 +20,7 @@ import addDoctorPage from '@/views/admin/addDoctorPage.vue'
 
 import pageNotFound from '@/views/pageNotFound.vue'
 
-import UserController from "@/globals.js"
+import UserController from "./userController"
 
 
 const routes = [
