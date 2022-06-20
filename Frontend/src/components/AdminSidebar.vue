@@ -2,13 +2,13 @@
     <SidebarContainer>
         <div class="sidebar-wrapper">
             <DropdownMenu id="patientsMenu" title="Patients" :items="[
-                {itemId: 'viewPatients', title: 'View patients', onClick: () => $router.push('patients')},
+                {itemId: 'viewPatients', title: 'View patients', onClick: () => $router.push('adminPatientsList')},
                 {itemId: 'addPatient', title: 'Add patient', onClick: () => $router.push('addPatient')}
                 ]"
                 @selected="(itemId) => selectedMenuItemId=itemId"
             />
             <DropdownMenu id="doctorsMenu" title="Doctors" :items="[
-                {itemId: 'viewDoctors', title: 'View doctors', onClick: () => $router.push('doctors')},
+                {itemId: 'viewDoctors', title: 'View doctors', onClick: () => $router.push('adminDoctorsList')},
                 {itemId: 'addDoctor', title: 'Add doctor', onClick: () => $router.push('addDoctor')}
                 ]"
                 @selected="(itemId) => selectedMenuItemId=itemId"

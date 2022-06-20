@@ -13,10 +13,15 @@ import changePasswordPage from '@/views/patient/changePasswordPage.vue'
 
 import doctorSite from '@/views/doctor/doctorSite.vue'
 import doctorPage from '@/views/doctor/doctorPage.vue'
+import patientsListPage from '@/views/doctor/patientsListPage.vue'
+import doctorGraphPage from '@/views/doctor/doctorGraphPage.vue'
 
 import adminSite from '@/views/admin/adminSite.vue'
 import addPatientPage from '@/views/admin/addPatientPage.vue'
 import addDoctorPage from '@/views/admin/addDoctorPage.vue'
+import adminPatientsListPage from '@/views/admin/adminPatientsListPage.vue'
+import adminDoctorsListPage from '@/views/admin/adminDoctorsListPage.vue'
+import adminEditUserPage from '@/views/admin/adminEditUserPage'
 
 import pageNotFound from '@/views/pageNotFound.vue'
 
@@ -89,6 +94,7 @@ const routes = [
     },
     {
         path: '/doctor',
+        redirect: { name: 'patients' },
         component: doctorSite,
         name: 'doctorSite',
         meta: {
@@ -99,6 +105,16 @@ const routes = [
                 path: 'user',
                 component: doctorPage,
                 name: "doctor",
+            },
+            {
+                path: 'patients',
+                component: patientsListPage,
+                name: "patients"
+            },
+            {
+                path: 'patientGraph',
+                component: doctorGraphPage,
+                name: 'doctorGraphPage'
             }
         ]
     },
@@ -120,6 +136,21 @@ const routes = [
                 path: 'addDoctor',
                 component: addDoctorPage,
                 name: 'addDoctor'
+            },
+            {
+                path: 'adminPatientsList',
+                component: adminPatientsListPage,
+                name: 'adminPatientsListPage'
+            },
+            {
+                path: 'adminDoctorsList',
+                component: adminDoctorsListPage,
+                name: 'adminDoctorsListPage'
+            },
+            {
+                path: 'adminEditUser',
+                component: adminEditUserPage,
+                name: 'adminEditUserPage'
             }
         ]
     },
