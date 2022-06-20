@@ -89,15 +89,5 @@ public class PatientController {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok(patient.get().getDoctor());
-	}
-	
-	@GetMapping("/patients/{patientId}/measurements")
-	public ResponseEntity<List<Measurement>> getMeasurementsFromPatient(@PathVariable int patientId) {
-		Optional<Patient> p = patientRepository.findById(patientId);
-		if(p.isEmpty()) {
-			return ResponseEntity.notFound().build();
-		}
-		return ResponseEntity.ok(p.get().getMeasurements());
-	}
-	
+	}	
 }

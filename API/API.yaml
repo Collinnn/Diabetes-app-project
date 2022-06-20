@@ -177,7 +177,23 @@ paths:
       responses:
         "204":
           description: The patient has been deleted
-          
+  
+  /patients/{patientId}/doctor:
+    get:
+      summary: Gets the doctor associated with a patient
+      parameters:
+        - in: path
+          name: patientId
+          type: integer
+          description: The id of the patient
+          required: true
+      responses:
+        "200":
+          description: The patient's doctor
+          schema:
+            $ref: "#/definitions/Doctor"
+        "404":
+          description: The patient cannot be found
           
   /patients/{patientId}/measurements:
     get:
@@ -261,8 +277,13 @@ definitions:
         type: string
       dateOfBirth:
         type: string
+        format: date
       doctor:
         $ref: "#/definitions/Doctor"
+      measurements:
+        type: array
+        items:
+          $ref: "#/definitions/Measurement"
         
   Doctor:
     type: object
@@ -275,6 +296,10 @@ definitions:
         type: string
       lastName:
         type: string
+      patients:
+        type: array
+        items:
+          $ref: "#/definitions/Patient"
           
   Measurement:
     type: object
