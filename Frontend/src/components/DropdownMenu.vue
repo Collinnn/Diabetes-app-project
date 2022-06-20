@@ -45,7 +45,7 @@ button:hover {
     height: 40px;
     width: 100%;
     cursor: pointer;
-    background-color: var(--accent-color);
+    background-color: inherit;
     border: none;
     color: var(--text-color);
     text-align: left;
