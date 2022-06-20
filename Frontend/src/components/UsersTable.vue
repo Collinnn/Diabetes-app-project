@@ -30,16 +30,14 @@
     export default {
         data() {
             return {
-                rows: [
-                    {id: 1, firstName: "Gauss", lastName: "Jordan", dateOfBirth: "1998-12-07"},
-                    {id: 2, firstName: "Jørgen", lastName: "Villadsen", dateOfBirth: "1979-10-10"},
-                    {id: 3, firstName: "Michael", lastName: "Pedersen", dateOfBirth: "1969-06-09"}
-                ],
                 visibleRows: [],
-                columnNames: ['Id','First Name', 'Last Name', 'Date of Birth'],
                 order: 'asc',
-                sortIndex: null
+                index: null
             }
+        },
+        props: {
+            rows: Array,
+            columnNames: Array
         },
         methods: {
             search(e) {
@@ -47,6 +45,11 @@
                 this.visibleRows = this.rows.filter(row => rowToString(row).toLowerCase().includes(term))
             },
             sortColumn(index) {
+                //this ensures that every time a new column is clicked, the default sorting order is ascending
+                if(!this.index == index) {
+                    this.order = 'asc'
+                }
+                this.index = index
                 if(this.order=='asc') {
                     switch(index) {
                         case 0: this.visibleRows.sort((a,b) => (a.id < b.id) ? -1: (a.id > b.id) ? 1: 0)
@@ -81,7 +84,7 @@
             }
         },
         mounted() {
-            this.visibleRows = this.rows
+            this.visibleRows = [...this.rows]
         }
     }
 </script>
