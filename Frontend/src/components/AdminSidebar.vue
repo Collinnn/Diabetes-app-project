@@ -38,7 +38,7 @@ export default {
     },
     watch: {
         selectedMenuItemId(value, oldValue) {
-            if (oldValue != null) {
+            if (oldValue != null && document.getElementById(oldValue) != null) {
                 document.getElementById(oldValue).style.backgroundColor = ""
             }
             document.getElementById(value).style.backgroundColor = "var(--primary-color)"
