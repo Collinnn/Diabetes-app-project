@@ -1,41 +1,100 @@
 <template>
 <div>
+    <div class = search-bar>
+        <input type="text" placeholder="Search users" @input="search">
+    </div> 
     <div class="table-wrapper">
         <table class="table">
             <thead>
                <tr>
-                <th v-for="(names,key) in columnNames" :key="key">{{names}}</th>
+                <th v-for="(names,index) in columnNames" :key="index" @click="sortColumn(index)">{{names}}</th>
                </tr>
             </thead>
             <tbody>
-                <tr v-for="(element,key) in rowElements" :key="key">
-                    <td v-for="(entry,key) in element" :key="key">{{entry}}</td>
+                <tr v-for="(element,index) in visibleRows" :key="index">
+                    <td v-for="(entry,index) in element" :key="index">{{entry}}</td>
                 </tr>
             </tbody>
         </table>
     </div>
+    <p id="tutorial">Click on a column header to sort in ascending order. Click again for descending order.</p>
 </div>
 </template>
 
 <script>
+
+    const rowToString = function (row) {
+        return Object.values(row).join(" ")
+    }
+
     export default {
         data() {
             return {
-                rowElements: [
+                rows: [
                     {id: 1, firstName: "Gauss", lastName: "Jordan", dateOfBirth: "1998-12-07"},
                     {id: 2, firstName: "Jørgen", lastName: "Villadsen", dateOfBirth: "1979-10-10"},
                     {id: 3, firstName: "Michael", lastName: "Pedersen", dateOfBirth: "1969-06-09"}
                 ],
-                columnNames: ['Id','First Name', 'Last Name', 'Date of Birth']
+                visibleRows: [],
+                columnNames: ['Id','First Name', 'Last Name', 'Date of Birth'],
+                order: 'asc',
+                sortIndex: null
             }
+        },
+        methods: {
+            search(e) {
+                const term = e.target.value.toLowerCase();
+                this.visibleRows = this.rows.filter(row => rowToString(row).toLowerCase().includes(term))
+            },
+            sortColumn(index) {
+                if(this.order=='asc') {
+                    switch(index) {
+                        case 0: this.visibleRows.sort((a,b) => (a.id < b.id) ? -1: (a.id > b.id) ? 1: 0)
+                        this.order='desc'
+                        break
+                        case 1: this.visibleRows.sort((a,b) => (a.firstName < b.firstName) ? -1: (a.firstName > b.firstName) ? 1: 0)
+                        this.order='desc'
+                        break
+                        case 2: this.visibleRows.sort((a,b) => (a.lastName < b.lastName) ? -1: (a.lastName > b.lastName) ? 1: 0)
+                        this.order='desc'
+                        break
+                        case 3: this.visibleRows.sort((a,b) => (a.dateOfBirth < b.dateOfBirth) ? -1: (a.dateOfBirth > b.dateOfBirth) ? 1: 0)
+                        this.order='desc'
+                        break
+                    }
+                } else {
+                    switch(index) {
+                        case 0: this.visibleRows.sort((a,b) => (a.id > b.id) ? -1: (a.id < b.id) ? 1: 0)
+                        this.order='asc'
+                        break
+                        case 1: this.visibleRows.sort((a,b) => (a.firstName > b.firstName) ? -1: (a.firstName < b.firstName) ? 1: 0)
+                        this.order='asc'
+                        break
+                        case 2: this.visibleRows.sort((a,b) => (a.lastName > b.lastName) ? -1: (a.lastName < b.lastName) ? 1: 0)
+                        this.order='asc'
+                        break
+                        case 3: this.visibleRows.sort((a,b) => (a.dateOfBirth > b.dateOfBirth) ? -1: (a.dateOfBirth < b.dateOfBirth) ? 1: 0)
+                        this.order='asc'
+                        break
+                    }
+                }                
+            }
+        },
+        mounted() {
+            this.visibleRows = this.rows
         }
     }
 </script>
 
 <style>
-    .container {
-        display:flex;
-        justify-content: center;
+    .search-bar {
+        text-align: left;
+        margin-bottom: 20px;
+        font-family: sans-serif;
+    }
+    .search-bar input {
+        min-width: 200px;
+        font-size: 0.9em;
     }
     .table-wrapper {
         width:810px;
@@ -55,7 +114,6 @@
         box-shadow: 0 0 20px rgba(0,0,0,0.15);
         font-size:0.9em;
         font-family: sans-serif;
-        height: 200px;
         overflow-y: scroll;
     }
     .table thead tr {
@@ -72,5 +130,9 @@
         text-align: left;
     }
     .table tbody tr:hover {background-color: white}
+    #tutorial {
+        color:red;
+        text-align: left;
+    }
     
 </style>
