@@ -14,6 +14,7 @@ import changePasswordPage from '@/views/patient/changePasswordPage.vue'
 import doctorSite from '@/views/doctor/doctorSite.vue'
 import doctorPage from '@/views/doctor/doctorPage.vue'
 import patientsListPage from '@/views/doctor/patientsListPage.vue'
+import doctorGraphPage from '@/views/doctor/doctorGraphPage.vue'
 
 import adminSite from '@/views/admin/adminSite.vue'
 import addPatientPage from '@/views/admin/addPatientPage.vue'
@@ -106,6 +107,11 @@ const routes = [
                 path: 'patients',
                 component: patientsListPage,
                 name: "patients"
+            },
+            {
+                path: 'patientGraph',
+                component: doctorGraphPage,
+                name: 'doctorGraphPage'
             }
         ]
     },

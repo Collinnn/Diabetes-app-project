@@ -1,7 +1,7 @@
 <template>
     <title>Patients list page</title> 
     <div class="container">
-        <UsersTable :columnNames="this.columnNames" :rows="this.rows"/>
+        <UsersTable :columnNames="this.columnNames" :rows="this.patients" @rowClick="patientsPage"/>
     </div>
 </template>
 
@@ -12,19 +12,29 @@ export default {
     name: "patientsListPage",
     data() {
         return {
-            rows: [
-                {id: 1, firstName: "Gauss", lastName: "Jordan", dateOfBirth: "1998-12-07"},
-                {id: 2, firstName: "Jørgen", lastName: "Villadsen", dateOfBirth: "1979-10-10"},
-                {id: 3, firstName: "Michael", lastName: "Pedersen", dateOfBirth: "1969-06-09"},
-                {id: 4, firstName: "Banana", lastName: "Split", dateOfBirth: "1911-11-11"},
-                {id: 5, firstName: "Lille", lastName: "Meyer", dateOfBirth: "2020-12-24"}
-
-            ],
-            columnNames: ["Id","First Name", "Last Name", "Date of Birth"]
+            patients: [],
+            columnNames: ["Id","First Name", "Last Name", "Date of Birth"],
+            randomVal: "0"
         }
+    },
+    async mounted() {
+        await this.axios.get(this.$backend.getUrlGetPatientsFromDoctorById(this.$userController.getUserData().id))
+        .then((response) => this.patients = response.data)
+        console.log(this.patients)
+        this.patients = this.patients.reduce((res,curr) => {
+            res.push({id: curr.id, firstName: curr.firstName, lastName: curr.lastName, dateOfBirth: curr.dateOfBirth})
+            return res
+        },[])
+        console.log(this.patients)
     },
     components: {
         UsersTable
+    },
+    methods: {
+        patientsPage(patient) {
+            console.log(patient)
+            this.$router.push({name: 'doctorGraphPage'})
+        }
     }
 }
 

@@ -11,13 +11,15 @@
                </tr>
             </thead>
             <tbody>
-                <tr v-for="(element,index) in visibleRows" :key="index">
-                    <td v-for="(entry,index) in element" :key="index">{{entry}}</td>
+                <tr v-for="(patient,index) in visibleRows" :key="index" @click="this.$emit('rowClick',patient)">
+                    <td v-for="(entry,index) in patient" :key="index">{{entry}}</td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <p id="tutorial">Click on a column header to sort in ascending order. Click again for descending order.</p>
+    <p id="tutorial">Click on a column header to sort in ascending order. Click again for descending order.
+    <br>Click on a row to be redirected to that user's page.
+    </p>
 </div>
 </template>
 
@@ -39,6 +41,7 @@
             rows: Array,
             columnNames: Array
         },
+        emits: ['rowClick'],
         methods: {
             search(e) {
                 const term = e.target.value.toLowerCase();
@@ -84,7 +87,12 @@
             }
         },
         mounted() {
-            this.visibleRows = [...this.rows]
+            this.visibleRows = this.rows
+        },
+        watch: {
+            rows(){
+                this.visibleRows = this.rows
+            }
         }
     }
 </script>
