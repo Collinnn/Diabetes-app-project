@@ -31,7 +31,7 @@
         </div>
     </div>
     <div id="showDropdown" v-if="settingsMenu.isVisible" >
-            <ProfileDropdown />
+        <ProfileDropdown />
     </div>
 </template>
 
@@ -74,8 +74,7 @@ import ProfileDropdown from "./ProfileDropdown.vue"
             this.$userController.setDarkTheme(!(this.$userController.getDarkTheme()));
             this.darkMode = this.$userController.getDarkTheme();
             if(this.darkMode) {
-                console.log("dark-theme");
-                console.log(this.$userController.getDarkTheme())
+                console.log("Dark theme enabled");
                 document.getElementById('app').style.setProperty("--primary-color",'#424242');
                 document.getElementById('app').style.setProperty("--secondary-color", '#212121');
                 document.getElementById('app').style.setProperty("--accent-color", '#747474');
@@ -83,8 +82,7 @@ import ProfileDropdown from "./ProfileDropdown.vue"
                 document.getElementById('app').style.setProperty("--highlight-color", '#B4B4B4');
                 document.getElementById('app').style.setProperty("--text-color", '#DDDDDD');
             } else {
-                console.log("light-theme");
-                console.log(this.$userController.getDarkTheme())
+                console.log("Light theme enabled");
                 document.getElementById('app').style.setProperty("--primary-color", '#EBEBF2');
                 document.getElementById('app').style.setProperty("--secondary-color",'#6295D9');
                 document.getElementById('app').style.setProperty("--accent-color", '#b1b8e3');
@@ -155,10 +153,6 @@ import ProfileDropdown from "./ProfileDropdown.vue"
 }
 #userButton {
     margin-right: 20px;
-}
-.settingsButton {
-    margin: 0px 10px;
-    padding: 10px 0px;
 }
 #homeIcon {
     background: url('@/assets/Home.svg') no-repeat center;

@@ -1,11 +1,11 @@
 <template>
     <title>Landing page</title>
-    <div class="container">
-        <button class="landingButton" @click="goToPage('patientLogin')">
+    <svg class="large-logo"></svg>
+    <div class="landing-container">
+        <button class="login-button" @click="goToPage('patientLogin')">
         Patient Login
         </button>
-
-        <button class="landingButton" @click="goToPage('doctorLogin')">
+        <button class="login-button" @click="goToPage('doctorLogin')">
         Doctor Login
         </button>
         <router-link id="adminLoginLink" to="/adminLogin"> Login as administrator </router-link>
@@ -29,20 +29,17 @@ export default {
 }
 </script>
 <style scoped>
-.container{
-    position: relative;
-    top:300px;
-    left:20%;
-    align-content: center;
-    max-width: 50%;
+.landing-container{
     background-color: var(--secondary-color);
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     border-radius: 40px;
+    width: 550px;
+    height: 360px;
 }
-.landingButton{
+.login-button{
     background-color: var(--accent-color);
     border: 1cm;
     color: #002851;
@@ -56,7 +53,7 @@ export default {
     border-radius: 20px;
     float:inherit;
 }
-.landingButton:hover{
+.login-button:hover{
     background: rgba(255, 255, 255, 0.60);
 }
 #adminLoginLink {
@@ -65,4 +62,6 @@ export default {
     text-decoration: underline;
     margin-bottom: 10px;
 }
+
+
 </style>

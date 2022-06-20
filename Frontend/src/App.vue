@@ -1,5 +1,7 @@
 <template>
-  <router-view />
+  <div class="page-wrapper">
+      <router-view />
+  </div>
 </template>
 
 <script>
@@ -45,7 +47,7 @@ export default {
 }
 </script>
 
-<style>
+<style> /* Applies to all pages (in all views) */
 #app {
   position: fixed;
   top: 0;
@@ -58,7 +60,7 @@ export default {
   color: var(--text-color);
   background-color: var(--primary-color);
 }
-.page-container {  /* Applies to all page containers (in all views) */
+.page-container {  
     position: absolute;
     top: var(--topbar-height);
     left: var(--sidebar-max-width);
@@ -73,6 +75,11 @@ export default {
     align-items: center;
     width: calc(100vw - var(--sidebar-max-width));
     height: calc(100vh - var(--topbar-height));
+}
+.large-logo {
+  height: 300px;
+  background: url('@/assets/Home.svg') no-repeat center/300px 300px;
+  padding-bottom: 30px;
 }
 
 </style>
