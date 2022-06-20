@@ -9,11 +9,7 @@
         Doctor Login
         </button>
         <router-link id="adminLoginLink" to="/adminLogin"> Login as administrator </router-link>
-    </div>
-
-    </div>
-
-   
+    </div>   
 </template>
 
 <script>
