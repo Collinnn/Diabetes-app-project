@@ -93,7 +93,6 @@ export default {
     display: flex;
     align-items: center;
     gap: 40px;
-    margin-top:10%;
     flex-direction: column;
 }
 .login-Comp{

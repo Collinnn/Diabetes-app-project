@@ -42,7 +42,7 @@ export default {
     flex-direction: column;
     align-items: center;
     gap: 40px;
-    margin-top:10%;
+    margin-top:2%;
     
     
 
