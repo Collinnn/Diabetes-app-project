@@ -2,6 +2,7 @@
     <div class="submission_container">
         <h3>Add a meals carbohydrate amount</h3>
         <!--Meals-->
+        <p class="wrongInput" v-if="this.wrongInput">{{this.wrongInputString}}</p>
         <div class="input" id="timer">
             Hours:
             <select @change="selectHour($event)" class="form-control">
@@ -10,7 +11,7 @@
             </select>
             Minutes:
             <select @change="selectMinute($event)" class="form-control">
-                <option disabled value="">Please select an min interval</option>
+                <option disabled value="">Please select a min interval</option>
                 <option v-for="{id,title} in minuteItems" :key="id" :value="title">{{title}}</option>
             </select>
         </div>
@@ -45,6 +46,8 @@ export default {
         return{
             hourItems: hours.reduce((acc,elem) => {acc.push({id:elem,title:elem}); return acc},[]),
             minuteItems: minutes.reduce((acc,elem) => {acc.push({id:elem,title:elem}); return acc},[]),
+            wrongInput: false,
+            wrongInputString: "There is no logged measurement for the chosen hour and minute",
             inputvalues:{
                 selectedHour: null,
                 selectedMinute:null,
@@ -130,7 +133,9 @@ export default {
             await this.axios.put(this.$backend.getUrlPutMeasurementByIdAndTimestamp(id,this.dateToString(today)),this.measurement)
             .then(response =>{
                 console.log(response)
-            }).catch((error) => console.log(error));
+            }).catch(() =>
+                        this.wrongInput = true
+                    );
         }
     }
 }
@@ -153,6 +158,10 @@ export default {
     background-color: var(--acent-color);
     justify-content: space-between;
     margin: 5%;
+}
+.wrongInput{
+    color:red;
+    font-size: 20px; 
 }
 
 </style>

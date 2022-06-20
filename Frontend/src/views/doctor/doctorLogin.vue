@@ -9,7 +9,7 @@
                 <h1 class="title">Doctor Login</h1>
                 <input type="number" name="id" v-model="input.id" placeholder="Username..." />
                 <input type="password" name="password" v-model="input.password" placeholder="Password..." />
-                <p class="wrongInput">{{this.input.wrongInputString}}</p>
+                <p class="wrongInput" v-if="this.input.wrongInput">{{this.input.wrongInputString}}</p>
             </div>
         <div class="buttons">
             <StandardButton name="Back" @click="back()"></StandardButton>

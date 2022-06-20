@@ -10,6 +10,7 @@
                 <h1 class="title">Patient Login</h1>
                 <input type="number" name="id" v-model="input.id" placeholder="Username..." />
                 <input type="password" name="password" v-model="input.password" placeholder="Password..." />
+                <p class="wrongInput" v-if="this.input.wrongInput">{{this.input.wrongInputString}}</p>
             </div>
             <div class="buttons">
                 <standard-button name="Back" @click="back()"></standard-button>
@@ -31,7 +32,9 @@ export default {
             return {
                 input: {
                     id: null,
-                    password: ""
+                    password: "",
+                    wrongInput: false,
+                    wrongInputString: ""
                 }
             }
         },
@@ -39,16 +42,20 @@ export default {
             async login() {
                 if(this.input.id != null || this.input.password != "") {
                     let data = await this.getPatientData()
-                    if(this.isLoginValid(data.password)){
+                    if(data != null && this.isLoginValid(data.password)){
                         //let doctor = await this.getDoctor()  
                         //data.doctor = doctor
                         console.log("Logged in succesfully")
                         this.$router.push("patientSite");
                         this.$userController.logIn("patient", data)
                     }else{
+                        this.input.wrongInput = true,
+                        this.input.wrongInputString = "Username and/or password was wrong";
                         console.log("username and/or password was wrong");
                     }
                 } else {
+                    this.input.wrongInput = true,
+                    this.input.wrongInputString = "Username and/or password was empty";
                     console.log("Username and/or password was empty");
             }
         },
@@ -57,7 +64,9 @@ export default {
             await this.axios.get(this.$backend.getUrlGetPatientById(this.input.id))
                     .then(response =>{
                         data = response.data
-                    }).catch((error) => console.log(error));
+                    }).catch(() =>
+                        this.input.wrongInput = true,
+                    );
             return data
         },
         isLoginValid(password){
@@ -119,4 +128,9 @@ export default {
     justify-content: center;
     flex-direction: row;
 }
+.wrongInput{
+    color:red;
+    font-size: 20px; 
+}
+
 </style>
