@@ -8,15 +8,22 @@ import adminLogin from '@/views/admin/adminLogin.vue'
 import patientSite from '@/views/patient/patientSite.vue'
 import graphPage from '@/views/patient/graphPage.vue'
 import mealPage from '@/views/patient/mealPage.vue'
-import userPage from '@/views/patient/userPage.vue'
-import changePasswordPage from '@/views/patient/changePasswordPage.vue'
+import patientUserPage from '@/views/patient/patientUserPage.vue'
+import changePatientPasswordPage from '@/views/patient/changePatientPasswordPage.vue'
 
 import doctorSite from '@/views/doctor/doctorSite.vue'
-import doctorPage from '@/views/doctor/doctorPage.vue'
+import doctorUserPage from '@/views/doctor/doctorUserPage.vue'
+import patientsListPage from '@/views/doctor/patientsListPage.vue'
+import doctorGraphPage from '@/views/doctor/doctorGraphPage.vue'
+import changeDoctorPasswordPage from '@/views/doctor/changeDoctorPasswordPage.vue'
+
 
 import adminSite from '@/views/admin/adminSite.vue'
 import addPatientPage from '@/views/admin/addPatientPage.vue'
 import addDoctorPage from '@/views/admin/addDoctorPage.vue'
+import adminPatientsListPage from '@/views/admin/adminPatientsListPage.vue'
+import adminDoctorsListPage from '@/views/admin/adminDoctorsListPage.vue'
+import adminEditUserPage from '@/views/admin/adminEditUserPage'
 
 import pageNotFound from '@/views/pageNotFound.vue'
 
@@ -77,18 +84,19 @@ const routes = [
             },
             {
                 path: 'user',
-                component: userPage,
-                name: 'user'
+                component: patientUserPage,
+                name: 'patientPage'
             },
             {
                 path: 'changePassword',
-                component: changePasswordPage,
-                name: 'changePassword'
+                component: changePatientPasswordPage,
+                name: 'changePatientPassword'
             },
         ]
     },
     {
         path: '/doctor',
+        redirect: { name: 'patients' },
         component: doctorSite,
         name: 'doctorSite',
         meta: {
@@ -97,9 +105,25 @@ const routes = [
         children: [
             {
                 path: 'user',
-                component: doctorPage,
-                name: "doctor",
-            }
+                component: doctorUserPage,
+                name: "doctorPage",
+            },
+            {
+                path: 'patients',
+                component: patientsListPage,
+                name: "patients"
+            },
+            {
+                path: 'patientGraph',
+                component: doctorGraphPage,
+                name: 'doctorGraphPage',
+                props: true
+            },
+            {
+                path: 'changePassword',
+                component: changeDoctorPasswordPage,
+                name: 'changeDoctorPassword'
+            },
         ]
     },
     {
@@ -120,6 +144,21 @@ const routes = [
                 path: 'addDoctor',
                 component: addDoctorPage,
                 name: 'addDoctor'
+            },
+            {
+                path: 'adminPatientsList',
+                component: adminPatientsListPage,
+                name: 'adminPatientsListPage'
+            },
+            {
+                path: 'adminDoctorsList',
+                component: adminDoctorsListPage,
+                name: 'adminDoctorsListPage'
+            },
+            {
+                path: 'adminEditUser',
+                component: adminEditUserPage,
+                name: 'adminEditUserPage'
             }
         ]
     },

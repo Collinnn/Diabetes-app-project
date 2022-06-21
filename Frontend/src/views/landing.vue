@@ -1,22 +1,15 @@
 <template>
     <title>Landing page</title>
-    <div class="pagecontainer">
-    <div class="pictureContainer" >
-        <svg class="picture"></svg>
-    </div>
-    <div class="container">
-        <button class="landingButton" @click="goToPage('patientLogin')">
+    <svg class="large-logo"></svg>
+    <div class="landing-container">
+        <button class="login-button" @click="goToPage('patientLogin')">
         Patient Login
         </button>
-        <button class="landingButton" @click="goToPage('doctorLogin')">
+        <button class="login-button" @click="goToPage('doctorLogin')">
         Doctor Login
         </button>
         <router-link id="adminLoginLink" to="/adminLogin"> Login as administrator </router-link>
-    </div>
-
-    </div>
-
-   
+    </div>   
 </template>
 
 <script>
@@ -36,29 +29,17 @@ export default {
 }
 </script>
 <style scoped>
-
-.pagecontainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-    margin-top:2%;
-    
-    
-
-}
-
-.container{
+.landing-container{
     background-color: var(--secondary-color);
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     border-radius: 40px;
-    width: 400px;
-    height: 300px;
-    flex-grow: 1;
+    width: 550px;
+    height: 360px;
 }
-.landingButton{
+.login-button{
     background-color: var(--accent-color);
     border: 1cm;
     color: #002851;
@@ -72,7 +53,7 @@ export default {
     border-radius: 20px;
 
 }
-.landingButton:hover{
+.login-button:hover{
     background: rgba(255, 255, 255, 0.60);
 }
 #adminLoginLink {
@@ -80,18 +61,6 @@ export default {
     color: var(--text-color);
     text-decoration: underline;
     margin-bottom: 10px;
-}
-.pictureContainer{
-    display: flex;
-    align-items: center;
-    height:300px;
-
-}
-.picture{
-    display: flex;
-    height: 400px;
-    background: url('@/assets/Home.svg') no-repeat center;
-    background-size: 300px 300px;
 }
 
 

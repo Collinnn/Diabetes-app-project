@@ -28,7 +28,7 @@ let specialChars = /[ `´§½!@#$%¤€£^¨&*()_+=[\]{};':"\\|,.<>/?~-]/
 let numbers = /\d/
 
 export default {
-    name: "changePasswordPage",
+    name: "changePatientPasswordPage",
     data(){
         return{
             form:{

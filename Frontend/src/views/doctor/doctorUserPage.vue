@@ -5,7 +5,7 @@
             <h3>Doctor Page</h3>
             <div>User id: {{this.$userController.getUserData().id}}</div>
             <div>User name: {{this.$userController.getUserData().firstName}} {{this.$userController.getUserData().lastName}}</div>
-            <button @click="goToPage('changePassword')"> Change password </button>
+            <button @click="goToPage('changeDoctorPassword')"> Change password </button>
         </div>
     </div>
 </template>

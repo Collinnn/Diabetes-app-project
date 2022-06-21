@@ -1,22 +1,17 @@
 <template>
     <title>Doctor Login</title>
-    <div class="page-wrapper">
-        <div class="pictureContainer">
-             <svg class="picture"></svg>
+    <svg class="large-logo"></svg>
+    <div class="login-container">
+        <div class="inputs">
+            <h1 class="title">Doctor Login</h1>
+            <input type="text" name="id" v-model="input.id" placeholder="Username..." autofocus/>
+            <input type="password" name="password" v-model="input.password" placeholder="Password..." />
+            <p class="wrongInput" v-if="this.input.wrongInput">{{this.input.wrongInputString}}</p>
         </div>
-        <div class="login-Comp">
-            <div class="inputs">
-                <h1 class="title">Doctor Login</h1>
-                <input type="number" name="id" v-model="input.id" placeholder="Username..." />
-                <input type="password" name="password" v-model="input.password" placeholder="Password..." />
-                <p class="wrongInput" v-if="this.input.wrongInput">{{this.input.wrongInputString}}</p>
-            </div>
-        <div class="buttons">
+        <div class="standard-buttons">
             <StandardButton name="Back" @click="back()"></StandardButton>
             <StandardButton name="Login" @click="login()"></StandardButton>
         </div>
-        </div>
-
     </div>
 
 </template>
@@ -80,41 +75,21 @@ export default {
 }
 </script>
 <style scoped>
-
-.page-wrapper{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-}
-.login-Comp{
-    position:relative;
+.login-container {
     background-color: var(--secondary-color);
     border-radius: 40px;
+    height: 280px;
     width: 470px;
     padding: 40px;
 }
-.login-Comp .title{ 
-    padding: 0px 0px 0px 0;
-    font-size: 60px;
-    
-}
-.pictureContainer{
-    display: flex;
-    align-items: center;
-    height:300px;
-
+.title{ 
+    font-size: 60px; 
 }
 .inputs{
     gap:10px
 }
-.picture{
-    display: flex;
-    height: 400px;
-    background: url('@/assets/Home.svg') no-repeat center;
-    background-size: 300px 300px;
-}
-.buttons{
+
+.standard-buttons {
     display: flex;
     margin-top:5%;
     gap:10px;
