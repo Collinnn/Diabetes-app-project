@@ -19,7 +19,7 @@ ChartJS.register(...registerables)
 
 
 export default {
-  name: 'GraphChart',
+  name: 'glucoseChart',
   components: { Line },
   emits: ["lowBloodSugar", "highBloodSugar"],
   props: {

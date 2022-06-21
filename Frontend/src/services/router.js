@@ -8,13 +8,15 @@ import adminLogin from '@/views/admin/adminLogin.vue'
 import patientSite from '@/views/patient/patientSite.vue'
 import graphPage from '@/views/patient/graphPage.vue'
 import mealPage from '@/views/patient/mealPage.vue'
-import userPage from '@/views/patient/userPage.vue'
-import changePasswordPage from '@/views/patient/changePasswordPage.vue'
+import patientUserPage from '@/views/patient/patientUserPage.vue'
+import changePatientPasswordPage from '@/views/patient/changePatientPasswordPage.vue'
 
 import doctorSite from '@/views/doctor/doctorSite.vue'
-import doctorPage from '@/views/doctor/doctorPage.vue'
+import doctorUserPage from '@/views/doctor/doctorUserPage.vue'
 import patientsListPage from '@/views/doctor/patientsListPage.vue'
 import doctorGraphPage from '@/views/doctor/doctorGraphPage.vue'
+import changeDoctorPasswordPage from '@/views/doctor/changeDoctorPasswordPage.vue'
+
 
 import adminSite from '@/views/admin/adminSite.vue'
 import addPatientPage from '@/views/admin/addPatientPage.vue'
@@ -82,13 +84,13 @@ const routes = [
             },
             {
                 path: 'user',
-                component: userPage,
-                name: 'user'
+                component: patientUserPage,
+                name: 'patientPage'
             },
             {
                 path: 'changePassword',
-                component: changePasswordPage,
-                name: 'changePassword'
+                component: changePatientPasswordPage,
+                name: 'changePatientPassword'
             },
         ]
     },
@@ -103,8 +105,8 @@ const routes = [
         children: [
             {
                 path: 'user',
-                component: doctorPage,
-                name: "doctor",
+                component: doctorUserPage,
+                name: "doctorPage",
             },
             {
                 path: 'patients',
@@ -114,8 +116,14 @@ const routes = [
             {
                 path: 'patientGraph',
                 component: doctorGraphPage,
-                name: 'doctorGraphPage'
-            }
+                name: 'doctorGraphPage',
+                props: true
+            },
+            {
+                path: 'changePassword',
+                component: changeDoctorPasswordPage,
+                name: 'changeDoctorPassword'
+            },
         ]
     },
     {

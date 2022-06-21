@@ -3,7 +3,7 @@
         <h3> Doctor Submission Form </h3>
         <form @submit.prevent="submitForm">
             <ul>
-                <p v-requirement v-for="{requirement} in unhandledRequirements" :key="requirement"> *{{ requirement }} </p>
+                <p class="requirements-text" v-requirement v-for="{requirement} in unhandledRequirements" :key="requirement"> *{{ requirement }} </p>
                 <label>
                     First name: <input type="text" v-model="form.firstName" />
                 </label>
@@ -54,7 +54,7 @@ export default {
                     this.form.firstName = ""
                     this.form.lastName = ""
                     this.form.password = ""
-                    console.log("Doctor submitted")
+                    console.log("Doctor submitted succesfully")
                 })
                 .catch(() => console.log("Invalid request"))
             }
@@ -96,8 +96,11 @@ export default {
     #container {
         width: 400px;
         border-radius: 20px;
-        background-color: rgb(192, 192, 192);
+        background-color: var(--accent-color);
         padding: 10px;
+    }
+    .requirements-text {
+        color: var(--strong-text-color);
     }
 
 </style>

@@ -17,9 +17,13 @@
             </tbody>
         </table>
     </div>
-    <p id="tutorial">Click on a column header to sort in ascending order. Click again for descending order.
-    <br>Click on a row to be redirected to that user's page.
-    </p>
+    <div id="tutorialContainer">
+        <span id="tutorial-tip" style="font-size: '24px'; font-weight: bold;"> #Tip </span>
+        <p id="tutorial">Click on a column header to sort in ascending order. Click again for descending order.
+        <br>Click on a row to be redirected to that user's page.
+        </p>
+    </div>
+    
 </div>
 </template>
 
@@ -143,10 +147,25 @@
         border-bottom: 1px solid lightgray;
         text-align: left;
     }
-    .table tbody tr:hover {background-color: white}
-    #tutorial {
-        color:red;
+    .table tbody tr:hover {
+        background-color: white
+    }
+    #tutorialContainer {
+        width: fit-content;
+        height: fit-content;
+        padding: 10px;
+        margin-top: 10px;
+        border: solid;
+        border-radius: 5px;
+        border-width: 1px;
+        border-color: black;
         text-align: left;
+    }
+    #tutorialTip {
+        margin-top: 10px;
+    }
+    #tutorial {
+        color:var(--text-color);
     }
     
 </style>

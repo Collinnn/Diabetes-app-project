@@ -1,7 +1,7 @@
 <template>
     <title>Patients list page</title> 
     <div class="container">
-        <UsersTable :columnNames="this.columnNames" :rows="this.patients" @rowClick="patientsPage"/>
+        <UsersTable :columnNames="this.columnNames" :rows="this.patients" @rowClick="goToPatientGraphPage"/>
     </div>
 </template>
 
@@ -29,9 +29,9 @@ export default {
         UsersTable
     },
     methods: {
-        patientsPage(patient) {
-            console.log(patient)
-            this.$router.push({name: 'doctorGraphPage'})
+        goToPatientGraphPage(patient) {
+            const patientId = Number(patient.id)
+            this.$router.push({name: 'doctorGraphPage', params: {userId: patientId}})
         }
     }
 }

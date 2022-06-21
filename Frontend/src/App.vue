@@ -16,21 +16,21 @@ export default {
     methods: {
       toggleDarkmode() {
           if(this.$userController.getDarkTheme()){
-            console.log("dark-theme"); 
+            console.log("Dark theme enabled");
             document.getElementById('app').style.setProperty("--primary-color",'#424242');
             document.getElementById('app').style.setProperty("--secondary-color", '#212121');
             document.getElementById('app').style.setProperty("--accent-color", '#747474');
-            document.getElementById('app').style.setProperty("--variant-color", '');
             document.getElementById('app').style.setProperty("--highlight-color", '#B4B4B4');
+            document.getElementById('app').style.setProperty("--strong-text-color", '#911d1d');
             document.getElementById('app').style.setProperty("--text-color", '#DDDDDD');
 
           } else {
-            console.log("light-theme"); 
+            console.log("Light theme enabled");
             document.getElementById('app').style.setProperty("--primary-color", '#EBEBF2');
             document.getElementById('app').style.setProperty("--secondary-color",'#6295D9');
             document.getElementById('app').style.setProperty("--accent-color", '#b1b8e3');
-            document.getElementById('app').style.setProperty("--variant-color", '');
             document.getElementById('app').style.setProperty("--highlight-color", '#EEF');
+            document.getElementById('app').style.setProperty("--strong-text-color", '#e00d0d');
             document.getElementById('app').style.setProperty("--text-color", '#2c3e50');
           }
       },
