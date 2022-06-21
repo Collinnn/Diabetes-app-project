@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="2048px" height="2048px" viewBox="0 0 2048 2048" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>DiApp_1</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="2048" height="2048" rx="1024"></rect>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#F5F5F5" offset="100%"></stop>
+        </linearGradient>
+        <path d="M1050,1415.91169 C1266.49562,1415.91169 1442,1240.40731 1442,1023.91169 C1442,807.416066 1266.49562,631.911688 1050,631.911688 C924.666667,631.911688 799.333333,631.911688 674,631.911688 C665.163444,631.911688 658,639.075132 658,647.911688 C658,773.245022 658,898.578355 658,1023.91169 C658,1240.40731 833.504378,1415.91169 1050,1415.91169 Z" id="path-4"></path>
+        <filter x="-46.9%" y="-46.9%" width="202.0%" height="202.0%" filterUnits="objectBoundingBox" id="filter-5">
+            <feOffset dx="32" dy="32" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="128" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.16 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <path d="M843,944.911688 C913.692448,944.911688 971,887.604136 971,816.911688 C971,746.21924 913.692448,688.911688 843,688.911688 C805.666667,688.911688 768.333333,688.911688 731,688.911688 C722.163444,688.911688 715,696.075132 715,704.911688 C715,742.245022 715,779.578355 715,816.911688 C715,887.604136 772.307552,944.911688 843,944.911688 Z" id="path-6"></path>
+        <filter x="-143.8%" y="-143.8%" width="412.5%" height="412.5%" filterUnits="objectBoundingBox" id="filter-7">
+            <feOffset dx="32" dy="32" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="128" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.04 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-2">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Rectangle" fill="#A7BAF2" xlink:href="#path-1"></use>
+            <rect id="Rectangle" fill="#A7BAF2" mask="url(#mask-2)" x="0" y="0" width="2048" height="2048" rx="1024"></rect>
+            <rect id="Rectangle" fill="#000000" opacity="0.08" mask="url(#mask-2)" x="306" y="0" width="1024" height="1355"></rect>
+            <rect id="Rectangle" fill="#000000" opacity="0.02" mask="url(#mask-2)" x="-718" y="-662" width="1024" height="1355"></rect>
+            <rect id="Rectangle" fill="#000000" opacity="0.04" mask="url(#mask-2)" x="306" y="1355" width="1024" height="1355"></rect>
+            <rect id="Rectangle" fill="#000000" opacity="0.12" mask="url(#mask-2)" x="1330" y="693" width="718" height="1355"></rect>
+            <rect id="Rectangle" fill="#000000" opacity="0.16" mask="url(#mask-2)" x="1330" y="-662" width="718" height="1355"></rect>
+            <path d="M1050,1530 C1329.45608,1530 1556,1303.45608 1556,1024 C1556,744.543917 1329.45608,518 1050,518 C897.333333,518 744.666667,518 592,518 C565.490332,518 544,539.490332 544,566 C544,718.666667 544,871.333333 544,1024 C544,1176.66667 544,1329.33333 544,1482 C544,1508.50967 565.490332,1530 592,1530 C744.666667,1530 897.333333,1530 1050,1530 Z" id="Oval" fill="url(#linearGradient-3)" mask="url(#mask-2)"></path>
+            <g id="Oval" mask="url(#mask-2)">
+                <use fill="black" fill-opacity="1" filter="url(#filter-5)" xlink:href="#path-4"></use>
+                <use fill="#F26B76" fill-rule="evenodd" xlink:href="#path-4"></use>
+            </g>
+            <g id="Oval" mask="url(#mask-2)">
+                <use fill="black" fill-opacity="1" filter="url(#filter-7)" xlink:href="#path-6"></use>
+                <use fill="#FFA3AA" fill-rule="evenodd" xlink:href="#path-6"></use>
+            </g>
+            <rect id="Rectangle" stroke="#FFFFFF" stroke-width="52" mask="url(#mask-2)" x="26" y="26" width="1996" height="1996" rx="998"></rect>
+        </g>
+    </g>
+</svg>
