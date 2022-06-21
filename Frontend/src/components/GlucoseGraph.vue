@@ -36,7 +36,7 @@ export default {
       
       lowGlucoseLevel: 4,
       highGlucoseLevel: 7,
-      dataTimeSpan: 1*1*60*60*1000,  // *60 minutes* in milliseconds
+      dataTimeSpan: 1*24*60*60*1000,  // *24 hours* in milliseconds
       timer: null,
 
       chartOptions: {
@@ -93,7 +93,7 @@ export default {
     await this.loadData()
     this.timer = setInterval(async () => {
       this.updateData()
-    }, 60000) // Every 60 sec
+    }, 300000) // Every 5 min
   },
   beforeUnmount() {
     clearInterval(this.timer)
@@ -223,7 +223,7 @@ export default {
       let tmp;
       tmp = date.toISOString().split('T');
       tmp = tmp[1].split('.');
-      return tmp[0].substring(3, 5)
+      return tmp[0].substring(0, 5)
     }
   },
   computed: {
