@@ -2,7 +2,7 @@
     <div class="submission_container">
         <h3>Add a meals carbohydrate amount</h3>
         <!--Meals-->
-        <p class="wrongInput" v-if="this.wrongInput">{{this.wrongInputString}}</p>
+       
         <div class="input" id="timer">
             Hours:
             <select @change="selectHour($event)" class="form-control">
@@ -19,10 +19,10 @@
             <input type =number step="0.000001" min="0" v-model="this.inputvalues.carbohydrates" placeholder="Carbohydrate in grams"/>
             <input type =number step="0.000001" min="0" v-model="this.inputvalues.bolus" placeholder="Insulin bolus in U"/>  
             <input type =number step="0.000001" min="0" v-model="this.inputvalues.basal" placeholder="Basal flowrate mU/min"/>  
+            <standard-button name="Upload" @click="sendUpdate()"/>
         </div>
-        <div class="submit">
-            <button type="button" id="button" @click="sendUpdate()">Upload</button>
-        </div>
+         <p class="wrongInput" v-if="this.wrongInput">{{this.wrongInputString}}</p>
+
     </div>
 </template>
 
@@ -40,8 +40,12 @@
             ,'25','30','35','40','45'
             ,'50','55']
 
+import StandardButton from '@/components/StandardButton.vue'
 export default {
     name: "mealPage",
+    components:{
+        StandardButton
+    },
     data(){
         return{
             hourItems: hours.reduce((acc,elem) => {acc.push({id:elem,title:elem}); return acc},[]),
@@ -75,7 +79,6 @@ export default {
     },
     methods:{
         dateToString(date) {
-            console.log(date)
             let tmp ="";
             tmp = date.toISOString();
             tmp = tmp.replaceAll(":","%3A")
@@ -104,17 +107,21 @@ export default {
             await this.axios.get(this.$backend.getUrlGetMeasurementsFromPatientById(id))
             .then(response =>{
                 response.data.forEach(data => {
-                    //console.log(data.measurementId.timestamp,"=",this.dateToGetString(today))
                     if(data.measurementId.timestamp ==this.dateToGetString(today)){
-                        console.log(data.carbohydrates)
                         this.measurement.basal= data.basal;
                         this.measurement.bolus= data.bolus;
                         this.measurement.carbohydrates=data.carbohydrates;
                     }
  
                 });
-            }).catch((error) => console.log(error))
-            console.log(this.inputvalues.basal)
+            }).catch(() => 
+                this.wrongInput=true
+                        );
+            console.log(this.inputvalues.selectedHour)
+            if(this.inputvalues.selectedHour == null || this.inputvalues.selectedMinute == null){
+                this.wrongInputString= "No hour or minute has been selected"
+                this.wrongInput=true;
+            }
             
             //Handling if no input has been made
             if(this.inputvalues.carbohydrates!=null || this.inputvalues.carbohydrates != ''){
@@ -131,9 +138,10 @@ export default {
             this.measurement.measurementId.patientId= id;
             
             await this.axios.put(this.$backend.getUrlPutMeasurementByIdAndTimestamp(id,this.dateToString(today)),this.measurement)
-            .then(response =>{
-                console.log(response)
+            .then(() =>{
+
             }).catch(() =>
+                        this.wrongInputString= "There is no logged measurement for the chosen hour and minute",
                         this.wrongInput = true
                     );
         }
@@ -157,7 +165,7 @@ export default {
     flex-direction: row;
     background-color: var(--acent-color);
     justify-content: space-between;
-    margin: 5%;
+    margin: 3%;
 }
 .wrongInput{
     color:red;
