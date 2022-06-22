@@ -16,13 +16,13 @@
 import SidebarContainer from "./SidebarContainer.vue"
 
 export default {
-        name: 'patientSidebar',
-        components: { SidebarContainer },
-        mounted() {
-            document.getElementById('app').style.setProperty("--sidebar-max-width", '150px')
-            document.getElementById('app').style.setProperty("--sidebar-min-width", '120px')
-        }
+    name: 'patientSidebar',
+    components: { SidebarContainer },
+    mounted() {
+        document.getElementById('app').style.setProperty("--sidebar-max-width", '150px')
+        document.getElementById('app').style.setProperty("--sidebar-min-width", '120px')
     }
+}
 </script>
 
 <style scoped>

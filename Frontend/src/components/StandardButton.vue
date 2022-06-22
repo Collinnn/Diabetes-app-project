@@ -6,7 +6,7 @@
 export default{
     name:'StandardButton',
     props:{
-        name: null
+        name: String
     }
 
 }
