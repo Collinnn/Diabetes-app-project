@@ -1,6 +1,5 @@
 <template>
     <div class="submission_container">
-        <h3>Add a meals carbohydrate amount</h3>
         <!--Meals-->
        
         <div class="input" id="timer">
