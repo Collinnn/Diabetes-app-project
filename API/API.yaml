@@ -7,7 +7,7 @@ host: localhost:8080
 basePath: /api/v1/
 schemes:
   - http
-  
+##  Responsible authors: The entire group  
 paths:
   /doctors:
     get:
