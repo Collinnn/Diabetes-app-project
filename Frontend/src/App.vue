@@ -1,3 +1,7 @@
+ <!-- Responsible author: Jacob Martens
+ * Contributors: Tobias Collin contributed with darkmode
+ -->
+
 <template>
   <div class="page-wrapper">
       <router-view />
