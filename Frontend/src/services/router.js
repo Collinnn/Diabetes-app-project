@@ -1,5 +1,5 @@
 /* Responsible author: Jacob Martens
-* Contributors: Everyone added their own respective components
+* Contributors: Everyone added their own respective components 
 */
 
 import { createRouter, createWebHistory } from 'vue-router'
@@ -166,7 +166,7 @@ const routes = [
             }
         ]
     },
-    {
+    {   /*Christopher Zwinge*/
         path: '/:pathMatch(.*)',
         component: pageNotFound,
         name: 'pageNotFound',
