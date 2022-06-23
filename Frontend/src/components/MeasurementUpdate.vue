@@ -1,5 +1,5 @@
 <!-- Responsible author: Collin
- * Contributors: 
+ * Contributors: Christopher Zwinge helped with error text
  -->
  
 <template>
