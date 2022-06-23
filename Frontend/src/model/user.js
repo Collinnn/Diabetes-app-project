@@ -1,3 +1,6 @@
+/* Responsible author: Jacob Martens
+* Contributors: 
+*/
 export default class User {
     constructor() {
         this.isLoggedIn = false
