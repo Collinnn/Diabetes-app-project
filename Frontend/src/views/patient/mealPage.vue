@@ -1,3 +1,6 @@
+<!-- Responsible author: Collin
+ * Contributors: 
+ -->
 <template>
     <title>Meal submission page</title>
     <h1>Meal & Insulin Submission Page</h1>
