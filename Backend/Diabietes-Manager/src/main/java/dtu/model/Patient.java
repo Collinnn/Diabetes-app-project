@@ -1,3 +1,7 @@
+/* Responsible author: Tobias Collin 
+ * Contributors:
+ */
+
 package dtu.model;
 
 import java.util.ArrayList;

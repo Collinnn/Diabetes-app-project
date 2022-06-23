@@ -1,3 +1,6 @@
+ <!-- Responsible author: Tobias Collin
+ * Contributors: Christopher Zwinge and Jacob Martens helped with adding the usercontroller and general logged in behaviour 
+ -->
 <template>
     <title> Admin login page </title>
     <svg class="large-logo"></svg>

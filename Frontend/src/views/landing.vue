@@ -1,4 +1,4 @@
-<!-- Responsible author: Collin
+<!-- Responsible author: Tobias Collin
  * Contributors: 
  -->
 <template>
