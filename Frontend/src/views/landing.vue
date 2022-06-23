@@ -1,3 +1,6 @@
+<!-- Responsible author: Tobias Collin
+ * Contributors: 
+ -->
 <template>
     <title>Landing page</title>
     <svg class="large-logo"></svg>

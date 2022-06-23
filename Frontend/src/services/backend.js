@@ -1,3 +1,7 @@
+/*
+ * Responsible author: Jacob Martens
+ * Contributors: Collin, Simon
+ */
 export default class Backend {
     constructor() {
         this.urlAPI = "http://localhost:8080/api/v1"
@@ -57,7 +61,7 @@ export default class Backend {
         return this.urlAPI + this.subpathPatients + "/" + id + "/doctor"
     }
 
-    ////// Measurement controller //////
+    ////// Measurement controller ////// Simon Poulsen
     getUrlGetMeasurementsFromPatientById(id) {
         return this.urlAPI + this.subpathPatients + "/" + id + this.subpathMeasurements
     }
@@ -66,10 +70,6 @@ export default class Backend {
         return this.urlAPI + this.subpathPatients + "/" + id + this.subpathMeasurements
     }
     getUrlPutMeasurementByIdAndTimestamp(id,timeStamp) {
-        console.log('http://localhost:8080/api/v1/patients/1/measurements/2022-06-13%2017%3A51%3A00')
-        console.log(this.urlAPI + this.subpathPatients + "/" + id +  this.subpathMeasurements + "/" + timeStamp)
-
         return this.urlAPI + this.subpathPatients + "/" + id +  this.subpathMeasurements + "/" + timeStamp
-        
     }
 }

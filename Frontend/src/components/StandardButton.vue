@@ -1,3 +1,6 @@
+<!-- Responsible author: Collin
+ * Contributors: 
+ -->
 <template>
 <div class="StandardButton">{{name}}</div>
 </template>

@@ -1,3 +1,7 @@
+<!-- Responsible author: Collin
+ * Contributors: Christopher Zwinge helped with error text
+ -->
+ 
 <template>
     <div class="submission_container">
         <!--Meals-->

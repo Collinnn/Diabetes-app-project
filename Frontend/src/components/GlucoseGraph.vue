@@ -1,3 +1,7 @@
+<!--
+ * Responsible author: Jacob Martens
+ * Contributors: Tobias Collin
+ -->
 <template>
     <Line
         :chart-options="chartOptions"
@@ -115,7 +119,7 @@ export default {
        })
       return data
     },
-    async loadGraphData(data) {
+    async loadGraphData(data) { // Tobias Collin with some edits by Jacob Martens
       let tmpDate, sampleTimestamp;
       let today = new Date()
       for (let i = 0; i < data.length; i++) {
@@ -208,7 +212,7 @@ export default {
       })
     },
 
-    dateTimeHandling(tmpDate) {
+    dateTimeHandling(tmpDate) { // Tobias Collin
       let dateTime = new Date();
       const [date, time] = tmpDate.slice(0, tmpDate.length-1).split('T');
       const [year, month, day] = date.split('-');
@@ -219,7 +223,7 @@ export default {
       dateTime.setHours(hour, minute, second);
       return dateTime;
     },
-    dateToString(date) {
+    dateToString(date) { // Tobias Collin
       let tmp;
       tmp = date.toISOString().split('T');
       tmp = tmp[1].split('.');
