@@ -1,3 +1,7 @@
+/* Responsible author: Simon Poulsen 
+ * Contributors:
+ */
+
 package dtu.controllers;
 
 import java.sql.Timestamp;

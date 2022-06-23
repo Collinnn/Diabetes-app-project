@@ -1,3 +1,7 @@
+/* Responsible author: Simon Poulsen
+ * Contributors:
+ */
+
 package dtu.model;
 
 import javax.persistence.Column;
