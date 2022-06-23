@@ -1,3 +1,7 @@
+<!-- Responsible author: Simon Poulsen
+ * Contributors:
+ -->
+
 <template>
     <title>Patients list page</title> 
     <div>
