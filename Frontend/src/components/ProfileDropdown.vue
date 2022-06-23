@@ -1,3 +1,6 @@
+ <!-- Responsible author: Christopher Zwinge
+ * Contributors:
+ -->
 <template>
     <div>
         <div class="settingsMenu" v-if="(this.$userController.getUserType() == 'patient')">

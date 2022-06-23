@@ -1,3 +1,7 @@
+/* Responsible author: Jacob Martens
+* Contributors: Everyone added their own respective components
+*/
+
 import { createRouter, createWebHistory } from 'vue-router'
 
 import landing from '@/views/landing.vue'
@@ -176,7 +180,7 @@ const router = createRouter({
     history: createWebHistory(),
     routes
 })
-
+/*Christopher Zwinge*/
 router.beforeEach((to) => {
     if (to.matched.some(route => route.meta.requiredLoggedIn)) {
         if (!UserController.isUserLoggedIn()) {

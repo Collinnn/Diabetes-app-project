@@ -1,3 +1,7 @@
+/* Responsible author: Jacob Martens
+* Contributors: Christopher Zwinge helped with login
+*/
+
 import User from "@/model/user"
 
 const user = new User()
