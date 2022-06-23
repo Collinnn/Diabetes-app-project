@@ -1,3 +1,6 @@
+ <!-- Responsible author: Christopher Zwinge
+ * Contributors:
+ -->
 <template>
     <title>Patient Page</title>
     <div class="content">
