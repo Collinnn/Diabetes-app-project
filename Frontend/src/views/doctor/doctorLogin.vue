@@ -16,7 +16,6 @@
             <StandardButton name="Login" @click="login()"></StandardButton>
         </div>
     </div>
-
 </template>
 
 <script>
@@ -37,7 +36,7 @@ export default {
             }
         },
         methods: {
-            async login() {
+        async login() {
                 if(this.input.id != null || this.input.password != "") {
                     let data = await this.getDoctorData()
                     if(data != null && this.isLoginValid(data.password)){

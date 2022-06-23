@@ -1,3 +1,7 @@
+<!-- Responsible author: Simon Poulsen
+ * Contributors: Jacob Martens
+ -->
+
 <template>
     <title>Graph page</title>
     <div class="graph-container">

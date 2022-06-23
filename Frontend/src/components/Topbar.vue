@@ -1,3 +1,7 @@
+ <!-- Responsible author: Christopher Zwinge
+ * Contributors: Tobias Collin contributed with darkmode
+ -->
+
 <template>
     <div class ="topbar">
         <div class = "leftElement">

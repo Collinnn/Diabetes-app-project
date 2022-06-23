@@ -1,3 +1,7 @@
+<!-- Responsible author: Simon Poulsen
+ * Contributors:
+ -->
+
 <template>
 <div>
     <div class = search-bar>
