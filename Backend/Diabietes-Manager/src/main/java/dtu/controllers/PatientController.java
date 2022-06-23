@@ -1,3 +1,7 @@
+/* Responsible author: Tobias Collin 
+ * Contributors: Simon Poulsen
+ */
+
 package dtu.controllers;
 
 import java.util.ArrayList;

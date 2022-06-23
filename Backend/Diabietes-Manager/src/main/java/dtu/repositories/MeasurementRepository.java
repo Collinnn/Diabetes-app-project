@@ -1,3 +1,7 @@
+/* Responsible author: Simon Poulsen
+ * Contributors:
+ */
+
 package dtu.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;

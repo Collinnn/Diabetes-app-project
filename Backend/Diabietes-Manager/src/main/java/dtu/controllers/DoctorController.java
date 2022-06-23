@@ -1,3 +1,7 @@
+/* Responsible author: Jacob Martens
+ * Contributors:
+ */
+
 package dtu.controllers;
 
 import java.util.ArrayList;
