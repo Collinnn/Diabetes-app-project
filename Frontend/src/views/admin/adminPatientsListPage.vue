@@ -1,6 +1,6 @@
 <template>
     <title>Patients list page</title> 
-    <div class="container">
+    <div>
         <UsersTable :columnNames="this.columnNames" :rows="this.patients" @rowClick="editPage"/>
     </div>
 </template>
@@ -37,7 +37,4 @@ export default {
 </script>
 
 <style>
-    .container {
-        margin:180px;
-    }
 </style>
