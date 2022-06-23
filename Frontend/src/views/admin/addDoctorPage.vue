@@ -1,4 +1,4 @@
- <!-- Responsible author: Christopher Zwinge
+ <!-- Responsible author: Jacob Martens
  * Contributors:
  -->
 <template>
