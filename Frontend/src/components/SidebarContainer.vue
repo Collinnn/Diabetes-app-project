@@ -1,3 +1,7 @@
+<!--
+ * Responsible author: Jacob Martens
+ * Contributors:
+ -->
 <template >
     <div id="sidebarContainer">
         <slot>
