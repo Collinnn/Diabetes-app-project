@@ -1,3 +1,7 @@
+<!-- Responsible author: Collin
+ * Contributors: 
+ -->
+ 
 <template>
     <div class="submission_container">
         <!--Meals-->

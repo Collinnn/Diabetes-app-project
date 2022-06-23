@@ -1,3 +1,6 @@
+<!-- Responsible author: Collin
+ * Contributors: Zwinge
+ -->
 <template>
     <title>Doctor Login</title>
     <svg class="large-logo"></svg>
