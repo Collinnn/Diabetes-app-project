@@ -1,5 +1,5 @@
  <!-- Responsible author: Jacob Martens
- * Contributors: Tobias Collin contributed with darkmode
+ * Contributors: Tobias Collin made everything dark/light mode related
  -->
 
 <template>

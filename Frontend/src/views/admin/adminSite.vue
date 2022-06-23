@@ -1,3 +1,7 @@
+<!--
+ * Responsible author: Jacob Martens
+ * Contributors:
+-->
 <template>
     <title> Admin site </title>
     <div class="page-container">

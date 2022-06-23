@@ -1,3 +1,7 @@
+<!--
+ * Responsible author: Jacob Martens
+ * Contributors:
+-->
 <template>
     <title> Add patient </title>
     <div class="container">

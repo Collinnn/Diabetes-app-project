@@ -1,4 +1,7 @@
-
+/*
+ * Responsible author: Jacob Martens
+ * Contributors:
+ */
 const requirement = {
     mounted(el) {
       el.style.fontFamily = 'verdana';

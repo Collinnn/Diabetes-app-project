@@ -1,3 +1,7 @@
+<!--
+ * Responsible author: Jacob Martens
+ * Contributors:
+-->
 <template>
     <title>Graph page</title>
     <ModalBox v-if="isModalVisible" @close="isModalVisible = false" >
