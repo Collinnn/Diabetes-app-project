@@ -1,3 +1,6 @@
+ <!-- Responsible author: Christopher Zwinge
+ * Contributors:
+ -->
 <template>
     <title> Add doctor </title>
     <div class="container">

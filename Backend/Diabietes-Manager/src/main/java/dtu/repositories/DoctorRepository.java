@@ -1,3 +1,7 @@
+/* Responsible author: Jacob Martens
+ * Contributors:
+ */
+
 package dtu.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;

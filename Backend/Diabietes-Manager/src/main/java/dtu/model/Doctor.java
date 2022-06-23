@@ -1,3 +1,7 @@
+/* Responsible author: Jacob Martens
+ * Contributors:
+ */
+
 package dtu.model;
 
 import java.util.ArrayList;

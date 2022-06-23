@@ -1,3 +1,7 @@
+<!--
+ * Responsible author: Jacob Martens
+ * Contributors:
+ -->
 <template>
     <button :id="id" class="menu-head" @click="isMenuVisible = !isMenuVisible"> {{title}} <span style="float: right; padding-right: 10px;">{{dropdownArrow}}</span> </button>
     <div class="menu-wrapper" v-if="isMenuVisible">

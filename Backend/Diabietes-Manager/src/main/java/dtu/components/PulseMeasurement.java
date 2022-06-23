@@ -1,3 +1,7 @@
+/* Responsible author: Tobias Collin 
+ * Contributors: Simon Poulsen
+ */
+
 package dtu.components;
 
 import java.io.File;

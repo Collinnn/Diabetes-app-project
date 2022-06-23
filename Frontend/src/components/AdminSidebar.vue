@@ -1,3 +1,7 @@
+ <!--
+ * Responsible author: Jacob Martens
+ * Contributors:
+ -->
 <template>
     <SidebarContainer>
         <div class="sidebar-wrapper">

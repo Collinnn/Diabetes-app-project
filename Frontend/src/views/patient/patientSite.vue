@@ -1,3 +1,6 @@
+ <!-- Responsible author: Jacob Martens
+ * Contributors:
+ -->
 <template>
     <title> Patient site </title>
     <div class="page-container">

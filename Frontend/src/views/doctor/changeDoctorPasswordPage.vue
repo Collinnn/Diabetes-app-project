@@ -1,3 +1,6 @@
+ <!-- Responsible author: Christopher Zwinge
+ * Contributors:
+ -->
 <template>
     <title>Change user password page</title>
     <div class="content">
